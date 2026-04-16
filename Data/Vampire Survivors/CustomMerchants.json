@@ -82,9 +82,9 @@
     "merchantCharacter": "EX_GLAUCUS",
     "inventoryType": "STAKETOYOURHEART",
     "portraitSprite": "glaucus32",
-    "portraitSpriteTexture": "items",
+    "portraitSpriteTexture": "tps_lossless_icons",
     "staticSprite": "glaucus",
-    "staticSpriteTexture": "items",
+    "staticSpriteTexture": "tps_props",
     "textLocKey": "merc_EX_GLAUCUS",
     "merchantInventory": [],
     "bodyOffset": {

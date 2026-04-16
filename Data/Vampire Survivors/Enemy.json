@@ -13106,7 +13106,7 @@
       "frameNames": [
         "JellyGoldBag_0.png"
       ],
-      "end": 15,
+      "end": 14,
       "textureName": "enemies2025",
       "idleFrameCount": 4,
       "killedAmount": 0,
@@ -13165,7 +13165,7 @@
         "HP_x_Level"
       ],
       "killedAmount": 0,
-      "end": 15,
+      "end": 12,
       "textureName": "enemies2025",
       "idleFrameCount": 4,
       "frameNames": [
@@ -13195,7 +13195,7 @@
       "textureName": "enemies2025",
       "end": 29,
       "frameNames": [
-        "XLDragonGoldFlag_0.png"
+        "XLDragonGold_Flag_0.png"
       ],
       "bInclude": false,
       "bHighlight": false,
@@ -14565,7 +14565,7 @@
       "idleFrameCount": 6,
       "killedAmount": 0,
       "textureName": "enemies2025",
-      "end": 1,
+      "end": 0,
       "frameNames": [
         "EX_BatDragonXL_0.png"
       ],
@@ -14601,7 +14601,7 @@
       "idleFrameCount": 6,
       "killedAmount": 0,
       "textureName": "enemies2025",
-      "end": 1,
+      "end": 0,
       "frameNames": [
         "EX_BatDragonXL_0.png"
       ],

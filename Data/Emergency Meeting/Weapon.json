@@ -9,8 +9,8 @@
       "name": "Reporting Device",
       "description": "Damages and pushes enemies away.",
       "tips": "Ignores: Duration.",
-      "texture": "items",
-      "frameName": "Report1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Report1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_CREWMA"
@@ -71,8 +71,8 @@
       "name": "Emergency Meeting",
       "description": "Evolved Reporting Device. Occasionally destroys all enemies of a given type.",
       "tips": "Requires Max: Shrunk Crewmate.",
-      "texture": "items",
-      "frameName": "Report2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Report2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -111,8 +111,8 @@
       "name": "Card Swipe",
       "description": "The amount of attacks is affected by Amount and by low Luck.",
       "tips": "Ignores: Duration.",
-      "texture": "items",
-      "frameName": "SwipeCard1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-SwipeCard1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_ENGINE"
@@ -178,8 +178,8 @@
       "name": "Wire Fix",
       "description": "Evolved Swipe Card. Covers a larger area.",
       "tips": "Requires Max: Shrunk Engineer.",
-      "texture": "items",
-      "frameName": "SwipeCard2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-SwipeCard2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -217,8 +217,8 @@
       "name": "Medical Scan",
       "description": "Restores Health points depending on Amount and Recovery.",
       "tips": "Best with: Amount, Recovery. Area affects other players.",
-      "texture": "items",
-      "frameName": "Medical1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Medical1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_GHOSTT"
@@ -275,8 +275,8 @@
       "name": "Paranormal Scan",
       "description": "Evolved Medical Scan. Grants a random stat boost for the rest of the run.",
       "tips": "Requires Max: Shrunk Ghost.",
-      "texture": "items",
-      "frameName": "Medical2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Medical2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -314,8 +314,8 @@
       "name": "Just Vent",
       "description": "Destroys or heavily damages enemies. Amount affects how many times it can be used.",
       "tips": "Best with: Amount. Can teleport other players.",
-      "texture": "items",
-      "frameName": "Vent1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Vent1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_SHAPES"
@@ -375,8 +375,8 @@
       "name": "Ejection",
       "description": "Evolved Just Vent. Draws in all enemies.",
       "tips": "Requires Max: Shrunk Shapeshifter.",
-      "texture": "items",
-      "frameName": "Vent2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Vent2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -415,8 +415,8 @@
       "name": "Clear Debris",
       "description": "Generates a damaging zone. Pushes enemies downwards.",
       "tips": "",
-      "texture": "items",
-      "frameName": "Garbage1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Garbage1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_GUARDI"
@@ -480,8 +480,8 @@
       "name": "Clear Asteroids",
       "description": "Evolved Clear Debris. Amount affects the number of hit boxes per explosion.",
       "tips": "Requires Max: Shrunk Guardian.",
-      "texture": "items",
-      "frameName": "Garbage2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Garbage2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -519,8 +519,8 @@
       "name": "Killer Tongue",
       "description": "Licks enemies in front of you. Damage multiplied by Recovery.",
       "tips": "",
-      "texture": "items",
-      "frameName": "Tongue1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Tongue1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_IMPOST"
@@ -576,8 +576,8 @@
       "name": "Assassination",
       "description": "Evolved Killer Tongue. Destroys the highest health enemy on screen (and anything along the way).",
       "tips": "Requires Max: Shrunk Impostor.",
-      "texture": "items",
-      "frameName": "Tongue2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Tongue2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -615,8 +615,8 @@
       "name": "Propellant Sampling",
       "description": "Generates zones that explode when touched by a player. Amount affects the number of hit boxes per explosion.",
       "tips": "Ignores: Speed.",
-      "texture": "items",
-      "frameName": "Samples1.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Samples1.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SHRINK_SCIENT"
@@ -675,8 +675,8 @@
       "name": "Rocket Science",
       "description": "Evolved Propellant Sampling. Triggers a finisher when the right conditions are met.",
       "tips": "Requires Max: Shrunk Scientist.",
-      "texture": "items",
-      "frameName": "Samples2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-Samples2.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "isEvolution": true,
@@ -716,8 +716,8 @@
       "name": "Hats",
       "description": "Throws cute bouncing projectiles with random properties.",
       "tips": "",
-      "texture": "items",
-      "frameName": "HatCollection.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-HatCollection.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": false,
       "poolLimit": 100,
@@ -772,8 +772,8 @@
       "name": "Silver Tongue",
       "description": "Licks enemies behind you. Damage multiplied by Recovery.",
       "tips": "",
-      "texture": "items",
-      "frameName": "TongueCounter.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-TongueCounter.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": false,
       "isSpecialOnly": true,
@@ -824,8 +824,8 @@
       "price": 80,
       "description": "Might occasionally shout at nearby enemies.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_CREWMA.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_CREWMA.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_REPORT1"
@@ -857,8 +857,8 @@
       "price": 80,
       "description": "Might occasionally electrocute enemies.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_ENGINE.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_ENGINE.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SWIPECARD1"
@@ -890,8 +890,8 @@
       "price": 80,
       "description": "Might occasionally freeze enemies in fear.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_GHOSTT.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_GHOSTT.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_MEDICAL1"
@@ -923,8 +923,8 @@
       "price": 80,
       "description": "Might occasionally fling leftover body parts at enemies.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_SHAPES.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_SHAPES.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_VENT1"
@@ -956,8 +956,8 @@
       "price": 80,
       "description": "Might occasionally prevent incoming damage.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_GUARDI.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_GUARDI.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_GARBA1"
@@ -989,8 +989,8 @@
       "price": 80,
       "description": "Might occasionally stab enemies.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_IMPOST.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_IMPOST.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_TONGUE1"
@@ -1022,8 +1022,8 @@
       "price": 80,
       "description": "Might occasionally throw science at enemies.",
       "tips": "",
-      "texture": "chalcedony",
-      "frameName": "C1_SHRINK_SCIENT.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_SCIENT.png",
       "collectionFrame": "frameB_purple.png",
       "evoSynergy": [
         "C1_SAMPLES1"
@@ -1055,8 +1055,8 @@
       "price": 80,
       "description": "Might occasionally infect you with its relentless happiness.",
       "tips": "",
-      "texture": "items",
-      "frameName": "C1_SHRINK_HORSEE.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-03-C1_SHRINK_HORSEE.png",
       "collectionFrame": "frameB_purple.png",
       "isUnlocked": true,
       "hidden": false,

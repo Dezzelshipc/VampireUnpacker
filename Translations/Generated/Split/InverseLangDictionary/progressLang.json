@@ -628,34 +628,34 @@
       "description": "Find the coffin in Hello Clerici."
     },
     "DOMM_ACH007": {
-      "description": null
+      "description": "Play as Antonio for 10 minutes in Hello Antonio."
     },
     "DOMM_ACH008": {
-      "description": null
+      "description": "Play as Genarro for 10 minutes in Hello Genarro."
     },
     "DOMM_ACH009": {
-      "description": null
+      "description": "Play as Porta for 10 minutes in Hello Porta."
     },
     "DOMM_ACH010": {
-      "description": null
+      "description": "Play as Christine for 10 minutes in Hello Christine."
     },
     "DOMM_ACH011": {
-      "description": null
+      "description": "Play as Bianca for 10 minutes in Hello Bianca."
     },
     "DOMM_ACH012": {
-      "description": null
+      "description": "Play as Clerici for 10 minutes in Hello Clerici."
     },
     "DOMM_ACH013": {
-      "description": null
+      "description": "Kill 10 Coffin Spawners in Hello Antonio."
     },
     "DOMM_ACH014": {
-      "description": null
+      "description": "Collect all of the items in Hello Genarro."
     },
     "DOMM_ACH015": {
-      "description": null
+      "description": "Kill X enemies in Hello Porta."
     },
     "DOMM_ACH016": {
-      "description": null
+      "description": "Kill a Bleeding Death in Hello Christine."
     },
     "DOMM_ACH017": {
       "description": null
@@ -664,10 +664,7 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
+      "description": "Vanquish the Jigvivor Killer."
     }
   },
   "fr": {
@@ -1335,9 +1332,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   },
@@ -2007,9 +2001,6 @@
     },
     "DOMM_ACH019": {
       "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
     }
   },
   "de": {
@@ -2677,9 +2668,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   },
@@ -3349,9 +3337,6 @@
     },
     "DOMM_ACH019": {
       "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
     }
   },
   "pt-BR": {
@@ -4019,9 +4004,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   },
@@ -4691,9 +4673,6 @@
     },
     "DOMM_ACH019": {
       "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
     }
   },
   "ru": {
@@ -5361,9 +5340,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   },
@@ -6033,9 +6009,6 @@
     },
     "DOMM_ACH019": {
       "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
     }
   },
   "zh-CN": {
@@ -6703,9 +6676,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   },
@@ -7375,9 +7345,6 @@
     },
     "DOMM_ACH019": {
       "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
     }
   },
   "ko": {
@@ -8045,9 +8012,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   },
@@ -8717,9 +8681,6 @@
     },
     "DOMM_ACH019": {
       "description": null
-    },
-    "DOMM_ACH020": {
-      "description": null
     }
   },
   "uk": {
@@ -9387,9 +9348,6 @@
       "description": null
     },
     "DOMM_ACH019": {
-      "description": null
-    },
-    "DOMM_ACH020": {
       "description": null
     }
   }

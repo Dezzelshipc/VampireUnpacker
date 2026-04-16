@@ -3763,7 +3763,7 @@
   },
   "DOMM_ACH007": {
     "description": {
-      "en": null,
+      "en": "Play as Antonio for 10 minutes in Hello Antonio.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3781,7 +3781,7 @@
   },
   "DOMM_ACH008": {
     "description": {
-      "en": null,
+      "en": "Play as Genarro for 10 minutes in Hello Genarro.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3799,7 +3799,7 @@
   },
   "DOMM_ACH009": {
     "description": {
-      "en": null,
+      "en": "Play as Porta for 10 minutes in Hello Porta.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3817,7 +3817,7 @@
   },
   "DOMM_ACH010": {
     "description": {
-      "en": null,
+      "en": "Play as Christine for 10 minutes in Hello Christine.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3835,7 +3835,7 @@
   },
   "DOMM_ACH011": {
     "description": {
-      "en": null,
+      "en": "Play as Bianca for 10 minutes in Hello Bianca.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3853,7 +3853,7 @@
   },
   "DOMM_ACH012": {
     "description": {
-      "en": null,
+      "en": "Play as Clerici for 10 minutes in Hello Clerici.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3871,7 +3871,7 @@
   },
   "DOMM_ACH013": {
     "description": {
-      "en": null,
+      "en": "Kill 10 Coffin Spawners in Hello Antonio.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3889,7 +3889,7 @@
   },
   "DOMM_ACH014": {
     "description": {
-      "en": null,
+      "en": "Collect all of the items in Hello Genarro.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3907,7 +3907,7 @@
   },
   "DOMM_ACH015": {
     "description": {
-      "en": null,
+      "en": "Kill X enemies in Hello Porta.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3925,7 +3925,7 @@
   },
   "DOMM_ACH016": {
     "description": {
-      "en": null,
+      "en": "Kill a Bleeding Death in Hello Christine.",
       "fr": null,
       "it": null,
       "de": null,
@@ -3979,25 +3979,7 @@
   },
   "DOMM_ACH019": {
     "description": {
-      "en": null,
-      "fr": null,
-      "it": null,
-      "de": null,
-      "es": null,
-      "pt-BR": null,
-      "pl": null,
-      "ru": null,
-      "tr": null,
-      "zh-CN": null,
-      "ja": null,
-      "ko": null,
-      "zh-TW": null,
-      "uk": null
-    }
-  },
-  "DOMM_ACH020": {
-    "description": {
-      "en": null,
+      "en": "Vanquish the Jigvivor Killer.",
       "fr": null,
       "it": null,
       "de": null,

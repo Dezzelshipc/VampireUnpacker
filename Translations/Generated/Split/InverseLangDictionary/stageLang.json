@@ -441,32 +441,32 @@
     },
     "ADV_DOMM_001_HelloAntonio": {
       "stageName": "Hello Antonio",
-      "description": null,
+      "description": "I want to play a game. You’ve given your life to the hunt, succumbing to your lineage’s obsession. Have you found a single one of these so-called vampires you loathe? I highly doubt it… but I have found you.",
       "tips": null
     },
     "ADV_DOMM_002_HelloGenarro": {
       "stageName": "Hello Genarro",
-      "description": null,
+      "description": "Like your mother and siblings, you kill creatures of the night, but your family doesn’t know you cut deals just as readily as throats. So many demons have bribed you to walk away, but tonight you face the ones you can’t ever leave behind.",
       "tips": null
     },
     "ADV_DOMM_003_HelloPorta": {
       "stageName": "Hello Porta",
-      "description": null,
+      "description": "Do you know why you are here? You married into wealth, but he didn’t know your true vow - til theft do we part. Do you deserve your ill-gotten gains, or should you have stayed on the pig farm with Papa? Make your choice.",
       "tips": null
     },
     "ADV_DOMM_004_HelloChristine": {
       "stageName": "Hello Christine",
-      "description": null,
+      "description": "Of the many who fail to appreciate life, it is those who cast it aside for vengeance who vex me most. You wage war on the monsters who slew your father, yet you refuse to face the conflict within yourself.",
       "tips": null
     },
     "ADV_DOMM_005_HelloBianca": {
       "stageName": "Hello Bianca",
-      "description": null,
+      "description": "I want to play a game. Nobody knows what made you a recluse. An obsessive fan? Health problems? All I know is you disappeared before finishing your last movie, and I was really looking forward to it.",
       "tips": null
     },
     "ADV_DOMM_006_HelloClerici": {
       "stageName": "Hello Clerici",
-      "description": null,
+      "description": "While a most righteous woman, your curiosity has compelled you to dabble in things forbidden. Are you so willing to let your faith whither in the shadow of the occult? Belief or knowledge… make your choice.",
       "tips": null
     }
   },

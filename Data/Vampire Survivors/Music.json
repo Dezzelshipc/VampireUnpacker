@@ -404,7 +404,7 @@
     "unlockedByStage": "EX_WESTWOODS",
     "unlockedByCharacter": null,
     "unlockedByItem": null,
-    "isUnlocked": true,
+    "isUnlocked": false,
     "icon": "stage_westwoods_icon.png",
     "hyperMod": {
       "rate": 1.0625,
@@ -422,7 +422,7 @@
     "unlockedByStage": "EX_LYCAEUM",
     "unlockedByCharacter": null,
     "unlockedByItem": null,
-    "isUnlocked": true,
+    "isUnlocked": false,
     "icon": "stage_lycaeum_icon.png",
     "hyperMod": {
       "rate": 1.0625,

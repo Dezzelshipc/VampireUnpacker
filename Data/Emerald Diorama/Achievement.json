@@ -2,7 +2,7 @@
    "EME_FindEmeraldDisk":{
       "description":"___",
       "stageToUnlock":"EMERALD",
-      "forcedTexture":"items",
+      "forcedTexture":"tps_lossless_icons",
       "forcedFrameName":"relic_emerald_disk",
       "relicToUnlock": "RELIC_EME_DISK",
       "UnlockConditions":[

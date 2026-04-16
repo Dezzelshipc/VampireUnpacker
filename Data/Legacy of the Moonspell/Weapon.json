@@ -9,8 +9,8 @@
       "name": "Silver Wind",
       "description": "Defeated enemies might drop hearts.",
       "tips": "",
-      "texture": "items",
-      "frameName": "silverWind.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-silverWind.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "REGEN"
@@ -74,8 +74,8 @@
       "name": "Festive Winds",
       "description": "Evolved Silver Wind. Weakens enemies defenses.",
       "tips": "Requires Max: Pummarola.",
-      "texture": "items",
-      "frameName": "silverWind2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-silverWind2.png",
       "collectionFrame": "frameB_blue.png",
       "evolvesFrom": [
         "SILVERWIND"
@@ -117,8 +117,8 @@
       "name": "Four Seasons",
       "description": "Generates 4 explosions. Amount and Duration affect damage instead.",
       "tips": "Ignores: speed.",
-      "texture": "items",
-      "frameName": "fourSeasons.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-fourSeasons.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "AREA"
@@ -175,8 +175,8 @@
       "name": "Godai Shuffle",
       "description": "Evolved Four Seasons. Generates an additional explosion.",
       "tips": "Requires Max: Candelabrador.",
-      "texture": "items",
-      "frameName": "fourSeasons2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-fourSeasons2.png",
       "collectionFrame": "frameB_blue.png",
       "evolvesFrom": [
         "FOURSEASONS"
@@ -214,8 +214,8 @@
       "name": "Summon Night",
       "description": "Generates damaging zones above the character.",
       "tips": "Ignores: speed.",
-      "texture": "items",
-      "frameName": "summonNight.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-summonNight.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "AMOUNT"
@@ -270,8 +270,8 @@
       "name": "Night's Reach",
       "description": "Evolved Summon Night. Generates damaging zones below the character.",
       "tips": "Requires Max: Duplicator.",
-      "texture": "items",
-      "frameName": "summonNight2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-summonNight2.png",
       "collectionFrame": "frameB_blue.png",
       "evolvesFrom": [
         "SUMMONNIGHT"
@@ -311,8 +311,8 @@
       "name": "Mirage Robe",
       "description": "Generates freezing mines with a chance to explode.",
       "tips": "Ignores: speed.",
-      "texture": "items",
-      "frameName": "mirageRobe.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-mirageRobe.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "MAGNET"
@@ -371,8 +371,8 @@
       "name": "J'Odore",
       "description": "Evolved Mirage Robe. Projectiles move and confuse enemies.",
       "tips": "Requires Max: Magnet.",
-      "texture": "items",
-      "frameName": "mirageRobe2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-mirageRobe2.png",
       "collectionFrame": "frameB_blue.png",
       "evolvesFrom": [
         "MIRAGEROBE"
@@ -413,8 +413,8 @@
       "name": "Night Sword",
       "description": "Strikes with a combo attack at the nearest enemy. Retaliates. Might steals hearts.",
       "tips": "Ignores: speed, duration.",
-      "texture": "items",
-      "frameName": "nightSword.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-nightSword.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "GREED"
@@ -471,8 +471,8 @@
       "name": "Muramasa",
       "description": "Evolved Night Sword. Enables critical hits and combo finisher. Drains Health.",
       "tips": "Requires Max: Stone Mask.",
-      "texture": "items",
-      "frameName": "nightSword2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-nightSword2.png",
       "collectionFrame": "frameB_blue.png",
       "evolvesFrom": [
         "NIGHTSWORD"
@@ -511,8 +511,8 @@
       "name": "Mille Bolle Blu",
       "description": "Fires lingering projectiles.",
       "tips": "",
-      "texture": "items",
-      "frameName": "bubble.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-bubble.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "DURATION"
@@ -570,8 +570,8 @@
       "name": "Boo Roo Boolle",
       "description": "Evolved Mille Bolle Blu. Projectiles can hit the same target more than once.",
       "tips": "Requires Max: Spellbinder",
-      "texture": "items",
-      "frameName": "bubble2.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-bubble2.png",
       "collectionFrame": "frameB_blue.png",
       "evolvesFrom": [
         "BUBBLES"
@@ -609,8 +609,8 @@
       "name": "108 Bocce",
       "description": "Actually it's just 8. Damage affected by the difference between Curse and Luck.",
       "tips": "Ignores: amount, duration, speed.",
-      "texture": "items",
-      "frameName": "bocce.png",
+      "texture": "tps_lossless_icons",
+      "frameName": "-01-bocce.png",
       "collectionFrame": "frameB_blue.png",
       "evoSynergy": [
         "PRAYERS"

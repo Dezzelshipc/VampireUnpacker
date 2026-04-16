@@ -3763,7 +3763,7 @@
   },
   "DOMM_ACH007": {
     "description": [
-      null,
+      "Play as Antonio for 10 minutes in Hello Antonio.",
       null,
       null,
       null,
@@ -3781,7 +3781,7 @@
   },
   "DOMM_ACH008": {
     "description": [
-      null,
+      "Play as Genarro for 10 minutes in Hello Genarro.",
       null,
       null,
       null,
@@ -3799,7 +3799,7 @@
   },
   "DOMM_ACH009": {
     "description": [
-      null,
+      "Play as Porta for 10 minutes in Hello Porta.",
       null,
       null,
       null,
@@ -3817,7 +3817,7 @@
   },
   "DOMM_ACH010": {
     "description": [
-      null,
+      "Play as Christine for 10 minutes in Hello Christine.",
       null,
       null,
       null,
@@ -3835,7 +3835,7 @@
   },
   "DOMM_ACH011": {
     "description": [
-      null,
+      "Play as Bianca for 10 minutes in Hello Bianca.",
       null,
       null,
       null,
@@ -3853,7 +3853,7 @@
   },
   "DOMM_ACH012": {
     "description": [
-      null,
+      "Play as Clerici for 10 minutes in Hello Clerici.",
       null,
       null,
       null,
@@ -3871,7 +3871,7 @@
   },
   "DOMM_ACH013": {
     "description": [
-      null,
+      "Kill 10 Coffin Spawners in Hello Antonio.",
       null,
       null,
       null,
@@ -3889,7 +3889,7 @@
   },
   "DOMM_ACH014": {
     "description": [
-      null,
+      "Collect all of the items in Hello Genarro.",
       null,
       null,
       null,
@@ -3907,7 +3907,7 @@
   },
   "DOMM_ACH015": {
     "description": [
-      null,
+      "Kill X enemies in Hello Porta.",
       null,
       null,
       null,
@@ -3925,7 +3925,7 @@
   },
   "DOMM_ACH016": {
     "description": [
-      null,
+      "Kill a Bleeding Death in Hello Christine.",
       null,
       null,
       null,
@@ -3979,25 +3979,7 @@
   },
   "DOMM_ACH019": {
     "description": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ]
-  },
-  "DOMM_ACH020": {
-    "description": [
-      null,
+      "Vanquish the Jigvivor Killer.",
       null,
       null,
       null,

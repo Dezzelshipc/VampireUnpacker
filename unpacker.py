@@ -11,6 +11,7 @@ from tkinter.messagebox import showerror, showwarning, showinfo, askyesno
 from tkinter.simpledialog import askinteger
 
 from PIL.Image import open as image_open
+import PIL
 
 import Source.Data.data as data_module
 import Source.Images.transparent_save as tr_save
@@ -922,6 +923,7 @@ class Unpacker(tk.Tk):
         full_path = Path(full_path)
         save_path = full_path.parent / "Inverse"
 
+        PIL.Image.MAX_IMAGE_PIXELS = 2766929920
         image = image_open(full_path)
 
         save_path.mkdir(exist_ok=True, parents=True)

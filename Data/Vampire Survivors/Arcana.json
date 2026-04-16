@@ -242,7 +242,9 @@
     "name": "VIII - Mad Groove",
     "description": "Every 2 minutes attracts all standard stage items, pickups, and light sources towards the character.",
     "weapons": [],
-    "items": [],
+    "items": [
+      "DUMMY_LIGHTSOURCE"
+    ],
     "texture": "randomazzo",
     "frameName": "08.png",
     "enabled": false,
