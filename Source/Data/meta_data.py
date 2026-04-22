@@ -200,7 +200,7 @@ class MetaDataHandler(Objectless):
         cls._assets_name_path.clear()
         cls._assets_guid_path.clear()
         cls.loaded_assets_meta.clear()
-        print(f"MetaData unloaded ({cls.loaded_game.name if cls.loaded_game else ""})")
+        print(f"MetaData unloaded [{cls.loaded_game.name if cls.loaded_game else ""}]")
 
     @classmethod
     def assert_game(cls, game: Game):
@@ -208,7 +208,7 @@ class MetaDataHandler(Objectless):
 
     @classmethod
     def assert_loaded_game(cls):
-        assert cls.loaded_game is not None, f"Game assets not loaded! ({cls.loaded_game})"
+        assert cls.loaded_game is not None, f"Game assets not loaded! [{cls.loaded_game}]"
 
     @classmethod
     def _load_assets_meta_file_paths(cls) -> None:
@@ -261,7 +261,7 @@ class MetaDataHandler(Objectless):
         ###
 
         cls._assets_name_path.update({normalize_str(f): f for f in biggest_files})
-        print(f"Loaded {len(cls._found_files)} meta paths ({timeit:.2f} sec)")
+        print(f"Loaded {len(cls._found_files)} meta paths [{cls.loaded_game.name if cls.loaded_game else ""}] ({timeit:.2f} sec)")
 
     @classmethod
     def _load_assets_meta_files_guids(cls) -> None:

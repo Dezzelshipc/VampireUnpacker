@@ -302,6 +302,8 @@ class Unpacker(tk.Tk):
         self.data_from_popup = None
         self.outer_progress_bar = None
 
+        self.after(10, MetaDataHandler.load, Game.VS)
+
     @staticmethod
     def get_assets_dir(key: DLCType = DLCType.VS) -> Path:
         path = Config.get_assets_dir(key)
@@ -933,10 +935,11 @@ class Unpacker(tk.Tk):
 
         self.last_loaded_folder = save_path
 
-    @staticmethod
-    def vc_generate_card_database():
+
+    def vc_generate_card_database(self):
         MetaDataHandler.load(Game.VC)
-        image_gen_vc.generate_card_group_database()
+        folder = image_gen_vc.generate_card_group_database()
+        self.last_loaded_folder = folder
 
 
 if __name__ == '__main__':
