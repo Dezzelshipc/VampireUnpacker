@@ -12,13 +12,13 @@ from Source.Utility.multirun import run_multiprocess, run_concurrent_sync
 from Source.Utility.special_classes import Objectless
 from Source.Utility.sprite_data import SpriteData, SpriteRect
 from Source.Utility.timer import Timeit
-from Source.Utility.unityparser2 import UnityDoc, UnityYAMLEntry
+from Source.Utility.unity_parser import UnityDoc, UnityEntry
 from Source.Utility.utility import CheckBoxes, write_in_file_end, clear_file
 from Utility.constants import GAME_OBJECT
 
 
 class Tilemap:
-    def __init__(self, doc: UnityYAMLEntry):
+    def __init__(self, doc: UnityEntry):
         self.m_Size = doc.get("m_Size")
         self.m_TileMatrixArray = doc.get("m_TileMatrixArray")
         self.m_TileSpriteArray = doc.get("m_TileSpriteArray")

@@ -1,7 +1,7 @@
 import json
 
 from Source.Utility.constants import TRANSLATIONS_FOLDER, VAMPIRE_CRAWLERS, GENERATED
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 
 SHARED_DATA = "Shared Data"
 

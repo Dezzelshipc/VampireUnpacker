@@ -23,7 +23,7 @@ MAX_PARSE_BATCH_SIZE = 1 << 12
 
 
 @dataclass
-class UnityYAMLEntry:
+class UnityEntry:
     className: str
     classID: int
     fileID: int
@@ -32,7 +32,9 @@ class UnityYAMLEntry:
     __none: Self = None
 
     def __repr__(self):
-        return f"<{self.__class__.__name__} className={self.className}, fileID={self.fileID}>"
+        m_name = self.data.get('m_Name')
+        m_name = f", m_Name={m_name}" if m_name else ""
+        return f"{self.__class__.__name__}(className={self.className}{m_name})"
 
     def get(self, item):
         return self.data.get(item)
@@ -44,21 +46,71 @@ class UnityYAMLEntry:
     def get_attrs(self):
         return set(self.data.keys())
 
+    def with_data(self, data: dict):
+        return UnityEntry(self.className, self.classID, self.fileID, data)
+
     @classmethod
     def gen_none(cls):
         if not cls.__none:
-            cls.__none = UnityYAMLEntry("None", 0, 0, {})
+            cls.__none = UnityEntry("None", 0, 0, {})
         return cls.__none
 
 
 @dataclass
-class UnityDoc:
-    entries: list[UnityYAMLEntry]
+class UnityReference(dict):
+    @property
+    def fileID(self):
+        return self.get("fileID")
 
-    def __getattribute__(self, item):
-        if item == "entry":
-            return self.entries[0]
-        return super().__getattribute__(item)
+    @property
+    def guid(self):
+        return self.get("guid")
+
+    @property
+    def type(self):
+        return self.get("type")
+
+    def is_valid(self):
+        return self.guid is not None
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(fileID={self.fileID}, guid={self.guid})"
+
+    @classmethod
+    def from_data(cls, data: dict):
+        def make_data(_data):
+            if isinstance(_data, dict):
+                if {'fileID'}.issubset(_data.keys()):
+                    ref = cls()
+                    ref.update(_data)
+                    return ref
+                else:
+                    return {
+                        k: make_data(v)
+                        for k, v in _data.items()
+                    }
+            elif isinstance(_data, list):
+                return [make_data(v) for v in _data]
+            else:
+                return _data
+        return make_data(data)
+
+
+
+@dataclass
+class UnityDoc:
+    entries: list[UnityEntry]
+
+    @property
+    def entry(self):
+        return self.entries[0]
+
+    def __post_init__(self):
+        for i, entry in enumerate(self.entries):
+            if isinstance(entry, UnityEntry):
+                entry.data = UnityReference.from_data(entry.data)
+            elif isinstance(entry, dict):
+                self.entries[i] = UnityReference.from_data(entry)
 
     def filter(self,
                class_names: Iterable[str] | None = None,
@@ -143,7 +195,7 @@ class UnityDoc:
 
         entries_parts = run_multiprocess(_yaml_load_part, text_split_parts)
 
-        entries: list[UnityYAMLEntry | None] = [None] * (entries_parts[-1][0] + 1)
+        entries: list[UnityEntry | None] = [None] * (entries_parts[-1][0] + 1)
         for entry_index, part_index, entry in entries_parts:
             if not entries[entry_index]:
                 entries[entry_index] = entry
@@ -164,7 +216,7 @@ class UnityDoc:
             return UnityDoc.yaml_parse_io_parallel(_f, filter_func)
 
 
-def _yaml_load_part(i: int, j: int, entry: str) -> tuple[int, int, "UnityYAMLEntry"]:
+def _yaml_load_part(i: int, j: int, entry: str) -> tuple[int, int, "UnityEntry"]:
     return i, j, yaml.load(entry, UnityLoaderR)
 
 
@@ -249,11 +301,11 @@ class UnityLoaderR(Reader, Scanner, UnityParserR, Composer, SafeConstructor, Res
         class_name, data = list(yaml_object.items())[0]
         assert len(yaml_object.keys()) == 1, "For each tag (!u!) there must by only one entry"
 
-        return UnityYAMLEntry(class_name, class_id, file_id, data)
+        return UnityEntry(class_name, class_id, file_id, data)
 
 
 @dataclass
-class UnityDocTree(UnityYAMLEntry):
+class UnityDocTree(UnityEntry):
 
     def __init__(self, unity_doc: UnityDoc):
         file_id = "fileID"
@@ -267,13 +319,13 @@ class UnityDocTree(UnityYAMLEntry):
 
         def _get_entry(_f_id):
             entries = unity_doc.filter(file_ids=(_f_id,))
-            return entries[0] if entries else UnityYAMLEntry.gen_none()
+            return entries[0] if entries else UnityEntry.gen_none()
 
         def _set_item(_item):
             if isinstance(_item, dict) and len(_item.keys()) == 1 and file_id in _item.keys():
                 f_id = _item[file_id]
                 return _get_entry(f_id)
-            elif isinstance(_item, dict) or isinstance(_item, list) :
+            elif isinstance(_item, dict) or isinstance(_item, list):
                 return make_data(_item)
             return None
 
@@ -289,16 +341,15 @@ class UnityDocTree(UnityYAMLEntry):
                     if _t is not None:
                         _data[i] = _t
 
-
         for entry in unity_doc.entries:
             make_data(entry.data)
 
 
 if __name__ == "__main__":
-    # fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles_RAW\0VS\ExportedProject\Assets\GameObject\AstralStair.prefab"
-    # fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles_RAW\0VS\ExportedProject\Assets\GameObject\CarloCart.prefab"
-    # fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles_RAW\0VS\ExportedProject\Assets\GameObject\Coop.prefab"
-    fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles_RAW\0VS\ExportedProject\Assets\GameObject\ADV_SHEMOON_004.prefab"
+    # fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles-RAW\0VS\ExportedProject\Assets\GameObject\AstralStair.prefab"
+    # fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles-RAW\0VS\ExportedProject\Assets\GameObject\CarloCart.prefab"
+    fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles-RAW\0VS\ExportedProject\Assets\GameObject\Coop.prefab"
+    # fp = r"D:\Program Files\GitHub\VampireSurvivorsFiles-RAW\0VS\ExportedProject\Assets\GameObject\ADV_SHEMOON_004.prefab"
 
     fp = Path(fp)
 
@@ -335,9 +386,10 @@ if __name__ == "__main__":
     def __tree():
         timeit = Timeit()
         doc = UnityDoc.yaml_parse_file_smart(fp)
-        print(timeit)
+        print(timeit("parsed"))
 
         tree = UnityDocTree(doc)
+        print(timeit())
         pass
 
 

@@ -13,7 +13,7 @@ from Source.Utility.multirun import run_multiprocess_single
 from Source.Utility.special_classes import Objectless
 from Source.Utility.sprite_data import SpriteData, AnimationData, SKIP_ANIM_NAMES_LIST
 from Source.Utility.timer import Timeit
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.utility import normalize_str
 
 

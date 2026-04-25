@@ -9,7 +9,7 @@ from Source.Config.config import DLCType
 from Source.Utility.constants import DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, COMPOUND_DATA, COMPOUND_DATA_TYPE
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.special_classes import Objectless
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.utility import to_pascalcase, clean_all_json, clean_commas_json
 
 

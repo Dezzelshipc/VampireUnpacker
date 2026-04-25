@@ -16,7 +16,7 @@ from Source.Utility.constants import GENERATED, COMPOUND_DATA, AUDIO_FOLDER, COM
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.multirun import run_concurrent_sync, run_gather
 from Source.Utility.timer import Timeit
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.utility import normalize_str
 
 

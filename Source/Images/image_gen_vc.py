@@ -2,7 +2,7 @@ from os import PathLike
 
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.constants import CARD_GROUP_DATABASE, IMAGES_FOLDER, GENERATED
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 
 
 def get_card_group_database():
