@@ -7,7 +7,7 @@ from PIL.Image import Image, open as image_open
 
 from Source.Config.config import DLCType, Config, Game
 from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJECT, PREFAB_INSTANCE, AUDIO_CLIP, \
-    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA
+    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
 from Source.Utility.multirun import run_multiprocess_single
 from Source.Utility.special_classes import Objectless
@@ -235,6 +235,7 @@ class MetaDataHandler(Objectless):
             case Game.VC:
                 path_roots.extend([
                     (MONO_BEHAVIOUR, ""),
+                    (MATERIAL, ""),
                 ])
 
         for dlc in DLCType.get_all_types_by_game(cls.loaded_game):

@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from typing import Final, Callable
+from typing import Final, Callable, Iterable
 
 from Source.Utility.special_classes import Objectless
 from Source.Utility.utility import _find_main_py_file
@@ -9,7 +9,6 @@ IS_DEBUG: Final[bool] = (sys.monitoring.get_tool(sys.monitoring.DEBUGGER_ID)) is
         sys.gettrace() is not None)
 
 ROOT_FOLDER: Final[Path] = _find_main_py_file().parent.absolute()
-
 
 AUDIO_FOLDER: Final[Path] = ROOT_FOLDER / "Audio"
 CONFIG_FOLDER: Final[Path] = ROOT_FOLDER / "Config"
@@ -20,7 +19,6 @@ TRANSLATIONS_FOLDER: Final[Path] = ROOT_FOLDER / "Translations"
 UTILITY_FOLDER: Final[Path] = ROOT_FOLDER / "Utility"
 
 VAMPIRE_SURVIVORS: Final[str] = "Vampire Survivors"
-VAMPIRE_CRAWLERS: Final[str] = "Vampire Crawlers"
 
 SOURCE: Final[str] = "Source"
 GENERATED: Final[str] = "Generated"
@@ -34,12 +32,10 @@ GAME_OBJECT: Final[str] = "GameObject"
 PREFAB_INSTANCE: Final[str] = "PrefabInstance"
 AUDIO_CLIP: Final[str] = "AudioClip"
 MONO_BEHAVIOUR: Final[str] = "MonoBehaviour"
+MATERIAL: Final[str] = "Material"
 
 DATA_MANAGER_SETTINGS: Final[str] = "DataManagerSettings"
 BUNDLE_MANIFEST_DATA: Final[str] = "BundleManifestData"
-
-CARD_DATABASE: Final[str] = "CardDatabase"
-CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"
 
 
 class COMPOUND_DATA(Objectless):
@@ -67,3 +63,11 @@ def to_source_path(path: Path) -> Path:
 
 
 DEFAULT_ANIMATION_FRAME_RATE: Final[int] = 7
+
+## VC
+VAMPIRE_CRAWLERS: Final[str] = "Vampire Crawlers"
+
+CARD_DATABASE: Final[str] = "CardDatabase"
+CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"
+
+SPRITE_FILE_IDS: Final[Iterable[int]] = range(21300000,21301000)

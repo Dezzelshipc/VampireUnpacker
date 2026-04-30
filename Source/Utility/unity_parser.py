@@ -73,6 +73,9 @@ class UnityReference(dict):
     def is_valid(self):
         return self.guid is not None
 
+    def __hash__(self):
+        return hash(self.guid)
+
     def __repr__(self):
         return f"{self.__class__.__name__}(fileID={self.fileID}, guid={self.guid})"
 
@@ -101,9 +104,18 @@ class UnityReference(dict):
 class UnityDoc:
     entries: list[UnityEntry]
 
+    guid: str | None = None
+
     @property
     def entry(self):
         return self.entries[0]
+
+    def set_guid(self, guid: str):
+        self.guid = guid
+        return self
+
+    def __hash__(self):
+        return hash(self.guid)
 
     def __post_init__(self):
         for i, entry in enumerate(self.entries):
