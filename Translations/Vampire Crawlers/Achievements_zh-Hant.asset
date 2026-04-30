@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   m_LocaleId:
     m_Code: zh-Hant
-  m_SharedData: {fileID: 11400000, guid: 7bfc08bb0b41f7c40826d70518d81969, type: 2}
+  m_SharedData: {fileID: 11400000, guid: 251f6e786a2b76e46b9e444a7e47667e, type: 2}
   m_Metadata:
     m_Items:
       Array:

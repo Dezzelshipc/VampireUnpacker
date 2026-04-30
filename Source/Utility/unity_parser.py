@@ -73,11 +73,16 @@ class UnityReference(dict):
     def is_valid(self):
         return self.guid is not None
 
+    def marked_not_found(self):
+        self['_not_found'] = True
+        return self
+
     def __hash__(self):
         return hash(self.guid)
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(fileID={self.fileID}, guid={self.guid})"
+        found = ", <Not found>" if self.get('_not_found') else ""
+        return f"{self.__class__.__name__}(fileID={self.fileID}, guid={self.guid}{found})"
 
     @classmethod
     def from_data(cls, data: dict):

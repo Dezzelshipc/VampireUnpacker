@@ -107,6 +107,25 @@ class MetaData:
         return f"<{self.__class__.__name__}: {self.name} ({self.real_name}) at {hex(id(self)).upper()}>"
 
 
+class ExactMetaData(MetaData):
+    fileID: int = None
+
+    @property
+    def sprite(self) -> SpriteData:
+        return self.data_id[self.fileID]
+
+    @classmethod
+    def from_meta_data(cls, meta_data: MetaData, fileID: int) -> "ExactMetaData":
+        emd = cls(meta_data.name,
+                  meta_data.real_name,
+                  meta_data.guid,
+                  meta_data.image,
+                  meta_data.data_name,
+                  meta_data.data_id)
+        emd.fileID = fileID
+        return emd
+
+
 def _get_meta(meta_path: Path) -> MetaData:
     timeit = Timeit()
 
@@ -262,7 +281,8 @@ class MetaDataHandler(Objectless):
         ###
 
         cls._assets_name_path.update({normalize_str(f): f for f in biggest_files})
-        print(f"Loaded {len(cls._found_files)} meta paths [{cls.loaded_game.name if cls.loaded_game else ""}] ({timeit:.2f} sec)")
+        print(
+            f"Loaded {len(cls._found_files)} meta paths [{cls.loaded_game.name if cls.loaded_game else ""}] ({timeit:.2f} sec)")
 
     @classmethod
     def _load_assets_meta_files_guids(cls) -> None:
@@ -399,9 +419,9 @@ class MetaDataHandler(Objectless):
         for name in name_set:
             norm_name = normalize_str(name)
 
-
             filtered = cls.filter_paths(
-                lambda name_path: re.fullmatch(rf"{norm_name}_\d+", name_path[0]) or name_path[0] == norm_name # name_path[0].startswith(norm_name+"_") or name_path[0] == norm_name
+                lambda name_path: re.fullmatch(rf"{norm_name}_\d+", name_path[0]) or name_path[0] == norm_name
+                # name_path[0].startswith(norm_name+"_") or name_path[0] == norm_name
             )
             fullest = list(sorted(filtered, key=lambda name_path: name_path[-1].stat().st_size, reverse=True))[0]
             fullest_set[fullest[0]] = name

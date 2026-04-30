@@ -51,10 +51,6 @@ def gen_main_langs():
         with open(sf / f"{t}.json", mode="w", encoding="UTF-8") as f:
             f.write(json.dumps(full_data, ensure_ascii=False, indent=2))
 
-        1
-
-    pass
-
 
 if __name__ == "__main__":
     gen_main_langs()

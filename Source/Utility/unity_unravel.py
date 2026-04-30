@@ -2,7 +2,7 @@ from itertools import cycle
 
 from Source.Data.unity_data import UnityDataHandler
 from Source.Utility.unity_parser import UnityEntry, UnityDoc, UnityReference
-from Source.Data.meta_data import MetaDataHandler, MetaData
+from Source.Data.meta_data import MetaDataHandler, MetaData, ExactMetaData
 from Source.Utility.constants import SPRITE_FILE_IDS
 from Source.Utility.multirun import run_multiprocess, run_concurrent_async, run_concurrent_sync, run_multiprocess_single
 
@@ -23,10 +23,13 @@ def _get_data(_data) -> set[UnityReference]:
     return set()
 
 
-def _make_data(_data, guid_docs: dict[str, UnityDoc]):
+def _make_data(_data, guid_docs: dict[str, UnityDoc | MetaData]):
     if isinstance(_data, UnityReference):
         if _data.is_valid():
-            return guid_docs.get(_data.guid) or _data
+            res_doc = guid_docs.get(_data.guid) or _data.marked_not_found()
+            if isinstance(res_doc, MetaData):
+                return ExactMetaData.from_meta_data(res_doc, _data.fileID)
+            return res_doc
     elif isinstance(_data, UnityEntry):
         return _data.with_data(_make_data(_data.data, guid_docs))
     elif isinstance(_data, UnityDoc):
@@ -42,7 +45,7 @@ def _make_data(_data, guid_docs: dict[str, UnityDoc]):
     return _data
 
 
-def _unity_unravel_entry(entry: UnityEntry, guid_docs: dict[str, UnityDoc]) -> UnityEntry:
+def _unity_unravel_entry(entry: UnityEntry, guid_docs: dict[str, UnityDoc | MetaData]) -> UnityEntry:
     return entry.with_data(_make_data(entry.data, guid_docs))
 
 
@@ -52,8 +55,11 @@ def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1) -> UnityDoc:
     guid_docs: dict[str, UnityDoc | MetaData] = {}
 
     for d in range(depth):
-        unity_refs = {guid for g_list in run_multiprocess_single(_get_data, [e.data for e in _unity_doc.entries]) for guid in
-                 g_list}
+        unity_refs = {
+            guid
+            for g_list in run_multiprocess_single(_get_data, [e.data for e in _unity_doc.entries])
+            for guid in g_list
+        }
 
         assets = {ref.guid for ref in unity_refs if ref.fileID not in SPRITE_FILE_IDS}
         sprites = {ref.guid for ref in unity_refs if ref.fileID in SPRITE_FILE_IDS}
@@ -77,15 +83,10 @@ if __name__ == "__main__":
 
     MetaDataHandler.load(Game.VC)
 
-    db_name = "EnemyDatabase"
-    # db_name = "AllDecks"
+    db_name = "RewardConfig_Default"
 
     path = MetaDataHandler.get_path_by_name_no_meta(db_name)
-
-
     doc = UnityDoc.yaml_parse_file_smart(path)
-    # print(doc)
-
-    udoc = unity_unravel_doc(doc, depth=3)
+    udoc = unity_unravel_doc(doc, depth=2)
 
     print(udoc)
