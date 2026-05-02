@@ -13,8 +13,10 @@ from Utility.multirun import run_concurrent_sync
 class DataTypeVC(Enum):
     ENEMY = "EnemyDatabase"
     COFFIN_GUARDIAN = "GuardianEncounterDatabase"
-    REWARD_CONFIG = "RewardConfig_Default"
     DECKS = "AllDecks"  # Not full list of decks
+    REWARD_CONFIG = "RewardConfig_Default"
+    LEVEL_CONFIG = "PlayerLevelConfig"
+    PLAYER_CONFIG = "PlayerConfig"
 
     ### Unused
     _AchievementCD = "AchievementConfigDatabase"
@@ -194,6 +196,42 @@ class RewardConfigDataDumper(BaseDataDumper):
         cls.save_data(full_data)
 
 
+class LevelConfigDataDumper(BaseDataDumper):
+    _type = DataTypeVC.LEVEL_CONFIG
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(0)
+
+        full_data = {
+            k: v
+            for k, v in udoc.entry.data.items()
+            if k in ['_baseXpReq', '_levelRanges']
+        }
+
+        cls.save_data(full_data)
+
+
+class PlayerConfigDataDumper(BaseDataDumper):
+    _type = DataTypeVC.PLAYER_CONFIG
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(0)
+
+        data = udoc.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in [
+            '_playerAudioConfig'
+        ], keys)
+
+        full_data = {k: data.get(k) for k in keys}
+
+        cls.save_data(full_data)
+
+
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    DeckDataDumper.dump_data()
+    PlayerConfigDataDumper.dump_data()
