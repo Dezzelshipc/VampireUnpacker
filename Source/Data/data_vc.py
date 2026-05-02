@@ -1,17 +1,20 @@
 import json
 from enum import Enum
+from itertools import cycle
 
 from Source.Config.config import Game
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.unity_unravel import unity_unravel_doc
 from Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS
+from Utility.multirun import run_concurrent_sync
 
 
 class DataTypeVC(Enum):
     ENEMY = "EnemyDatabase"
     COFFIN_GUARDIAN = "GuardianEncounterDatabase"
     REWARD_CONFIG = "RewardConfig_Default"
+    DECKS = "AllDecks"  # Not full list of decks
 
     ### Unused
     _AchievementCD = "AchievementConfigDatabase"
@@ -35,7 +38,6 @@ class DataTypeVC(Enum):
     _RoomTD = "RoomTemplateDatabase"  # '_assetReference'
     _TownBD = "TownBuildingDatabase"
 
-    _AllDecks = "AllDecks"  # Not full list of decks
     _AllDungeons = "AllDungeons"
 
     NONE = None
@@ -103,22 +105,35 @@ class EnemyDataDumper(BaseDataDumper):
         cls.save_data(full_data)
 
 
-# class DeckDataDumper(BaseDataDumper):
-#     _type = DataTypeVC.DECK
-#
-#     @classmethod
-#     def dump_data(cls):
-#         udoc = cls.get_udoc(2)
-#
-#         full_data: dict[str, list[str]] = {}
-#
-#         for deck_config in udoc.entry.data['_assetList']:
-#             data: dict = deck_config.entry.data
-#             name = data['deckName']
-#
-#             full_data[name] = [card_config['cardConfig'].entry.data['m_Name'] for card_config in data['cards']]
-#
-#         cls.save_data(full_data)
+class DeckDataDumper(BaseDataDumper):
+    _type = DataTypeVC.DECKS
+
+    @classmethod
+    def get_udoc(cls, depth: int):
+        assert False, f"Unsupported function. Use {cls.__class__.__name__}.get_deck_udocs(depth)"
+
+    @classmethod
+    def get_deck_udocs(cls, depth: int, verbose: int = 0) -> list[UnityDoc]:
+        paths = MetaDataHandler.filter_paths(lambda name_path: name_path[0].endswith('deck'))
+        docs = run_concurrent_sync(UnityDoc.yaml_parse_file_smart, (p.with_suffix("") for n, p in paths))
+        return run_concurrent_sync(unity_unravel_doc, zip(docs, cycle((depth,)), cycle((verbose,))))
+
+    @classmethod
+    def dump_data(cls):
+        udocs = cls.get_deck_udocs(2)
+        udocs.sort(key=lambda d: d.entry.data['m_Name'])
+
+        full_data: dict[str, list[str]] = {}
+
+        for deck_config in udocs:
+            data: dict = deck_config.entry.data
+            name = data['deckName']
+
+            if name in full_data:
+                name += "_" + data['m_Name']
+            full_data[name] = [card_config['cardConfig'].entry.data['m_Name'] for card_config in data['cards']]
+
+        cls.save_data(full_data)
 
 
 class CoffinGuardianDataDumper(BaseDataDumper):
@@ -181,4 +196,4 @@ class RewardConfigDataDumper(BaseDataDumper):
 
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    RewardConfigDataDumper.dump_data()
+    DeckDataDumper.dump_data()

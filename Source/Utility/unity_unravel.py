@@ -49,7 +49,7 @@ def _unity_unravel_entry(entry: UnityEntry, guid_docs: dict[str, UnityDoc | Meta
     return entry.with_data(_make_data(entry.data, guid_docs))
 
 
-def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1) -> UnityDoc:
+def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, verbose: int = 1) -> UnityDoc:
     _unity_doc = unity_doc
 
     guid_docs: dict[str, UnityDoc | MetaData] = {}
@@ -64,7 +64,8 @@ def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1) -> UnityDoc:
         assets = {ref.guid for ref in unity_refs if ref.fileID not in SPRITE_FILE_IDS}
         sprites = {ref.guid for ref in unity_refs if ref.fileID in SPRITE_FILE_IDS}
 
-        print(f"Unraveling UnityDoc. Depth: {d} (Assets to parse: {len(assets)}, Sprites to parse: {len(sprites)})")
+        if verbose > 0:
+            print(f"Unraveling UnityDoc. Depth: {d} (Assets to parse: {len(assets)}, Sprites to parse: {len(sprites)})")
 
         docs = UnityDataHandler.get_data_dict_by_guid_set(assets)
         guid_docs.update(docs)
@@ -83,7 +84,8 @@ if __name__ == "__main__":
 
     MetaDataHandler.load(Game.VC)
 
-    db_name = "RewardConfig_Default"
+    db_name = "CardGroupDatabase"
+    print(db_name)
 
     path = MetaDataHandler.get_path_by_name_no_meta(db_name)
     doc = UnityDoc.yaml_parse_file_smart(path)

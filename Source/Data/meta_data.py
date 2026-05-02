@@ -111,7 +111,7 @@ class ExactMetaData(MetaData):
     fileID: int = None
 
     @property
-    def sprite(self) -> SpriteData:
+    def sprite_data(self) -> SpriteData:
         return self.data_id[self.fileID]
 
     @classmethod
