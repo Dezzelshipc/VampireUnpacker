@@ -1,0 +1,129 @@
+{
+    "RelicConfig_Blacksmith": {
+        "_assetId": "RelicConfig_Blacksmith",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_BombaInfernale": {
+        "_assetId": "RelicConfig_BombaInfernale",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_BraveStory": {
+        "_assetId": "GrimGrimoire",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_Darkasso": {
+        "_assetId": "RelicConfig_Darkasso",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_DeckBox": {
+        "_assetId": "RelicConfig_DeckBox",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_FccPamphlet": {
+        "_assetId": "RelicConfig_FccPamphlet",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_GemHammer": {
+        "_assetId": "RelicConfig_GemHammer",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_GrimGrimoire": {
+        "_assetId": "RelicConfig_GrimGrimoire",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_GuidingLight": {
+        "_assetId": "RelicConfig_GuidingLight",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_InnKey": {
+        "_assetId": "RelicConfig_InnKey",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_Jeweller": {
+        "_assetId": "RelicConfig_Jeweller",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_MagicBanger": {
+        "_assetId": "RelicConfig",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_MilkyWayMap": {
+        "_assetId": "RelicConfig_MilkyWayMap",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_Ovenkilt": {
+        "_assetId": "RelicConfig_Ovenkilt",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_Overkill": {
+        "_assetId": "RelicConfig_Overkill",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_PancakeOfPower": {
+        "_assetId": "RelicConfig_PancakeOfPower",
+        "_descriptionStringArguments": [
+            "<size=40px><sprite name=UI_sprites_ManaFull></size>"
+        ],
+        "IsToggleable": 1
+    },
+    "RelicConfig_Polentir": {
+        "_assetId": "RelicConfig_Polentir",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_PossessedSneakers": {
+        "_assetId": "RelicConfig_PossessedSneakers",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_RageVirus": {
+        "_assetId": "RelicConfig_RageVirus",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_Randomazzo": {
+        "_assetId": "RelicConfig_Randomazzo",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_Randomizer": {
+        "_assetId": "RelicConfig_Randomizer",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_Rilevatore": {
+        "_assetId": "RelicConfig_DamageIndicators",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_SorcerersTears": {
+        "_assetId": "RelicConfig_SorcerersTears",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 0
+    },
+    "RelicConfig_UltraOverkill": {
+        "_assetId": "RelicConfig_UltimateOverkill",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    },
+    "RelicConfig_YellowSign": {
+        "_assetId": "RelicConfig_YellowSign",
+        "_descriptionStringArguments": [],
+        "IsToggleable": 1
+    }
+}

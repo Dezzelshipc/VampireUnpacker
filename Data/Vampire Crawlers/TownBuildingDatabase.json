@@ -1,0 +1,50 @@
+{
+    "TownBuilding_Blacksmith": {
+        "_assetId": "TownBuilding_Blacksmith",
+        "IsTownExit": 0,
+        "_musicOverride": "SongConfig_Menus_Blacksmith",
+        "_allowedInDemo": 0
+    },
+    "TownBuilding_Fortune": {
+        "_assetId": "TownBuilding_Fortune",
+        "IsTownExit": 0,
+        "_musicOverride": "SongConfig_Menus_Arcana",
+        "_allowedInDemo": 0
+    },
+    "TownBuilding_Graveyard": {
+        "_assetId": "TownBuilding_Graveyard",
+        "IsTownExit": 0,
+        "_musicOverride": null,
+        "_allowedInDemo": 1
+    },
+    "TownBuilding_Inn": {
+        "_assetId": "TownBuilding_Inn",
+        "IsTownExit": 0,
+        "_musicOverride": null,
+        "_allowedInDemo": 1
+    },
+    "TownBuilding_Museum": {
+        "_assetId": "TownBuilding_Museum",
+        "IsTownExit": 0,
+        "_musicOverride": "SongConfig_Menus_Relics",
+        "_allowedInDemo": 1
+    },
+    "TownBuilding_Shop": {
+        "_assetId": "TownBuilding_Shop",
+        "IsTownExit": 0,
+        "_musicOverride": "SongConfig_Menus_Shop",
+        "_allowedInDemo": 1
+    },
+    "TownBuilding_TownHall": {
+        "_assetId": "TownBuilding_TownHall",
+        "IsTownExit": 0,
+        "_musicOverride": null,
+        "_allowedInDemo": 1
+    },
+    "TownBuilding_WorldMap": {
+        "_assetId": "TownBuilding_WorldMap",
+        "IsTownExit": 1,
+        "_musicOverride": null,
+        "_allowedInDemo": 1
+    }
+}

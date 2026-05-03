@@ -70,4 +70,7 @@ VAMPIRE_CRAWLERS: Final[str] = "Vampire Crawlers"
 CARD_DATABASE: Final[str] = "CardDatabase"
 CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"
 
-SPRITE_FILE_IDS: Final[set[int]] = {*range(2800000,2800010), *range(21300000,21305000)}
+SPRITE_CLASS_IDS: Final[set[int]] = {28, 213}
+AUDIO_CLASS_IDS: Final[set[int]] = {83, 1020}
+
+NOT_UNITY_DATA_CLASS_IDS: Final[set[int]] = {*SPRITE_CLASS_IDS, *AUDIO_CLASS_IDS}

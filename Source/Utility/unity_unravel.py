@@ -1,10 +1,10 @@
 from itertools import cycle
 
-from Source.Data.unity_data import UnityDataHandler
-from Source.Utility.unity_parser import UnityEntry, UnityDoc, UnityReference
 from Source.Data.meta_data import MetaDataHandler, MetaData, ExactMetaData
-from Source.Utility.constants import SPRITE_FILE_IDS
-from Source.Utility.multirun import run_multiprocess, run_concurrent_async, run_concurrent_sync, run_multiprocess_single
+from Source.Data.unity_data import UnityDataHandler
+from Source.Utility.constants import SPRITE_CLASS_IDS, NOT_UNITY_DATA_CLASS_IDS
+from Source.Utility.multirun import run_multiprocess, run_multiprocess_single
+from Source.Utility.unity_parser import UnityEntry, UnityDoc, UnityReference
 
 
 def _get_data(_data) -> set[UnityReference]:
@@ -61,10 +61,11 @@ def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, is_load_sprites: bool
             for guid in g_list
         }
 
-        assets = {ref.guid for ref in unity_refs if ref.fileID not in SPRITE_FILE_IDS}
-        sprites = {ref.guid for ref in unity_refs if ref.fileID in SPRITE_FILE_IDS}
+        assets = {ref.guid for ref in unity_refs if ref.classID not in NOT_UNITY_DATA_CLASS_IDS}
+        sprites = {ref.guid for ref in unity_refs if ref.classID in NOT_UNITY_DATA_CLASS_IDS}
 
-        # print([ref for ref in unity_refs if ref.fileID not in SPRITE_FILE_IDS])
+        print([(ref, MetaDataHandler.get_path_by_guid_no_meta(ref.guid))
+               for ref in unity_refs if ref.classID not in NOT_UNITY_DATA_CLASS_IDS])
 
         if verbose > 0:
             print(f"Unraveling UnityDoc. Depth: {d} (Assets to parse: {len(assets)}, Sprites to parse: {len(sprites)})")
@@ -89,11 +90,11 @@ if __name__ == "__main__":
 
     MetaDataHandler.load(Game.VC)
 
-    db_name = "AchievementConfigDatabase"
+    db_name = "AllDungeons"
     print(db_name)
 
     path = MetaDataHandler.get_path_by_name_no_meta(db_name)
     doc = UnityDoc.yaml_parse_file_smart(path)
-    udoc = unity_unravel_doc(doc, depth=2)
+    udoc = unity_unravel_doc(doc, depth=4, is_load_sprites=False)
 
     print(udoc)

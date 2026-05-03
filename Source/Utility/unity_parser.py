@@ -56,8 +56,11 @@ class UnityEntry:
         return cls.__none
 
 
-@dataclass
 class UnityReference(dict):
+    @property
+    def classID(self):
+        return self.fileID // 100000
+
     @property
     def fileID(self):
         return self.get("fileID")
@@ -84,25 +87,26 @@ class UnityReference(dict):
         found = ", <Not found>" if self.get('_not_found') else ""
         return f"{self.__class__.__name__}(fileID={self.fileID}, guid={self.guid}{found})"
 
-    @classmethod
-    def from_data(cls, data: dict):
-        def make_data(_data):
-            if isinstance(_data, dict):
-                if {'fileID'}.issubset(_data.keys()):
-                    ref = cls()
-                    ref.update(_data)
-                    return ref
-                else:
-                    return {
-                        k: make_data(v)
-                        for k, v in _data.items()
-                    }
-            elif isinstance(_data, list):
-                return [make_data(v) for v in _data]
-            else:
-                return _data
-        return make_data(data)
 
+class UnityLocalizedReference(dict):
+    @property
+    def table_guid(self):
+        match self:
+            case {'m_TableReference': {'m_TableCollectionName': str(guid)}}:
+                return guid.replace("GUID:", "")
+            case _:
+                return None
+
+    @property
+    def table_key(self):
+        match self:
+            case {'m_TableEntryReference': {'m_KeyId': int(key_id)}}:
+                return key_id
+            case _:
+                return None
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(table={self.table_guid}, key={self.table_key})"
 
 
 @dataclass
@@ -123,11 +127,27 @@ class UnityDoc:
         return hash(self.guid)
 
     def __post_init__(self):
+        def make_data(_data):
+            if isinstance(_data, dict):
+                if {'fileID'}.issubset(_data.keys()):
+                    return UnityReference(**_data)
+                elif {'m_TableReference'}.issubset(_data.keys()):
+                    return UnityLocalizedReference(**_data)
+                else:
+                    return {
+                        k: make_data(v)
+                        for k, v in _data.items()
+                    }
+            elif isinstance(_data, list):
+                return [make_data(v) for v in _data]
+            else:
+                return _data
+
         for i, entry in enumerate(self.entries):
             if isinstance(entry, UnityEntry):
-                entry.data = UnityReference.from_data(entry.data)
+                entry.data = make_data(entry.data)
             elif isinstance(entry, dict):
-                self.entries[i] = UnityReference.from_data(entry)
+                self.entries[i] = make_data(entry)
 
     def filter(self,
                class_names: Iterable[str] | None = None,

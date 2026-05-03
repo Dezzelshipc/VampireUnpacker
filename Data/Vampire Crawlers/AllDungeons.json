@@ -1,0 +1,2111 @@
+{
+    "Dungeon_TinyBridge_01": {
+        "<AssetId>k__BackingField": "Dungeon_TinyBridge_01",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_TinyBridge_01",
+        "_difficultyRating": 3,
+        "_cameraVolumeProfile": "DungeonCameraPP TinyBridge",
+        "_skyboxMaterial": "SkyboxNull",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.38431376,
+                "g": 0.4431373,
+                "b": 0.46274513,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0.28235295,
+                "g": 0.54509807,
+                "b": 0.6901961,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+            },
+            "FogMode": 2,
+            "FogDensity": 0.03,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_TinyBridgeTraversal",
+        "_battleBGM": "SongConfig_TinyBridgeEncounter",
+        "_ambience": "SFX_2D_ST_QD_TinyBridge_01",
+        "_relicsInLevel": [
+            "RelicConfig_Overkill",
+            "RelicConfig_Blacksmith"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 0
+    },
+    "Dungeon_TinyBridge_02": {
+        "<AssetId>k__BackingField": "Dungeon_TinyBridge_02",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_TinyBridge_02",
+        "_difficultyRating": 5,
+        "_cameraVolumeProfile": "DungeonCameraPP TinyBridge 1",
+        "_skyboxMaterial": "SkyboxNull",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.38431376,
+                "g": 0.4431373,
+                "b": 0.46274513,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0.28235295,
+                "g": 0.54509807,
+                "b": 0.6901961,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.12156863,
+                "g": 0.06666667,
+                "b": 0.18431373,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.01,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_TinyBridgeTraversal",
+        "_battleBGM": "SongConfig_TinyBridgeEncounter",
+        "_ambience": "SFX_2D_ST_QD_TinyBridge_01",
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 0
+    },
+    "Dungeon_TinyBridge_03": {
+        "<AssetId>k__BackingField": "Dungeon_TinyBridge_03",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_TinyBridge_03",
+        "_difficultyRating": 7,
+        "_cameraVolumeProfile": "DungeonCameraPP TinyBridge 2",
+        "_skyboxMaterial": "SkyboxNull",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.38431376,
+                "g": 0.4431373,
+                "b": 0.46274513,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0.28235295,
+                "g": 0.54509807,
+                "b": 0.6901961,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0.0627451,
+                "g": 0.05882353,
+                "b": 0.29411766,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.02,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_TinyBridgeTraversal",
+        "_battleBGM": "SongConfig_TinyBridgeEncounter",
+        "_ambience": "SFX_2D_ST_QD_TinyBridge_01",
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 0
+    },
+    "Dungeon_CappellaMagna_01": {
+        "<AssetId>k__BackingField": "Dungeon_CappellaMagna_01",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_CapellaMagna_01",
+        "_difficultyRating": 8,
+        "_cameraVolumeProfile": "DungeonCameraPP_CappellaMagna",
+        "_skyboxMaterial": "CappellaMagnaSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0.6855345,
+                "g": 0.6855345,
+                "b": 0.6855345,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.5801887,
+                "g": 1,
+                "b": 1,
+                "a": 1
+            },
+            "FogMode": 3,
+            "FogDensity": 0.007,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_CappellaMagnaTraversal",
+        "_battleBGM": "SongConfig_CappellaMagnaEncounter",
+        "_ambience": "SFX_2D_ST_QD_CapellaMagna_01",
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_CappellaMagna_02": {
+        "<AssetId>k__BackingField": "Dungeon_CappellaMagna_02",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_CapellaMagna_02",
+        "_difficultyRating": 9,
+        "_cameraVolumeProfile": "DungeonCameraPP_CappellaMagna",
+        "_skyboxMaterial": "CappellaMagnaSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0.54088044,
+                "g": 0.54088044,
+                "b": 0.54088044,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0.8867924,
+                "g": 0.87125564,
+                "b": 0.72365606,
+                "a": 1
+            },
+            "FogMode": 3,
+            "FogDensity": 0.01,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_CappellaMagnaTraversal",
+        "_battleBGM": "SongConfig_CappellaMagnaEncounter",
+        "_ambience": "SFX_2D_ST_QD_CapellaMagna_01",
+        "_relicsInLevel": [
+            "RelicConfig_Ovenkilt"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_DairyPlant_01": {
+        "<AssetId>k__BackingField": "Dungeon_DairyPlant_01",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_DairyPlant_01",
+        "_difficultyRating": 4,
+        "_cameraVolumeProfile": "DungeonCameraPP DairyPlant",
+        "_skyboxMaterial": "DairyPlantSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.9372549
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0.8862746,
+                "g": 0.8862746,
+                "b": 0.8000001,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.27450982,
+                "g": 0.21960784,
+                "b": 0.20784314,
+                "a": 1
+            },
+            "FogMode": 1,
+            "FogDensity": 0.02,
+            "FogStartDistance": 10,
+            "FogEndDistance": 70
+        },
+        "_traversalBGM": "SongConfig_DairyPlantTraversal",
+        "_battleBGM": "SongConfig_DairyPlantEncounter",
+        "_ambience": "SFX_2D_ST_QD_DairyPlant_01",
+        "_relicsInLevel": [
+            "RelicConfig_BombaInfernale"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_DairyPlant_02": {
+        "<AssetId>k__BackingField": "Dungeon_DairyPlant_02",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_DairyPlant_02",
+        "_difficultyRating": 5,
+        "_cameraVolumeProfile": "DungeonCameraPP DairyPlant 1",
+        "_skyboxMaterial": "DairyPlantSkybox 1",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.02,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.4509804,
+                "g": 0.36078432,
+                "b": 0.29803923,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.03,
+            "FogStartDistance": 20,
+            "FogEndDistance": 100
+        },
+        "_traversalBGM": "SongConfig_DairyPlantTraversal",
+        "_battleBGM": "SongConfig_DairyPlantEncounter",
+        "_ambience": "SFX_2D_ST_QD_DairyPlant_01",
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [
+            "FCC_Poppea"
+        ],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_DairyPlant_03": {
+        "<AssetId>k__BackingField": "Dungeon_DairyPlant_03",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_DairyPlant_03",
+        "_difficultyRating": 6,
+        "_cameraVolumeProfile": "DungeonCameraPP DairyPlant 2",
+        "_skyboxMaterial": "DairyPlantSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.02,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.04,
+            "FogStartDistance": 20,
+            "FogEndDistance": 100
+        },
+        "_traversalBGM": "SongConfig_DairyPlantTraversal",
+        "_battleBGM": "SongConfig_DairyPlantEncounter",
+        "_ambience": "SFX_2D_ST_QD_DairyPlant_01",
+        "_relicsInLevel": [
+            "RelicConfig_UltraOverkill"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_GalloTower_01": {
+        "<AssetId>k__BackingField": "Dungeon_GalloTower_01",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_GalloTower",
+        "_difficultyRating": 6,
+        "_cameraVolumeProfile": "DungeonCameraPP GalloTower",
+        "_skyboxMaterial": "SkyboxNull",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0.31132078,
+                "g": 0.033775374,
+                "b": 0.033775374,
+                "a": 0.007843138
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0.02745098,
+                "g": 0.050980393,
+                "b": 0.22745098,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.04,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_GalloTowerTraversal",
+        "_battleBGM": "SongConfig_GalloTowerEncounter",
+        "_ambience": "SFX_2D_ST_QD_GalloTower_01",
+        "_relicsInLevel": [
+            "RelicConfig_Jeweller",
+            "RelicConfig_SorcerersTears"
+        ],
+        "_coffinsInLevel": [
+            "FCC_Concetta"
+        ],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_InlaidLibrary_01": {
+        "<AssetId>k__BackingField": "Dungeon_InlaidLibrary_01",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_InlaidLibrary_01",
+        "_difficultyRating": 2,
+        "_cameraVolumeProfile": "DungeonCameraPP InlaidLibrary",
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 3,
+            "AmbientColor": {
+                "r": 0.066037714,
+                "g": 0.021493407,
+                "b": 0.021493407,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.16352195,
+                "g": 0.15893105,
+                "b": 0.15066645,
+                "a": 0.13333334
+            },
+            "GroundFogDepthFade": 0.07,
+            "FullFogColor": {
+                "r": 0.47798735,
+                "g": 0.2999651,
+                "b": 0.109726585,
+                "a": 0.1254902
+            },
+            "FullFogDepthFade": 0.15,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.5754717,
+                "g": 0.4260123,
+                "b": 0.21444464,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.003,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_InlaidLibraryTraversal",
+        "_battleBGM": "SongConfig_InlaidLibraryEncounter",
+        "_ambience": "SFX_2D_ST_QD_InlaidLibrary_01",
+        "_relicsInLevel": [
+            "RelicConfig_GuidingLight"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 1,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_InlaidLibrary_02": {
+        "<AssetId>k__BackingField": "Dungeon_InlaidLibrary_02",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_InlaidLibrary_02",
+        "_difficultyRating": 3,
+        "_cameraVolumeProfile": "DungeonCameraPP InlaidLibrary 1",
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 3,
+            "AmbientColor": {
+                "r": 0.066037714,
+                "g": 0.021493407,
+                "b": 0.021493407,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.48235294,
+                "g": 0.28235295,
+                "b": 0.29685664,
+                "a": 0.13333334
+            },
+            "GroundFogDepthFade": 0.284,
+            "FullFogColor": {
+                "r": 0.13333334,
+                "g": 0,
+                "b": 0,
+                "a": 0.019607844
+            },
+            "FullFogDepthFade": 0.5,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.09803922,
+                "g": 0.023529412,
+                "b": 0.03529412,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.04,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_InlaidLibraryTraversal",
+        "_battleBGM": "SongConfig_InlaidLibraryEncounter",
+        "_ambience": "SFX_2D_ST_QD_InlaidLibrary_01",
+        "_relicsInLevel": [
+            "RelicConfig_GrimGrimoire"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_InlaidLibrary_03": {
+        "<AssetId>k__BackingField": "Dungeon_InlaidLibrary_03",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_InlaidLibrary_03",
+        "_difficultyRating": 4,
+        "_cameraVolumeProfile": "DungeonCameraPP InlaidLibrary 2",
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 3,
+            "AmbientColor": {
+                "r": 0.066037714,
+                "g": 0.021493407,
+                "b": 0.021493407,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.2825188,
+                "g": 0.14453536,
+                "b": 0.5283019,
+                "a": 0.13333334
+            },
+            "GroundFogDepthFade": 0.284,
+            "FullFogColor": {
+                "r": 0.13333334,
+                "g": 0,
+                "b": 0,
+                "a": 0.019607844
+            },
+            "FullFogDepthFade": 0.5,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.25211278,
+                "g": 0.066666655,
+                "b": 0.2784314,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.01,
+            "FogStartDistance": 10,
+            "FogEndDistance": 60
+        },
+        "_traversalBGM": "SongConfig_InlaidLibraryTraversal",
+        "_battleBGM": "SongConfig_InlaidLibraryEncounter",
+        "_ambience": "SFX_2D_ST_QD_InlaidLibrary_01",
+        "_relicsInLevel": [
+            "RelicConfig_Randomazzo"
+        ],
+        "_coffinsInLevel": [
+            "FCC_Giovanna"
+        ],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_Madforest_01": {
+        "<AssetId>k__BackingField": "Dungeon_Madforest_01",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_MadForest_01",
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": "DungeonCameraPP MadForest",
+        "_skyboxMaterial": "MadForestDaySkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.38431376,
+                "g": 0.46274513,
+                "b": 0.4039216,
+                "a": 0.20392157
+            },
+            "GroundFogDepthFade": 0.3,
+            "FullFogColor": {
+                "r": 0.28235295,
+                "g": 0.54509807,
+                "b": 0.6901961,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0.12549019,
+                "g": 0.19191273,
+                "b": 0.30980393,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.02,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_MadForestTraversal",
+        "_battleBGM": "SongConfig_MadForestEncounter",
+        "_ambience": "SFX_2D_ST_QD_MadForest_01",
+        "_relicsInLevel": [
+            "RelicConfig_GemHammer"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 1,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_Madforest_02": {
+        "<AssetId>k__BackingField": "Dungeon_Madforest_02",
+        "<BonusCoins>k__BackingField": 1000,
+        "GenerationConfig": "DungeonGenConfig_MadForest_02",
+        "_difficultyRating": 2,
+        "_cameraVolumeProfile": "DungeonCameraPP MadForest Dusk",
+        "_skyboxMaterial": "MadForestDuskSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.44339618,
+                "g": 0.3869259,
+                "b": 0.41006944,
+                "a": 0.16470589
+            },
+            "GroundFogDepthFade": 0.4,
+            "FullFogColor": {
+                "r": 0.25490198,
+                "g": 0.16470589,
+                "b": 0.34901962,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.001,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.22745098,
+                "g": 0.14509805,
+                "b": 0.14901961,
+                "a": 0
+            },
+            "FogMode": 2,
+            "FogDensity": 0.03,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_MadForestTraversal",
+        "_battleBGM": "SongConfig_MadForestEncounter",
+        "_ambience": "SFX_2D_ST_QD_MadForest_02",
+        "_relicsInLevel": [
+            "RelicConfig_Polentir"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_Madforest_03": {
+        "<AssetId>k__BackingField": "Dungeon_Madforest_03",
+        "<BonusCoins>k__BackingField": 2500,
+        "GenerationConfig": "DungeonGenConfig_MadForest_03",
+        "_difficultyRating": 3,
+        "_cameraVolumeProfile": "DungeonCameraPP MadForest Night",
+        "_skyboxMaterial": "MadForestNightSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.18098706,
+                "g": 0.17888921,
+                "b": 0.18867919,
+                "a": 0.16470589
+            },
+            "GroundFogDepthFade": 0.7,
+            "FullFogColor": {
+                "r": 0.18823531,
+                "g": 0.21960786,
+                "b": 0.33333334,
+                "a": 0.019607844
+            },
+            "FullFogDepthFade": 0.01,
+            "UseEnvironmentFog": 1,
+            "FogColor": {
+                "r": 0.043137256,
+                "g": 0.047058824,
+                "b": 0.047058824,
+                "a": 1
+            },
+            "FogMode": 1,
+            "FogDensity": 0.03,
+            "FogStartDistance": 5,
+            "FogEndDistance": 50
+        },
+        "_traversalBGM": "SongConfig_MadForestTraversal",
+        "_battleBGM": "SongConfig_MadForestEncounter",
+        "_ambience": "SFX_2D_ST_QD_MadForest_03",
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [
+            "FCC_Pugnala"
+        ],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_TestLongerBattle": {
+        "<AssetId>k__BackingField": "LongerBattle",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_TestMidGame": {
+        "<AssetId>k__BackingField": "MidGameDungeon",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeon": {
+        "<AssetId>k__BackingField": "TestDungeon",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "Dungeon_Tutorial": {
+        "<AssetId>k__BackingField": "Dungeon_Tutorial",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenConfig_Tutorial",
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": "PP_introCutscene",
+        "_skyboxMaterial": "TutorialSkybox",
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0.38431376,
+                "g": 0.46274513,
+                "b": 0.4039216,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0,
+            "FullFogColor": {
+                "r": 0.28235295,
+                "g": 0.54509807,
+                "b": 0.6901961,
+                "a": 0
+            },
+            "FullFogDepthFade": 0,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_PlaceholderTraversal",
+        "_battleBGM": "SongConfig_PlaceholderEncounter",
+        "_ambience": "SFX_2D_ST_QD_MadForest_01",
+        "_relicsInLevel": [
+            "RelicConfig_PancakeOfPower"
+        ],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 1,
+        "_allowBombaInfernale": 0
+    },
+    "TestDungeonConfig_1AttackingEnemy": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_1AttackingEnemy",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_1AttackingKnockbackResistantEnemy": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_1AttackingKnockbackResistantEnemy",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_1EnemyEncounter": {
+        "<AssetId>k__BackingField": "DungeonConfig",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_5HighHealthEnemyEncounter": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_5HighHealthEnemyEncounter",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_AllEvents": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_AllEvents",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenerationConfig_Test_AllEvents",
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": "SongConfig_InlaidLibraryTraversal",
+        "_battleBGM": "SongConfig_InlaidLibraryEncounter",
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_ForcedFloorChicken": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_ForcedFloorChicken",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_ForcedCrystal": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_ForcedCrystal",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_ForcedMana": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_ForcedMana",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_GeneratedEncounters": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_GeneratedEncounters",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenerationConfig_Test_GeneratedEncounters",
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_KnockbackOnlyAffectingAttackers": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_KnockbackOnlyAffectingAttackers",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": null,
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_NavigationPlayground": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_NavigationTests",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenerationConfig_Test_NavigationPlayground",
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    },
+    "TestDungeonConfig_NavigationPlaygroundMultiFloor": {
+        "<AssetId>k__BackingField": "TestDungeonConfig_NavigationPlaygroundMultiFloor",
+        "<BonusCoins>k__BackingField": 500,
+        "GenerationConfig": "DungeonGenerationConfig_Test_NavigationPlaygroundMultiFloor",
+        "_difficultyRating": 1,
+        "_cameraVolumeProfile": null,
+        "_skyboxMaterial": null,
+        "_environmentConfig": {
+            "AmbientLightingMode": 0,
+            "AmbientColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "SkyColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "EquatorColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "GroundFogDepthFade": 0.06,
+            "FullFogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FullFogDepthFade": 0.1,
+            "UseEnvironmentFog": 0,
+            "FogColor": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+            },
+            "FogMode": 0,
+            "FogDensity": 0,
+            "FogStartDistance": 0,
+            "FogEndDistance": 0
+        },
+        "_traversalBGM": null,
+        "_battleBGM": null,
+        "_ambience": null,
+        "_relicsInLevel": [],
+        "_coffinsInLevel": [],
+        "_allowedInDemo": 0,
+        "_allowBombaInfernale": 1
+    }
+}

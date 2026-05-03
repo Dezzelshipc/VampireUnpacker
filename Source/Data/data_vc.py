@@ -15,17 +15,22 @@ from Utility.unity_parser import UnityReference
 
 class DataTypeVC(Enum):
     ENEMY = "EnemyDatabase"
-    DECKS = "AllDecks"  # Not full list of decks
+    DECK = "AllDecks"  # Not full list of decks
     CARD = "CardDatabase"
+    POWER_UP = "PowerUpDatabase"
+    RELIC = "RelicDatabase"
+    DUNGEON = "AllDungeons"
+
+    TOWN_BUILDING = "TownBuildingDatabase"
 
     ACHIEVEMENT_CONFIG = "AchievementConfigDatabase"
-    _ARCANA_CONFIG = "ArcanaConfigDatabase"
     GUARDIAN_COFFIN = "GuardianEncounterDatabase"
     REWARD_CONFIG = "RewardConfig_Default"
     LEVEL_CONFIG = "PlayerLevelConfig"
     PLAYER_CONFIG = "PlayerConfig"
 
     ### Unused
+    _ARCANA_CONFIG = "ArcanaConfigDatabase"
     _CardGD = "CardGroupDatabase"
     _CardTD = "CardTypeDatabase"
     _DungeonED = "DungeonEventDatabase"
@@ -38,13 +43,8 @@ class DataTypeVC(Enum):
     _DemTD = "GemTagDatabase"
     _MapTileDD = "MapTileDefinitionDatabase"
     _PassiveED = "PassiveEventDatabase"
-    _PowerUpD = "PowerUpDatabase"
     _PropDD = "PropDefinitionDatabase"  # '_assetReference'
-    _RelicD = "RelicDatabase"
     _RoomTD = "RoomTemplateDatabase"  # '_assetReference'
-    _TownBD = "TownBuildingDatabase"
-
-    _AllDungeons = "AllDungeons"
 
     NONE = None
 
@@ -124,7 +124,7 @@ class EnemyDataDumper(BaseDataDumper):
 
 
 class DeckDataDumper(BaseDataDumper):
-    _type = DataTypeVC.DECKS
+    _type = DataTypeVC.DECK
 
     @classmethod
     def get_udoc(cls, depth: int):
@@ -292,8 +292,8 @@ class AchievementDataDumper(BaseDataDumper):
     _type = DataTypeVC.ACHIEVEMENT_CONFIG
 
     @classmethod
-    def format_data(cls, arcana_config: UnityDoc) -> tuple[str, dict]:
-        data: dict = arcana_config.entry.data
+    def format_data(cls, ach_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = ach_config.entry.data
 
         keys = data.keys()
         keys = filter(lambda k: not k.startswith("m_"), keys)
@@ -321,7 +321,7 @@ class AchievementDataDumper(BaseDataDumper):
         else:
             data_taken['_criteriasToMeet'] = []
 
-        return cls.get_m_Name(arcana_config), data_taken
+        return cls.get_m_Name(ach_config), data_taken
 
     @classmethod
     def dump_data(cls):
@@ -329,8 +329,153 @@ class AchievementDataDumper(BaseDataDumper):
 
         full_data: dict[str, dict] = {}
 
-        for arcana_config in udoc.entry.data['_assetList']:
-            name, data_taken = cls.format_data(arcana_config)
+        for ach_config in udoc.entry.data['_assetList']:
+            name, data_taken = cls.format_data(ach_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+
+class PowerUpDataDumper(BaseDataDumper):
+    _type = DataTypeVC.POWER_UP
+
+    @classmethod
+    def format_data(cls, power_up_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = power_up_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'imageSprite',
+            # TODO: lang file support
+            'itemName', 'description',
+            'references',
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        return cls.get_m_Name(power_up_config), data_taken
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        full_data: dict[str, dict] = {}
+
+        for power_up_config in udoc.entry.data['_assetList']:
+            name, data_taken = cls.format_data(power_up_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+
+class RelicDataDumper(BaseDataDumper):
+    _type = DataTypeVC.RELIC
+
+    @classmethod
+    def format_data(cls, relic_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = relic_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'imageSprite',
+            # TODO: lang file support
+            'LocalizedName', '_localizedDescription',
+            'IconSprite',
+            'references',
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        return cls.get_m_Name(relic_config), data_taken
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        full_data: dict[str, dict] = {}
+
+        for relic_config in udoc.entry.data['_assetList']:
+            name, data_taken = cls.format_data(relic_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+
+class DungeonsDataDumper(BaseDataDumper):
+    _type = DataTypeVC.DUNGEON
+
+    @classmethod
+    def format_data(cls, dungeon_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = dungeon_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'references',
+            # TODO: lang file support
+            '<DungeonNameLoc>k__BackingField', '<DungeonDescriptionLoc>k__BackingField',
+            '_dungeonThumbnailSprite', '_soundGroupCreator', '_reverbZonePrefab',
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['GenerationConfig'] = cls.get_m_Name(data_taken.get('GenerationConfig'))  ## ?
+
+        data_taken['_cameraVolumeProfile'] = cls.get_m_Name(data_taken.get('_cameraVolumeProfile'))
+        data_taken['_skyboxMaterial'] = cls.get_m_Name(data_taken.get('_skyboxMaterial'))
+        data_taken['_traversalBGM'] = cls.get_m_Name(data_taken.get('_traversalBGM'))
+        data_taken['_battleBGM'] = cls.get_m_Name(data_taken.get('_battleBGM'))
+
+        data_taken['_relicsInLevel'] = [cls.get_m_Name(d) for d in data_taken.get('_relicsInLevel', [])]
+        data_taken['_coffinsInLevel'] = [cls.get_m_Name(d) for d in data_taken.get('_coffinsInLevel', [])]
+
+        return cls.get_m_Name(dungeon_config), data_taken
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        full_data: dict[str, dict] = {}
+
+        for dungeon_config in udoc.entry.data['_assetList']:
+            name, data_taken = cls.format_data(dungeon_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+
+class TownBuildingDataDumper(BaseDataDumper):
+    _type = DataTypeVC.TOWN_BUILDING
+
+    @classmethod
+    def format_data(cls, dungeon_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = dungeon_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'references',
+            # TODO: lang file support
+            '_townBuildingName', '_menuName', '_unlockedBuildingDesc', '_lockedBuildingDesc',
+
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['_musicOverride'] = cls.get_m_Name(data_taken.get('_musicOverride'))
+
+        return cls.get_m_Name(dungeon_config), data_taken
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        full_data: dict[str, dict] = {}
+
+        for dungeon_config in udoc.entry.data['_assetList']:
+            name, data_taken = cls.format_data(dungeon_config)
             full_data[name] = data_taken
 
         cls.save_data(full_data)
@@ -338,4 +483,4 @@ class AchievementDataDumper(BaseDataDumper):
 
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    AchievementDataDumper.dump_data()
+    TownBuildingDataDumper.dump_data()
