@@ -49,7 +49,7 @@ def _unity_unravel_entry(entry: UnityEntry, guid_docs: dict[str, UnityDoc | Meta
     return entry.with_data(_make_data(entry.data, guid_docs))
 
 
-def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, verbose: int = 1) -> UnityDoc:
+def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, is_load_sprites: bool = True, verbose: int = 1) -> UnityDoc:
     _unity_doc = unity_doc
 
     guid_docs: dict[str, UnityDoc | MetaData] = {}
@@ -64,13 +64,18 @@ def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, verbose: int = 1) -> 
         assets = {ref.guid for ref in unity_refs if ref.fileID not in SPRITE_FILE_IDS}
         sprites = {ref.guid for ref in unity_refs if ref.fileID in SPRITE_FILE_IDS}
 
+        # print([ref for ref in unity_refs if ref.fileID not in SPRITE_FILE_IDS])
+
         if verbose > 0:
             print(f"Unraveling UnityDoc. Depth: {d} (Assets to parse: {len(assets)}, Sprites to parse: {len(sprites)})")
 
         docs = UnityDataHandler.get_data_dict_by_guid_set(assets)
         guid_docs.update(docs)
-        metas = MetaDataHandler.get_meta_dict_by_guid_set(sprites)
-        guid_docs.update(metas)
+        if is_load_sprites:
+            metas = MetaDataHandler.get_meta_dict_by_guid_set(sprites)
+            guid_docs.update(metas)
+        else:
+            guid_docs.update(dict.fromkeys(sprites))
 
         args = zip(_unity_doc.entries, cycle((guid_docs,)))
 
@@ -84,7 +89,7 @@ if __name__ == "__main__":
 
     MetaDataHandler.load(Game.VC)
 
-    db_name = "CardGroupDatabase"
+    db_name = "AchievementConfigDatabase"
     print(db_name)
 
     path = MetaDataHandler.get_path_by_name_no_meta(db_name)

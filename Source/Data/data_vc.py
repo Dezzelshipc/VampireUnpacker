@@ -1,4 +1,6 @@
+import itertools
 import json
+import sys
 from enum import Enum
 from itertools import cycle
 
@@ -8,20 +10,22 @@ from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.unity_unravel import unity_unravel_doc
 from Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS
 from Utility.multirun import run_concurrent_sync
+from Utility.unity_parser import UnityReference
 
 
 class DataTypeVC(Enum):
     ENEMY = "EnemyDatabase"
-    COFFIN_GUARDIAN = "GuardianEncounterDatabase"
     DECKS = "AllDecks"  # Not full list of decks
+    CARD = "CardDatabase"
+
+    ACHIEVEMENT_CONFIG = "AchievementConfigDatabase"
+    _ARCANA_CONFIG = "ArcanaConfigDatabase"
+    GUARDIAN_COFFIN = "GuardianEncounterDatabase"
     REWARD_CONFIG = "RewardConfig_Default"
     LEVEL_CONFIG = "PlayerLevelConfig"
     PLAYER_CONFIG = "PlayerConfig"
 
     ### Unused
-    _AchievementCD = "AchievementConfigDatabase"
-    _ArcanaCD = "ArcanaConfigDatabase"
-    _CardD = "CardDatabase"
     _CardGD = "CardGroupDatabase"
     _CardTD = "CardTypeDatabase"
     _DungeonED = "DungeonEventDatabase"
@@ -63,7 +67,19 @@ class BaseDataDumper:
     def get_udoc(cls, depth: int):
         path = MetaDataHandler.get_path_by_name_no_meta(cls._type.value)
         doc = UnityDoc.yaml_parse_file_smart(path)
-        return unity_unravel_doc(doc, depth=depth)
+        return unity_unravel_doc(doc, depth=depth, is_load_sprites=False)
+
+    @staticmethod
+    def get_m_Name(doc: UnityDoc | UnityReference | None) -> str | None:
+        if doc is None:
+            return None
+        elif isinstance(doc, UnityDoc):
+            return doc.entry.data.get("m_Name")
+        elif not doc.is_valid():
+            return None
+        _text = f"{doc} not dereferenced"
+        print(_text, file=sys.stderr)
+        return _text
 
     @classmethod
     def save_data(cls, full_data: dict | list):
@@ -123,7 +139,7 @@ class DeckDataDumper(BaseDataDumper):
     @classmethod
     def dump_data(cls):
         udocs = cls.get_deck_udocs(2)
-        udocs.sort(key=lambda d: d.entry.data['m_Name'])
+        udocs.sort(key=lambda d: cls.get_m_Name(d))
 
         full_data: dict[str, list[str]] = {}
 
@@ -133,13 +149,53 @@ class DeckDataDumper(BaseDataDumper):
 
             if name in full_data:
                 name += "_" + data['m_Name']
-            full_data[name] = [card_config['cardConfig'].entry.data['m_Name'] for card_config in data['cards']]
+            full_data[name] = [cls.get_m_Name(card_config) for card_config in data['cards']]
+
+        cls.save_data(full_data)
+
+
+class CardDataDumper(BaseDataDumper):
+    _type = DataTypeVC.CARD
+
+    @classmethod
+    def format_data(cls, card_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = card_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in [
+            'serializationData',
+            # TODO: lang file support
+            'cardName', 'cardDescription', 'levelZeroDescription', '_additionalOnPlayDescription',
+            'sprites', 'references',
+        ], keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['cardType'] = cls.get_m_Name(data_taken['cardType'])
+        data_taken['cardGroup'] = cls.get_m_Name(data_taken['cardGroup'])
+
+        data_taken['_evolutionComponents'] = [cls.get_m_Name(d) for d in data_taken['_evolutionComponents']]
+        data_taken['_excludeGemTags'] = [cls.get_m_Name(d) for d in data_taken['_excludeGemTags']]
+        data_taken['_excludeGemTagGroups'] = [cls.get_m_Name(d) for d in data_taken['_excludeGemTagGroups']]
+
+        return cls.get_m_Name(card_config), data_taken
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        full_data: dict[str, dict] = {}
+
+        for card_config in itertools.chain(udoc.entry.data['_assetList'], [udoc.entry.data['_cursedLancet']]):
+            name, data_taken = cls.format_data(card_config)
+            full_data[name] = data_taken
 
         cls.save_data(full_data)
 
 
 class CoffinGuardianDataDumper(BaseDataDumper):
-    _type = DataTypeVC.COFFIN_GUARDIAN
+    _type = DataTypeVC.GUARDIAN_COFFIN
 
     @classmethod
     def format_data(cls, guardian_config: UnityDoc) -> tuple[str, dict]:
@@ -160,7 +216,7 @@ class CoffinGuardianDataDumper(BaseDataDumper):
         config_guardian["__name"] = name_guardian
         data_taken['guardian'] = config_guardian
         if isinstance(ach_doc := data.get('unlockedAchievement'), UnityDoc):
-            data_taken['unlockedAchievement'] = ach_doc.entry.data['m_Name']
+            data_taken['unlockedAchievement'] = cls.get_m_Name(ach_doc)
 
         return name, data_taken
 
@@ -188,7 +244,7 @@ class RewardConfigDataDumper(BaseDataDumper):
 
         for reward_config in udoc.entry.data['_levelRanges']:
             data_taken = reward_config
-            data_taken['_cards'] = [card_doc.entry.data['m_Name'] for card_doc in data_taken['_cards']]
+            data_taken['_cards'] = [cls.get_m_Name(card_doc) for card_doc in data_taken['_cards']]
             data_taken['_cardGroups'] = [card_doc.entry.data['_assetId'] for card_doc in data_taken['_cardGroups']]
 
             full_data.append(data_taken)
@@ -232,6 +288,54 @@ class PlayerConfigDataDumper(BaseDataDumper):
         cls.save_data(full_data)
 
 
+class AchievementDataDumper(BaseDataDumper):
+    _type = DataTypeVC.ACHIEVEMENT_CONFIG
+
+    @classmethod
+    def format_data(cls, arcana_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = arcana_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData',
+            # TODO: lang file support
+            '_achievementName', '_achievementDescription', '_platformTrophyDescription',
+            '_unlockRewardIcon', '_rewardName', '_rewardDescription',
+            '_hiddenString', '_flavourText',
+            'references',
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['_dungeonConfig'] = cls.get_m_Name(data_taken.get('_dungeonConfig'))
+        data_taken['_fccConfig'] = cls.get_m_Name(data_taken.get('_fccConfig'))
+        data_taken['_encounterConfig'] = cls.get_m_Name(data_taken.get('_encounterConfig'))
+        data_taken['_powerUpConfig'] = cls.get_m_Name(data_taken.get('_powerUpConfig'))
+
+        data_taken['_achievementsRequired'] = [cls.get_m_Name(d) for d in data_taken.get('_achievementsRequired', [])]
+
+        if '_criteriasToMeet' in data_taken:
+            for ci in data_taken['_criteriasToMeet']:
+                ci['FccToCheck'] = cls.get_m_Name(ci['FccToCheck'])
+        else:
+            data_taken['_criteriasToMeet'] = []
+
+        return cls.get_m_Name(arcana_config), data_taken
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        full_data: dict[str, dict] = {}
+
+        for arcana_config in udoc.entry.data['_assetList']:
+            name, data_taken = cls.format_data(arcana_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    PlayerConfigDataDumper.dump_data()
+    AchievementDataDumper.dump_data()

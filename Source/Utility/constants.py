@@ -70,4 +70,4 @@ VAMPIRE_CRAWLERS: Final[str] = "Vampire Crawlers"
 CARD_DATABASE: Final[str] = "CardDatabase"
 CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"
 
-SPRITE_FILE_IDS: Final[Iterable[int]] = range(21300000,21301000)
+SPRITE_FILE_IDS: Final[set[int]] = {*range(2800000,2800010), *range(21300000,21305000)}

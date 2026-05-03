@@ -14,6 +14,7 @@ class UnityDataHandler(Objectless):
         if not_loaded_set:
             guid_paths = [(guid, MetaDataHandler.get_path_by_guid_no_meta(guid)) for guid in guids]
             guid_paths_not_none = (arg for arg in guid_paths if arg[-1] is not None)
+            # print(guid_paths)
             docs = run_concurrent_sync(lambda guid, path: UnityDoc.yaml_parse_file_smart(path).set_guid(guid),
                                        guid_paths_not_none)
             cls.loaded_data.update({
