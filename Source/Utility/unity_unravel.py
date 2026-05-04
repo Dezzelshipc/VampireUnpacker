@@ -2,7 +2,7 @@ from itertools import cycle
 
 from Source.Data.meta_data import MetaDataHandler, MetaData, ExactMetaData
 from Source.Data.unity_data import UnityDataHandler
-from Source.Utility.constants import SPRITE_CLASS_IDS, NOT_UNITY_DATA_CLASS_IDS
+from Source.Utility.constants import NOT_UNITY_DATA_CLASS_IDS
 from Source.Utility.multirun import run_multiprocess, run_multiprocess_single
 from Source.Utility.unity_parser import UnityEntry, UnityDoc, UnityReference
 
@@ -26,7 +26,7 @@ def _get_data(_data) -> set[UnityReference]:
 def _make_data(_data, guid_docs: dict[str, UnityDoc | MetaData]):
     if isinstance(_data, UnityReference):
         if _data.is_valid():
-            res_doc = guid_docs.get(_data.guid) or _data.marked_not_found()
+            res_doc = guid_docs.get(_data.guid) or _data.mark_not_found()
             if isinstance(res_doc, MetaData):
                 return ExactMetaData.from_meta_data(res_doc, _data.fileID)
             return res_doc
@@ -64,8 +64,8 @@ def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, is_load_sprites: bool
         assets = {ref.guid for ref in unity_refs if ref.classID not in NOT_UNITY_DATA_CLASS_IDS}
         sprites = {ref.guid for ref in unity_refs if ref.classID in NOT_UNITY_DATA_CLASS_IDS}
 
-        print([(ref, MetaDataHandler.get_path_by_guid_no_meta(ref.guid))
-               for ref in unity_refs if ref.classID not in NOT_UNITY_DATA_CLASS_IDS])
+        # print([(ref, MetaDataHandler.get_path_by_guid_no_meta(ref.guid))
+        #        for ref in unity_refs if ref.classID not in NOT_UNITY_DATA_CLASS_IDS])
 
         if verbose > 0:
             print(f"Unraveling UnityDoc. Depth: {d} (Assets to parse: {len(assets)}, Sprites to parse: {len(sprites)})")
@@ -90,11 +90,11 @@ if __name__ == "__main__":
 
     MetaDataHandler.load(Game.VC)
 
-    db_name = "AllDungeons"
+    db_name = "GemDatabase"
     print(db_name)
 
     path = MetaDataHandler.get_path_by_name_no_meta(db_name)
     doc = UnityDoc.yaml_parse_file_smart(path)
-    udoc = unity_unravel_doc(doc, depth=4, is_load_sprites=False)
+    udoc = unity_unravel_doc(doc, depth=2, is_load_sprites=False)
 
     print(udoc)

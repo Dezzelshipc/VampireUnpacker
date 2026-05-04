@@ -76,7 +76,10 @@ class UnityReference(dict):
     def is_valid(self):
         return self.guid is not None
 
-    def marked_not_found(self):
+    def is_not_found(self):
+        return self.get('_not_found')
+
+    def mark_not_found(self):
         self['_not_found'] = True
         return self
 
@@ -125,6 +128,11 @@ class UnityDoc:
 
     def __hash__(self):
         return hash(self.guid)
+
+    def __repr__(self):
+        if len(self.entries) == 1:
+            return f"{self.__class__.__name__}(entry={self.entries[0]})"
+        return f"{self.__class__.__name__}(entries=[{self.entries[0]}...{len(self.entries)-1}])"
 
     def __post_init__(self):
         def make_data(_data):

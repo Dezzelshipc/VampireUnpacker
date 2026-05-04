@@ -6,11 +6,10 @@ from itertools import cycle
 
 from Source.Config.config import Game
 from Source.Data.meta_data import MetaDataHandler
-from Source.Utility.unity_parser import UnityDoc
+from Source.Utility.unity_parser import UnityDoc, UnityReference
 from Source.Utility.unity_unravel import unity_unravel_doc
-from Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS
-from Utility.multirun import run_concurrent_sync
-from Utility.unity_parser import UnityReference
+from Source.Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS
+from Source.Utility.multirun import run_concurrent_sync
 
 
 class DataTypeVC(Enum):
@@ -23,6 +22,10 @@ class DataTypeVC(Enum):
 
     TOWN_BUILDING = "TownBuildingDatabase"
 
+    GEM_FREQUENCY = "GemFrequency" # No database file
+    GEM_FREQUENCY_GROUP = "GemFrequencyGroup" # No database file
+
+    GLOBAL_CONFIG = "GlobalConfig"
     ACHIEVEMENT_CONFIG = "AchievementConfigDatabase"
     GUARDIAN_COFFIN = "GuardianEncounterDatabase"
     REWARD_CONFIG = "RewardConfig_Default"
@@ -40,7 +43,7 @@ class DataTypeVC(Enum):
     _EventDD = "EventDetailsDatabase"
     _FccD = "FccDatabase"
     _GemD = "GemDatabase"
-    _DemTD = "GemTagDatabase"
+    _GemTD = "GemTagDatabase"
     _MapTileDD = "MapTileDefinitionDatabase"
     _PassiveED = "PassiveEventDatabase"
     _PropDD = "PropDefinitionDatabase"  # '_assetReference'
@@ -74,12 +77,29 @@ class BaseDataDumper:
         if doc is None:
             return None
         elif isinstance(doc, UnityDoc):
+            # return repr(doc)
             return doc.entry.data.get("m_Name")
+        elif doc.is_not_found():
+            return f"{UnityReference.__qualname__}(classID={doc.classID}, <Not found>)"
         elif not doc.is_valid():
             return None
         _text = f"{doc} not dereferenced"
         print(_text, file=sys.stderr)
         return _text
+
+    @classmethod
+    def get_data_with_m_Name(cls, _data):
+        if isinstance(_data, (UnityDoc, UnityReference)):
+            return cls.get_m_Name(_data)
+        elif isinstance(_data, dict):
+            return {
+                k: cls.get_data_with_m_Name(v)
+                for k, v in _data.items()
+            }
+        elif isinstance(_data, list):
+            return [cls.get_data_with_m_Name(v) for v in _data]
+
+        return _data
 
     @classmethod
     def save_data(cls, full_data: dict | list):
@@ -128,17 +148,17 @@ class DeckDataDumper(BaseDataDumper):
 
     @classmethod
     def get_udoc(cls, depth: int):
-        assert False, f"Unsupported function. Use {cls.__class__.__name__}.get_deck_udocs(depth)"
+        assert False, f"Unsupported function. Use {cls.__class__.__name__}.get_udocs(depth)"
 
     @classmethod
-    def get_deck_udocs(cls, depth: int, verbose: int = 0) -> list[UnityDoc]:
+    def get_udocs(cls, depth: int, verbose: int = 0) -> list[UnityDoc]:
         paths = MetaDataHandler.filter_paths(lambda name_path: name_path[0].endswith('deck'))
         docs = run_concurrent_sync(UnityDoc.yaml_parse_file_smart, (p.with_suffix("") for n, p in paths))
         return run_concurrent_sync(unity_unravel_doc, zip(docs, cycle((depth,)), cycle((verbose,))))
 
     @classmethod
     def dump_data(cls):
-        udocs = cls.get_deck_udocs(2)
+        udocs = cls.get_udocs(2)
         udocs.sort(key=lambda d: cls.get_m_Name(d))
 
         full_data: dict[str, list[str]] = {}
@@ -481,6 +501,118 @@ class TownBuildingDataDumper(BaseDataDumper):
         cls.save_data(full_data)
 
 
+class GlobalConfigDataDumper(BaseDataDumper):
+    _type = DataTypeVC.GLOBAL_CONFIG
+
+    @classmethod
+    def dump_data(cls):
+        udoc = cls.get_udoc(2)
+
+        data: dict = udoc.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'references',
+
+        }, keys)
+
+        full_data = {
+            k: cls.get_data_with_m_Name(data.get(k))
+            for k in keys
+        }
+
+        cls.save_data(full_data)
+
+
+class GemFrequencyDataDumper(BaseDataDumper):
+    _type = DataTypeVC.GEM_FREQUENCY
+
+    @classmethod
+    def format_data(cls, gem_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = gem_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'references',
+            '_frequencyColor',
+            # TODO: lang file support
+            '_frequencyName',
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        return cls.get_m_Name(gem_config), data_taken
+
+    @classmethod
+    def get_udoc(cls, depth: int):
+        assert False, f"Unsupported function. Use {cls.__class__.__name__}.get_udocs(depth)"
+
+    @classmethod
+    def get_udocs(cls, depth: int, verbose: int = 0) -> list[UnityDoc]:
+        paths = MetaDataHandler.filter_paths(lambda name_path: name_path[0].startswith('gemfrequency_'))
+        docs = run_concurrent_sync(UnityDoc.yaml_parse_file_smart, (p.with_suffix("") for n, p in paths))
+        return run_concurrent_sync(unity_unravel_doc, zip(docs, cycle((depth,)), cycle((verbose,))))
+
+    @classmethod
+    def dump_data(cls):
+        udocs = cls.get_udocs(2)
+        udocs.sort(key=lambda d: cls.get_m_Name(d))
+
+        full_data: dict[str, dict] = {}
+
+        for gem_config in udocs:
+            name, data_taken = cls.format_data(gem_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+class GemFrequencyGroupDataDumper(BaseDataDumper):
+    _type = DataTypeVC.GEM_FREQUENCY_GROUP
+
+    @classmethod
+    def format_data(cls, gem_config: UnityDoc) -> tuple[str, dict]:
+        data: dict = gem_config.entry.data
+
+        keys = data.keys()
+        keys = filter(lambda k: not k.startswith("m_"), keys)
+        keys = filter(lambda k: k not in {
+            'serializationData', 'references',
+            '_frequencyColor',
+            # TODO: lang file support
+        }, keys)
+
+        data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['_frequencies'] = cls.get_data_with_m_Name(data_taken['_frequencies'])
+
+        return cls.get_m_Name(gem_config), data_taken
+
+    @classmethod
+    def get_udoc(cls, depth: int):
+        assert False, f"Unsupported function. Use {cls.__class__.__name__}.get_udocs(depth)"
+
+    @classmethod
+    def get_udocs(cls, depth: int, verbose: int = 0) -> list[UnityDoc]:
+        paths = MetaDataHandler.filter_paths(lambda name_path: name_path[0].startswith('gemfrequencygroup'))
+        docs = run_concurrent_sync(UnityDoc.yaml_parse_file_smart, (p.with_suffix("") for n, p in paths))
+        return run_concurrent_sync(unity_unravel_doc, zip(docs, cycle((depth,)), cycle((verbose,))))
+
+    @classmethod
+    def dump_data(cls):
+        udocs = cls.get_udocs(2)
+        udocs.sort(key=lambda d: cls.get_m_Name(d))
+
+        full_data: dict[str, dict] = {}
+
+        for gem_config in udocs:
+            name, data_taken = cls.format_data(gem_config)
+            full_data[name] = data_taken
+
+        cls.save_data(full_data)
+
+
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    TownBuildingDataDumper.dump_data()
+    GemFrequencyGroupDataDumper.dump_data()

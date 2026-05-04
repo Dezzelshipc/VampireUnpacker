@@ -1,0 +1,27 @@
+{
+    "GemFrequency_Common": {
+        "ChestRewardWeighting": 100,
+        "LevelUpRewardWeighting": 60,
+        "LevelUpLuckFactor": 0
+    },
+    "GemFrequency_Epic": {
+        "ChestRewardWeighting": 60,
+        "LevelUpRewardWeighting": 2,
+        "LevelUpLuckFactor": 0.5
+    },
+    "GemFrequency_Legendary": {
+        "ChestRewardWeighting": 40,
+        "LevelUpRewardWeighting": 0,
+        "LevelUpLuckFactor": 0
+    },
+    "GemFrequency_Rare": {
+        "ChestRewardWeighting": 50,
+        "LevelUpRewardWeighting": 20,
+        "LevelUpLuckFactor": 0.25
+    },
+    "GemFrequency_Uncommon": {
+        "ChestRewardWeighting": 80,
+        "LevelUpRewardWeighting": 30,
+        "LevelUpLuckFactor": 0.1
+    }
+}
