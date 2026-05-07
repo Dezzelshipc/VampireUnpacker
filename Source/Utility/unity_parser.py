@@ -119,7 +119,7 @@ class UnityDoc:
     guid: str | None = None
 
     @property
-    def entry(self):
+    def entry(self) -> UnityEntry:
         return self.entries[0]
 
     def set_guid(self, guid: str):

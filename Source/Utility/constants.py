@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from typing import Final, Callable, Iterable
+from typing import Final, Callable
 
 from Source.Utility.special_classes import Objectless
 from Source.Utility.utility import _find_main_py_file
@@ -37,6 +37,8 @@ MATERIAL: Final[str] = "Material"
 DATA_MANAGER_SETTINGS: Final[str] = "DataManagerSettings"
 BUNDLE_MANIFEST_DATA: Final[str] = "BundleManifestData"
 
+I2_LANGUAGES: Final[str] = "I2Languages"
+
 
 class COMPOUND_DATA(Objectless):
     """
@@ -66,6 +68,8 @@ DEFAULT_ANIMATION_FRAME_RATE: Final[int] = 7
 
 ## VC
 VAMPIRE_CRAWLERS: Final[str] = "Vampire Crawlers"
+
+SHARED_DATA: Final[str] = "Shared Data"
 
 CARD_DATABASE: Final[str] = "CardDatabase"
 CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"

@@ -1,56 +1,149 @@
+import dataclasses
 import json
+from enum import Enum
+from pathlib import Path
 
-from Source.Utility.constants import TRANSLATIONS_FOLDER, VAMPIRE_CRAWLERS, GENERATED
-from Source.Utility.unity_parser import UnityDoc
+from Source.Config.config import Game
+from Source.Data.meta_data import MetaDataHandler
+from Source.Translations.language_utils import Lang
+from Source.Utility.constants import TRANSLATIONS_FOLDER, VAMPIRE_CRAWLERS, GENERATED, SHARED_DATA
+from Source.Utility.special_classes import Objectless
+from Source.Utility.unity_parser import UnityDoc, UnityEntry
+from Source.Utility.multirun import run_concurrent_sync
 
-SHARED_DATA = "Shared Data"
+
+class LangTypeVC(Enum):
+    ACHIEVEMENT = "Achievements"
+    ARCANA = "Arcanas"
+    CARDS = "Cards"
+    COMMON = "Common"
+    CREDITS = "Credits"
+    DUNGEONS = "Dungeons"
+    EFFECTS = "Effects"
+    GEMS = "Gems"
+    GLOBAL_KEYWORDS = "GlobalKeywords"
+    MENUS = "Menus"
+    POWER_UPS = "PowerUps"
+    RELICS = "Relics"
 
 
-def gen_main_langs():
-    folder = TRANSLATIONS_FOLDER / VAMPIRE_CRAWLERS
+class LangFileVC:
+    lang_type: LangTypeVC
+    guid: str = None
+    _data: dict[Lang, dict[int, str]] = dataclasses.field(default_factory=dict)
+    _paths: dict[Lang, Path] = None
+    _raw: dict[Lang, str] = dataclasses.field(default_factory=dict)
 
-    files = list(folder.glob("*.asset"))
+    @staticmethod
+    def __get_data_from_entry(entry: UnityEntry) -> dict[int, str]:
+        data = entry.data.get('m_TableData') or entry.data.get('m_Entries')
 
-    types = [file for file in files if file.stem.endswith(SHARED_DATA)]
-    # .stem.replace(SHARED_DATA, "").strip()
+        return {lang_ref['m_Id']: (lang_ref.get('m_Localized') or lang_ref.get('m_Key')) for lang_ref in data}
 
-    types_dict = {
-        t: [file for file in files if
-            t.stem.replace(SHARED_DATA, "").strip() in file.stem and SHARED_DATA not in file.stem]
-        for t in types
-    }
+    def __load_lang(self, lang: Lang) -> UnityEntry | None:
+        if lang in self._data:
+            return
 
-    save_folder = folder / GENERATED
+        with open(self._paths[lang], "r", encoding="UTF-8") as _f:
+            text = _f.read()
 
-    for keys_data_path, langs_data_paths in types_dict.items():
-        t = keys_data_path.stem.replace(SHARED_DATA, "").strip()
-        keys_data = UnityDoc.yaml_parse_file_smart(keys_data_path).entry.data['m_Entries']
-        keys_data = {data['m_Id']: data['m_Key'] for data in keys_data}
+        entry = UnityDoc.yaml_parse_text_smart(text).entry
+        self._data[lang] = self.__get_data_from_entry(entry)
+        self._raw[lang] = text
+        return entry
 
-        langs_data = {"en": [{}]}
-        langs_data.update({
-            p.stem.replace(f"{t}_", ""): UnityDoc.yaml_parse_file_smart(p).entry.data['m_TableData']
-            for p in langs_data_paths
-        })
-        langs_data = {
-            lang: {data['m_Id']: data['m_Localized'] for data in lang_data}
-            for lang, lang_data in langs_data.items()
-        }
+    def __post_init__(self):
+        langs_list = [f" {SHARED_DATA}", *[f"_{l.value}" for l in Lang.get_vc()]]
+        langs_list = [f"{self.lang_type.value}{l}" for l in langs_list]
+        paths = list(map(MetaDataHandler.get_path_by_name_no_meta, langs_list))
+        self._paths = dict(zip([Lang.SHARED_DATA, *Lang.get_vc()], paths))
 
-        full_data = {
-            key: {
-                lang: data.get(_id)
-                for lang, data in langs_data.items()
+        shared_entry = self.__load_lang(Lang.SHARED_DATA)
+
+        self.guid = shared_entry.data.get('m_TableCollectionNameGuidString')
+        assert self.guid is not None
+
+    def get(self, lang: Lang) -> dict[int, str]:
+        self.__load_lang(lang)
+        return self._data[lang]
+
+    def en(self, _id: int) -> str | None:
+        return self.get(Lang.EN).get(_id)
+
+    def raw(self, lang: Lang) -> str | None:
+        self.__load_lang(lang)
+        return self._raw[lang]
+
+
+class LangHandlerVC(Objectless):
+    _data_by_lang: dict[LangTypeVC, LangFileVC] = {}
+    _data_by_guid: dict[str, LangFileVC] = {}
+
+    @classmethod
+    def get_lang_file(cls, lang_type: LangTypeVC) -> LangFileVC:
+        if not lang_type in cls._data_by_lang:
+            file = LangFileVC(lang_type)
+            cls._data_by_lang[lang_type] = file
+            cls._data_by_guid[file.guid] = file
+
+        return cls._data_by_lang.get(lang_type)
+
+    @classmethod
+    def get_lang_by_guid(cls, guid: str) -> LangFileVC:
+        if not guid in cls._data_by_guid:
+            run_concurrent_sync(cls.get_lang_file, [*LangTypeVC])
+
+        return cls._data_by_guid.get(guid)
+
+    @classmethod
+    def save_raw_langs(cls, lang_types: set[LangTypeVC] = None) -> None:
+        if lang_types is None:
+            lang_types = {*LangTypeVC}
+
+        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_CRAWLERS / "Raw"
+        save_folder.mkdir(parents=True, exist_ok=True)
+
+        for lang_type in lang_types:
+            data = cls.get_lang_file(lang_type)
+
+            sf = save_folder / lang_type.value
+            sf.mkdir(parents=True, exist_ok=True)
+
+            for lang, path in data._paths.items():
+                name = path.with_suffix(".yaml").name
+
+                with open(sf / name, "w", encoding="UTF-8") as _f:
+                    print(data.raw(lang), file=_f)
+
+    @classmethod
+    def save_dict_langs(cls, lang_types: set[LangTypeVC] = None) -> None:
+        if lang_types is None:
+            lang_types = {*LangTypeVC}
+
+        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_CRAWLERS / GENERATED / "LangDictionary"
+        save_folder.mkdir(parents=True, exist_ok=True)
+
+        for lang_type in lang_types:
+            data = cls.get_lang_file(lang_type)
+
+            shared = data.get(Lang.SHARED_DATA)
+
+            full_data = {
+                name: {
+                    lang.value: data.get(lang).get(_id)
+                    for lang in Lang.get_vc()
+                }
+                for _id, name in shared.items()
             }
-            for _id, key in keys_data.items()
-        }
 
-        sf = save_folder / "LangDictionary"
-        sf.mkdir(parents=True, exist_ok=True)
-
-        with open(sf / f"{t}.json", mode="w", encoding="UTF-8") as f:
-            f.write(json.dumps(full_data, ensure_ascii=False, indent=2))
+            with open(save_folder / f"{lang_type.value}.json", "w", encoding="UTF-8") as _f:
+                print(json.dumps(full_data, ensure_ascii=False, indent=2), file=_f)
 
 
 if __name__ == "__main__":
-    gen_main_langs()
+    # gen_main_langs()
+
+    MetaDataHandler.load(Game.VC)
+    # l = LangHandlerVC.get_lang_by_guid('8d13770d5c9b0ac498f95395651811b5')
+
+    LangHandlerVC.save_dict_langs()
