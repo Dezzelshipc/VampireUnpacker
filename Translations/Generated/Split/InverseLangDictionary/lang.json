@@ -859,7 +859,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "fr": {
     "intro_start": "APPUYEZ POUR COMMENCER",
@@ -1721,7 +1729,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "it": {
     "intro_start": "PREMI PER INIZIARE",
@@ -2583,7 +2599,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "de": {
     "intro_start": "DRÜCKE ZUM STARTEN",
@@ -3445,7 +3469,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "es": {
     "intro_start": "PULSA PARA COMENZAR",
@@ -4307,7 +4339,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "pt-BR": {
     "intro_start": "PRESSIONE PARA INICIAR",
@@ -5169,7 +5209,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "pl": {
     "intro_start": "NACIŚNIJ, ABY ZACZĄĆ",
@@ -6031,7 +6079,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "ru": {
     "intro_start": "НАЖМИТЕ, ЧТОБЫ НАЧАТЬ",
@@ -6893,7 +6949,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "tr": {
     "intro_start": "BAŞLAMAK İÇİN TIKLAYIN",
@@ -7755,7 +7819,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "zh-CN": {
     "intro_start": "按任意键开始",
@@ -8617,7 +8689,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "ja": {
     "intro_start": "ゲームスタート",
@@ -9479,7 +9559,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "ko": {
     "intro_start": "시작하려면 아무 키나 누르세요",
@@ -10341,7 +10429,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "zh-TW": {
     "intro_start": "按下任意鍵以開始遊玩",
@@ -11203,7 +11299,15 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   },
   "uk": {
     "intro_start": "НАТИСНІТЬ, ЩОБИ ПОЧАТИ",
@@ -12065,6 +12169,14 @@
     "options_alwaysQuickTreasureAnim": "Quick Treasures",
     "options_mouseMode": "Mouse Mode",
     "options_mouseSens": "Mouse Sensitivity",
-    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete"
+    "ACCOUNT_VERIFICATION_REGISTRATION_COMPLETE_HEADING": "Registration Complete",
+    "saveslots_cloudSave": "Cloud Save",
+    "saveslots_viewCloudSaves": "VIEW CLOUD SAVES",
+    "saveslots_viewLocalSaves": "VIEW LOCAL SAVES",
+    "saveslots_localSaves": "Local Saves",
+    "account_save_data_local_data_label_2": "Local save data:",
+    "saveslots_uploadToCloud": "Upload to Cloud Save Slot",
+    "saveslots_overwriteWithCloudSave": "Overwrite with Cloud Save",
+    "noSpace": "No Space"
   }
 }

@@ -1416,9 +1416,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Reach a high score of 777 with Infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -1437,9 +1434,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Kooleo."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -1448,6 +1442,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Kooleo."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "fr": {
@@ -2867,9 +2867,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Atteignez un score de 777 avec Infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -2888,9 +2885,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -2899,6 +2893,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "it": {
@@ -4318,9 +4318,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Raggiungi un punteggio record di 777 con Infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -4339,9 +4336,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -4350,6 +4344,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "de": {
@@ -5769,9 +5769,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Erreiche eine Punktzahl von 777 mit Infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -5790,9 +5787,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -5801,6 +5795,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "es": {
@@ -7220,9 +7220,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Alcanza una puntuación de 777 con el infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -7241,9 +7238,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -7252,6 +7246,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "pt-BR": {
@@ -8671,9 +8671,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Alcance uma pontuação de 777 com Infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -8692,9 +8689,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -8703,6 +8697,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "pl": {
@@ -10122,9 +10122,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Osiągnij wynik 777, dzierżąc Infernolatro."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -10143,9 +10140,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -10154,6 +10148,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "ru": {
@@ -11573,9 +11573,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Наберите 777 очков с помощью «Инфернолатро»."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -11594,9 +11591,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -11605,6 +11599,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "tr": {
@@ -13024,9 +13024,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Infernolatro ile 777 puana ulaş."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -13045,9 +13042,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -13056,6 +13050,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "zh-CN": {
@@ -14475,9 +14475,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "使用炼狱小丑获得777的最高分。"
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -14496,9 +14493,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -14507,6 +14501,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "ja": {
@@ -15926,9 +15926,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "インフェルノラトロで777のハイスコアに到達する。"
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -15947,9 +15944,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -15958,6 +15952,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "ko": {
@@ -17377,9 +17377,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "인페르놀라트로 최고 점수인 777점을 달성하세요."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -17398,9 +17395,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -17409,6 +17403,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "zh-TW": {
@@ -18828,9 +18828,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "使用煉獄使者達到 777 分的高分。"
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -18849,9 +18846,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -18860,6 +18854,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   },
   "uk": {
@@ -20279,9 +20279,6 @@
     "LEM_GetInfernolatro_Score777": {
       "description": "Наберіть 777 очок із Пекеллатро."
     },
-    "Dark_19Challenge": {
-      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    },
     "FindManyVacuums": {
       "description": "Find 50 Vacuums."
     },
@@ -20300,9 +20297,6 @@
     "BuySurvarocchi": {
       "description": "Find and buy the Survarocchi in The Lycaeum."
     },
-    "Dark_08ParaKooleo": {
-      "description": "Trigger a Lavatrix Machina with Para Coolio."
-    },
     "DefeatBatDragons": {
       "description": "Defeat 1 Bat Dragon."
     },
@@ -20311,6 +20305,12 @@
     },
     "Dark_00Troubler": {
       "description": "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    },
+    "Dark_08ParaKooleo": {
+      "description": "Trigger a Lavatrix Machina with Para Coolio."
+    },
+    "Dark_19Challenge": {
+      "description": "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     }
   }
 }

@@ -4372,5 +4372,203 @@
       "zh-TW": "額外：V－蒼白鑽石的入侵",
       "uk": "ДОДАТКОВО: V — Вторгнення тьмяного діаманту"
     }
+  },
+  "FindManyVacuums": {
+    "description": {
+      "en": "EXTRA: The Lycaeum",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "Survive20minutesInLycaeum": {
+    "description": {
+      "en": "EXTRA: Para Kooleo",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "EvolvePenshin": {
+    "description": {
+      "en": "EXTRA: Penshin Facha",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "EvolveAllPenshin_ParaKooleoSkin": {
+    "description": {
+      "en": "EXTRA: Para Kooleo Skins",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "BuyGreenEyesVizard": {
+    "description": {
+      "en": "EXTRA: Green Eyes Vizard",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "BuySurvarocchi": {
+    "description": {
+      "en": "EXTRA: Survarocchi",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "DefeatBatDragons": {
+    "description": {
+      "en": "EXTRA: Big Troubler",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "EvolveUnearthlyBolt": {
+    "description": {
+      "en": "EXTRA: Unearthly Bolt",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "Dark_00Troubler": {
+    "description": {
+      "en": "EXTRA: 0 - Stake to your Heart",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "Dark_08ParaKooleo": {
+    "description": {
+      "en": "EXTRA: VIII - Edge of the Earth",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
+  },
+  "Dark_19Challenge": {
+    "description": {
+      "en": "EXTRA: XIX - Heir of Fate",
+      "fr": null,
+      "it": null,
+      "de": null,
+      "es": null,
+      "pt-BR": null,
+      "pl": null,
+      "ru": null,
+      "tr": null,
+      "zh-CN": null,
+      "ja": null,
+      "ko": null,
+      "zh-TW": null,
+      "uk": null
+    }
   }
 }

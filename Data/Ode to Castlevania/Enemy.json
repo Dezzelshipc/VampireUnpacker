@@ -340,7 +340,7 @@
       "xp": 2.5,
       "end": 10,
       "textureName": "TP_enemiesReuse",
-      "idleFrameCount": 5,
+      "idleFrameCount": 4,
       "frameNames": [
         "TP_REUSE_HARPY_0.png"
       ],
@@ -4165,7 +4165,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Bat1_0.png"
       ]

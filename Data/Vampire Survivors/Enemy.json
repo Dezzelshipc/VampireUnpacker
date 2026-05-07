@@ -11,7 +11,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Bat1_0.png"
@@ -45,7 +45,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Bat2_0.png"
@@ -65,7 +65,7 @@
       "xp": 1,
       "end": 16,
       "idleFrameCount": 4,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Bat3_0.png"
       ]
@@ -213,7 +213,7 @@
         "Fixed_Direction"
       ],
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 16,
       "frameNames": [
         "Bat1_0.png",
@@ -262,7 +262,7 @@
       "killedAmount": 0,
       "xp": 2,
       "end": 18,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Skeleton1_0.png",
@@ -301,7 +301,7 @@
       "killedAmount": 0,
       "xp": 2,
       "end": 18,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Skeleton1_0.png",
@@ -325,7 +325,7 @@
       "killedAmount": 0,
       "xp": 2,
       "end": 18,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Skeleton1_0.png",
@@ -349,7 +349,7 @@
       "killedAmount": 0,
       "xp": 2,
       "end": 18,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Skeleton1_0.png",
@@ -387,7 +387,9 @@
       ],
       "bInclude": true,
       "bHighlight": false,
-      "bVariants": []
+      "bVariants": [
+        "MS_ZOMBIE"
+      ]
     }
   ],
   "MUDMAN1": [
@@ -453,7 +455,7 @@
       ],
       "xp": 2,
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Flower1_0.png",
@@ -505,7 +507,7 @@
       "killedAmount": 0,
       "xp": 1.5,
       "end": 11,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Ghost_0.png"
@@ -557,7 +559,7 @@
       "killedAmount": 0,
       "xp": 1.5,
       "end": 11,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "res_Defang": 1,
       "frameNames": [
@@ -738,7 +740,7 @@
       ],
       "idleFrameCount": 5,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 15,
       "frameNames": [
         "XLDragon1_0.png"
@@ -771,7 +773,7 @@
       ],
       "passThroughWalls": true,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 13,
       "frameNames": [
         "XLDragon_FlagTip_0.png"
@@ -794,7 +796,7 @@
       ],
       "idleFrameCount": 5,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 16,
       "frameNames": [
         "XLDragon2_0.png"
@@ -817,7 +819,7 @@
       ],
       "passThroughWalls": true,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 13,
       "frameNames": [
         "XLDragon2_FlagTip_0.png"
@@ -895,7 +897,7 @@
       "idleFrameCount": 3,
       "passThroughWalls": true,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 12,
       "frameNames": [
         "ShadeRed_0.png"
@@ -930,7 +932,7 @@
       "idleFrameCount": 3,
       "passThroughWalls": true,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 16,
       "frameNames": [
         "Candelabrone_0.png"
@@ -955,7 +957,7 @@
       "moreY": 60,
       "idleFrameCount": 3,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 16,
       "frameNames": [
         "Candelabrone_0.png"
@@ -1192,7 +1194,7 @@
         "Fixed_Direction"
       ],
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Medusa1_0.png"
@@ -1228,7 +1230,7 @@
         "Fixed_Direction"
       ],
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Medusa1_0.png"
@@ -1394,7 +1396,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Ecto1_0.png"
@@ -1426,7 +1428,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Ecto2_0.png"
@@ -1446,7 +1448,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 17,
       "frameNames": [
         "Imp_0.png"
@@ -2106,7 +2108,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Stalker_0.png"
       ]
@@ -2182,9 +2184,9 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
-        "XLDrowner_0.png"
+        "XLDrowner_0_0.png"
       ]
     }
   ],
@@ -2365,7 +2367,7 @@
       "scale": 1.5,
       "xp": 30,
       "idleFrameCount": 4,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Medusa1_0.png"
@@ -2566,7 +2568,7 @@
         "Pile1_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0,
       "bName": "Twin Snakes",
@@ -2675,7 +2677,7 @@
         "Bullet1_0.png"
       ],
       "end": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "killedAmount": 0
     }
   ],
@@ -2746,7 +2748,7 @@
         "Jelly_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0
     }
@@ -2769,7 +2771,7 @@
         "Jelly_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0
     }
@@ -3131,7 +3133,7 @@
         "Migno3_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0,
       "skills": [
@@ -3164,7 +3166,7 @@
         "Migno3_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0
     }
@@ -3895,7 +3897,7 @@
       "xp": 50,
       "passThroughWalls": true,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 22,
       "frameNames": [
         "XLCrab_0.png"
@@ -3950,7 +3952,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "A1_0.png",
@@ -3994,7 +3996,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "A1_0.png",
@@ -4018,7 +4020,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "A1_0.png",
@@ -4088,7 +4090,7 @@
       ],
       "passThroughWalls": false,
       "end": 29,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "D1_0.png",
         "D2_0.png",
@@ -4112,7 +4114,7 @@
       ],
       "passThroughWalls": false,
       "end": 29,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "E1_0.png",
         "E2_0.png",
@@ -4132,7 +4134,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "A1_0.png",
@@ -4164,7 +4166,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "C3_0.png",
@@ -4195,7 +4197,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "B1_0.png",
@@ -4215,7 +4217,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "B2_0.png",
@@ -4246,7 +4248,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "C1_0.png",
@@ -4266,7 +4268,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "D1_0.png",
@@ -4287,7 +4289,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "E1_0.png",
@@ -4308,7 +4310,7 @@
       "xp": 1,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "F1_0.png",
@@ -4338,7 +4340,7 @@
       "alpha": 0.75,
       "feverValue": 0.2,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "G1_0.png",
@@ -4367,7 +4369,7 @@
       "xp": 0,
       "alpha": 0.75,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "H1_0.png",
@@ -4387,7 +4389,7 @@
       "xp": 0,
       "alpha": 0.75,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "H1_0.png",
@@ -4632,7 +4634,7 @@
       "weak_Fire": 1.66,
       "xp": 2,
       "end": 18,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Ghost_0.png"
@@ -5186,7 +5188,7 @@
       "res_Rosary": 1,
       "res_Debuffs": 1,
       "res_Defang": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -5362,7 +5364,7 @@
       "res_Rosary": 1,
       "res_Debuffs": 1,
       "res_Defang": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -5435,7 +5437,7 @@
         "Jelly_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0
     }
@@ -5598,7 +5600,7 @@
       "xp": 1,
       "end": 16,
       "idleFrameCount": 4,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Bat3_0.png"
       ]
@@ -5768,7 +5770,7 @@
         "Pile1_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0
     }
@@ -5978,7 +5980,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "XLReaper_0.png"
       ]
@@ -6032,7 +6034,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Stalker_0.png"
       ]
@@ -6059,7 +6061,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "XLDrowner_0.png"
       ]
@@ -7723,7 +7725,7 @@
         "Pile4_0.png"
       ],
       "end": 16,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0,
       "bName": "Twin Skulls",
@@ -7755,7 +7757,7 @@
         "Pile4_0.png"
       ],
       "end": 16,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0
     }
@@ -7772,7 +7774,7 @@
       "xp": 2,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 16,
       "frameNames": [
         "SkullNoAura_0.png"
@@ -7922,7 +7924,7 @@
       "xp": 25,
       "end": 18,
       "scale": 1.5,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Skeleton1_0.png",
@@ -8020,7 +8022,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeGold_0.png"
       ],
@@ -8059,7 +8061,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeSilver_0.png"
       ],
@@ -8098,7 +8100,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeLeft_0.png"
       ],
@@ -8137,7 +8139,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ],
@@ -8178,7 +8180,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ],
@@ -8379,7 +8381,7 @@
       "killedAmount": 0,
       "xp": 1.5,
       "end": 11,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "frameNames": [
         "Ghost_0.png"
@@ -8437,7 +8439,7 @@
         "Fixed_Direction"
       ],
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Medusa1_0.png"
@@ -8578,7 +8580,7 @@
       "scale": 0.5,
       "xp": 3,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 22,
       "frameNames": [
         "XLCrab_0.png"
@@ -8612,7 +8614,7 @@
       "tint": 8965375,
       "alpha": 0.9,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 22,
       "frameNames": [
         "XLCrab_0.png"
@@ -8632,7 +8634,7 @@
       "xp": 0,
       "alpha": 0.85,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "H1_0.png",
@@ -8661,7 +8663,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ]
@@ -8688,7 +8690,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ]
@@ -8715,7 +8717,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ]
@@ -8742,7 +8744,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ]
@@ -8761,7 +8763,7 @@
       "xp": 0,
       "end": 16,
       "idleFrameCount": 4,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Bat3_0.png"
       ],
@@ -8792,7 +8794,7 @@
       "passThroughWalls": true,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 16,
       "frameNames": [
         "Bat3_0.png"
@@ -8828,7 +8830,7 @@
       "passThroughWalls": true,
       "scale": 1,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 12,
       "frameNames": [
         "ShadeRed_0.png"
@@ -8921,7 +8923,7 @@
       "xp": 3,
       "end": 21,
       "scale": 0.5,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -8946,7 +8948,7 @@
       "res_Freeze": 1.1,
       "res_Rosary": 1,
       "res_Debuffs": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -8981,7 +8983,7 @@
       "res_Freeze": 1.1,
       "res_Rosary": 1,
       "res_Debuffs": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -9007,7 +9009,7 @@
       "res_Freeze": 1.1,
       "res_Rosary": 1,
       "res_Debuffs": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "passThroughWalls": true,
       "idleFrameCount": 30,
       "frameNames": [
@@ -9033,7 +9035,7 @@
       "res_Freeze": 1.1,
       "res_Rosary": 1,
       "res_Debuffs": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "passThroughWalls": true,
       "idleFrameCount": 30,
       "frameNames": [
@@ -9060,7 +9062,7 @@
       "res_Freeze": 1.1,
       "res_Rosary": 1,
       "res_Debuffs": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "passThroughWalls": true,
       "idleFrameCount": 30,
       "frameNames": [
@@ -9082,7 +9084,7 @@
       "alpha": 0.9,
       "tint": 7829401,
       "killedAmount": 0,
-      "textureName": "enemiesM",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "H1_0.png",
@@ -9261,7 +9263,7 @@
         "Bat3_0.png"
       ],
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0,
       "alias": {
@@ -9289,7 +9291,7 @@
       ],
       "scale": 1.5,
       "end": 29,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "idleFrameCount": 4,
       "killedAmount": 0,
       "alias": {
@@ -9787,7 +9789,7 @@
       ],
       "end": 21,
       "idleFrameCount": 30,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "killedAmount": 0
     }
   ],
@@ -10085,7 +10087,7 @@
       "end": 29,
       "idleFrameCount": 8,
 	  "passThroughWalls": false,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "XLReaper_0.png"
       ],
@@ -10132,7 +10134,7 @@
       "end": 29,
       "idleFrameCount": 8,
       "passThroughWalls": true,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "XLReaper_0.png"
       ]
@@ -10194,7 +10196,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Stalker_0.png"
       ],
@@ -10230,7 +10232,7 @@
       "xp": 0,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "XLDrowner_0.png"
       ],
@@ -10531,7 +10533,7 @@
       "xp": 50,
       "passThroughWalls": true,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 22,
       "frameNames": [
         "XLCrab_0.png"
@@ -10841,7 +10843,7 @@
       "xp": 30,
       "end": 29,
       "idleFrameCount": 8,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "XLDrowner_0.png"
       ],
@@ -10922,7 +10924,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Bat1_0.png"
@@ -10941,7 +10943,7 @@
       "xp": 1,
       "idleFrameCount": 4,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Bat2_0.png"
@@ -10961,7 +10963,7 @@
       "xp": 1,
       "end": 12,
       "idleFrameCount": 4,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Bat3_0.png"
       ]
@@ -11089,7 +11091,7 @@
       "end": 16,
       "idleFrameCount": 4,
       "passThroughWalls": true,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "Bat3_0.png"
       ]
@@ -11240,7 +11242,7 @@
       "idleFrameCount": 8,
       "scale": 1.5,
       "killedAmount": 0,
-      "textureName": "enemies",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "Stalker_0.png"
@@ -11264,7 +11266,7 @@
       "idleFrameCount": 8,
       "scale": 1.5,
       "killedAmount": 0,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "end": 29,
       "frameNames": [
         "XLDrowner_0.png"
@@ -11310,7 +11312,7 @@
       "killedAmount": 0,
       "xp": 2,
       "end": 21,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -11361,7 +11363,7 @@
       "scale": 1,
       "xp": 0,
       "end": 21,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -11644,7 +11646,7 @@
       ],
       "end": 21,
       "idleFrameCount": 30,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "killedAmount": 0
     }
   ],
@@ -11924,14 +11926,14 @@
       "passThroughWalls": true,
       "end": 29,
       "idleFrameCount": 4,
-      "textureName": "enemies2",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "CapeRight_0.png"
       ],
       "alias": {
         "end": 29,
         "idleFrameCount": 4,
-        "textureName": "enemies2",
+        "textureName": "enemies_Universal",
         "frameNames": [
           "CapeSilver_0.png"
         ]
@@ -12194,7 +12196,7 @@
       ],
       "alias": {
         "end": 11,
-        "textureName": "enemies",
+        "textureName": "enemies_Universal",
         "idleFrameCount": 4,
         "frameNames": [
           "Ghost_0.png"
@@ -12922,7 +12924,7 @@
       "passThroughWalls": true,
       "idleFrameCount": 4,
       "end": 10,
-      "textureName": "enemies2023",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "batGoblinG_0"
       ],
@@ -12958,7 +12960,7 @@
       "passThroughWalls": true,
       "idleFrameCount": 4,
       "end": 10,
-      "textureName": "enemies2023",
+      "textureName": "enemies_Universal",
       "frameNames": [
         "batGoblin_0"
       ],
@@ -12985,7 +12987,7 @@
       "res_Freeze": 1.1,
       "res_Rosary": 1,
       "res_Debuffs": 1,
-      "textureName": "enemies2",
+      "textureName": "enemies_universal",
       "idleFrameCount": 30,
       "frameNames": [
         "eye_0.png"
@@ -13197,6 +13199,7 @@
       "frameNames": [
         "XLDragonGold_Flag_0.png"
       ],
+      "flagName": "XLDragonGold_Flag.png",
       "bInclude": false,
       "bHighlight": false,
       "bPlaces": [
@@ -13347,7 +13350,11 @@
       "bVariants": [
         "EX_SPADEKNIGHT2",
         "EX_BOSS_SPADEKNIGHT",
-        "EX_BOSS_SPADEKNIGHT2"
+        "EX_BOSS_SPADEKNIGHT2",
+        "LEM_SPADEKNIGHT1",
+        "LEM_SPADEKNIGHT2",
+        "LEM_BOSS_SPADEKNIGHT",
+        "LEM_BOSS_SPADEKNIGHT2"
       ],
       "bPlaces": [
         "EX_WESTWOODS"
@@ -13508,6 +13515,9 @@
       ],
       "bInclude": true,
       "bHighlight": false,
+      "bVariants": [
+        "LEM_CASINOGHOUL"
+      ],
       "bPlaces": [
         "EX_WESTWOODS"
       ]
@@ -13646,7 +13656,8 @@
       "bInclude": true,
       "bHighlight": false,
       "bVariants": [
-        "EX_GAMBLIN2"
+        "EX_GAMBLIN2",
+        "LEM_GAMBLIN2"
       ],
       "bPlaces": [
         "EX_WESTWOODS"
@@ -14019,6 +14030,9 @@
       "killedAmount": 0,
       "bInclude": true,
       "bHighlight": false,
+      "bVariant": [
+        "LEM_CARDSHARP"
+      ],
       "bPlaces": [
         "EX_WESTWOODS"
       ]
@@ -14950,7 +14964,7 @@
       "bName": "Deep Angel",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bInclude": true,
       "bHighlight": false,
@@ -14979,7 +14993,7 @@
       "bName": "Deep Pig",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bInclude": true,
       "bHighlight": false,
@@ -15008,7 +15022,7 @@
       "bName": "Deep Slug",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bInclude": true,
       "bHighlight": false,
@@ -15036,7 +15050,7 @@
       "bName": "Ichthyo Centaur",
       "bDesc": "---",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bInclude": true,
       "bHighlight": false,
@@ -15196,7 +15210,7 @@
       "bName": "Deep Horse",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bVariants": ["EX_LEAFYSEAHORSE_02"],
       "bHighlight": false
@@ -15250,7 +15264,7 @@
       "bName": "Deep Olm",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bHighlight": false
     }
@@ -15279,7 +15293,7 @@
       "bName": "Deep Ahuizotl",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bHighlight": false
     }
@@ -15307,7 +15321,7 @@
       "bName": "Bukavac",
       "bDesc": "---",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bInclude": true,
       "bHighlight": false,
@@ -15363,7 +15377,7 @@
       "bName": "Deep Pink",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bHighlight": false
     }
@@ -15462,7 +15476,7 @@
       "bName": "Deep Seasphynx",
       "bDesc": "",
       "bPlaces": [
-        "SINKING"
+        "EX_LYCAEUM"
       ],
       "bHighlight": false
     }

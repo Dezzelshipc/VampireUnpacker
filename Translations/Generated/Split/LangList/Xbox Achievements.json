@@ -4372,5 +4372,203 @@
       "額外：V－蒼白鑽石的入侵",
       "ДОДАТКОВО: V — Вторгнення тьмяного діаманту"
     ]
+  },
+  "FindManyVacuums": {
+    "description": [
+      "EXTRA: The Lycaeum",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "Survive20minutesInLycaeum": {
+    "description": [
+      "EXTRA: Para Kooleo",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "EvolvePenshin": {
+    "description": [
+      "EXTRA: Penshin Facha",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "EvolveAllPenshin_ParaKooleoSkin": {
+    "description": [
+      "EXTRA: Para Kooleo Skins",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "BuyGreenEyesVizard": {
+    "description": [
+      "EXTRA: Green Eyes Vizard",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "BuySurvarocchi": {
+    "description": [
+      "EXTRA: Survarocchi",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "DefeatBatDragons": {
+    "description": [
+      "EXTRA: Big Troubler",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "EvolveUnearthlyBolt": {
+    "description": [
+      "EXTRA: Unearthly Bolt",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "Dark_00Troubler": {
+    "description": [
+      "EXTRA: 0 - Stake to your Heart",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "Dark_08ParaKooleo": {
+    "description": [
+      "EXTRA: VIII - Edge of the Earth",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "Dark_19Challenge": {
+    "description": [
+      "EXTRA: XIX - Heir of Fate",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   }
 }

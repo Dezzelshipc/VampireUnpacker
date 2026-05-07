@@ -728,6 +728,39 @@
     },
     "Dark_05Appunta": {
       "description": "EXTRA: V - Pale Diamond Incursion"
+    },
+    "FindManyVacuums": {
+      "description": "EXTRA: The Lycaeum"
+    },
+    "Survive20minutesInLycaeum": {
+      "description": "EXTRA: Para Kooleo"
+    },
+    "EvolvePenshin": {
+      "description": "EXTRA: Penshin Facha"
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": "EXTRA: Para Kooleo Skins"
+    },
+    "BuyGreenEyesVizard": {
+      "description": "EXTRA: Green Eyes Vizard"
+    },
+    "BuySurvarocchi": {
+      "description": "EXTRA: Survarocchi"
+    },
+    "DefeatBatDragons": {
+      "description": "EXTRA: Big Troubler"
+    },
+    "EvolveUnearthlyBolt": {
+      "description": "EXTRA: Unearthly Bolt"
+    },
+    "Dark_00Troubler": {
+      "description": "EXTRA: 0 - Stake to your Heart"
+    },
+    "Dark_08ParaKooleo": {
+      "description": "EXTRA: VIII - Edge of the Earth"
+    },
+    "Dark_19Challenge": {
+      "description": "EXTRA: XIX - Heir of Fate"
     }
   },
   "fr": {
@@ -1459,6 +1492,39 @@
     },
     "Dark_05Appunta": {
       "description": "EXTRA : V - Incursion du diamant pâle"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "it": {
@@ -2190,6 +2256,39 @@
     },
     "Dark_05Appunta": {
       "description": "EXTRA: V - Incursione del diamante pallido"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "de": {
@@ -2921,6 +3020,39 @@
     },
     "Dark_05Appunta": {
       "description": "EXTRA: V - Fahler Diamant"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "es": {
@@ -3652,6 +3784,39 @@
     },
     "Dark_05Appunta": {
       "description": "ADICIONAL: V: As. del diamante blanquecino"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "pt-BR": {
@@ -4383,6 +4548,39 @@
     },
     "Dark_05Appunta": {
       "description": "EXTRA: V – Incursão do Diamante Pálido"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "pl": {
@@ -5114,6 +5312,39 @@
     },
     "Dark_05Appunta": {
       "description": "EKSTRA: V – Diamentowa inwazja"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "ru": {
@@ -5845,6 +6076,39 @@
     },
     "Dark_05Appunta": {
       "description": "ДОПОЛНИТЕЛЬНО: V — Включение бледного алмаза"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "tr": {
@@ -6576,6 +6840,39 @@
     },
     "Dark_05Appunta": {
       "description": "EKSTRA: V - Solgun Elmas Akını"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "zh-CN": {
@@ -7307,6 +7604,39 @@
     },
     "Dark_05Appunta": {
       "description": "额外：V - 苍钻侵入"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "ja": {
@@ -8038,6 +8368,39 @@
     },
     "Dark_05Appunta": {
       "description": "追加：V - ペール・ダイヤモンドの侵攻"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "ko": {
@@ -8769,6 +9132,39 @@
     },
     "Dark_05Appunta": {
       "description": "추가: V - 창백한 다이아몬드의 급습"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "zh-TW": {
@@ -9500,6 +9896,39 @@
     },
     "Dark_05Appunta": {
       "description": "額外：V－蒼白鑽石的入侵"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   },
   "uk": {
@@ -10231,6 +10660,39 @@
     },
     "Dark_05Appunta": {
       "description": "ДОДАТКОВО: V — Вторгнення тьмяного діаманту"
+    },
+    "FindManyVacuums": {
+      "description": null
+    },
+    "Survive20minutesInLycaeum": {
+      "description": null
+    },
+    "EvolvePenshin": {
+      "description": null
+    },
+    "EvolveAllPenshin_ParaKooleoSkin": {
+      "description": null
+    },
+    "BuyGreenEyesVizard": {
+      "description": null
+    },
+    "BuySurvarocchi": {
+      "description": null
+    },
+    "DefeatBatDragons": {
+      "description": null
+    },
+    "EvolveUnearthlyBolt": {
+      "description": null
+    },
+    "Dark_00Troubler": {
+      "description": null
+    },
+    "Dark_08ParaKooleo": {
+      "description": null
+    },
+    "Dark_19Challenge": {
+      "description": null
     }
   }
 }

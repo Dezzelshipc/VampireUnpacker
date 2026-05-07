@@ -8885,24 +8885,6 @@
       "Наберіть 777 очок із Пекеллатро."
     ]
   },
-  "Dark_19Challenge": {
-    "description": [
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
-      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
-    ]
-  },
   "FindManyVacuums": {
     "description": [
       "Find 50 Vacuums.",
@@ -9011,24 +8993,6 @@
       "Find and buy the Survarocchi in The Lycaeum."
     ]
   },
-  "Dark_08ParaKooleo": {
-    "description": [
-      "Trigger a Lavatrix Machina with Para Kooleo.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio.",
-      "Trigger a Lavatrix Machina with Para Coolio."
-    ]
-  },
   "DefeatBatDragons": {
     "description": [
       "Defeat 1 Bat Dragon.",
@@ -9081,6 +9045,42 @@
       "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana.",
       "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana.",
       "Defeat a Bat Dragon with Big Troubler while using the Game Killer Arcana."
+    ]
+  },
+  "Dark_08ParaKooleo": {
+    "description": [
+      "Trigger a Lavatrix Machina with Para Kooleo.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio.",
+      "Trigger a Lavatrix Machina with Para Coolio."
+    ]
+  },
+  "Dark_19Challenge": {
+    "description": [
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups.",
+      "Survive 15 minutes in Inverse Boss Rash with Random Events and Random Level Ups."
     ]
   }
 }

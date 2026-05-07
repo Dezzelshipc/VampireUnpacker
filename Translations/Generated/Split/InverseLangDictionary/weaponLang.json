@@ -16661,7 +16661,7 @@
     },
     "MISSPELL": {
       "name": "Пламя оговорки",
-      "description": "Выделяет конусы пламени.",
+      "description": "Выпускает конусы пламени.",
       "tips": null
     },
     "MISSPELL2": {

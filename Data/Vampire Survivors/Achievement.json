@@ -2918,8 +2918,9 @@
   },
   "FindMap_AstralStair": {
     "description": "Find the Astral Stair Map.",
+    "contentGroup": "EXTRA",
     "relicToUnlock": "RELIC_MAP_AS",
-    "requiresItem": "RELIC_MIRROR",
+    "requiresStage": "ASTRALSTAIR",
     "UnlockConditions": [
       {
         "AchievementUnlockType": "FindItems",
