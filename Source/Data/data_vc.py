@@ -638,4 +638,4 @@ class GemFrequencyGroupDataDumper(BaseDataDumper):
 
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    GemFrequencyDataDumper.dump_data()
+    AchievementDataDumper.dump_data()

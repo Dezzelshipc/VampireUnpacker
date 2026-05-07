@@ -111,7 +111,7 @@ class UnityLocalizedReference(dict):
     @property
     def key_name(self):
         match self:
-            case {'m_TableEntryReference': {'m_Key': int(key_id)}}:
+            case {'m_TableEntryReference': {'m_Key': str(key_id)}}:
                 return key_id
             case _:
                 return None
