@@ -8,7 +8,7 @@ from Source.Data.meta_data import MetaDataHandler
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import TRANSLATIONS_FOLDER, VAMPIRE_CRAWLERS, GENERATED, SHARED_DATA
 from Source.Utility.special_classes import Objectless
-from Source.Utility.unity_parser import UnityDoc, UnityEntry
+from Source.Utility.unity_parser import UnityDoc, UnityEntry, UnityLocalizedReference
 from Source.Utility.multirun import run_concurrent_sync
 
 
@@ -27,10 +27,13 @@ class LangTypeVC(Enum):
     RELICS = "Relics"
 
 
+@dataclasses.dataclass
 class LangFileVC:
     lang_type: LangTypeVC
     guid: str = None
+    name: str = None
     _data: dict[Lang, dict[int, str]] = dataclasses.field(default_factory=dict)
+    _key_to_id: dict[str, int] = dataclasses.field(default_factory=dict)
     _paths: dict[Lang, Path] = None
     _raw: dict[Lang, str] = dataclasses.field(default_factory=dict)
 
@@ -59,7 +62,9 @@ class LangFileVC:
         self._paths = dict(zip([Lang.SHARED_DATA, *Lang.get_vc()], paths))
 
         shared_entry = self.__load_lang(Lang.SHARED_DATA)
+        self._key_to_id = {key: _id for _id, key in self._data[Lang.SHARED_DATA].items()}
 
+        self.name = shared_entry.data.get('m_TableCollectionName')
         self.guid = shared_entry.data.get('m_TableCollectionNameGuidString')
         assert self.guid is not None
 
@@ -77,23 +82,34 @@ class LangFileVC:
 
 class LangHandlerVC(Objectless):
     _data_by_lang: dict[LangTypeVC, LangFileVC] = {}
-    _data_by_guid: dict[str, LangFileVC] = {}
+    _data_loaded: dict[str, LangFileVC] = {}
 
     @classmethod
     def get_lang_file(cls, lang_type: LangTypeVC) -> LangFileVC:
         if not lang_type in cls._data_by_lang:
             file = LangFileVC(lang_type)
             cls._data_by_lang[lang_type] = file
-            cls._data_by_guid[file.guid] = file
+            cls._data_loaded[file.name] = file
+            cls._data_loaded[file.guid] = file
 
         return cls._data_by_lang.get(lang_type)
 
     @classmethod
     def get_lang_by_guid(cls, guid: str) -> LangFileVC:
-        if not guid in cls._data_by_guid:
+        if not guid in cls._data_loaded:
             run_concurrent_sync(cls.get_lang_file, [*LangTypeVC])
 
-        return cls._data_by_guid.get(guid)
+        return cls._data_loaded.get(guid)
+
+    @classmethod
+    def get_by_loc_ref(cls, loc_ref: UnityLocalizedReference) -> str | None:
+        file = cls.get_lang_by_guid(loc_ref.table_guid)
+        key_id = loc_ref.key_id
+
+        if not key_id:
+            key_id = file._key_to_id.get(loc_ref.key_name)
+
+        return file.en(key_id)
 
     @classmethod
     def save_raw_langs(cls, lang_types: set[LangTypeVC] = None) -> None:
@@ -144,6 +160,8 @@ if __name__ == "__main__":
     # gen_main_langs()
 
     MetaDataHandler.load(Game.VC)
+
     # l = LangHandlerVC.get_lang_by_guid('8d13770d5c9b0ac498f95395651811b5')
 
-    LangHandlerVC.save_dict_langs()
+    # LangHandlerVC.save_dict_langs()
+    pass

@@ -4,13 +4,15 @@ from Source.Data.meta_data import MetaDataHandler, MetaData, ExactMetaData
 from Source.Data.unity_data import UnityDataHandler
 from Source.Utility.constants import NOT_UNITY_DATA_CLASS_IDS
 from Source.Utility.multirun import run_multiprocess, run_multiprocess_single
-from Source.Utility.unity_parser import UnityEntry, UnityDoc, UnityReference
+from Source.Utility.unity_parser import UnityEntry, UnityDoc, UnityReference, UnityLocalizedReference
 
 
 def _get_data(_data) -> set[UnityReference]:
     if isinstance(_data, UnityReference):
         if _data.is_valid():
             return {_data}
+    elif isinstance(_data, UnityLocalizedReference):
+        return set()
     elif isinstance(_data, UnityEntry):
         return _get_data(_data.data)
     elif isinstance(_data, UnityDoc):
@@ -30,6 +32,8 @@ def _make_data(_data, guid_docs: dict[str, UnityDoc | MetaData]):
             if isinstance(res_doc, MetaData):
                 return ExactMetaData.from_meta_data(res_doc, _data.fileID)
             return res_doc
+    elif isinstance(_data, UnityLocalizedReference):
+        return _data
     elif isinstance(_data, UnityEntry):
         return _data.with_data(_make_data(_data.data, guid_docs))
     elif isinstance(_data, UnityDoc):

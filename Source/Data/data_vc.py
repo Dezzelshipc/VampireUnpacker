@@ -6,10 +6,11 @@ from itertools import cycle
 
 from Source.Config.config import Game
 from Source.Data.meta_data import MetaDataHandler
-from Source.Utility.unity_parser import UnityDoc, UnityReference
+from Source.Utility.unity_parser import UnityDoc, UnityReference, UnityLocalizedReference
 from Source.Utility.unity_unravel import unity_unravel_doc
 from Source.Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS
 from Source.Utility.multirun import run_concurrent_sync
+from Source.Translations.language_vc import LangHandlerVC
 
 
 class DataTypeVC(Enum):
@@ -22,8 +23,8 @@ class DataTypeVC(Enum):
 
     TOWN_BUILDING = "TownBuildingDatabase"
 
-    GEM_FREQUENCY = "GemFrequency" # No database file
-    GEM_FREQUENCY_GROUP = "GemFrequencyGroup" # No database file
+    GEM_FREQUENCY = "GemFrequency"  # No database file
+    GEM_FREQUENCY_GROUP = "GemFrequencyGroup"  # No database file
 
     GLOBAL_CONFIG = "GlobalConfig"
     ACHIEVEMENT_CONFIG = "AchievementConfigDatabase"
@@ -87,6 +88,13 @@ class BaseDataDumper:
         print(_text, file=sys.stderr)
         return _text
 
+    @staticmethod
+    def get_loc_text(loc_ref: UnityLocalizedReference) -> str | None:
+        if loc_ref is None or not loc_ref.is_valid():
+            return None
+
+        return LangHandlerVC.get_by_loc_ref(loc_ref)
+
     @classmethod
     def get_data_with_m_Name(cls, _data):
         if isinstance(_data, (UnityDoc, UnityReference)):
@@ -104,8 +112,8 @@ class BaseDataDumper:
     @classmethod
     def save_data(cls, full_data: dict | list):
         save_path = ROOT_FOLDER / "Data" / VAMPIRE_CRAWLERS
-        with open(save_path / f"{cls._type.value}.json", "w") as f:
-            f.write(json.dumps(full_data, indent=4, ensure_ascii=False))
+        with open(save_path / f"{cls._type.value}.json", "w", encoding="UTF-8") as f:
+            print(json.dumps(full_data, indent=2, ensure_ascii=False), file=f)
 
 
 class EnemyDataDumper(BaseDataDumper):
@@ -185,8 +193,6 @@ class CardDataDumper(BaseDataDumper):
         keys = filter(lambda k: not k.startswith("m_"), keys)
         keys = filter(lambda k: k not in [
             'serializationData',
-            # TODO: lang file support
-            'cardName', 'cardDescription', 'levelZeroDescription', '_additionalOnPlayDescription',
             'sprites', 'references',
         ], keys)
 
@@ -194,6 +200,11 @@ class CardDataDumper(BaseDataDumper):
 
         data_taken['cardType'] = cls.get_m_Name(data_taken['cardType'])
         data_taken['cardGroup'] = cls.get_m_Name(data_taken['cardGroup'])
+
+        data_taken['cardName'] = cls.get_loc_text(data_taken['cardName'])
+        data_taken['cardDescription'] = cls.get_loc_text(data_taken['cardDescription'])
+        data_taken['levelZeroDescription'] = cls.get_loc_text(data_taken['levelZeroDescription'])
+        data_taken['_additionalOnPlayDescription'] = cls.get_loc_text(data_taken['_additionalOnPlayDescription'])
 
         data_taken['_evolutionComponents'] = [cls.get_m_Name(d) for d in data_taken['_evolutionComponents']]
         data_taken['_excludeGemTags'] = [cls.get_m_Name(d) for d in data_taken['_excludeGemTags']]
@@ -319,10 +330,7 @@ class AchievementDataDumper(BaseDataDumper):
         keys = filter(lambda k: not k.startswith("m_"), keys)
         keys = filter(lambda k: k not in {
             'serializationData',
-            # TODO: lang file support
-            '_achievementName', '_achievementDescription', '_platformTrophyDescription',
-            '_unlockRewardIcon', '_rewardName', '_rewardDescription',
-            '_hiddenString', '_flavourText',
+            '_unlockRewardIcon',
             'references',
         }, keys)
 
@@ -332,6 +340,14 @@ class AchievementDataDumper(BaseDataDumper):
         data_taken['_fccConfig'] = cls.get_m_Name(data_taken.get('_fccConfig'))
         data_taken['_encounterConfig'] = cls.get_m_Name(data_taken.get('_encounterConfig'))
         data_taken['_powerUpConfig'] = cls.get_m_Name(data_taken.get('_powerUpConfig'))
+
+        data_taken['_achievementName'] = cls.get_loc_text(data_taken['_achievementName'])
+        data_taken['_achievementDescription'] = cls.get_loc_text(data_taken['_achievementDescription'])
+        data_taken['_platformTrophyDescription'] = cls.get_loc_text(data_taken['_platformTrophyDescription'])
+        data_taken['_rewardName'] = cls.get_loc_text(data_taken['_rewardName'])
+        data_taken['_rewardDescription'] = cls.get_loc_text(data_taken['_rewardDescription'])
+        data_taken['_hiddenString'] = cls.get_loc_text(data_taken['_hiddenString'])
+        data_taken['_flavourText'] = cls.get_loc_text(data_taken['_flavourText'])
 
         data_taken['_achievementsRequired'] = [cls.get_m_Name(d) for d in data_taken.get('_achievementsRequired', [])]
 
@@ -367,12 +383,13 @@ class PowerUpDataDumper(BaseDataDumper):
         keys = filter(lambda k: not k.startswith("m_"), keys)
         keys = filter(lambda k: k not in {
             'serializationData', 'imageSprite',
-            # TODO: lang file support
-            'itemName', 'description',
             'references',
         }, keys)
 
         data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['itemName'] = cls.get_loc_text(data_taken['itemName'])
+        data_taken['description'] = cls.get_loc_text(data_taken['description'])
 
         return cls.get_m_Name(power_up_config), data_taken
 
@@ -400,13 +417,14 @@ class RelicDataDumper(BaseDataDumper):
         keys = filter(lambda k: not k.startswith("m_"), keys)
         keys = filter(lambda k: k not in {
             'serializationData', 'imageSprite',
-            # TODO: lang file support
-            'LocalizedName', '_localizedDescription',
             'IconSprite',
             'references',
         }, keys)
 
         data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['LocalizedName'] = cls.get_loc_text(data_taken['LocalizedName'])
+        data_taken['_localizedDescription'] = cls.get_loc_text(data_taken['_localizedDescription'])
 
         return cls.get_m_Name(relic_config), data_taken
 
@@ -434,8 +452,6 @@ class DungeonsDataDumper(BaseDataDumper):
         keys = filter(lambda k: not k.startswith("m_"), keys)
         keys = filter(lambda k: k not in {
             'serializationData', 'references',
-            # TODO: lang file support
-            '<DungeonNameLoc>k__BackingField', '<DungeonDescriptionLoc>k__BackingField',
             '_dungeonThumbnailSprite', '_soundGroupCreator', '_reverbZonePrefab',
         }, keys)
 
@@ -447,6 +463,10 @@ class DungeonsDataDumper(BaseDataDumper):
         data_taken['_skyboxMaterial'] = cls.get_m_Name(data_taken.get('_skyboxMaterial'))
         data_taken['_traversalBGM'] = cls.get_m_Name(data_taken.get('_traversalBGM'))
         data_taken['_battleBGM'] = cls.get_m_Name(data_taken.get('_battleBGM'))
+
+        data_taken['<DungeonNameLoc>k__BackingField'] = cls.get_loc_text(data_taken['<DungeonNameLoc>k__BackingField'])
+        data_taken['<DungeonDescriptionLoc>k__BackingField'] = cls.get_loc_text(
+            data_taken['<DungeonDescriptionLoc>k__BackingField'])
 
         data_taken['_relicsInLevel'] = [cls.get_m_Name(d) for d in data_taken.get('_relicsInLevel', [])]
         data_taken['_coffinsInLevel'] = [cls.get_m_Name(d) for d in data_taken.get('_coffinsInLevel', [])]
@@ -477,14 +497,17 @@ class TownBuildingDataDumper(BaseDataDumper):
         keys = filter(lambda k: not k.startswith("m_"), keys)
         keys = filter(lambda k: k not in {
             'serializationData', 'references',
-            # TODO: lang file support
-            '_townBuildingName', '_menuName', '_unlockedBuildingDesc', '_lockedBuildingDesc',
 
         }, keys)
 
         data_taken = {k: data.get(k) for k in keys}
 
         data_taken['_musicOverride'] = cls.get_m_Name(data_taken.get('_musicOverride'))
+
+        data_taken['_townBuildingName'] = cls.get_loc_text(data_taken['_townBuildingName'])
+        data_taken['_menuName'] = cls.get_loc_text(data_taken['_menuName'])
+        data_taken['_unlockedBuildingDesc'] = cls.get_loc_text(data_taken['_unlockedBuildingDesc'])
+        data_taken['_lockedBuildingDesc'] = cls.get_loc_text(data_taken['_lockedBuildingDesc'])
 
         return cls.get_m_Name(dungeon_config), data_taken
 
@@ -537,11 +560,11 @@ class GemFrequencyDataDumper(BaseDataDumper):
         keys = filter(lambda k: k not in {
             'serializationData', 'references',
             '_frequencyColor',
-            # TODO: lang file support
-            '_frequencyName',
         }, keys)
 
         data_taken = {k: data.get(k) for k in keys}
+
+        data_taken['_frequencyName'] = cls.get_loc_text(data_taken.get('_frequencyName'))
 
         return cls.get_m_Name(gem_config), data_taken
 
@@ -568,6 +591,7 @@ class GemFrequencyDataDumper(BaseDataDumper):
 
         cls.save_data(full_data)
 
+
 class GemFrequencyGroupDataDumper(BaseDataDumper):
     _type = DataTypeVC.GEM_FREQUENCY_GROUP
 
@@ -580,7 +604,6 @@ class GemFrequencyGroupDataDumper(BaseDataDumper):
         keys = filter(lambda k: k not in {
             'serializationData', 'references',
             '_frequencyColor',
-            # TODO: lang file support
         }, keys)
 
         data_taken = {k: data.get(k) for k in keys}
@@ -615,4 +638,4 @@ class GemFrequencyGroupDataDumper(BaseDataDumper):
 
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    GemFrequencyGroupDataDumper.dump_data()
+    GemFrequencyDataDumper.dump_data()

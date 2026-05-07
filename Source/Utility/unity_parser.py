@@ -101,15 +101,26 @@ class UnityLocalizedReference(dict):
                 return None
 
     @property
-    def table_key(self):
+    def key_id(self):
         match self:
             case {'m_TableEntryReference': {'m_KeyId': int(key_id)}}:
                 return key_id
             case _:
                 return None
 
+    @property
+    def key_name(self):
+        match self:
+            case {'m_TableEntryReference': {'m_Key': int(key_id)}}:
+                return key_id
+            case _:
+                return None
+
+    def is_valid(self):
+        return self.table_guid is not None
+
     def __repr__(self):
-        return f"{self.__class__.__name__}(table={self.table_guid}, key={self.table_key})"
+        return f"{self.__class__.__name__}(table={self.table_guid}, key={self.key_id})"
 
 
 @dataclass
@@ -132,7 +143,7 @@ class UnityDoc:
     def __repr__(self):
         if len(self.entries) == 1:
             return f"{self.__class__.__name__}(entry={self.entries[0]})"
-        return f"{self.__class__.__name__}(entries=[{self.entries[0]}...{len(self.entries)-1}])"
+        return f"{self.__class__.__name__}(entries=[{self.entries[0]}...{len(self.entries) - 1}])"
 
     def __post_init__(self):
         def make_data(_data):
