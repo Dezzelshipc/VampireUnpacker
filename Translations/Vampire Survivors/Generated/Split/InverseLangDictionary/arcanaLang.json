@@ -408,7 +408,7 @@
       "name": "E03 - Giant Mantichana"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - Jelly Swarm"
     },
     "205": {
       "name": "E05 - Archon Ascia"
@@ -423,7 +423,7 @@
       "name": "E08 - Skelewing"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - Sig.ra Rossi"
     },
     "210": {
       "name": "E10 - Merdusa"
@@ -845,70 +845,70 @@
       "description": "Obtient %0 tous les %1 niveaux (%2 fois max)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Pieu au cœur",
+      "description": "Suspend le gain d'EXP. Les ennemis lâchent des pièces d'or. Les dégâts sont infligés aux pièces d'or au lieu des PV. Un marchand spécial apparaît chaque minute."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - Héritier du destin",
+      "description": "Éliminer des ennemis avec du FEU vous octroie de la santé max et de la puissance supplémentaires. Déclenche un Nduja Fritta lorsque la santé atteint un niveau critique."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - Le bout du monde",
+      "description": "Octroie +3 Épines. Ajoute +100 % à la vitesse de déplacement. Vous permet de traverser les murs et d'aspirer les coffres au trésor, les sources de lumière et les armes."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - Puissant épéiste"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - Siamois solitaire"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - Mantichana géante"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - Attaque médusante"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05 - Archonte Ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - Élémentaire lacté"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E08 - Musc musc"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - Squelette ailé"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - Dame rosâtre"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "E10 - Merduse"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - Cornichon de l'espace"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - Squelegemme"
     },
     "213": {
       "name": "E13 - Sphon'Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - Élémentaire mentholé"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - Crâneur"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - Crâniche rouge"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 - Chérubeau déchu"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - Œuf cosmique"
     },
     "39": {
       "name": null,
@@ -1303,70 +1303,70 @@
       "description": "Comincia a guadagnare %0 ogni %1 livelli (max %2 volte)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Paletto nel cuore",
+      "description": "Blocca il guadagno di PE. I nemici rilasciano Monete d'oro. I danni subiti riducono le Monete d'oro anziché i PS. Un mercante speciale viene generato ogni minuto."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - Erede del fato",
+      "description": "Sconfiggendo i nemici con il FUOCO ottieni bonus a Salute massima e Potenza. Scatena una Nduja fritta quando la salute raggiunge livelli critici."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - Confini della Terra",
+      "description": "Conferisce +3 Spine. Blocca la Velocità di movimento a +100%. Ti consente di attraversare i muri e di risucchiare Forzieri del tesoro, Fonti di luce e Armi."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - Spadiano potente"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - Gemello perduto"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - Mantichana gigante"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - Sciame di meduse"
     },
     "205": {
       "name": "E05 - Archon Ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - Elementale del latte"
     },
     "207": {
       "name": "E07 - Musc Musc"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - Scheletralato"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - Sig.ra Rossi"
     },
     "210": {
       "name": "E10 - Merdusa"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - Cetriolino spaziale"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - Schelegemma"
     },
     "213": {
       "name": "E13 - Sphon'Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - Elementale della menta"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - Teschione"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - Teschiorosso"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 – Cherubello caduto"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - Uovo cosmico"
     },
     "39": {
       "name": null,
@@ -1761,70 +1761,70 @@
       "description": "Erhalte %0 nach jedem %1. Level (max. %2-mal)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Pflock ins Herz",
+      "description": "Stoppt den EP-Gewinn. Gegner lassen Goldmünzen fallen. Wenn du Schaden erleidest, verlierst du Goldmünzen statt LP. Jede Minute erscheint ein besonderer Händler."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - Schicksalserbe",
+      "description": "Das Besiegen von Gegnern mit FEUER gewährt einen Bonus auf max. LP und Macht. Löst ein Nduja Fritta aus, wenn die Gesundheit einen kritisch niedrigen Wert erreicht."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - Am Ende der Welt",
+      "description": "Gewährt +3 Dornen. Bewegungstempo wird dauerhaft +100 %. Du kannst durch Wände laufen und Schatztruhen, Lichtquellen und Waffen mit einem Vakuum ansaugen."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "G01 - Mächtiger Schwertwächter"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "G02 - Verlorener Zwilling"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "G03 - Riesen-Mantichana"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "G04 - Quallenschwarm"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "G05 - Archon Ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "G06 - Milch-Elementargeist"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "G07 - Musc Musc"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "G08 - Skelettschwinge"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "G09 - Sig.ra Rossi"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "G10 - Mehrdusa"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "G11 - Weltraumgurke"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "G12 - Skeledelstein"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "G13 - Sphon’Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "G14 - Menta-Elementargeist"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "G15 - Skullone"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "G16 - Skulorosso"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "G17 - Gefallener Cherubello"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "G18 - Kosmisches Ei"
     },
     "39": {
       "name": null,
@@ -2219,70 +2219,70 @@
       "description": "Empieza a ganar %0 cada %1 niveles (máx.: %2 veces)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Estaca al corazón",
+      "description": "Dejas de ganar EXP. Los enemigos sueltan monedas de oro. El daño recibido reduce las monedas de oro en lugar de los PS. Aparece un mercader especial cada minuto."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX: Herencia del destino",
+      "description": "Derrotar a enemigos con FUEGO otorga salud máxima y poder adicionales. Activa la Nduja Fritta cuando la salud llega a un punto crítico."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII: Borde de la tierra",
+      "description": "Otorga +3 espinas. Fija la velocidad de movimiento a +100 %. Te permite atravesar muros. Te permite aspirar cofres del tesoro, fuentes de luz y armas."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01: Espadián poderoso"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02: Siamesa perdida"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03: Manticana gigante"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04: Enjambre de medusas"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05: Arconte ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06: Elemental de leche"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E07: Mucus"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08: Esquelealas"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09: Sra. rosa"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "E10: Mierdusa"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11: Pepinillo espacial"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12: Esquelegema"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "E13: Sphon'Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14: Elemental de menta"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15: Craneón"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16: Craneorojo"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17: Arcángel caído"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18: Huevo cósmico"
     },
     "39": {
       "name": null,
@@ -2677,70 +2677,70 @@
       "description": "Passa a ganhar %0 a cada %1 níveis (máx. %2 vezes)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Estaca no Coração",
+      "description": "Interrompe o ganho de EXP. Inimigos concedem Moedas de Ouro. O dano é causado a Moedas de Ouro em vez de aos PV. Um mercador especial aparece a cada minuto."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - Herança do Destino",
+      "description": "Derrotar inimigos com FOGO concede bônus de Vida Máxima e Poder. Ativa uma Nduja Fritta quando Vida chega a um nível crítico."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - Beira do Mundo",
+      "description": "Concede +3 Espinhos. Ganha +100% de Vel. de Mov. Permite atravessar paredes. Permite aspirar Baús do Tesouro, Fontes de Luz e Armas."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - Poder Espadachim"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - Gêmeo Perdido"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - Mantichana Gigante"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - Enxame de Águas-vivas"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05 - Arconte Ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - Elemental Lácteo"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E07 - Muco Muco"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - Esqueletalado"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - Sig.ra Rossi"
     },
     "210": {
       "name": "E10 - Merdusa"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - Picles Alienígena"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - Esquelejoia"
     },
     "213": {
       "name": "E13 - Sphon'Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - Elemental Mentolado"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - Caveirão"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - Caveirrubro"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 - Querubelo Caído"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - Ovo Cósmico"
     },
     "39": {
       "name": null,
@@ -3135,70 +3135,70 @@
       "description": "Zacznij otrzymywać %0 po każdych %1 poziomach (maks. %2 razy)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Kołkiem w serce",
+      "description": "Wstrzymuje przyrost PD. Wrogowie pozostawiają złote monety. Obrażenia są zadawane złotym monetom zamiast PZ. Specjalny kupiec pojawia się co minutę."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX – Potomek przeznaczenia",
+      "description": "Pokonywanie wrogów za pomocą OGNIA przyznaje premię do Maks. zdrowia i Mocy. Uruchamia Nduja Fritta, gdy zdrowie osiągnie krytycznie niski poziom."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII – Na krańcu Ziemi",
+      "description": "Otrzymuje +3 Cierni. Dodaje +100% Prędkości ruchu. Pozwala na przechodzenie przez ściany. Pozwala na przyciągnięcie skrzyń skarbów, źródeł światła i broni."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "L01 – Srogi szermierz"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "L02 – Zaginiony bliźniak"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "L03 – Wielka mantichana"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "L04 – Rój meduz"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "L05 – Archont ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "L06 – Mleczny żywiołak"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "L07 – Glutoglut"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "L08 – Skrzydlet"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "L09 – Sig.ra Rossi"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "L10 – Merduza"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "L11 – Kosmiczny ogór"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "L12 – Szkieleskarb"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "L13 – Sphon'Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "L14 – Żarłoczny żywiołak"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "L15 – Czaszkone"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "L16 – Czaszkorosso"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "L17 – Upadły cherubbello"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "L18 – Kosmiczne jajo"
     },
     "39": {
       "name": null,
@@ -3593,70 +3593,70 @@
       "description": "Начинает получать %0 каждые %1 ур. (до %2 раз)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Кол в сердце",
+      "description": "Приостанавливает получение опыта. Из врагов выпадают золотые монеты. Вместо урона здоровью у вас отнимаются золотые монеты. Каждую минуту появляется особый торговец."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX — Наследник судьбы",
+      "description": "Победа над врагами ОГНЁМ даёт бонус к максимальному здоровью и силе. Когда здоровье падает до критически низкого уровня, активируется «Ндуя Фритта»."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII — Грань Земли",
+      "description": "Даёт +3 к шипам. Устанавливает скорость движения на +100%. Позволяет проходить сквозь стены. Позволяет засасывать сундуки с сокровищами, источники света и оружие."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "Е01 — Могучий мечник"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "Е02 — Потерянный близнец"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "Е03 — Гигантская мантикана"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "Е04 — Рой медуз"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "Е05 — Архонт с топором"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "Е06 — Молочный элементаль"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "Е07 — Слайм Слайм"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "Е08 — Крылатый скелет"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "Е09 — Красная Сиг.ра"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "Е10 — Мердуза"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "Е11 — Космический огурчик"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "Е12 — Скелецвет"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "Е13 — Сфон'дато"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "Е14 — Ментоловый элементаль"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "Е15 — Черепоне"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "Е16 — Красный череп"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "Е17 — Павший херувиммо"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "Е18 — Космическое яйцо"
     },
     "39": {
       "name": null,
@@ -4051,70 +4051,70 @@
       "description": "Her %1 seviyede bir %0 kazanmaya başlar (Maks %2 kez."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "Kalbe Bir Kazık",
+      "description": "XP kazanımını durdurur. Düşmanlar Altın Akçe düşürür. HP yerine Altın Akçeler hasar alır. Her dakika özel bir tüccar doğar."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - Kader Vârisi",
+      "description": "Düşmanları ATEŞ ile öldürmek bonus Maks. Sağlık ve Kuvvet verir. Sağlık kritik derecede düşük bir seviyeye ulaştığında bir Nduja Fritta tetikler."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - Dünyanın Sınırı",
+      "description": "#ERROR!"
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "D01 - Büyük Kılıçbey"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "D02 - Kayıp İkiz"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "D03 - Dev Mantichana"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "D04 - Denizanası Sürüsü"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "D05 - Arkon Ascia"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "D06 - Süt Elementali"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "D07 - Yos Yosun"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "D08 - İskelenat"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "D09 - Sig.Ra Rossi"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "D10 - Merdusa"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "D11 - Uzay Turşusu"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "D12 - İskelet Cevher"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "D13 - Sphon'Dato"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "D14 - Menta Elemental"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "D15 - Kafatasnız"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "D16 - Skulorosso"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "D17 - Düşmüş Kerubello"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "D18 - Kozmik Yumurta"
     },
     "39": {
       "name": null,
@@ -4509,70 +4509,70 @@
       "description": "每%1级，+%0（最多%2次）。"
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "护心金",
+      "description": "不再获得经验，敌人会掉落金币，受到伤害时损失金币而非生命值，每分钟生成一个特殊商人。"
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - 命运继承者",
+      "description": "用火击败敌人将获得额外的生命上限和力量加成。当濒临死亡时，将触发一次辣香肠酱。"
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - 地球边缘",
+      "description": "荆棘+3，移动速度调整为+100%，可穿墙，可吸取宝箱、光源和武器。"
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - 强大剑卫"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - 独生蛇"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - 巨型螳螂"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - 水母群涌"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05 - 大斧执政官"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - 奶精灵"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E07 - 黏黏"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - 翼骷髅"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - 红女士"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "E10 - 美杜莎"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - 太空泡菜"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - 宝石骷髅"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "E13 - 斯芬达托"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - 邪精灵"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - 飘颅"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - 红飞颅"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 - 堕落娈天使"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - 宇宙之元"
     },
     "39": {
       "name": null,
@@ -4967,70 +4967,70 @@
       "description": "%1レベルごとに%0を獲得し始める（最大%2回まで）。"
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "心臓の杭打ち",
+      "description": "XP獲得を一時停止。敵に金貨をドロップさせる。ダメージはHPではなく、金貨に対して付与される。また、毎分専属の商人が召喚される。"
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - 運命の継承者",
+      "description": "炎で敵を倒すと、最大HPと攻撃力を増加させる。HPが著しく低下すると、ンドゥヤ・フリッタを発動させる。"
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - 地上の果て",
+      "description": "茨+3。素早さが+100%で固定され、壁を通過できるようになる。宝箱、明かり、そして武器を引き寄せることが可能。"
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - 偉大なる剣"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - ロストツイン"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - 巨大マンティチャーナ"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - クラゲの群れ"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05 - アッシャ・アルコーン"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - ミルク・エレメンタル"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E07 - ムスク・ムスク"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - スケルウィング"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - シニョーラ・ロッシ"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "E10 - メドゥーサ"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - 宇宙ピクルス"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - スケルジェム"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "E13 - スフォンダト"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - メンタ・エレメンタル"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - スカローネ"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - スカロロッソ"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 - 上級堕天使"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - コズミック・エッグ"
     },
     "39": {
       "name": null,
@@ -5425,70 +5425,70 @@
       "description": "%1레벨마다 %0(을)를 획득하기 시작합니다 (최대 %2회)."
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "심장에 박힌 말뚝",
+      "description": "XP 획득을 중단합니다. 적이 금화를 떨어뜨립니다. 피해는 HP 대신 금화에 줍니다. 특별한 상인이 1분마다 나타납니다."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX - 운명의 계승자",
+      "description": "불로 적을 물리치면 최대 체력과 피해량이 보너스로 증가합니다. 체력이 매우 낮은 수준에 도달하면 은두자 프리타를 발동합니다."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII - 지구의 모서리",
+      "description": "가시가 +3 됩니다. 이동 속도를 +100%로 수정합니다. 벽을 통과할 수 있게 해줍니다. 보물상자, 광원, 무기를 흡입할 수 있게 해줍니다."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - 전능한 소디언"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - 잃어버린 쌍둥이"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - 거대 만티차나"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - 해파리 떼"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05 - 아르콘 도끼"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - 우유 엘리멘탈"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E07 - 머쉬 머쉬"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - 스켈레윙"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - 시뇨르라 로시"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "E10 - 메르두사"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - 스페이스 피클"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - 스켈레젬"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "E13 - 스폰다토"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - 멘타 엘리멘탈"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - 해골론"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - 해골로로소"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 - 타락한 케루벨로"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - 우주의 알"
     },
     "39": {
       "name": null,
@@ -5883,70 +5883,70 @@
       "description": "每升 %1 級，便可獲得以下的加成效益： %0（最多可觸發 %2 次）。"
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "掏心賭注",
+      "description": "停止獲得經驗值。敵人會改為掉落金幣。受到傷害的話會扣除金幣，而非扣除生命值。每分鐘會出現一位特殊商人。"
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX－宿命繼承者",
+      "description": "以「火焰」傷害擊敗敵人可以獲得額外的最大生命值與力量。在生命值變得相當低的時候，會觸發一次義式辣香腸薄餅的效果。"
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII－世界盡頭",
+      "description": "可獲得 +3 點的荊棘傷害加成。移動速度會被調整為 +100%。讓你能夠穿牆。讓你能夠吸取寶箱、光源和武器。"
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "E01 - 絕世劍衛"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "E02 - 獨生蛇"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "E03 - 巨型螳螂"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "E04 - 水母群湧"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "E05 - 大斧執政官"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "E06 - 奶精靈"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "E07 - 黏黏"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "E08 - 翼骷髏"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "E09 - 紅女士"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "E10 - 梅杜莎"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "E11 - 太空醃黃瓜"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "E12 - 骷髏寶石"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "E13 - 斯芬達托"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "E14 - 薄荷精靈"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "E15 - 飄顱"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "E16 - 紅飛顱"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "E17 - 墮落孌天使"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "E18 - 宇宙之元"
     },
     "39": {
       "name": null,
@@ -6341,70 +6341,70 @@
       "description": "Починає отримувати %0 кожні %1 рівні(в) (макс. %2 р.)"
     },
     "22": {
-      "name": "Stake to your Heart",
-      "description": "Halts XP gain. Enemies drop Gold Coins. Damage is dealt to Gold Coins instead of HP. A special merchant spawns every minute."
+      "name": "«Кілок у серце»",
+      "description": "Припиняє накопичення досвіду. Вороги кидають золоті монети. Шкода завдається золотим монетам замість ОЗ. Щохвилини з'являється спеціальний торговець."
     },
     "41": {
-      "name": "XIX - Heir of Fate",
-      "description": "Defeating enemies with FIRE gives bonus MaxHealth and Might. Triggers an Nduja Fritta when health reaches a critically low level."
+      "name": "XIX — «Нащадок фатуму»",
+      "description": "Знищення ворогів ВОГНЕМ дає бонус до макс. здоров'я і сили. Запускає Ндуя Фрітта при критично низькому рівні здоров'я."
     },
     "30": {
-      "name": "VIII - Edge of the Earth",
-      "description": "Gives +3 Thorns. Fixes MoveSpeed to +100%. Allows you to walk through walls. Allows you to vacuum Treasure Chests, Light Sources, and Weapons."
+      "name": "VIII — «Край землі»",
+      "description": "Надає +3 до Тернів. Фіксує швидкість руху на рівні +100%. Дозволяє проходити крізь стіни. Дозволяє миттєво притягувати скрині зі скарбами, джерела світла та зброю."
     },
     "201": {
-      "name": "E01 - Mighty Swordian"
+      "name": "В01 — «Могутній мечник»"
     },
     "202": {
-      "name": "E02 - Lost Twin"
+      "name": "В02 — «Загублений близнюк»"
     },
     "203": {
-      "name": "E03 - Giant Mantichana"
+      "name": "В03 — «Гігантська мантикана»"
     },
     "204": {
-      "name": "E04 - Jellyfish Swarm"
+      "name": "В04 — «Зграя медуз»"
     },
     "205": {
-      "name": "E05 - Archon Ascia"
+      "name": "В05 — «Архонт із сокирою»"
     },
     "206": {
-      "name": "E06 - Milk Elemental"
+      "name": "В06 — «Молочний елементаль»"
     },
     "207": {
-      "name": "E07 - Musc Musc"
+      "name": "В07 — «Слизовик»"
     },
     "208": {
-      "name": "E08 - Skelewing"
+      "name": "В08 — «Скелетокрил»"
     },
     "209": {
-      "name": "E09 - Sig.Ra Rossi"
+      "name": "В09 — «Червоні сіґри»"
     },
     "210": {
-      "name": "E10 - Merdusa"
+      "name": "В10 — «Мердуза»"
     },
     "211": {
-      "name": "E11 - Space Pickle"
+      "name": "В11 — «Космоогірок»"
     },
     "212": {
-      "name": "E12 - Skelegem"
+      "name": "В12 — «Скелетоцвіт»"
     },
     "213": {
-      "name": "E13 - Sphon'Dato"
+      "name": "В13 — «Сфон'Дато»"
     },
     "214": {
-      "name": "E14 - Menta Elemental"
+      "name": "В14 — «Ментоловий елементаль»"
     },
     "215": {
-      "name": "E15 - Skullone"
+      "name": "В15 — «Черепоне»"
     },
     "216": {
-      "name": "E16 - Skullorosso"
+      "name": "В16 — «Червоний череп»"
     },
     "217": {
-      "name": "E17 - Fallen Cherubbello"
+      "name": "В17 — «Грішний херувимо»"
     },
     "218": {
-      "name": "E18 - Cosmic Egg"
+      "name": "В18 — «Космічне яйце»"
     },
     "39": {
       "name": null,

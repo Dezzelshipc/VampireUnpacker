@@ -2835,16 +2835,16 @@
       "description": "Maîtrise le Trident. Toujours suivi par Gaibon. Devient furieux si son partenaire meurt."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Lo-",
+      "charName": "Pain",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Active son arme principale lorsqu'il ramasse des pièces d'or. Utilise des pièces d'or pour bloquer les dégâts. Possède quatre fois plus de chances d'obtenir des Survarots FOIL."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Déclenche une inondation lorsqu'une arme évolue. Aspire tous les cristaux d'EXP lorsque sa santé atteint un seuil critique."
     }
   },
   "it": {
@@ -4259,16 +4259,16 @@
       "description": "Abile col Tridente. È sempre con Gaibon. Va su tutte le furie quando muore il suo partner."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Grosso",
+      "charName": "Combinaguai",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Attiva la sua arma principale quando raccoglie Monete d'oro. Usa le Monete d'oro come barriera difensiva. Probabilità quadruplicata di pescare Survarocchi FOIL."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Scatena un'alluvione quando migliora un'arma. Risucchia tutti i cristalli di PE quando la salute raggiunge un livello critico."
     }
   },
   "de": {
@@ -5683,16 +5683,16 @@
       "description": "Geschickt im Umgang mit dem Dreizack. Hat immer Gaibon im Schlepptau. Wird wütend, wenn sein Partner stirbt."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Po",
+      "charName": "Lan",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Aktiviert seine Hauptwaffe beim Aufsammeln von Goldmünzen. Verwendet Goldmünzen als Schild gegen Schaden. 4-fache Chance auf FOIL-Karten im Survarots-Draft."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Erzeugt beim Verbessern einer Waffe eine Flutwelle. Saugt bei kritisch niedrigen LP alle EP-Edelsteine an."
     }
   },
   "es": {
@@ -7107,16 +7107,16 @@
       "description": "Experto con el tridente. Siempre lo sigue Gaibon. Enfurece si su compañero muere."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": null,
+      "charName": "Golpista",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Activa su arma principal al recoger monedas de oro. Usa las monedas como barrera de daño. Tiene el cuádruple de probabilidad de robar supervicanos FOIL."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Activa una inundación cuando evoluciona un arma. Absorbe todas las gemas de EXP cuando la salud llega a un punto crítico."
     }
   },
   "pt-BR": {
@@ -8531,16 +8531,16 @@
       "description": "Hábil com Tridente. Sempre seguido por Gaibon. Se enfurece se o parceiro morre."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Po",
+      "charName": "Lan",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Ativa a arma principal dele ao coletar Moedas de Ouro. Usa Moedas de Ouro como barreira de dano. Tem chance x4 de tirar um Surtarô FOIL."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Causa uma enchente ao evoluir uma arma. Aspira todas as joias de EXP ao atingir um nível crítico de Vida."
     }
   },
   "pl": {
@@ -9955,16 +9955,16 @@
       "description": "Wprawnie posługuje się Trójzębem. Zawsze podąża za nią Gaibon. Wpada w szał, gdy jej partner umiera."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Wielki",
+      "charName": "Drako",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Jego główna broń aktywuje się podczas podnoszenia złotych monet. Wykorzystuje złote monety jako osłonę przed obrażeniami. Ma 4x szans na dobranie kart Survarota FOIL."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Wytwarza powódź po ulepszeniu broni. Przyciąga wszystkie kryształy PD, gdy zdrowie osiągnie krytycznie niski poziom."
     }
   },
   "ru": {
@@ -11379,16 +11379,16 @@
       "description": "Знаток «Трезубца». Никогда не расстаётся с Гайбоном. Впадает в ярость, если напарник погибает."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Большой",
+      "charName": "Переполох",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Активирует своё основное оружие, подбирая золотые монеты. Использует золотые монеты в качестве барьера от урона. Есть шанс х4 добавить в набор сурвароты FOIL."
     },
     "EX_PARACOOLIO": {
-      "prefix": "Para",
-      "charName": "Kooleo",
+      "prefix": "Пара",
+      "charName": "Кулео",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Активирует наводнение при улучшении оружия. Засасывает все кристаллы опыта, когда здоровье опускается до критически низкого уровня."
     }
   },
   "tr": {
@@ -12803,16 +12803,16 @@
       "description": "Üç Uçlu Mızrak kullanmada ustadır. Gaibon her zaman arkasından gelir. Ortağı ölürse çok sinirlenir."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Büyük",
+      "charName": "Bela",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Altın Akçe toplarken ana silahını etkinleştirir. Altın Akçeleri hasar önleyici olarak kullanır. FOIL Survarotlarını alma şansı 4X'tir."
     },
     "EX_PARACOOLIO": {
       "prefix": "Para",
       "charName": "Kooleo",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "Silah evrildiğinde bir sel tetikler. Sağlık kritik derecede düşük bir seviyeye ulaştığında tüm XP mücevherlerini çeker."
     }
   },
   "zh-CN": {
@@ -14227,16 +14227,16 @@
       "description": "擅长三叉戟，与贾鹏形影不离，在其搭档死亡时会被激怒。"
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": null,
+      "charName": "大妖魔",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "拾取金币时激活其主武器，可使用金币屏蔽伤害，有4倍几率抽取到FOIL幸存塔罗牌。"
     },
     "EX_PARACOOLIO": {
-      "prefix": "Para",
-      "charName": "Kooleo",
+      "prefix": "帕拉",
+      "charName": "库里欧",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "武器升级时触发洪水，濒死时吸取所有经验水晶。"
     }
   },
   "ja": {
@@ -15651,16 +15651,16 @@
       "description": "トライデントとの相性良し。ギャイボンが常に同行している。パートナーが死ぬと激怒する。"
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "怪奇の",
+      "charName": "魔術師",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "金貨を拾うとメインの武器を発動する。ダメージバリアとして金貨を消耗。FOILサバイバーカードを引く確率が4倍になる。"
     },
     "EX_PARACOOLIO": {
-      "prefix": "Para",
-      "charName": "Kooleo",
+      "prefix": "パラ・",
+      "charName": "クーリオ",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "武器進化時に洪水を引き起こす。また、HPが著しく低下した際には周囲全てのXPクリスタルを引き寄せる。"
     }
   },
   "ko": {
@@ -17075,16 +17075,16 @@
       "description": "트라이던트에 능숙합니다. 항상 가이본이 따라다니죠. 파트너가 죽으면 화를 냅니다."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "빅",
+      "charName": "트러블러",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "금화를 획득하면 주무기를 활성화됩니다. 금화를 피해 방어막으로 사용합니다. 포일 서바로트를 뽑을 확률이 4배입니다."
     },
     "EX_PARACOOLIO": {
-      "prefix": "Para",
-      "charName": "Kooleo",
+      "prefix": "파라",
+      "charName": "클레오",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "무기가 진화하면 홍수가 발생합니다. 체력이 매우 낮은 수준에 도달하면 XP 크리스털을 모두 흡입합니다."
     }
   },
   "zh-TW": {
@@ -18499,16 +18499,16 @@
       "description": "精通三叉戟。蓋本幾乎可以說是斯洛格拉的影子。如果其中一名夥伴死亡的話，會進入狂暴狀態。"
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "大尾",
+      "charName": "妖魔",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "在撿起金幣的同時，大尾妖魔會發動一次他的主要武器來進行攻擊。以金幣來作為傷害屏障。有四倍的機率能夠抽到「閃卡」版本的倖存牌。"
     },
     "EX_PARACOOLIO": {
-      "prefix": "Para",
-      "charName": "Kooleo",
+      "prefix": "帕拉",
+      "charName": "庫里歐",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "在解放武器的當下，帕拉能夠發動一波洪水攻擊。在生命值變得相當低的時候，會吸取地圖上所有的經驗值水晶。"
     }
   },
   "uk": {
@@ -19923,16 +19923,16 @@
       "description": "Майстерно володіє Тризубом. Завжди в парі з Ґайбоном. Впадає в лють після смерті напарника."
     },
     "EX_BIGTROUBLER": {
-      "prefix": "Big",
-      "charName": "Troubler",
+      "prefix": "Великий",
+      "charName": "Винуватець",
       "surname": null,
-      "description": "Activates his main weapon when picking up Gold Coins. Uses Gold Coins as a damage barrier. Has a 4X chance of drafting FOIL Survarots."
+      "description": "Активує свою головну зброю, збираючи золоті монети. Застосовує злоті монети як захист від шкоди. Має шанс зібрати в 4 рази більше карт Таро вцілілих."
     },
     "EX_PARACOOLIO": {
-      "prefix": "Para",
-      "charName": "Kooleo",
+      "prefix": "Пара",
+      "charName": "Кула",
       "surname": null,
-      "description": "Triggers a flood when a weapon evolves. Vacuums all XP Crystals when health reaches a critically low level."
+      "description": "При еволюції зброї запускає потоп. Притягує всі самоцвіти досвіду, коли здоров'я падає до критичного рівня."
     }
   }
 }
