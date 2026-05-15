@@ -13,7 +13,8 @@ from PIL.Image import Image, open as image_open, new as image_new
 
 from Source.Config.config import DLCType
 from Source.Data.data import DataHandler, DataType, DataFile
-from Source.Translations.language import LangHandler, LangType, Lang
+from Source.Translations.language import LangHandler, LangType
+from Source.Translations.language_utils import Lang
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, COMPOUND_DATA_TYPE, GENERATED, \
     PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA
 from Source.Utility.image_functions import make_image_black
@@ -464,10 +465,21 @@ class ArcanaImageGenerator(BaseImageGenerator):
 
         sprite_data = texture_meta_data.data_name.get(sprite_texture)
         if not sprite_data:
-            print(f"!!! Arcana picture skipped '{sprite_texture}': not found for texture '{main_texture}'", file=sys.stderr)
+            print(f"!!! Arcana picture skipped '{sprite_texture}': not found for texture '{main_texture}'",
+                  file=sys.stderr)
             return None
 
         eng_name = entry.get(self.key_entry_name) or entry.get(KEY_ID)
+
+        if entry.get("arcanaType") < 100:
+            name_s = eng_name.split("-")
+            if len(name_s) < 2:
+                num = "0"
+                name = name_s[0].strip()
+            else:
+                num = name_s[0].strip()
+                name = name_s[1].strip()
+            eng_name = f"{name} ({num})"
 
         save_image_prefix = self.get_save_image_prefix(entry)
 
@@ -834,7 +846,6 @@ class AdventureStageImageGenerator(StageImageGenerator):
         }
 
         super().__init__(dlc_type, data_type, requested_gen_types)
-
 
     def get_unit(self, key_id: str, entry: list[dict[str, Any]]) -> dict[str, Any]:
         entry = super().get_unit(key_id, entry)

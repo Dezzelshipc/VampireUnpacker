@@ -56,6 +56,28 @@ class Game(Enum):
 
     SPECIAL = -1
 
+    @classmethod
+    def get_all_types(cls) -> set[Self]:
+        return {*cls}.difference({cls.SPECIAL})
+
+    def get_default_dlc(self) -> "DLCType":
+        match self:
+            case Game.VS:
+                return DLCType.VS
+            case Game.VC:
+                return DLCType.VC
+            case _:
+                assert False, "Game enum has no default dlc"
+
+    def get_main_folder_key(self) -> "CfgKey":
+        match self:
+            case Game.VS:
+                return CfgKey.STEAM_VS
+            case Game.VC:
+                return CfgKey.STEAM_VC
+            case _:
+                assert False, "Game enum has no default folder"
+
 
 @dataclass(order=True, unsafe_hash=True)
 class DLC:

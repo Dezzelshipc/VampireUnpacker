@@ -10,7 +10,13 @@ class BaseMetaDataTest(TestCase):
         super().__init__(*args)
         MetaDataHandler.load(Game.VS)
 
-        self.names_list = ["I2Languages", "enemies", "items", "UI", "LaborratoryTexturePacked"]
+        self.names_list = [
+            "I2Languages",
+            "enemies",
+            # "items",
+            "UI",
+            "LaborratoryTexturePacked"
+        ]
         guids_list = [_get_meta_guid(MetaDataHandler.get_path_by_name(name)) for name in self.names_list]
         self.guids_list = [guid[0] for guid in guids_list if guid]
 

@@ -1,6 +1,8 @@
+from os import PathLike
+
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.constants import CARD_GROUP_DATABASE, IMAGES_FOLDER, GENERATED
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 
 
 def get_card_group_database():
@@ -20,7 +22,7 @@ def get_card_group_database():
     return map(get_asset_data, paths)
 
 
-def generate_card_group_database():
+def generate_card_group_database() -> PathLike[str]:
     assets = get_card_group_database()
 
     save_folder = IMAGES_FOLDER / GENERATED / CARD_GROUP_DATABASE
@@ -65,4 +67,6 @@ def generate_card_group_database():
                 continue
 
             icon_meta.data_id[icon_id].sprite.save(sf / f"CSprite-{ name }.png")
+
+    return save_folder
 

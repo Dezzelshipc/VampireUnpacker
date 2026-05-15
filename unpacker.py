@@ -11,6 +11,7 @@ from tkinter.messagebox import showerror, showwarning, showinfo, askyesno
 from tkinter.simpledialog import askinteger
 
 from PIL.Image import open as image_open
+import PIL
 
 import Source.Data.data as data_module
 import Source.Images.transparent_save as tr_save
@@ -20,10 +21,11 @@ from Source.Data.data import DataHandler
 from Source.Data.meta_data import MetaDataHandler
 from Source.Images import image_gen, image_gen_vc
 from Source.Images.image_gen_new import ImageGeneratorManager
-from Source.Translations.language import LangHandler, I2_LANGUAGES, LangType
-from Source.Utility.constants import ROOT_FOLDER, IS_DEBUG, DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, \
-    GENERATED, TILEMAPS, DATA_FOLDER, TRANSLATIONS_FOLDER, SPLIT, COMPOUND_DATA, COMPOUND_DATA_TYPE, PREFAB_INSTANCE, \
-    GAME_OBJECT
+from Source.Translations.language import LangHandler, LangType
+from Source.Translations.language_utils import Lang
+from Source.Utility.constants import I2_LANGUAGES, VAMPIRE_SURVIVORS, ROOT_FOLDER, IS_DEBUG, \
+    DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, GENERATED, TILEMAPS, DATA_FOLDER, TRANSLATIONS_FOLDER, SPLIT, \
+    COMPOUND_DATA, COMPOUND_DATA_TYPE, PREFAB_INSTANCE, GAME_OBJECT
 from Source.Utility.defer_constants import DeferConstants
 from Source.Utility.constants import to_source_path
 from Source.Utility.image_functions import resize_image, get_anim_sprites_ready, apply_tint, resize_list_images
@@ -301,6 +303,8 @@ class Unpacker(tk.Tk):
         self.data_from_popup = None
         self.outer_progress_bar = None
 
+        self.after(10, MetaDataHandler.load, Game.VS)
+
     @staticmethod
     def get_assets_dir(key: DLCType = DLCType.VS) -> Path:
         path = Config.get_assets_dir(key)
@@ -502,19 +506,25 @@ class Unpacker(tk.Tk):
         self.progress_bar_set_percent(0, 1)
         print("Copying I2Languages.assets")
 
+        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS
+        save_folder.mkdir(exist_ok=True, parents=True)
+
         i2l = LangHandler.get_i2language().raw_text()
-        with open((TRANSLATIONS_FOLDER / I2_LANGUAGES).with_suffix(".yaml"), "w", encoding="utf-8") as f:
+        with open((save_folder / I2_LANGUAGES).with_suffix(".yaml"), "w",
+                  encoding="utf-8") as f:
             f.write(i2l)
 
         print(f"Copying I2Languages finished {timeit!r}")
         self.progress_bar_set_percent(1, 1)
-        self.last_loaded_folder = TRANSLATIONS_FOLDER
+        self.last_loaded_folder = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS
 
     def languages_get_json(self):
         timeit = Timeit()
         self.progress_bar_set_percent(0, 1)
-        save_folder = TRANSLATIONS_FOLDER / GENERATED
         print("Converting I2Languages to json")
+
+        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS / GENERATED
+        save_folder.mkdir(exist_ok=True, parents=True)
 
         i2l = LangHandler.get_i2language().json_text()
         with open((save_folder / I2_LANGUAGES).with_suffix(".json"), "w", encoding="utf-8") as f:
@@ -562,7 +572,7 @@ class Unpacker(tk.Tk):
         lang_types = LangType.get_all_types()
         i = 0
 
-        save_path = TRANSLATIONS_FOLDER / GENERATED / SPLIT / split_folder_names[split_index]
+        save_path = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS / GENERATED / SPLIT / split_folder_names[split_index]
         save_path.mkdir(parents=True, exist_ok=True)
         for lang_type in lang_types:
             lang_file = split_funcs[split_index](lang_type)
@@ -627,13 +637,13 @@ class Unpacker(tk.Tk):
 
             self.outer_progress_bar.change_label(f"Getting language file")
 
-            lang = lang_module.LangHandler.get_lang_file(gen.langFileName).get_lang(lang_module.Lang.EN) \
+            lang = lang_module.LangHandler.get_lang_file(gen.langFileName).get_lang(Lang.EN) \
                 if gen.langFileName != LangType.NONE else None
 
             if gen.assets_type == image_gen.OldDataType.CHARACTER:
                 w_data = DataHandler.get_data(COMPOUND_DATA, data_module.DataType.WEAPON).data()
-                lang_skins = lang_module.LangHandler.get_lang_file(LangType.SKIN).get_lang(lang_module.Lang.EN)
-                lang_weapon = lang_module.LangHandler.get_lang_file(LangType.WEAPON).get_lang(lang_module.Lang.EN)
+                lang_skins = lang_module.LangHandler.get_lang_file(LangType.SKIN).get_lang(Lang.EN)
+                lang_weapon = lang_module.LangHandler.get_lang_file(LangType.WEAPON).get_lang(Lang.EN)
                 add_data.update({
                     "weapon": w_data,
                     "character": data,
@@ -922,6 +932,7 @@ class Unpacker(tk.Tk):
         full_path = Path(full_path)
         save_path = full_path.parent / "Inverse"
 
+        PIL.Image.MAX_IMAGE_PIXELS = 2766929920
         image = image_open(full_path)
 
         save_path.mkdir(exist_ok=True, parents=True)
@@ -931,10 +942,10 @@ class Unpacker(tk.Tk):
 
         self.last_loaded_folder = save_path
 
-    @staticmethod
-    def vc_generate_card_database():
+    def vc_generate_card_database(self):
         MetaDataHandler.load(Game.VC)
-        image_gen_vc.generate_card_group_database()
+        folder = image_gen_vc.generate_card_group_database()
+        self.last_loaded_folder = folder
 
 
 if __name__ == '__main__':

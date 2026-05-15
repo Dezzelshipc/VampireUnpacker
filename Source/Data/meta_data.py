@@ -1,3 +1,4 @@
+import re
 from collections.abc import Callable
 from pathlib import Path
 from tkinter import Image
@@ -6,13 +7,13 @@ from PIL.Image import Image, open as image_open
 
 from Source.Config.config import DLCType, Config, Game
 from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJECT, PREFAB_INSTANCE, AUDIO_CLIP, \
-    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA
+    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
-from Source.Utility.multirun import run_multiprocess_single
+from Source.Utility.multirun import run_multiprocess_single, run_concurrent_sync
 from Source.Utility.special_classes import Objectless
 from Source.Utility.sprite_data import SpriteData, AnimationData, SKIP_ANIM_NAMES_LIST
 from Source.Utility.timer import Timeit
-from Source.Utility.unityparser2 import UnityDoc
+from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.utility import normalize_str
 
 
@@ -104,6 +105,25 @@ class MetaData:
 
     def __repr__(self):
         return f"<{self.__class__.__name__}: {self.name} ({self.real_name}) at {hex(id(self)).upper()}>"
+
+
+class ExactMetaData(MetaData):
+    fileID: int = None
+
+    @property
+    def sprite_data(self) -> SpriteData:
+        return self.data_id[self.fileID]
+
+    @classmethod
+    def from_meta_data(cls, meta_data: MetaData, fileID: int) -> "ExactMetaData":
+        emd = cls(meta_data.name,
+                  meta_data.real_name,
+                  meta_data.guid,
+                  meta_data.image,
+                  meta_data.data_name,
+                  meta_data.data_id)
+        emd.fileID = fileID
+        return emd
 
 
 def _get_meta(meta_path: Path) -> MetaData:
@@ -199,7 +219,7 @@ class MetaDataHandler(Objectless):
         cls._assets_name_path.clear()
         cls._assets_guid_path.clear()
         cls.loaded_assets_meta.clear()
-        print(f"MetaData unloaded ({cls.loaded_game.name if cls.loaded_game else ""})")
+        print(f"MetaData unloaded [{cls.loaded_game.name if cls.loaded_game else ""}]")
 
     @classmethod
     def assert_game(cls, game: Game):
@@ -207,7 +227,7 @@ class MetaDataHandler(Objectless):
 
     @classmethod
     def assert_loaded_game(cls):
-        assert cls.loaded_game is not None, f"Game assets not loaded! ({cls.loaded_game})"
+        assert cls.loaded_game is not None, f"Game assets not loaded! [{cls.loaded_game}]"
 
     @classmethod
     def _load_assets_meta_file_paths(cls) -> None:
@@ -234,6 +254,7 @@ class MetaDataHandler(Objectless):
             case Game.VC:
                 path_roots.extend([
                     (MONO_BEHAVIOUR, ""),
+                    (MATERIAL, ""),
                 ])
 
         for dlc in DLCType.get_all_types_by_game(cls.loaded_game):
@@ -260,7 +281,8 @@ class MetaDataHandler(Objectless):
         ###
 
         cls._assets_name_path.update({normalize_str(f): f for f in biggest_files})
-        print(f"Loaded {len(cls._found_files)} meta paths ({timeit:.2f} sec)")
+        print(
+            f"Loaded {len(cls._found_files)} meta paths [{cls.loaded_game.name if cls.loaded_game else ""}] ({timeit:.2f} sec)")
 
     @classmethod
     def _load_assets_meta_files_guids(cls) -> None:
@@ -269,7 +291,7 @@ class MetaDataHandler(Objectless):
         if not cls._assets_guid_path:
             print("Started collecting guid of every asset")
             timeit = Timeit()
-            # guid_path = run_concurrent_sync(_get_meta_guid, self._found_files)
+            # guid_path = run_concurrent_sync(_get_meta_guid, cls._found_files)
             guid_path = run_multiprocess_single(_get_meta_guid, cls._found_files)
             cls._assets_guid_path.update(guid_path)
             print(f"Finished collecting guid of every asset ({timeit:.2f} sec)")
@@ -396,8 +418,10 @@ class MetaDataHandler(Objectless):
 
         for name in name_set:
             norm_name = normalize_str(name)
+
             filtered = cls.filter_paths(
-                lambda name_path: name_path[0].startswith(norm_name+"_") or name_path[0] == norm_name
+                lambda name_path: re.fullmatch(rf"{norm_name}_\d+", name_path[0]) or name_path[0] == norm_name
+                # name_path[0].startswith(norm_name+"_") or name_path[0] == norm_name
             )
             fullest = list(sorted(filtered, key=lambda name_path: name_path[-1].stat().st_size, reverse=True))[0]
             fullest_set[fullest[0]] = name
