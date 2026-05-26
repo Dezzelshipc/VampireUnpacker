@@ -11,6 +11,18 @@ class Timeit:
     def get_sec(self) -> float:
         return self.get_ns() / 1e9
 
+    def __copy__(self):
+        t = Timeit()
+        t.start = self.start
+        return t
+
+    def __call__(self, mark = None) -> "Timeit":
+        if mark:
+            print(f"[{mark}]", end=' ')
+        ret = self.__copy__()
+        self.start = perf_counter_ns()
+        return ret
+
     def __str__(self):
         return str(self.get_sec())
 

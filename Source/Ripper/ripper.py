@@ -7,7 +7,7 @@ from tkinter.messagebox import showerror
 
 import requests
 
-from Source.Config.config import DLCType, CfgKey, Config
+from Source.Config.config import DLCType, CfgKey, Config, Game
 from Source.Utility.constants import RIPPER_FOLDER, to_source_path
 from Source.Utility.timer import Timeit
 
@@ -84,7 +84,11 @@ def rip_files(dlc_list: set[DLCType]):
                 wait_time *= 2
                 print(f"Ripper is not loaded. Trying reconnect in {wait_time} sec.")
 
-    steam_folder = {p.name: p for p in Config[CfgKey.STEAM_VS].iterdir()}
+    steam_folder = {
+        p.name: p
+        for game_dlc in Game.get_all_types()
+        for p in Config[game_dlc.get_main_folder_key()].iterdir()
+    }
 
     for dlc in sorted(map(lambda x: x.value, dlc_list)):
         assets_path = Config[dlc.config_key]

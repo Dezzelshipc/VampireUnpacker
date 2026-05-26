@@ -1,16 +1,7 @@
-# Vampire Survivors Files
+* [Vampire Survivors Files](https://github.com/Dezzelshipc/VampireSurvivorsFiles)
+* [Vampire Crawlers Files](https://github.com/Dezzelshipc/VampireCrawlersFiles)
 
-Some data files of Vampire Survivors game.
-
-Ripped from v1.14 + Moonspell + Foscari + Meeting + Guns + Ode + Diorama + Ante
-
-[Vampire Survivors](https://store.steampowered.com/app/1794680/Vampire_Survivors/) by [poncle](https://poncle.games)
-
-## Data Files
-
-Game data files and DLC data files located in [Data](Data) folder.
-
-## Unpacker (v0.16.5) - Data manager and Image generator
+# Unpacker (v0.17.0) - Data manager and Image generator
 
 Run [unpacker.py](unpacker.py) with [run.bat](run.bat). It can unpack images, get language strings and split them to
 different files and

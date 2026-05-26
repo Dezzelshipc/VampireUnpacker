@@ -11,12 +11,15 @@ IS_DEBUG: Final[bool] = (sys.monitoring.get_tool(sys.monitoring.DEBUGGER_ID)) is
 ROOT_FOLDER: Final[Path] = _find_main_py_file().parent.absolute()
 
 AUDIO_FOLDER: Final[Path] = ROOT_FOLDER / "Audio"
-CONFIG_FOLDER: Final[Path] = ROOT_FOLDER / "Config"
 DATA_FOLDER: Final[Path] = ROOT_FOLDER / "Data"
 IMAGES_FOLDER: Final[Path] = ROOT_FOLDER / "Images"
-RIPPER_FOLDER: Final[Path] = ROOT_FOLDER / "Ripper"
 TRANSLATIONS_FOLDER: Final[Path] = ROOT_FOLDER / "Translations"
+
+CONFIG_FOLDER: Final[Path] = ROOT_FOLDER / "Config"
+RIPPER_FOLDER: Final[Path] = ROOT_FOLDER / "Ripper"
 UTILITY_FOLDER: Final[Path] = ROOT_FOLDER / "Utility"
+
+VAMPIRE_SURVIVORS: Final[str] = "Vampire Survivors"
 
 SOURCE: Final[str] = "Source"
 GENERATED: Final[str] = "Generated"
@@ -30,12 +33,12 @@ GAME_OBJECT: Final[str] = "GameObject"
 PREFAB_INSTANCE: Final[str] = "PrefabInstance"
 AUDIO_CLIP: Final[str] = "AudioClip"
 MONO_BEHAVIOUR: Final[str] = "MonoBehaviour"
+MATERIAL: Final[str] = "Material"
 
 DATA_MANAGER_SETTINGS: Final[str] = "DataManagerSettings"
 BUNDLE_MANIFEST_DATA: Final[str] = "BundleManifestData"
 
-CARD_DATABASE: Final[str] = "CardDatabase"
-CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"
+I2_LANGUAGES: Final[str] = "I2Languages"
 
 
 class COMPOUND_DATA(Objectless):
@@ -63,3 +66,16 @@ def to_source_path(path: Path) -> Path:
 
 
 DEFAULT_ANIMATION_FRAME_RATE: Final[int] = 7
+
+## VC
+VAMPIRE_CRAWLERS: Final[str] = "Vampire Crawlers"
+
+SHARED_DATA: Final[str] = "Shared Data"
+
+CARD_DATABASE: Final[str] = "CardDatabase"
+CARD_GROUP_DATABASE: Final[str] = "CardGroupDatabase"
+
+SPRITE_CLASS_IDS: Final[set[int]] = {28, 213}
+AUDIO_CLASS_IDS: Final[set[int]] = {83, 1020}
+
+NOT_UNITY_DATA_CLASS_IDS: Final[set[int]] = {*SPRITE_CLASS_IDS, *AUDIO_CLASS_IDS}

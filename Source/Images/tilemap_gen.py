@@ -7,17 +7,18 @@ from PIL.Image import Image, new as image_new
 from Source.Config.config import Config
 from Source.Utility.constants import IMAGES_FOLDER, GENERATED, TILEMAPS, PROGRESS_BAR_FUNC_TYPE
 from Source.Utility.image_functions import affine_transform, crop_image_rect_left_bot
-from Source.Data.meta_data import MetaData, MetaDataHandler
+from Source.Data.meta_data import MetaData, MetaDataHandler, to_current_game_path
 from Source.Utility.multirun import run_multiprocess, run_concurrent_sync
 from Source.Utility.special_classes import Objectless
 from Source.Utility.sprite_data import SpriteData, SpriteRect
 from Source.Utility.timer import Timeit
-from Source.Utility.unityparser2 import UnityDoc, UnityYAMLEntry
+from Source.Utility.unity_parser import UnityDoc, UnityEntry
 from Source.Utility.utility import CheckBoxes, write_in_file_end, clear_file
+from Utility.constants import GAME_OBJECT
 
 
 class Tilemap:
-    def __init__(self, doc: UnityYAMLEntry):
+    def __init__(self, doc: UnityEntry):
         self.m_Size = doc.get("m_Size")
         self.m_TileMatrixArray = doc.get("m_TileMatrixArray")
         self.m_TileSpriteArray = doc.get("m_TileSpriteArray")
@@ -90,6 +91,7 @@ def __create_tilemap_image(tilemap: Tilemap, new_image: Image, data_by_guid: dic
 
 
 def __save_image(image: Image, path: Path) -> None:
+    # image.save(path, compression_level=3)
     image.save(path)
 
 
@@ -97,7 +99,7 @@ def gen_tilemap(path: Path, __is_full_auto=True,
                 func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
     p_file = path.name
     save_file = path.with_suffix("").name
-    save_folder = Path(IMAGES_FOLDER, GENERATED, TILEMAPS, save_file)
+    save_folder = Path(to_current_game_path(IMAGES_FOLDER), GENERATED, TILEMAPS, save_file)
 
     if path not in TilemapDataHandler.loaded_prefabs:
         _text = path.read_text(encoding="UTF-8")
@@ -261,10 +263,12 @@ if __name__ == "__main__":
 
     def __profile():
         from tkinter import filedialog as fd
-        from Config.config import DLCType
+        from Source.Config.config import DLCType, Game
+        MetaDataHandler.load(Game.VS)
+
         full_path = fd.askopenfilename(
             title='Select prefab file of tilemap',
-            initialdir=Config.get_assets_dir(DLCType.VS),
+            initialdir=Config.get_assets_dir(DLCType.VS) / GAME_OBJECT,
             filetypes=[('Prefab', '*.prefab')]
         )
         if not full_path:
@@ -275,6 +279,7 @@ if __name__ == "__main__":
         print("Started")
         with cProfile.Profile() as pr:
             gen_tilemap(full_path, False)
-            pr.print_stats('time')
+            # pr.print_stats('time')
+            pr.dump_stats('./tilemap.prof')
 
     # __profile()
