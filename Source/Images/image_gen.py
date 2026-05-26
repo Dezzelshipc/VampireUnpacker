@@ -11,7 +11,7 @@ import Source.Images.transparent_save as tr_save
 from Source.Translations.language import LangType
 from Source.Utility.constants import DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, to_source_path
 from Source.Utility.image_functions import get_anim_sprites_ready, resize_list_images
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.sprite_data import SpriteData
 from Source.Utility.utility import normalize_str
 from Source.Utility.image_functions import make_image_black
@@ -226,7 +226,7 @@ class ImageGenerator:
         im_crop_r = im_crop.resize((im_crop.size[0] * scale_factor, im_crop.size[1] * scale_factor),
                                    Resampling.NEAREST)
 
-        p_dir = IMAGES_FOLDER
+        p_dir = to_current_game_path(IMAGES_FOLDER)
 
         sf_text = f'{p_dir}/Generated/{save_folder}'
 
@@ -240,7 +240,7 @@ class ImageGenerator:
 
     def save_png_icon(self, im_frame_data, im_obj_data, name, save_folder, scale_factor=1,
                       add_data: dict = None) -> None:
-        p_dir = IMAGES_FOLDER
+        p_dir = to_current_game_path(IMAGES_FOLDER)
 
         sf_text = f'{p_dir}/Generated/{save_folder}/icon'
 
@@ -301,7 +301,7 @@ class ImageGenerator:
         sprites = get_anim_sprites_ready(sprite_data.animation)
         sprites = resize_list_images(sprites, scale_factor)
 
-        sf_text = IMAGES_FOLDER / f'Generated/{save_folder}/anim{save_append}'
+        sf_text = to_current_game_path(IMAGES_FOLDER) / f'Generated/{save_folder}/anim{save_append}'
 
         name = self.change_name(name)
 
@@ -861,7 +861,7 @@ class CharacterImageGenerator(TableGenerator):
 
         frame_im.alpha_composite(obj_im, (12, frame_im.height - obj_im.height - 11))
 
-        p_dir = IMAGES_FOLDER
+        p_dir = to_current_game_path(IMAGES_FOLDER)
         sf_text = f'{p_dir}/Generated/{save_folder}/icon'
 
         os.makedirs(sf_text, exist_ok=True)
@@ -1023,7 +1023,7 @@ class StageImageGenerator(TableGenerator):
         if im_obj is None:
             return
 
-        p_dir = IMAGES_FOLDER
+        p_dir = to_current_game_path(IMAGES_FOLDER)
 
         sf_text = f'{p_dir}/Generated/{save_folder}/icon'
 

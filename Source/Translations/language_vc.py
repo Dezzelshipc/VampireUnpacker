@@ -4,12 +4,12 @@ from enum import Enum
 from pathlib import Path
 
 from Source.Config.config import Game
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Translations.language_utils import Lang
-from Source.Utility.constants import TRANSLATIONS_FOLDER, VAMPIRE_CRAWLERS, GENERATED, SHARED_DATA
+from Source.Utility.constants import TRANSLATIONS_FOLDER, GENERATED, SHARED_DATA
+from Source.Utility.multirun import run_concurrent_sync
 from Source.Utility.special_classes import Objectless
 from Source.Utility.unity_parser import UnityDoc, UnityEntry, UnityLocalizedReference
-from Source.Utility.multirun import run_concurrent_sync
 
 
 class LangTypeVC(Enum):
@@ -116,7 +116,7 @@ class LangHandlerVC(Objectless):
         if lang_types is None:
             lang_types = {*LangTypeVC}
 
-        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_CRAWLERS / "Raw"
+        save_folder = to_current_game_path(TRANSLATIONS_FOLDER) / "Raw"
         save_folder.mkdir(parents=True, exist_ok=True)
 
         for lang_type in lang_types:
@@ -136,7 +136,7 @@ class LangHandlerVC(Objectless):
         if lang_types is None:
             lang_types = {*LangTypeVC}
 
-        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_CRAWLERS / GENERATED / "LangDictionary"
+        save_folder = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED / "LangDictionary"
         save_folder.mkdir(parents=True, exist_ok=True)
 
         for lang_type in lang_types:
@@ -163,5 +163,6 @@ if __name__ == "__main__":
 
     # l = LangHandlerVC.get_lang_by_guid('8d13770d5c9b0ac498f95395651811b5')
 
-    # LangHandlerVC.save_dict_langs()
+    LangHandlerVC.save_raw_langs()
+    LangHandlerVC.save_dict_langs()
     pass

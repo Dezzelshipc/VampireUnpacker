@@ -5,10 +5,10 @@ from enum import Enum
 from itertools import cycle
 
 from Source.Config.config import Game
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.unity_parser import UnityDoc, UnityReference, UnityLocalizedReference
 from Source.Utility.unity_unravel import unity_unravel_doc
-from Source.Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS
+from Source.Utility.constants import ROOT_FOLDER, VAMPIRE_CRAWLERS, DATA_FOLDER
 from Source.Utility.multirun import run_concurrent_sync
 from Source.Translations.language_vc import LangHandlerVC
 
@@ -80,9 +80,9 @@ class BaseDataDumper:
         elif isinstance(doc, UnityDoc):
             # return repr(doc)
             return doc.entry.data.get("m_Name")
-        elif doc.is_not_found():
+        elif isinstance(doc, UnityReference) and doc.is_not_found():
             return f"{UnityReference.__qualname__}(classID={doc.classID}, <Not found>)"
-        elif not doc.is_valid():
+        elif isinstance(doc, UnityReference) and not doc.is_valid():
             return None
         _text = f"{doc} not dereferenced"
         print(_text, file=sys.stderr)
@@ -111,7 +111,8 @@ class BaseDataDumper:
 
     @classmethod
     def save_data(cls, full_data: dict | list):
-        save_path = ROOT_FOLDER / "Data" / VAMPIRE_CRAWLERS
+        save_path = to_current_game_path(DATA_FOLDER)
+        save_path.mkdir(parents=True, exist_ok=True)
         with open(save_path / f"{cls._type.value}.json", "w", encoding="UTF-8") as f:
             print(json.dumps(full_data, indent=2, ensure_ascii=False), file=f)
 
@@ -177,7 +178,7 @@ class DeckDataDumper(BaseDataDumper):
 
             if name in full_data:
                 name += "_" + data['m_Name']
-            full_data[name] = [cls.get_m_Name(card_config) for card_config in data['cards']]
+            full_data[name] = [cls.get_m_Name(card_config['cardConfig']) for card_config in data['cards']]
 
         cls.save_data(full_data)
 
@@ -638,4 +639,7 @@ class GemFrequencyGroupDataDumper(BaseDataDumper):
 
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    AchievementDataDumper.dump_data()
+    DeckDataDumper.dump_data()
+    # for sub in BaseDataDumper.__subclasses__():
+    #     print(sub)
+    #     sub.dump_data()

@@ -7,7 +7,7 @@ from PIL.Image import Image, new as image_new
 from Source.Config.config import Config
 from Source.Utility.constants import IMAGES_FOLDER, GENERATED, TILEMAPS, PROGRESS_BAR_FUNC_TYPE
 from Source.Utility.image_functions import affine_transform, crop_image_rect_left_bot
-from Source.Data.meta_data import MetaData, MetaDataHandler
+from Source.Data.meta_data import MetaData, MetaDataHandler, to_current_game_path
 from Source.Utility.multirun import run_multiprocess, run_concurrent_sync
 from Source.Utility.special_classes import Objectless
 from Source.Utility.sprite_data import SpriteData, SpriteRect
@@ -99,7 +99,7 @@ def gen_tilemap(path: Path, __is_full_auto=True,
                 func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
     p_file = path.name
     save_file = path.with_suffix("").name
-    save_folder = Path(IMAGES_FOLDER, GENERATED, TILEMAPS, save_file)
+    save_folder = Path(to_current_game_path(IMAGES_FOLDER), GENERATED, TILEMAPS, save_file)
 
     if path not in TilemapDataHandler.loaded_prefabs:
         _text = path.read_text(encoding="UTF-8")

@@ -1,4 +1,5 @@
 import re
+from tkinter.messagebox import showerror
 from collections.abc import Callable
 from pathlib import Path
 from tkinter import Image
@@ -7,7 +8,7 @@ from PIL.Image import Image, open as image_open
 
 from Source.Config.config import DLCType, Config, Game
 from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJECT, PREFAB_INSTANCE, AUDIO_CLIP, \
-    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL
+    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL, ROOT_FOLDER
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
 from Source.Utility.multirun import run_multiprocess_single, run_concurrent_sync
 from Source.Utility.special_classes import Objectless
@@ -448,12 +449,30 @@ class MetaDataHandler(Objectless):
         return list(meta_data.values())[0] if meta_data else None
 
 
+def to_current_game_path(path: Path) -> Path:
+    game_path = Config[MetaDataHandler.loaded_game.get_data_folder_key()]
+
+    if game_path is None or game_path == "" or game_path == Path():
+        err = f"Config does not contain path for dumping data [{MetaDataHandler.loaded_game}: {MetaDataHandler.loaded_game.get_data_folder_key()}]"
+        showerror("Dumping path error", err)
+        assert False, err
+
+    suffix = path.parts[len(ROOT_FOLDER.parts):]
+    return game_path / Path(*suffix)
+
+
 if __name__ == "__main__":
     # a = MetaDataHandler.get_meta_by_name_fullest("character_chulareh")
-    a = MetaDataHandler.get_meta_by_name_fullest("ThosePeople")
+    # a = MetaDataHandler.get_meta_by_name_fullest("ThosePeople")
     # a = MetaDataHandler.get_meta_by_name("enemies")
     # a = MetaDataHandler.get_meta_by_guid('f2e351beec1ed57408f2e8aab0db8951')
 
-    a.init_sprites()
+    # a.init_sprites()
+
+    MetaDataHandler.load(Game.VS)
+    from Source.Utility.constants import TRANSLATIONS_FOLDER, VAMPIRE_CRAWLERS
+
+    a = to_current_game_path(TRANSLATIONS_FOLDER / VAMPIRE_CRAWLERS / "Raw")
+    print(a)
 
     pass

@@ -10,24 +10,24 @@ from tkinter import ttk
 from tkinter.messagebox import showerror, showwarning, showinfo, askyesno
 from tkinter.simpledialog import askinteger
 
-from PIL.Image import open as image_open
 import PIL
+from PIL.Image import open as image_open
 
 import Source.Data.data as data_module
 import Source.Images.transparent_save as tr_save
 import Source.Translations.language as lang_module
 from Source.Config.config import CfgKey, DLCType, Config, Game
 from Source.Data.data import DataHandler
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import image_gen, image_gen_vc
 from Source.Images.image_gen_new import ImageGeneratorManager
 from Source.Translations.language import LangHandler, LangType
 from Source.Translations.language_utils import Lang
-from Source.Utility.constants import I2_LANGUAGES, VAMPIRE_SURVIVORS, ROOT_FOLDER, IS_DEBUG, \
+from Source.Utility.constants import I2_LANGUAGES, ROOT_FOLDER, IS_DEBUG, \
     DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, GENERATED, TILEMAPS, DATA_FOLDER, TRANSLATIONS_FOLDER, SPLIT, \
     COMPOUND_DATA, COMPOUND_DATA_TYPE, PREFAB_INSTANCE, GAME_OBJECT
-from Source.Utility.defer_constants import DeferConstants
 from Source.Utility.constants import to_source_path
+from Source.Utility.defer_constants import DeferConstants
 from Source.Utility.image_functions import resize_image, get_anim_sprites_ready, apply_tint, resize_list_images
 from Source.Utility.logger import Logger
 from Source.Utility.timer import Timeit
@@ -409,7 +409,7 @@ class Unpacker(tk.Tk):
 
         total_len = len(data.data_name)
 
-        folder_to_save = ROOT_FOLDER.joinpath("Images", "Generated", "_By meta Image")
+        folder_to_save = to_current_game_path(IMAGES_FOLDER) / GENERATED / "_By meta Image"
         if total_len > 1:
             folder_to_save = folder_to_save.joinpath(full_path.stem)
         else:
@@ -473,7 +473,7 @@ class Unpacker(tk.Tk):
         selected_types = list(itertools.compress(anim_types, selected_anim_types))
         print(f"Selected {scale_factor=}, {frame_rate=}, selected extensions={selected_types}")
 
-        folder_to_save = ROOT_FOLDER.joinpath("Images", "Generated", "_By meta Anim")
+        folder_to_save = to_current_game_path(IMAGES_FOLDER) / GENERATED / "_By meta Anim"
         if total_len > 1:
             folder_to_save = folder_to_save.joinpath(full_path.stem)
         else:
@@ -506,7 +506,7 @@ class Unpacker(tk.Tk):
         self.progress_bar_set_percent(0, 1)
         print("Copying I2Languages.assets")
 
-        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS
+        save_folder = to_current_game_path(TRANSLATIONS_FOLDER)
         save_folder.mkdir(exist_ok=True, parents=True)
 
         i2l = LangHandler.get_i2language().raw_text()
@@ -516,14 +516,14 @@ class Unpacker(tk.Tk):
 
         print(f"Copying I2Languages finished {timeit!r}")
         self.progress_bar_set_percent(1, 1)
-        self.last_loaded_folder = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS
+        self.last_loaded_folder = save_folder
 
     def languages_get_json(self):
         timeit = Timeit()
         self.progress_bar_set_percent(0, 1)
         print("Converting I2Languages to json")
 
-        save_folder = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS / GENERATED
+        save_folder = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED
         save_folder.mkdir(exist_ok=True, parents=True)
 
         i2l = LangHandler.get_i2language().json_text()
@@ -572,7 +572,7 @@ class Unpacker(tk.Tk):
         lang_types = LangType.get_all_types()
         i = 0
 
-        save_path = TRANSLATIONS_FOLDER / VAMPIRE_SURVIVORS / GENERATED / SPLIT / split_folder_names[split_index]
+        save_path = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED / SPLIT / split_folder_names[split_index]
         save_path.mkdir(parents=True, exist_ok=True)
         for lang_type in lang_types:
             lang_file = split_funcs[split_index](lang_type)
@@ -597,7 +597,7 @@ class Unpacker(tk.Tk):
 
         dlc_types = DLCType.get_all_types_by_game(Game.VS)
         for dlc_type in dlc_types:
-            save_path = DATA_FOLDER / dlc_type.value.full_name
+            save_path = to_current_game_path(DATA_FOLDER) / dlc_type.value.full_name
             save_path.mkdir(parents=True, exist_ok=True)
 
             data_files = DataHandler.get_dict_by_dlc_type(dlc_type)
@@ -618,7 +618,7 @@ class Unpacker(tk.Tk):
         for data_type in data_types:
             self.progress_bar_set_percent(i := i + 1, len(data_types), data_type.name)
 
-            save_path = DATA_FOLDER / GENERATED
+            save_path = to_current_game_path(DATA_FOLDER) / GENERATED
             save_path.mkdir(parents=True, exist_ok=True)
 
             data_file = DataHandler.get_data(COMPOUND_DATA, data_type)
@@ -900,7 +900,7 @@ class Unpacker(tk.Tk):
         # MetaDataHandler.load(Game.VS)
 
     def create_inverse_tilemap(self):
-        selecting_path = IMAGES_FOLDER / GENERATED / TILEMAPS
+        selecting_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / TILEMAPS
         while not selecting_path.exists():
             selecting_path = selecting_path.parent
 

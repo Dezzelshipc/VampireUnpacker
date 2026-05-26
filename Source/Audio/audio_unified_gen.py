@@ -11,7 +11,7 @@ import Source.Data.data as data_module
 import Source.Translations.language as lang_module
 from Source.Config.config import DLCType, Config
 from Source.Data.data import DataType
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Translations.language import LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import GENERATED, COMPOUND_DATA, AUDIO_FOLDER, COMPOUND_DATA_TYPE, PROGRESS_BAR_FUNC_TYPE
@@ -155,7 +155,7 @@ def gen_music_tracks(music_dlc: DLCType | COMPOUND_DATA_TYPE, save_name_types: s
         str | None, None | str):
     save_name_types.add(AudioSaveType.CODE_NAME)
 
-    f_path = AUDIO_FOLDER
+    f_path = to_current_game_path(AUDIO_FOLDER)
 
     save_path = f_path / GENERATED
 

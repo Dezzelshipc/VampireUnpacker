@@ -19,7 +19,7 @@ from Source.Utility.constants import to_source_path, IMAGES_FOLDER, COMPOUND_DAT
     PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA
 from Source.Utility.image_functions import make_image_black
 from Source.Utility.image_functions import resize_image, get_adjusted_sprites_to_rect, get_rects_by_sprite_list
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.sprite_data import SpriteData
 from Source.Utility.utility import normalize_str
 
@@ -241,7 +241,7 @@ class BaseImageGenerator:
                        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
 
-        save_path = IMAGES_FOLDER / GENERATED / data_type.value / DLCType.string(dlc_type)
+        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / DLCType.string(dlc_type)
         save_path.mkdir(parents=True, exist_ok=True)
 
         total_len = len(self.entries)

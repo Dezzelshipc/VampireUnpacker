@@ -1,9 +1,11 @@
 from os import PathLike
 
-from Source.Data.meta_data import MetaDataHandler
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.constants import CARD_GROUP_DATABASE, IMAGES_FOLDER, GENERATED
 from Source.Utility.unity_parser import UnityDoc
 
+
+# REQUIRES FULL REWORK USING VC DATA
 
 def get_card_group_database():
     card_path = MetaDataHandler.get_path_by_name_no_meta(CARD_GROUP_DATABASE)
@@ -25,7 +27,7 @@ def get_card_group_database():
 def generate_card_group_database() -> PathLike[str]:
     assets = get_card_group_database()
 
-    save_folder = IMAGES_FOLDER / GENERATED / CARD_GROUP_DATABASE
+    save_folder = to_current_game_path(IMAGES_FOLDER) / GENERATED / CARD_GROUP_DATABASE
     save_folder.mkdir(parents=True, exist_ok=True)
 
     asset_groups = {}

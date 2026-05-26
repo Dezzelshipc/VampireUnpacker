@@ -11,11 +11,12 @@ IS_DEBUG: Final[bool] = (sys.monitoring.get_tool(sys.monitoring.DEBUGGER_ID)) is
 ROOT_FOLDER: Final[Path] = _find_main_py_file().parent.absolute()
 
 AUDIO_FOLDER: Final[Path] = ROOT_FOLDER / "Audio"
-CONFIG_FOLDER: Final[Path] = ROOT_FOLDER / "Config"
 DATA_FOLDER: Final[Path] = ROOT_FOLDER / "Data"
 IMAGES_FOLDER: Final[Path] = ROOT_FOLDER / "Images"
-RIPPER_FOLDER: Final[Path] = ROOT_FOLDER / "Ripper"
 TRANSLATIONS_FOLDER: Final[Path] = ROOT_FOLDER / "Translations"
+
+CONFIG_FOLDER: Final[Path] = ROOT_FOLDER / "Config"
+RIPPER_FOLDER: Final[Path] = ROOT_FOLDER / "Ripper"
 UTILITY_FOLDER: Final[Path] = ROOT_FOLDER / "Utility"
 
 VAMPIRE_SURVIVORS: Final[str] = "Vampire Survivors"

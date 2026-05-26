@@ -7,7 +7,7 @@ from pathlib import Path
 from tkinter import ttk
 from tkinter.filedialog import askdirectory
 from tkinter.messagebox import showerror, showinfo
-from typing import Self, Final, OrderedDict, Callable
+from typing import Self, Final, Callable
 
 from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_TYPE, COMPOUND_DATA
 from Source.Utility.special_classes import Objectless
@@ -30,9 +30,11 @@ class CfgKey(Enum):
     ED = "ED_ASSETS"
     AC = "AC_ASSETS"
     # IS = "IS_ASSETS"
+    DATA_VS = "DATA_VS"
 
     STEAM_VC = "STEAM_VC"
     VC = "VC_ASSETS"
+    DATA_VC = "DATA_VC"
 
     def __str__(self):
         return self.value
@@ -77,6 +79,15 @@ class Game(Enum):
                 return CfgKey.STEAM_VC
             case _:
                 assert False, "Game enum has no default folder"
+
+    def get_data_folder_key(self) -> "CfgKey":
+        match self:
+            case Game.VS:
+                return CfgKey.DATA_VS
+            case Game.VC:
+                return CfgKey.DATA_VC
+            case _:
+                assert False, "Game enum has no data folder"
 
 
 @dataclass(order=True, unsafe_hash=True)
@@ -147,7 +158,7 @@ class DLCType(Enum):
 
 
 class Config(Objectless):
-    __data: OrderedDict[CfgKey, Path | bool] = OrderedDict()
+    __data: dict[CfgKey, Path | bool] = dict()
 
     _CONFIG_FILE: Final[Path] = CONFIG_FOLDER / "Config.json"
 
@@ -171,10 +182,11 @@ class Config(Objectless):
 
     @staticmethod
     def _get_default_config():
-        data: OrderedDict[CfgKey, Path | bool] = OrderedDict(
-            {dlc.value.config_key: Path() for dlc in DLCType.get_all_types()})
+        data: dict[CfgKey, Path | bool] = {dlc.value.config_key: Path() for dlc in DLCType.get_all_types()}
         data[CfgKey.STEAM_VS] = Path()
         data[CfgKey.STEAM_VC] = Path()
+        data[CfgKey.DATA_VS] = Path()
+        data[CfgKey.DATA_VC] = Path()
         data[CfgKey.RIPPER] = Path()
         data[CfgKey.MULTIPROCESSING] = False
         return data
@@ -186,7 +198,7 @@ class Config(Objectless):
                 json_file = json.loads(f.read())
             except json.decoder.JSONDecodeError as e:
                 print(e)
-                json_file = OrderedDict()
+                json_file = dict()
 
             cls.__data.update({
                 CfgKey(key): (val if CfgKey(key) in CfgKey.get_non_path_keys() else Path(val))
@@ -195,11 +207,11 @@ class Config(Objectless):
             })
 
     @classmethod
-    def _update_data(cls, data: OrderedDict[CfgKey, Path | bool]):
+    def _update_data(cls, data: dict[CfgKey, Path | bool]):
         cls.__data.update(data)
 
     @classmethod
-    def get_data(cls) -> OrderedDict[CfgKey, Path | bool]:
+    def get_data(cls) -> dict[CfgKey, Path | bool]:
         Config.load()
         return cls.__data
 
@@ -215,7 +227,7 @@ class Config(Objectless):
         return cls[dlc.value.config_key] / EXPORTED_PROJECT / ASSETS
 
     @staticmethod
-    def _fix_assets_path(data: OrderedDict[CfgKey, Path | bool]) -> (OrderedDict[CfgKey, Path | bool], bool):
+    def _fix_assets_path(data: dict[CfgKey, Path | bool]) -> tuple[dict[CfgKey, Path | bool], bool]:
         is_changed = False
 
         for key in CfgKey.get_assets_keys():
@@ -278,6 +290,10 @@ class Config(Objectless):
                             info_text = f"VC steam folder. Folder must contain 'Vampire Crawlers.exe'"
                         case CfgKey.MULTIPROCESSING:
                             continue
+                        case CfgKey.DATA_VS:
+                            info_text = f"Folder for dumping Survivors data"
+                        case CfgKey.DATA_VC:
+                            info_text = f"Folder for dumping Crawlers data"
 
                 tk.Label(self, text=info_text).pack()
 
@@ -303,9 +319,9 @@ class Config(Objectless):
 
         def try_save(self):
             # print({k: v.get() for k, v in self.variables.items()})
-            data, is_changed = Config._fix_assets_path(OrderedDict(
+            data, is_changed = Config._fix_assets_path(
                 {k: Path(v.get()) if isinstance(v, tk.StringVar) else v.get() for k, v in self.variables.items()}
-            ))
+            )
 
             for key in CfgKey.get_assets_keys():
                 self.variables[key].set(str(Path(data.get(key))))
@@ -335,9 +351,8 @@ class Config(Objectless):
             self.__save()
 
         def __save(self):
-            data = OrderedDict(
-                {k: Path(v.get()) if isinstance(v, tk.StringVar) else v.get() for k, v in self.variables.items()}
-            )
+            data = {k: Path(v.get()) if isinstance(v, tk.StringVar) else v.get() for k, v in self.variables.items()}
+
             Config._update_data(data)
             Config._save_config_file()
             self.destroy()
