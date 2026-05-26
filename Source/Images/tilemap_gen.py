@@ -14,7 +14,6 @@ from Source.Utility.sprite_data import SpriteData, SpriteRect
 from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc, UnityEntry
 from Source.Utility.utility import CheckBoxes, write_in_file_end, clear_file
-from Utility.constants import GAME_OBJECT
 
 
 class Tilemap:
@@ -264,6 +263,7 @@ if __name__ == "__main__":
     def __profile():
         from tkinter import filedialog as fd
         from Source.Config.config import DLCType, Game
+        from Source.Utility.constants import GAME_OBJECT
         MetaDataHandler.load(Game.VS)
 
         full_path = fd.askopenfilename(
