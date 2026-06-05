@@ -37,6 +37,7 @@ MATERIAL: Final[str] = "Material"
 
 DATA_MANAGER_SETTINGS: Final[str] = "DataManagerSettings"
 BUNDLE_MANIFEST_DATA: Final[str] = "BundleManifestData"
+VERSION_DATA: Final[str] = "VersionData"
 
 I2_LANGUAGES: Final[str] = "I2Languages"
 

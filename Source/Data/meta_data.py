@@ -1,5 +1,6 @@
 import re
 from tkinter.messagebox import showerror
+from dataclasses import dataclass
 from collections.abc import Callable
 from pathlib import Path
 from tkinter import Image
@@ -8,7 +9,7 @@ from PIL.Image import Image, open as image_open
 
 from Source.Config.config import DLCType, Config, Game
 from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJECT, PREFAB_INSTANCE, AUDIO_CLIP, \
-    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL, ROOT_FOLDER
+    MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL, ROOT_FOLDER, VERSION_DATA
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
 from Source.Utility.multirun import run_multiprocess_single, run_concurrent_sync
 from Source.Utility.special_classes import Objectless
@@ -18,9 +19,9 @@ from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.utility import normalize_str
 
 
-def _get_meta_guid(path: Path) -> tuple[str, Path] | None:
+def _get_meta_guid(path: Path) -> tuple[str | None, Path]:
     if not path or not path.exists():
-        return None
+        return None, path
 
     with open(path, 'r', encoding="UTF-8") as f:
         for i, line in enumerate(f.readlines()):
@@ -31,8 +32,8 @@ def _get_meta_guid(path: Path) -> tuple[str, Path] | None:
                     return val.strip(), path
 
             if i > 3:
-                return None
-        return None
+                return None, path
+        return None, path
 
 
 class MetaData:
@@ -237,6 +238,7 @@ class MetaDataHandler(Objectless):
 
         timeit = Timeit()
 
+        ### load assets paths
         path_roots = [
             (RESOURCES, ""),
             (TEXTURE_2D, ""),
@@ -251,6 +253,15 @@ class MetaDataHandler(Objectless):
                 path_roots.extend([
                     (MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS),
                     (MONO_BEHAVIOUR, BUNDLE_MANIFEST_DATA),
+                    (MONO_BEHAVIOUR, VERSION_DATA),
+
+                    (MONO_BEHAVIOUR, "Moonspell"),
+                    (MONO_BEHAVIOUR, "Foscari"),
+                    (MONO_BEHAVIOUR, "Chalcedony"),
+                    (MONO_BEHAVIOUR, "FirstBlood"),
+                    (MONO_BEHAVIOUR, "ThosePeople"),
+                    (MONO_BEHAVIOUR, "Emeralds"),
+                    (MONO_BEHAVIOUR, "Lemon"),
                 ])
             case Game.VC:
                 path_roots.extend([
@@ -263,6 +274,11 @@ class MetaDataHandler(Objectless):
                 path = Config.get_assets_dir(dlc) and Config.get_assets_dir(dlc).joinpath(root)
                 if path and path.exists():
                     cls._found_files.extend(path.rglob(f"{file_name}*.meta"))
+
+        ### load additional paths
+        path = Config.get_project_settings_dir(cls.loaded_game.get_default_dlc())
+        if path and path.exists():
+            cls._found_files.extend(path.rglob("*"))
 
         ### deduplication
         files_by_stem = {}
@@ -282,6 +298,7 @@ class MetaDataHandler(Objectless):
         ###
 
         cls._assets_name_path.update({normalize_str(f): f for f in biggest_files})
+        cls._assets_name_path.update({f.name.lower(): f for f in cls._found_files})
         print(
             f"Loaded {len(cls._found_files)} meta paths [{cls.loaded_game.name if cls.loaded_game else ""}] ({timeit:.2f} sec)")
 
@@ -327,10 +344,29 @@ class MetaDataHandler(Objectless):
         return cls._assets_name_path.get(normalize_str(name))
 
     @classmethod
+    def get_path_by_name_lower(cls, name: str) -> Path | None:
+        cls.assert_loaded_game()
+        return cls._assets_name_path.get(name.lower())
+
+    @classmethod
     def get_path_by_name_no_meta(cls, name: str) -> Path | None:
         cls.assert_loaded_game()
         path = cls.get_path_by_name(name)
-        return path.with_suffix("") if path else None
+        if not path:
+            return None
+        if path.suffix == ".meta":
+            return path.with_suffix("")
+        return path
+
+    @classmethod
+    def get_path_by_name_no_meta_suffixes(cls, name: str, *suffixes: str) -> Path | None:
+        cls.assert_loaded_game()
+        path = cls.get_path_by_name_lower(".".join((name, *suffixes, 'meta')))
+        if not path:
+            return None
+        if path.suffix == ".meta":
+            return path.with_suffix("")
+        return path
 
     @classmethod
     def get_path_by_guid(cls, guid: str) -> Path | None:

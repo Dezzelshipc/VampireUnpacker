@@ -13,6 +13,7 @@ from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_T
 from Source.Utility.special_classes import Objectless
 
 ASSETS = "Assets"
+PROJECT_SETTINGS = "ProjectSettings"
 EXPORTED_PROJECT = "ExportedProject"
 
 
@@ -219,12 +220,21 @@ class Config(Objectless):
         return cls.get_data().get(item)
 
     @classmethod
+    def assert_key(cls, item: CfgKey):
+        i = cls[item]
+        assert i is not None and i != Path()
+
+    @classmethod
     def get_multiprocessing(cls) -> bool:
         return cls[CfgKey.MULTIPROCESSING]
 
     @classmethod
     def get_assets_dir(cls, dlc: DLCType = DLCType.VS) -> Path:
         return cls[dlc.value.config_key] / EXPORTED_PROJECT / ASSETS
+
+    @classmethod
+    def get_project_settings_dir(cls, dlc: DLCType = DLCType.VS) -> Path:
+        return cls[dlc.value.config_key] / EXPORTED_PROJECT / PROJECT_SETTINGS
 
     @staticmethod
     def _fix_assets_path(data: dict[CfgKey, Path | bool]) -> tuple[dict[CfgKey, Path | bool], bool]:

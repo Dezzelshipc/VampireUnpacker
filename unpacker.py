@@ -14,6 +14,7 @@ import PIL
 from PIL.Image import open as image_open
 
 import Source.Data.data as data_module
+import Source.Data.game_version as game_version
 import Source.Images.transparent_save as tr_save
 import Source.Translations.language as lang_module
 from Source.Config.config import CfgKey, DLCType, Config, Game
@@ -296,8 +297,8 @@ class Unpacker(tk.Tk):
 
         ttk.Button(
             self,
-            text="Generate VC Card Database",
-            command=self.vc_generate_card_database
+            text="Create Game Version file",
+            command=game_version.load_version_file,
         ).grid(row=11, column=0)
 
         self.data_from_popup = None
