@@ -8,6 +8,9 @@ from Source.Utility.utility import _find_main_py_file
 IS_DEBUG: Final[bool] = (sys.monitoring.get_tool(sys.monitoring.DEBUGGER_ID)) is not None or (
         sys.gettrace() is not None)
 
+STEAM_APPID_VS = 1794680
+STEAM_APPID_VC = 3265700
+
 ROOT_FOLDER: Final[Path] = _find_main_py_file().parent.absolute()
 
 AUDIO_FOLDER: Final[Path] = ROOT_FOLDER / "Audio"

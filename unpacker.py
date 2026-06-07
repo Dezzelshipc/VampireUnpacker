@@ -28,7 +28,6 @@ from Source.Utility.constants import I2_LANGUAGES, ROOT_FOLDER, IS_DEBUG, \
     DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, GENERATED, TILEMAPS, DATA_FOLDER, TRANSLATIONS_FOLDER, SPLIT, \
     COMPOUND_DATA, COMPOUND_DATA_TYPE, PREFAB_INSTANCE, GAME_OBJECT
 from Source.Utility.constants import to_source_path
-from Source.Utility.defer_constants import DeferConstants
 from Source.Utility.image_functions import resize_image, get_anim_sprites_ready, apply_tint, resize_list_images
 from Source.Utility.logger import Logger
 from Source.Utility.timer import Timeit
@@ -833,7 +832,8 @@ class Unpacker(tk.Tk):
         self.last_loaded_folder = save_folder
 
     def audio_gen_handler(self):
-        if not DeferConstants.is_pydub():
+        from req_test import check_pydub
+        if not check_pydub():
             print("FFmpeg not found")
             showerror("Error", "FFmpeg not found")
             return
@@ -956,4 +956,3 @@ if __name__ == '__main__':
 
     app = Unpacker()
     app.mainloop()
-    DeferConstants.is_pydub()

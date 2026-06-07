@@ -58,10 +58,6 @@ def check_pydub():
     return any([which(f) for f in files])
 
 
-async def check_pydub_defer():
-    return await asyncio.to_thread(check_pydub)
-
-
 RIPPER_VERSION_MINIMAL = (1, 3, 8)
 
 

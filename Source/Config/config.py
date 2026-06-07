@@ -9,7 +9,8 @@ from tkinter.filedialog import askdirectory
 from tkinter.messagebox import showerror, showinfo
 from typing import Self, Final, Callable
 
-from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_TYPE, COMPOUND_DATA
+from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_TYPE, COMPOUND_DATA, STEAM_APPID_VS, \
+    STEAM_APPID_VC
 from Source.Utility.special_classes import Objectless
 
 ASSETS = "Assets"
@@ -30,6 +31,7 @@ class CfgKey(Enum):
     OC = "OC_ASSETS"
     ED = "ED_ASSETS"
     AC = "AC_ASSETS"
+    # BM = "BM_ASSETS"
     # IS = "IS_ASSETS"
     DATA_VS = "DATA_VS"
 
@@ -83,10 +85,19 @@ class Game(Enum):
 
     def get_data_folder_key(self) -> "CfgKey":
         match self:
-            case Game.VS:
+            case Game.VS | Game.SPECIAL:
                 return CfgKey.DATA_VS
             case Game.VC:
                 return CfgKey.DATA_VC
+            case _:
+                assert False, "Game enum has no data folder"
+
+    def get_steam_appid(self) -> int:
+        match self:
+            case Game.VS:
+                return STEAM_APPID_VS
+            case Game.VC:
+                return STEAM_APPID_VC
             case _:
                 assert False, "Game enum has no data folder"
 
@@ -110,6 +121,7 @@ class DLCType(Enum):
     OC = DLC(5, CfgKey.OC, Game.VS, "THOSE_PEOPLE", "3210350", "Ode to Castlevania")
     ED = DLC(6, CfgKey.ED, Game.VS, "EMERALDS", "3451100", "Emerald Diorama")
     AC = DLC(7, CfgKey.AC, Game.VS, "LEMON", "3929770", "Ante Chamber")
+    # BM = DLC(8, CfgKey.BM, Game.VS, "BLOODMOON(?)", "4781330", "Legacy of the Bloodmoon")
     # IS = DLC(-1, CfgKey.IS, Game.VS, "-", "-", "IS")
 
     VC = DLC(100, CfgKey.VC, Game.VC, "CRAWLERS", "Vampire Crawlers_Data", "Vampire Crawlers")

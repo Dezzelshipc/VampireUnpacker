@@ -113,6 +113,19 @@ def clean_commas_json(string: str) -> str:
     return string
 
 
+def acf_to_json(string: str) -> str:
+    string = string.replace('"AppState"\n', "")
+    # add : after key for object
+    string = re.sub(r"\"([ \t\r\n]+){", r'":\1{', string)
+    # add : after key for value
+    string = re.sub(r"\"\t\t\"", "\":\t\t\"", string)
+    # add , after value
+    string = re.sub(r"\"(\n[ \t\r\n]+)\"", r'",\1"', string)
+    # add , after object
+    string = re.sub(r"}(\n[ \t\r\n]+)\"", r'},\1"', string)
+    return string
+
+
 def clean_all_json(string: str) -> str:
     string = clean_comments_json(string)
     return clean_commas_json(string)
@@ -133,3 +146,13 @@ def _find_main_py_file(file_name: str = "unpacker.py") -> Path | None:
 
     print(f"!!! Not found {file_name}")
     return None
+
+
+def get_parent_path_to(path: Path, folder: str) -> Path | None:
+    path = path.absolute()
+    try:
+        idx = path.parts.index(folder)
+    except ValueError:
+        return None
+
+    return path.parents[len(path.parents) - idx - 1]

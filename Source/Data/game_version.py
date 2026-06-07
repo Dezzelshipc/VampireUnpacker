@@ -1,10 +1,11 @@
-import shutil
+import json
 import sys
 
 from Source.Config.config import PROJECT_SETTINGS, Game, DLCType, Config
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.constants import VERSION_DATA, VAMPIRE_SURVIVORS
 from Source.Utility.unity_parser import UnityDoc
+from Source.Utility.utility import get_parent_path_to, acf_to_json
 
 
 def get_game_bundle_version() -> str | None:
@@ -35,6 +36,7 @@ def get_game_build_version() -> tuple[str | None, str | None]:
     data = doc.entry.data
     return data['_BuildId'], data['_BuildTime']
 
+
 def get_dlc_version() -> list[tuple[DLCType, str, str]]:
     MetaDataHandler.assert_loaded_game()
 
@@ -51,7 +53,7 @@ def get_dlc_version() -> list[tuple[DLCType, str, str]]:
                 (DLCType.AC, "Lemon"),
             ]
         case Game.VC:
-            pass ## Not implemented; not any DLC yet
+            pass  ## Not implemented; not any DLC yet
 
     result = []
     for dlc, asset in assets:
@@ -68,6 +70,29 @@ def get_dlc_version() -> list[tuple[DLCType, str, str]]:
     return result
 
 
+def get_appmanifest() -> dict[str, str]:
+    STEAMAPPS = "steamapps"
+
+    MetaDataHandler.assert_loaded_game()
+
+    game = MetaDataHandler.loaded_game
+
+    path = Config[game.get_main_folder_key()]
+    path = get_parent_path_to(path, STEAMAPPS)
+
+    if path is None or path.stem != STEAMAPPS:
+        print(f"Not found steamapps path for {game}", file=sys.stderr)
+        return {}
+
+    path /= f"appmanifest_{game.get_steam_appid()}.acf"
+
+    with open(path) as f:
+        text = acf_to_json(f.read())
+        text = json.loads(text)
+
+    return text
+
+
 def load_version_file():
     MetaDataHandler.assert_loaded_game()
 
@@ -75,6 +100,7 @@ def load_version_file():
     Config.assert_key(data_folder_key)
     data_folder = Config[data_folder_key]
 
+    text = "SHOULD NOT BE PRINTED"
     match MetaDataHandler.loaded_game:
         case Game.VS:
             game_version = get_game_bundle_version()
@@ -85,16 +111,30 @@ def load_version_file():
             for dlc, name, version in dlc_list:
                 text += f"{name} - {version}\n"
             text = f"{VAMPIRE_SURVIVORS} - {game_version}\n" + text
-            text += f"{build_time} [{build_num}R]"
+            text += f"{build_time} [{build_num}R]\n"
 
-            with open(data_folder / 'Game Version.txt', 'w') as f:
-                print(text, file=f)
         case Game.VC:
             build_info = MetaDataHandler.get_path_by_name_no_meta_suffixes("BuildInfo", 'txt')
             if not build_info:
                 return None
 
-            shutil.copy(build_info, data_folder / 'Game Version.txt')
+            text = build_info.read_text() + "\n"
+
+    manifest = get_appmanifest()
+
+    if manifest:
+        assert manifest['buildid'] == manifest['TargetBuildID'], "Build ID and Target build ID do not match"
+
+        text += "\n"
+        text += f"\nappid - {int(manifest['appid'])}"
+        text += f"\nbuildid - {int(manifest['buildid'])}"
+
+        text += "\n\n\nInstalledDepots:"
+        for depot, depot_data in manifest['InstalledDepots'].items():
+            text += f"\n{int(depot)} - manifest: {depot_data['manifest']}"
+
+    with open(data_folder / 'Game Version.txt', 'w') as f:
+        print(text, file=f)
 
     return None
 
