@@ -60,6 +60,17 @@ class DataTypeVC(Enum):
                 return BaseDataDumper
 
 
+def dump_all_data():
+    assert MetaDataHandler.loaded_game == Game.VC, f"Loaded wrong metadata ({MetaDataHandler.loaded_game}). Need {Game.VC}"
+    for sub in BaseDataDumper.__subclasses__():
+        try:
+            print(sub, sub._type.value)
+            sub.dump_data()
+        except Exception as e:
+            print(e, file=sys.stderr)
+            continue
+
+
 class BaseDataDumper:
     _type: DataTypeVC = DataTypeVC.NONE
 
@@ -219,7 +230,7 @@ class CardDataDumper(BaseDataDumper):
 
         full_data: dict[str, dict] = {}
 
-        for card_config in itertools.chain(udoc.entry.data['_assetList'], [udoc.entry.data['_cursedLancet']]):
+        for card_config in udoc.entry.data['_assetList']:
             name, data_taken = cls.format_data(card_config)
             full_data[name] = data_taken
 
@@ -639,7 +650,5 @@ class GemFrequencyGroupDataDumper(BaseDataDumper):
 
 if __name__ == "__main__":
     MetaDataHandler.load(Game.VC)
-    DeckDataDumper.dump_data()
-    # for sub in BaseDataDumper.__subclasses__():
-    #     print(sub)
-    #     sub.dump_data()
+    # CardDataDumper.dump_data()
+    dump_all_data()

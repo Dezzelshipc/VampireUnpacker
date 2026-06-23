@@ -18,10 +18,12 @@ import Source.Data.game_version as game_version
 import Source.Images.transparent_save as tr_save
 import Source.Translations.language as lang_module
 from Source.Config.config import CfgKey, DLCType, Config, Game
+from Source.Data import data_vc
 from Source.Data.data import DataHandler
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import image_gen, image_gen_vc
 from Source.Images.image_gen_new import ImageGeneratorManager
+from Source.Translations import language_vc
 from Source.Translations.language import LangHandler, LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import I2_LANGUAGES, ROOT_FOLDER, IS_DEBUG, \
@@ -228,7 +230,20 @@ class Unpacker(tk.Tk):
         )
         b_language_split.grid(row=6, column=1)
 
+        ttk.Button(
+            self,
+            text="Get language strings VC",
+            command=language_vc.save_all_langs
+        ).grid(row=6, column=2)
+
         self.rowconfigure(7, minsize=30)
+
+        b_data_get = ttk.Button(
+            self,
+            text="Get data VC",
+            command=data_vc.dump_all_data
+        )
+        b_data_get.grid(row=7, column=2)
 
         b_data_get = ttk.Button(
             self,

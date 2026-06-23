@@ -156,13 +156,12 @@ class LangHandlerVC(Objectless):
                 print(json.dumps(full_data, ensure_ascii=False, indent=2), file=_f)
 
 
-if __name__ == "__main__":
-    # gen_main_langs()
-
-    MetaDataHandler.load(Game.VC)
-
-    # l = LangHandlerVC.get_lang_by_guid('8d13770d5c9b0ac498f95395651811b5')
-
+def save_all_langs():
+    assert MetaDataHandler.loaded_game == Game.VC, f"Loaded wrong metadata ({MetaDataHandler.loaded_game}). Need {Game.VC}"
     LangHandlerVC.save_raw_langs()
     LangHandlerVC.save_dict_langs()
-    pass
+
+
+if __name__ == "__main__":
+    MetaDataHandler.load(Game.VC)
+    save_all_langs()
