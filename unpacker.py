@@ -675,11 +675,12 @@ class Unpacker(tk.Tk):
             for meta in metas:
                 meta.init_sprites()
 
+            llf = "."
             for i, (k_id, obj) in enumerate(ug):
                 self.progress_bar_set_percent(i + 1, total)
-                gen.make_image(k_id, obj, lang_data=(lang or {}).get(k_id), add_data=add_data, **generator_settings)
+                llf = gen.make_image(k_id, obj, lang_data=(lang or {}).get(k_id), add_data=add_data, **generator_settings)
 
-            self.last_loaded_folder = Path(f"./Images/Generated/{add_data["p_file"]}").absolute()
+            self.last_loaded_folder = Path(llf)
 
         if "assets" not in self.get_assets_dir().stem.lower():
             showerror("Error", "Assets directory must be selected.")
@@ -783,7 +784,7 @@ class Unpacker(tk.Tk):
 
     @staticmethod
     def data_selector(add_title="") -> Path | None:
-        path = Path("./Data")
+        path = Config[MetaDataHandler.loaded_game.get_data_folder_key()]
         if not path.exists():
             return None
 

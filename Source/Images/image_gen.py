@@ -77,7 +77,7 @@ class IGFactory:
             return PowerUpImageGenerator()
         elif "props" in data_file:
             return PropsImageGenerator()
-        elif "adventuremerchants" in data_file:
+        elif "adventuremerchants" in data_file or "custommerchants" in data_file:
             return AdvMerchantsGenerator()
         elif "hitvfx" in data_file:
             return HitVFXGenerator()
@@ -360,6 +360,8 @@ class SimpleGenerator(ImageGenerator):
         frame_name = self.get_frame_name(obj)
         save_folder = f"{normalize_str(add_data.get("p_file"))}/{self.folderToSave or texture_name}"
 
+        save_folder_ret = save_folder
+
         def func_meta(x):
             d = MetaDataHandler.get_meta_by_name_fullest(x)
             if d:
@@ -456,6 +458,8 @@ class SimpleGenerator(ImageGenerator):
                            postfix_name=obj.get("postfix_name"), save_append="_special",
                            frame_rate=obj.get("frameRate", DEFAULT_ANIMATION_FRAME_RATE), scale_factor=scale_factor,
                            add_data=add_data)
+
+        return save_folder_ret
 
 
 class ItemImageGenerator(SimpleGenerator):
