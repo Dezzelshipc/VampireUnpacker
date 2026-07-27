@@ -597,6 +597,10 @@ class Unpacker(tk.Tk):
 
             self.progress_bar_set_percent(i := i + 1, len(lang_types))
 
+        save_path = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED / "Metadata.json"
+        folder_metadata = [lang_type.value for lang_type in lang_types]
+        save_path.write_text(json.dumps(sorted(folder_metadata), ensure_ascii=False, indent=2))
+
         print(f"Finished splitting I2Languages to separate categories. {_time!r}")
 
     def get_data(self):
@@ -621,6 +625,13 @@ class Unpacker(tk.Tk):
                     f.write(data_file.raw_text_cleaned_commas())
 
                 self.progress_bar_set_percent(i := i + 1, total_amount)
+
+        folder_meta_data = {
+            dlc_type.value.full_name: [dlc.value for dlc in DataHandler.get_dict_by_dlc_type(dlc_type).keys()]
+            for dlc_type in DLCType.get_all_types_by_game(Game.VS)
+        }
+        save_path = to_current_game_path(DATA_FOLDER) / "Metadata.json"
+        save_path.write_text(json.dumps(folder_meta_data, ensure_ascii=False, indent=2))
 
         print(f"Finished copying data files. {_time!r}")
 
@@ -678,7 +689,8 @@ class Unpacker(tk.Tk):
             llf = "."
             for i, (k_id, obj) in enumerate(ug):
                 self.progress_bar_set_percent(i + 1, total)
-                llf = gen.make_image(k_id, obj, lang_data=(lang or {}).get(k_id), add_data=add_data, **generator_settings)
+                llf = gen.make_image(k_id, obj, lang_data=(lang or {}).get(k_id), add_data=add_data,
+                                     **generator_settings)
 
             self.last_loaded_folder = Path(llf)
 
