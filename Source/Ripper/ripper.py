@@ -3,11 +3,12 @@ import shutil
 import sys
 import time
 from pathlib import Path
-from tkinter.messagebox import showerror
 
 import requests
 
 from Source.Config.config import DLCType, CfgKey, Config, Game
+from Source.UI.ui import UIBase
+from Source.UI.ui_tkinter import UITkinter
 from Source.Utility.constants import RIPPER_FOLDER, to_source_path
 from Source.Utility.timer import Timeit
 
@@ -15,7 +16,7 @@ ripper_port = 56636
 ripper_url = f"http://127.0.0.1:{ripper_port}/"
 
 
-def rip_files(dlc_list: set[DLCType]):
+def rip_files(dlc_list: set[DLCType], ui_class: UIBase.__class__ = UITkinter):
     ripper_path = Config[CfgKey.RIPPER]
     settings_name = "AssetRipper.Settings.json"
 
@@ -36,18 +37,19 @@ def rip_files(dlc_list: set[DLCType]):
     if not ripper:
         _s = "AssetRipper not found"
         print(_s, file=sys.stderr)
-        showerror("Ripper Error", _s)
+        ui_class.show_error("Ripper Error", _s)
         return
 
-    if Config[CfgKey.STEAM_VS] == Path():
-        _s = f"Steam config path is empty"
-        showerror("Ripper Error", _s)
+    steam_to_rip = {dlc.value.game for dlc in dlc_list}
+    if empty_game_paths := [game for game in steam_to_rip if Config[game.get_main_folder_key()] == Path()]:
+        _s = f"Some config paths are empty:\n{'\n'.join(empty_game_paths)}"
+        ui_class.show_error("Ripper Error", _s)
         print(_s, file=sys.stderr)
         return
 
     if empty_paths := [dlc.value.full_name for dlc in dlc_list if Config[dlc.value.config_key] == Path()]:
         _s = f"Some config paths are empty:\n{'\n'.join(empty_paths)}"
-        showerror("Ripper Error", _s)
+        ui_class.show_error("Ripper Error", _s)
         print(_s, file=sys.stderr)
         return
 

@@ -12,7 +12,7 @@ from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJ
     MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL, ROOT_FOLDER, VERSION_DATA
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
 from Source.Utility.multirun import run_multiprocess_single, run_concurrent_sync
-from Source.Utility.special_classes import Objectless
+from Source.Utility.special_classes import Objectless, Emitter
 from Source.Utility.sprite_data import SpriteData, AnimationData, SKIP_ANIM_NAMES_LIST
 from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc
@@ -196,13 +196,15 @@ def _get_meta(meta_path: Path) -> MetaData:
     return MetaData(name, meta_path_name, guid, image, prepared_data_name, prepared_data_id)
 
 
-class MetaDataHandler(Objectless):
+class MetaDataHandler(Emitter, Objectless):
     _found_files: list[Path] = []
 
     _assets_name_path: dict[str, Path] = {}
     _assets_guid_path: dict[str, Path] = {}
 
-    loaded_game: Game = None
+    _on_loaded_game_callback: list[Callable[[Game | None], None]] = []
+
+    loaded_game: Game | None = None
     loaded_assets_meta: dict[str, MetaData] = {}
 
     @classmethod
@@ -210,10 +212,12 @@ class MetaDataHandler(Objectless):
         if game != cls.loaded_game:
             if cls.loaded_game is not None:
                 cls.unload()
-            cls.loaded_game = game
 
-        cls._load_assets_meta_file_paths()
-        cls._load_assets_meta_files_guids()
+            cls.emit("before_load", cls.loaded_game, game)
+            cls.loaded_game = game
+            cls._load_assets_meta_file_paths()
+            cls._load_assets_meta_files_guids()
+            cls.emit("after_load", cls.loaded_game)
 
     @classmethod
     def unload(cls):
@@ -222,6 +226,8 @@ class MetaDataHandler(Objectless):
         cls._assets_guid_path.clear()
         cls.loaded_assets_meta.clear()
         print(f"MetaData unloaded [{cls.loaded_game.name if cls.loaded_game else ""}]")
+        cls.loaded_game = None
+        cls.emit("after_load", cls.loaded_game)
 
     @classmethod
     def assert_game(cls, game: Game):
