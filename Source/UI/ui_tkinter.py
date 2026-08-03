@@ -1,7 +1,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import Iterable, Callable
+from typing import Iterable, Callable, Any
 
 import tkinter as tk
 from tkinter import simpledialog, messagebox, filedialog, ttk
@@ -11,7 +11,7 @@ from Source.Data.meta_data import MetaDataHandler
 from Source.UI.ui import UIBase
 from Source.Utility.constants import IS_DEBUG
 from Source.Utility.logger import Logger
-from Source.UI.boxes_tkinter import CheckBoxes
+from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
 
 
 class UITkinter(tk.Tk, UIBase):
@@ -150,25 +150,25 @@ class UITkinter(tk.Tk, UIBase):
         ttk.Button(
             _by_meta_frame,
             text="Select image atlas to unpack images",
-            # command=lambda : 1
+            command=lambda: self.unpack_by_meta(self.generate_images_by_meta)
         ).grid(column=0, row=0)
 
         ttk.Button(
             _by_meta_frame,
             text="... from spritesheets",
-            # command=lambda : 1
+            command=lambda: self.unpack_by_meta_from_spritesheets(self.generate_images_by_meta)
         ).grid(column=1, row=0)
 
         ttk.Button(
             _by_meta_frame,
             text="Select image atlas to unpack animations",
-            # command=lambda : 1
+            command=lambda: self.unpack_by_meta(self.generate_animation_by_meta)
         ).grid(column=0, row=1)
 
         ttk.Button(
             _by_meta_frame,
             text="... from spritesheets",
-            # command=lambda : 1
+            command=lambda: self.unpack_by_meta_from_spritesheets(self.generate_animation_by_meta)
         ).grid(column=1, row=1)
         ###
 
@@ -250,8 +250,9 @@ class UITkinter(tk.Tk, UIBase):
     def show_error(title: str = None, message: str = None, **options) -> None:
         tk.messagebox.showerror(title, message, **options)
 
+
     def progress_bar_set_percent(self, current: int | float, total: int | float, add_text: str = "") -> None:
-        self.__update_progress_bar(current / total * 100 if total else 100, f"{current / total}", add_text)
+        self.__update_progress_bar(current / total * 100 if total else 100, f"{current} / {total}", add_text)
 
     def progress_bar_set_sec(self, seconds: float, add_text: str = "") -> None:
         self.__update_progress_bar((seconds * 10) % 100, f"{seconds:.2f}", add_text)
@@ -263,10 +264,17 @@ class UITkinter(tk.Tk, UIBase):
     def change_config(self) -> None:
         Config.invoke_config_changer(self)
 
-    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[...]:
-        cbs = CheckBoxes(list_to_boxes, title="Select DLCs", label="Select DLCs to rip", parent=self, width=width)
+    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[Any]:
+        cbs = CheckBoxes(list_to_boxes, title=title, label=label, parent=self, width=width)
         cbs.wait_window()
         return cbs.return_data
+
+    def buttons_box(self, list_to_texts, title="", label: str | list[str] = "", width: int = 300) -> Any | None:
+        bb = ButtonsBox(list_to_texts, title=title, label=label, parent=self, width=width)
+        bb.wait_window()
+        if bb.return_data is None:
+            return None
+        return list_to_texts[bb.return_data]
 
 
 if __name__ == '__main__':

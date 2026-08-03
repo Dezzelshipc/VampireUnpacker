@@ -50,7 +50,7 @@ def split_name_count(name: str) -> tuple[str, int]:
         return name, -1
 
     num = count.group()
-    return name.replace(num, "") or "_", int(num)
+    return name[:count.start()] or "_", int(num)
 
 
 # Note: pivots for sprites of animation are on the same relative pixel for the whole animation

@@ -22,7 +22,7 @@ from Source.Data import data_vc
 from Source.Data.data import DataHandler
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import image_gen, image_gen_vc
-from Source.Images.image_gen_new import ImageGeneratorManager
+from Source.Images.image_gen_vs import ImageGeneratorManager
 from Source.Translations import language_vc
 from Source.Translations.language import LangHandler, LangType
 from Source.Translations.language_utils import Lang

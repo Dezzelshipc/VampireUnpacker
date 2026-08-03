@@ -230,6 +230,10 @@ class MetaDataHandler(Emitter, Objectless):
         cls.emit("after_load", cls.loaded_game)
 
     @classmethod
+    def is_loaded(cls):
+        return cls.loaded_game is not None
+
+    @classmethod
     def assert_game(cls, game: Game):
         assert cls.loaded_game == game
 

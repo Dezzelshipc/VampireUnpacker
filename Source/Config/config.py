@@ -67,7 +67,7 @@ class Game(Enum):
 
     def get_default_dlc(self) -> "DLCType":
         match self:
-            case Game.VS:
+            case Game.VS | Game.SPECIAL:
                 return DLCType.VS
             case Game.VC:
                 return DLCType.VC

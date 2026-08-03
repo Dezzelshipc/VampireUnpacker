@@ -58,7 +58,7 @@ class COMPOUND_DATA(Objectless):
         return f"{cls.value} (all DLC)"
 
 
-COMPOUND_DATA_TYPE = COMPOUND_DATA.__class__
+COMPOUND_DATA_TYPE = type[COMPOUND_DATA]
 
 PROGRESS_BAR_FUNC_TYPE = Callable[[int | float, int | float], None]
 
