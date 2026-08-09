@@ -6,7 +6,8 @@ from PIL.Image import Image, new as image_new
 from Source.Config.config import Config
 from Source.UI.ui import UIBase
 from Source.UI.ui_tkinter import UITkinter
-from Source.Utility.constants import IMAGES_FOLDER, GENERATED, TILEMAPS, PROGRESS_BAR_FUNC_TYPE
+from Source.Utility.constants import IMAGES_FOLDER, GENERATED, TILEMAPS, PROGRESS_BAR_FUNC_TYPE, \
+    PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.image_functions import affine_transform, crop_image_rect_left_bot
 from Source.Data.meta_data import MetaData, MetaDataHandler, to_current_game_path
 from Source.Utility.multirun import run_multiprocess, run_concurrent_sync
@@ -97,7 +98,7 @@ def __save_image(image: Image, path: Path) -> None:
 
 
 def gen_tilemap(path: Path, __is_full_auto=True,
-                func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0,
+                func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
                 ui_class: UIBase.__class__ = UITkinter) -> Path | None:
     p_file = path.name
     save_file = path.with_suffix("").name

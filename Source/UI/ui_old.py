@@ -247,7 +247,7 @@ class UIOld(tk.Tk):
         b_data_get = ttk.Button(
             self,
             text="Get data VC",
-            command=data_vc.dump_all_data
+            command=data_vc.dump_selected_data
         )
         b_data_get.grid(row=7, column=2)
 

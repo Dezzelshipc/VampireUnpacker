@@ -3,10 +3,11 @@ from pathlib import Path
 from typing import Iterable, Any
 
 from Source.Config.config import Config, DLCType, CfgKey, Game
-from Source.Data import game_version
+from Source.Data import game_version, data_vc
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import transparent_save
 from Source.Images.image_gen_general import generate_images_by_meta, generate_animation_by_meta
+from Source.Translations import language_vc
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, GENERATED, COMPOUND_DATA_TYPE, COMPOUND_DATA, \
     DEFAULT_ANIMATION_FRAME_RATE
 from Source.Utility.popups import ErrorPopup, BasePopup, InfoPopup, WarningPopup
@@ -70,7 +71,7 @@ class UIBase:
     def progress_bar_set_sec(self, seconds: float, add_text: str = "") -> None:
         raise NotImplementedError()
 
-    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[Any]:
+    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[bool]:
         raise NotImplementedError()
 
     def buttons_box(self, list_to_texts, title="", label: str | list[str] = "", width: int = 300) -> Any:
@@ -181,7 +182,7 @@ class UIBase:
             if llf:
                 self._last_loaded_folder = llf
         except BasePopup as p:
-                self.show_popup(p)
+            self.show_popup(p)
 
     def generate_animation_by_meta(self, full_path: Path):
         scale_factor = self.ask_integer("Scale", "Input scale multiplier", initialvalue=1)
@@ -191,9 +192,10 @@ class UIBase:
                                       initialvalue=DEFAULT_ANIMATION_FRAME_RATE)
         if not frame_rate or frame_rate <= 0: return
 
-        selected_anim_types = self.check_boxes(transparent_save.ANIM_SAVE_TYPES,
-                                               label="Select animation extension to use.\n(GIF does not support partial transparency)",
-                                               title="Select anim types")
+        selected_anim_types = self.check_boxes(
+            transparent_save.ANIM_SAVE_TYPES,
+            label="Select animation extension to use.\n(GIF does not support partial transparency)",
+            title="Select anim types")
 
         try:
             llf = generate_animation_by_meta(
@@ -206,3 +208,17 @@ class UIBase:
                 self._last_loaded_folder = llf
         except BasePopup as p:
             self.show_popup(p)
+
+    def get_languages_vs_all(self):
+        self._last_loaded_folder = language_vc.save_all_langs(self.progress_bar_set_percent)
+
+    def get_data_vc_all(self):
+        dumpers = data_vc.get_available_dumpers()
+        selected = self.check_boxes([d.data_type.value for d in dumpers], title="Select data to dump",
+                                    label="Select data to dump")
+
+        if selected is None or not any(selected): return
+
+        self._last_loaded_folder = data_vc.dump_selected_data(selected, self.progress_bar_set_percent)
+
+        data_vc.make_meta_file_folder_structure()

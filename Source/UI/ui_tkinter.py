@@ -8,10 +8,12 @@ from tkinter import simpledialog, messagebox, filedialog, ttk
 
 from Source.Config.config import Game, DLCType, Config
 from Source.Data.meta_data import MetaDataHandler
+from Source.Data import data_vc
+from Source.Translations import language_vc
 from Source.UI.ui import UIBase
+from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
 from Source.Utility.constants import IS_DEBUG
 from Source.Utility.logger import Logger
-from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
 
 
 class UITkinter(tk.Tk, UIBase):
@@ -209,7 +211,19 @@ class UITkinter(tk.Tk, UIBase):
             main_frame,
             text="Create Game Version file",
             command=self.create_version_file,
-        ).grid(column=0, row=0)
+        ).grid(column=0, row=0, pady=self._pady)
+
+        ttk.Button(
+            main_frame,
+            text="Get language strings",
+            command=self.get_languages_vs_all
+        ).grid(column=0, row=1)
+
+        ttk.Button(
+            main_frame,
+            text="Get data",
+            command=self.get_data_vc_all
+        ).grid(column=0, row=2)
 
     @staticmethod
     def ask_open_file_name(title: str = "Select file", initialdir: set | os.PathLike[str] = None,
@@ -264,7 +278,7 @@ class UITkinter(tk.Tk, UIBase):
     def change_config(self) -> None:
         Config.invoke_config_changer(self)
 
-    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[Any]:
+    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[bool]:
         cbs = CheckBoxes(list_to_boxes, title=title, label=label, parent=self, width=width)
         cbs.wait_window()
         return cbs.return_data

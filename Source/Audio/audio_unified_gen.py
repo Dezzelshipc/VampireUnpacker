@@ -14,7 +14,8 @@ from Source.Data.data import DataType
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Translations.language import LangType
 from Source.Translations.language_utils import Lang
-from Source.Utility.constants import GENERATED, COMPOUND_DATA, AUDIO_FOLDER, COMPOUND_DATA_TYPE, PROGRESS_BAR_FUNC_TYPE
+from Source.Utility.constants import GENERATED, COMPOUND_DATA, AUDIO_FOLDER, COMPOUND_DATA_TYPE, PROGRESS_BAR_FUNC_TYPE, \
+    PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.multirun import run_concurrent_sync, run_gather
 from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc
@@ -150,9 +151,11 @@ def _save_track(music_track: MusicTrack, save_path: Path):
     music_track.audio.export(save_path, music_track.ext, tags=music_track.tags)
 
 
-def gen_music_tracks(music_dlc: DLCType | COMPOUND_DATA_TYPE, save_name_types: set[AudioSaveType],
-                     func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> (
-        str | None, None | str):
+def gen_music_tracks(
+        music_dlc: DLCType | COMPOUND_DATA_TYPE,
+        save_name_types: set[AudioSaveType],
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> tuple[str | None, None | str]:
     save_name_types.add(AudioSaveType.CODE_NAME)
 
     f_path = to_current_game_path(AUDIO_FOLDER)

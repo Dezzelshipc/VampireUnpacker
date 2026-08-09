@@ -4,7 +4,8 @@ from pathlib import Path
 from Source.Config.config import Game
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import transparent_save
-from Source.Utility.constants import IMAGES_FOLDER, GENERATED, PROGRESS_BAR_FUNC_TYPE, DEFAULT_ANIMATION_FRAME_RATE
+from Source.Utility.constants import IMAGES_FOLDER, GENERATED, PROGRESS_BAR_FUNC_TYPE, DEFAULT_ANIMATION_FRAME_RATE, \
+    PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.image_functions import resize_image, get_anim_sprites_ready, resize_list_images
 from Source.Utility.popups import ErrorPopup, InfoPopup
 
@@ -13,7 +14,7 @@ def generate_images_by_meta(
         image_path: Path,
         scale_factor: int = 1,
         folder_save_path: Path = None,
-        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
 ) -> Path | None:
     file = image_path.name
 
@@ -61,7 +62,7 @@ def generate_animation_by_meta(
         frame_rate: int = DEFAULT_ANIMATION_FRAME_RATE,
         selected_anim_types: list[bool] = None,
         folder_save_path: Path = None,
-        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
 ) -> Path | None:
     file = image_path.name
 
@@ -71,7 +72,7 @@ def generate_animation_by_meta(
 
     if not MetaDataHandler.is_loaded():
         MetaDataHandler.load(Game.SPECIAL)
-    
+
     meta_path = image_path.with_name(file + ".meta")
     if not MetaDataHandler.has_meta_by_path(meta_path):
         if not meta_path.exists():
@@ -115,7 +116,7 @@ def generate_animation_by_meta(
         sprites_list = resize_list_images(sprites_list, scale_factor)
 
         for ext, folder, func in itertools.compress(transparent_save.SAVE_DATA, selected_anim_types):
-            path = folder_save_path /folder
+            path = folder_save_path / folder
             path.mkdir(exist_ok=True)
             func(sprites_list, duration, path / f"{anim.name}{ext}")
 

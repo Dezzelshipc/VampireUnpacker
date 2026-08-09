@@ -6,9 +6,11 @@ from pathlib import Path
 from Source.Config.config import Game
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Translations.language_utils import Lang
-from Source.Utility.constants import TRANSLATIONS_FOLDER, GENERATED, SHARED_DATA
+from Source.Utility.constants import TRANSLATIONS_FOLDER, GENERATED, SHARED_DATA, PROGRESS_BAR_FUNC_TYPE, \
+    PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.multirun import run_concurrent_sync
 from Source.Utility.special_classes import Objectless
+from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc, UnityEntry, UnityLocalizedReference
 
 
@@ -112,7 +114,7 @@ class LangHandlerVC(Objectless):
         return file.en(key_id)
 
     @classmethod
-    def save_raw_langs(cls, lang_types: set[LangTypeVC] = None) -> None:
+    def save_raw_langs(cls, lang_types: set[LangTypeVC] = None) -> Path:
         if lang_types is None:
             lang_types = {*LangTypeVC}
 
@@ -131,8 +133,10 @@ class LangHandlerVC(Objectless):
                 with open(sf / name, "w", encoding="UTF-8") as _f:
                     print(data.raw(lang), file=_f)
 
+        return save_folder
+
     @classmethod
-    def save_dict_langs(cls, lang_types: set[LangTypeVC] = None) -> None:
+    def save_dict_langs(cls, lang_types: set[LangTypeVC] = None) -> Path:
         if lang_types is None:
             lang_types = {*LangTypeVC}
 
@@ -155,11 +159,24 @@ class LangHandlerVC(Objectless):
             with open(save_folder / f"{lang_type.value}.json", "w", encoding="UTF-8") as _f:
                 print(json.dumps(full_data, ensure_ascii=False, indent=2), file=_f)
 
+        return save_folder
 
-def save_all_langs():
+
+def save_all_langs(func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT):
     assert MetaDataHandler.loaded_game == Game.VC, f"Loaded wrong metadata ({MetaDataHandler.loaded_game}). Need {Game.VC}"
-    LangHandlerVC.save_raw_langs()
+
+    print("Started getting Translation files for VC")
+    tt = Timeit()
+
+    func_progress_bar_set_percent(0, 2)
+    save_path = LangHandlerVC.save_raw_langs()
+    func_progress_bar_set_percent(1, 2)
     LangHandlerVC.save_dict_langs()
+    func_progress_bar_set_percent(2, 2)
+
+    print(f"Finished getting Translation files for VC {tt!r}")
+
+    return save_path.parent
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ from Source.Data.data import DataHandler, DataType, DataFile
 from Source.Translations.language import LangHandler, LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, COMPOUND_DATA_TYPE, GENERATED, \
-    PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA
+    PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA, PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.image_functions import make_image_black
 from Source.Utility.image_functions import resize_image, get_adjusted_sprites_to_rect, get_rects_by_sprite_list
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
@@ -173,7 +173,7 @@ class ImageGeneratorManager:
 
     @staticmethod
     def gen_unified_images(dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                           func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0,
+                           func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
                            parent=None) -> Path | None:
         gen_class: BaseImageGenerator.__class__ = ImageGeneratorManager.get_gen(data_type)
 
@@ -238,7 +238,7 @@ class BaseImageGenerator:
         ]
 
     def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
 
         save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / DLCType.string(dlc_type)
@@ -438,7 +438,7 @@ class ArcanaImageGenerator(BaseImageGenerator):
         return textures_set
 
     def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         save_path = super().main_generator(dlc_type, data_type)
         scale = self.requested_gens.get(GenType.IMAGE)
 
@@ -773,7 +773,7 @@ class StageImageGenerator(ListBaseImageGenerator):
     key_entry_name = "stageName"
 
     def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
         save_path = super().main_generator(dlc_type, data_type, func_progress_bar_set_percent)
 

@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from typing import Any
 
 
 def clear_file(save_path: Path):
@@ -81,3 +82,11 @@ def get_parent_path_to(path: Path, folder: str) -> Path | None:
         return None
 
     return path.parents[len(path.parents) - idx - 1]
+
+
+def deep_remove_dict_keys(data: dict | list, remove_keys: set[Any]) -> dict | list:
+    if isinstance(data, dict):
+        return {k: deep_remove_dict_keys(v, remove_keys) for k, v in data.items() if k not in remove_keys}
+    elif isinstance(data, list):
+        return [deep_remove_dict_keys(v, remove_keys) for v in data]
+    return data
