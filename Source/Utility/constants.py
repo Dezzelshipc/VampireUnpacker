@@ -10,6 +10,7 @@ IS_DEBUG: Final[bool] = (sys.monitoring.get_tool(sys.monitoring.DEBUGGER_ID)) is
 
 STEAM_APPID_VS = 1794680
 STEAM_APPID_VC = 3265700
+STEAM_APPID_JJKR = 4753290
 
 ROOT_FOLDER: Final[Path] = _find_main_py_file().parent.absolute()
 

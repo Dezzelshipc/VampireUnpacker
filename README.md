@@ -11,10 +11,10 @@ of characters and enemies.
 ### Getting started
 
 Use [Python 3.12](https://www.python.org/downloads/) with _**tkinter**_ and install dependencies
-`pip install -r requirements.txt`
+`pip install -r requirements.txt` (Can be done in global or venv. [run.bat](run.bat) has parameter of venv name when
+using in terminal. Default name ".venv". If venv not found it starts in global.)
 
 Enter paths to folders where ripped assets for respective DLCs will be located with _**Change config**_.
-(_OR_ enter paths where folders `...\ExportedProject\Assets` are located after ripping).
 
 * ! ***NOTE*** that ripping will **<u>REMOVE EVERYTHING</u>** in selected folders!
 
@@ -73,4 +73,5 @@ overflowing memory for very big files).
 ## Future plans
 
 * Keep support for new content updates and DLC.
+* Add VC image generator.
 * Rewrite Image gen to better pipeline.

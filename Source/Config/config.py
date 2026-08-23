@@ -10,7 +10,7 @@ from tkinter.messagebox import showerror, showinfo
 from typing import Self, Final, Callable
 
 from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_TYPE, COMPOUND_DATA, STEAM_APPID_VS, \
-    STEAM_APPID_VC
+    STEAM_APPID_VC, STEAM_APPID_JJKR
 from Source.Utility.special_classes import Objectless
 
 ASSETS = "Assets"
@@ -31,13 +31,17 @@ class CfgKey(Enum):
     OC = "OC_ASSETS"
     ED = "ED_ASSETS"
     AC = "AC_ASSETS"
-    # BM = "BM_ASSETS"
+    BM = "BM_ASSETS"
     # IS = "IS_ASSETS"
     DATA_VS = "DATA_VS"
 
     STEAM_VC = "STEAM_VC"
     VC = "VC_ASSETS"
     DATA_VC = "DATA_VC"
+
+    STEAM_JJKR = "STEAM_JJKR"
+    JJKR = "JJKR_ASSETS"
+    DATA_JJKR = "DATA_JJKR"
 
     def __str__(self):
         return self.value
@@ -58,6 +62,7 @@ class CfgKey(Enum):
 class Game(Enum):
     VS = 0
     VC = 100
+    JJKR = 200
 
     SPECIAL = -1
 
@@ -71,6 +76,8 @@ class Game(Enum):
                 return DLCType.VS
             case Game.VC:
                 return DLCType.VC
+            case Game.JJKR:
+                return DLCType.JJKR
             case _:
                 assert False, "Game enum has no default dlc"
 
@@ -80,6 +87,8 @@ class Game(Enum):
                 return CfgKey.STEAM_VS
             case Game.VC:
                 return CfgKey.STEAM_VC
+            case Game.JJKR:
+                return CfgKey.STEAM_JJKR
             case _:
                 assert False, "Game enum has no default folder"
 
@@ -89,6 +98,8 @@ class Game(Enum):
                 return CfgKey.DATA_VS
             case Game.VC:
                 return CfgKey.DATA_VC
+            case Game.JJKR:
+                return CfgKey.DATA_JJKR
             case _:
                 assert False, "Game enum has no data folder"
 
@@ -98,6 +109,8 @@ class Game(Enum):
                 return STEAM_APPID_VS
             case Game.VC:
                 return STEAM_APPID_VC
+            case Game.JJKR:
+                return STEAM_APPID_JJKR
             case _:
                 assert False, "Game enum has no data folder"
 
@@ -121,10 +134,12 @@ class DLCType(Enum):
     OC = DLC(5, CfgKey.OC, Game.VS, "THOSE_PEOPLE", "3210350", "Ode to Castlevania")
     ED = DLC(6, CfgKey.ED, Game.VS, "EMERALDS", "3451100", "Emerald Diorama")
     AC = DLC(7, CfgKey.AC, Game.VS, "LEMON", "3929770", "Ante Chamber")
-    # BM = DLC(8, CfgKey.BM, Game.VS, "BLOODMOON(?)", "4781330", "Legacy of the Bloodmoon")
+    BM = DLC(8, CfgKey.BM, Game.VS, "BLOODMOON", "4781330", "Legacy of the Bloodmoon") # Codename?
     # IS = DLC(-1, CfgKey.IS, Game.VS, "-", "-", "IS")
 
     VC = DLC(100, CfgKey.VC, Game.VC, "CRAWLERS", "Vampire Crawlers_Data", "Vampire Crawlers")
+
+    JJKR = DLC(200, CfgKey.JJKR, Game.JJKR, "JJKR", "*_Data", "JUJUTSU KAISEN RUMBLE: SURVIVATON") # Codename and steam index
 
     @staticmethod
     def string(dlc: Self | COMPOUND_DATA_TYPE) -> str:
