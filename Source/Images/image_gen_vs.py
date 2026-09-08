@@ -252,7 +252,7 @@ class BaseImageGenerator:
                 if out_entry:
                     out_entry.save_entry(save_path, entry, scale)
 
-                func_progress_bar_set_percent(i + 1, total_len)
+                func_progress_bar_set_percent(i + 1, total_len, out_entry.name if out_entry else "")
 
         if self.requested_gens.get(GenType.IMAGE_FRAME):
             for i, entry in enumerate(self.entries):
@@ -260,7 +260,7 @@ class BaseImageGenerator:
                 if out_entry:
                     out_entry.save_entry(save_path, entry, scale, add_to_path="Icon")
 
-                func_progress_bar_set_percent(i + 1, total_len)
+                func_progress_bar_set_percent(i + 1, total_len, "Icon:" + out_entry.name if out_entry else "")
 
         return save_path
 
@@ -310,7 +310,7 @@ class BaseImageGenerator:
             print(f"!!! Image skipped '{sprite_texture}': texture '{main_texture}' not found", file=sys.stderr)
             return None
 
-        sprite_data = texture_meta_data.data_name.get(sprite_texture)
+        sprite_data = texture_meta_data.data_name.get(sprite_texture) or texture_meta_data.data_id.get(0)
         if not sprite_data:
             print(f"!!! Image skipped '{sprite_texture}': not found for texture '{main_texture}'", file=sys.stderr)
             return None
@@ -694,6 +694,10 @@ class CharacterImageGenerator(ListBaseImageGenerator):
 
         if (weapon_id := entry.get("startingWeapon")) and weapon_id not in ["VOID", "0", 0, None]:
             weapon_data = self.weapon_image_gen.data_file.data().get(weapon_id)
+            if weapon_data is None:
+                print(f"Not found weapon [ID={weapon_id}] for character {eng_name}")
+                return None
+
             weapon_entry = self.weapon_image_gen.gen_image(self.weapon_image_gen.get_unit(weapon_id, weapon_data))
 
             if weapon_entry is None:
@@ -712,17 +716,23 @@ class CharacterImageGenerator(ListBaseImageGenerator):
         frame_image.alpha_composite(char_sprite, (12, frame_image.height - char_sprite.height - 11))
 
         text = entry.get(CHAR_NAME)
-        font = ImageFont.truetype(FONT_FILE_PATH, 30)
+        font_size = 30
+        font = ImageFont.truetype(FONT_FILE_PATH, font_size)
 
-        if font.getbbox(text)[2] > frame_image.size[0] - 8:
-            small_size = 28
+        if font.getbbox(text)[2] > frame_image.size[0] - 30:
+            font_size = 28
             if "lolo,".lower() in text.lower():
-                small_size = 24
+                font_size = 24
                 text = text.replace(", ", ",\n", 2).replace(",\n", ", ", 1)
             elif " " in text:
                 text = text[::-1].replace(" ", "\n", 1)[::-1]
 
-            font = ImageFont.truetype(FONT_FILE_PATH, small_size)
+            font = font.font_variant(size=font_size)
+            while font_size >= 20:
+                if font.getbbox(text)[2] <= frame_image.size[0] - 30:
+                    break
+                font_size -= 0.2
+                font = font.font_variant(size=font_size)
 
         canvas = image_new('RGBA', frame_image.size)
 

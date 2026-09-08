@@ -265,6 +265,7 @@ class MetaDataHandler(Emitter, Objectless):
                     (MONO_BEHAVIOUR, BUNDLE_MANIFEST_DATA),
                     (MONO_BEHAVIOUR, VERSION_DATA),
 
+                    ## Refactor
                     (MONO_BEHAVIOUR, "Moonspell"),
                     (MONO_BEHAVIOUR, "Foscari"),
                     (MONO_BEHAVIOUR, "Chalcedony"),
@@ -272,6 +273,7 @@ class MetaDataHandler(Emitter, Objectless):
                     (MONO_BEHAVIOUR, "ThosePeople"),
                     (MONO_BEHAVIOUR, "Emeralds"),
                     (MONO_BEHAVIOUR, "Lemon"),
+                    (MONO_BEHAVIOUR, "Bloodmoon"),
                 ])
             case Game.VC:
                 path_roots.extend([

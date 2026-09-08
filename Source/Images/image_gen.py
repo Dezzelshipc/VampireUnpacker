@@ -709,16 +709,20 @@ class CharacterImageGenerator(TableGenerator):
 
                 skin_type = obj.get("skinType", "DEFAULT")
                 lang_skins = add_data.get("lang_skins")
-                if (skin_obj := lang_skins.get(skin_type)) and (obj.get('name', 'default').lower() != "default"):
-                    suffix = skin_obj.get("suffix") or " "
-                    space_suf = suffix[0] not in [":", ","] and " " or ""
-                    name = f"{skin_obj.get("prefix") or ""} {name}{space_suf}{suffix}"
-                    add_save_folder = True
-                elif obj.get('name', 'default').lower() != "default":
-                    name += f" {obj.get('name')}"
-                    add_save_folder = True
-                elif obj.get("id", 0) != 0:
+                if obj.get("id", 0) != 0:
                     name += f"-{obj.get("id")}"
+                    add_save_folder = True
+                else:
+                    skin_obj = lang_skins.get(skin_type, {})
+                    suffix = skin_obj.get("suffix") or obj.get("suffix") or " "
+
+                    if suffix != " " and suffix:
+                        space_suf = suffix[0] not in [":", ","] and " " or ""
+                        name = f"{skin_obj.get("prefix") or obj.get("prefix") or ""} {name}{space_suf}{suffix}"
+                        add_save_folder = True
+
+                if not add_save_folder and obj.get('name', 'default').lower() != "default":
+                    name += f" {obj.get('name')}"
                     add_save_folder = True
 
                 if add_save_folder:
@@ -875,7 +879,7 @@ class CharacterImageGenerator(TableGenerator):
         text = add_data["clear_name"].strip()
         font = ImageFont.truetype(self.fontFilePath, 30)
 
-        if font.getbbox(text)[2] > frame_im.size[0] - 5 * scale_factor:
+        if font.getbbox(text)[2] > frame_im.size[0] - 30:
             small_size = 28
             if "lolo,".lower() in text.lower():
                 small_size = 24
@@ -884,6 +888,13 @@ class CharacterImageGenerator(TableGenerator):
                 text = text[::-1].replace(" ", "\n", 1)[::-1]
 
             font = ImageFont.truetype(self.fontFilePath, small_size)
+
+            while small_size >= 20:
+                if font.getbbox(text)[2] <= frame_im.size[0] - 30:
+                    break
+                small_size -= 0.2
+                font = ImageFont.truetype(self.fontFilePath, small_size)
+
 
         canvas = image_new('RGBA', frame_im.size)
 

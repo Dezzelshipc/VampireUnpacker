@@ -43,8 +43,10 @@ def get_dlc_version() -> list[tuple[DLCType, str, str]]:
     assets = []
     match MetaDataHandler.loaded_game:
         case Game.VS:
+            ## Refactor
             assets = [
                 (DLCType.MS, "Moonspell"),
+                (DLCType.BM, "Bloodmoon"),
                 (DLCType.FS, "Foscari"),
                 (DLCType.EM, "Chalcedony"),
                 (DLCType.OG, "FirstBlood"),

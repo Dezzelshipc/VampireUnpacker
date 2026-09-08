@@ -51,12 +51,21 @@ class CfgKey(Enum):
         return {cls.MULTIPROCESSING}
 
     @classmethod
+    def get_steam_path_keys(cls) -> list[Self]:
+        return [cls.STEAM_VS, cls.STEAM_VC, cls.STEAM_JJKR]
+
+    @classmethod
+    def get_data_path_keys(cls) -> list[Self]:
+        return [cls.DATA_VS, cls.DATA_VC, cls.DATA_JJKR]
+
+    @classmethod
     def get_path_keys(cls) -> set[Self]:
         return {*cls}.difference(cls.get_non_path_keys())
 
     @classmethod
     def get_assets_keys(cls) -> set[Self]:
-        return {*cls}.difference({CfgKey.MULTIPROCESSING, CfgKey.RIPPER, CfgKey.STEAM_VS, CfgKey.STEAM_VC})
+        return {*cls}.difference(
+            {CfgKey.MULTIPROCESSING, CfgKey.RIPPER} | set(cls.get_data_path_keys()) | set(cls.get_steam_path_keys()))
 
 
 class Game(Enum):
@@ -134,12 +143,13 @@ class DLCType(Enum):
     OC = DLC(5, CfgKey.OC, Game.VS, "THOSE_PEOPLE", "3210350", "Ode to Castlevania")
     ED = DLC(6, CfgKey.ED, Game.VS, "EMERALDS", "3451100", "Emerald Diorama")
     AC = DLC(7, CfgKey.AC, Game.VS, "LEMON", "3929770", "Ante Chamber")
-    BM = DLC(8, CfgKey.BM, Game.VS, "BLOODMOON", "4781330", "Legacy of the Bloodmoon") # Codename?
+    BM = DLC(8, CfgKey.BM, Game.VS, "BLOODMOON", "4781330", "Legacy of the Bloodmoon")
     # IS = DLC(-1, CfgKey.IS, Game.VS, "-", "-", "IS")
 
     VC = DLC(100, CfgKey.VC, Game.VC, "CRAWLERS", "Vampire Crawlers_Data", "Vampire Crawlers")
 
-    JJKR = DLC(200, CfgKey.JJKR, Game.JJKR, "JJKR", "*_Data", "JUJUTSU KAISEN RUMBLE: SURVIVATON") # Codename and steam index
+    JJKR = DLC(200, CfgKey.JJKR, Game.JJKR, "JJKR", "*_Data",
+               "JUJUTSU KAISEN RUMBLE: SURVIVATON")  # Codename and steam index
 
     @staticmethod
     def string(dlc: Self | COMPOUND_DATA_TYPE) -> str:
@@ -211,10 +221,10 @@ class Config(Objectless):
     @staticmethod
     def _get_default_config():
         data: dict[CfgKey, Path | bool] = {dlc.value.config_key: Path() for dlc in DLCType.get_all_types()}
-        data[CfgKey.STEAM_VS] = Path()
-        data[CfgKey.STEAM_VC] = Path()
-        data[CfgKey.DATA_VS] = Path()
-        data[CfgKey.DATA_VC] = Path()
+
+        data.update({cfg: Path() for cfg in CfgKey.get_steam_path_keys()})
+        data.update({cfg: Path() for cfg in CfgKey.get_data_path_keys()})
+
         data[CfgKey.RIPPER] = Path()
         data[CfgKey.MULTIPROCESSING] = False
         return data
