@@ -1,9 +1,9 @@
-from enum import Enum
+from enum import Enum, StrEnum
 
 from Source.Utility.constants import SHARED_DATA
 
 
-class Lang(Enum):
+class Lang(StrEnum):
     EN = "en"  # s c
     FR = "fr"  # s c
     IT = "it"  # s c

@@ -3,11 +3,11 @@ from pathlib import Path
 from typing import Iterable, Any
 
 from Source.Config.config import Config, DLC, CfgKey, Game
-from Source.Data import game_version, data_vc
+from Source.Data import game_version, data_vc, data_vs
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import transparent_save
 from Source.Images.image_gen_general import generate_images_by_meta, generate_animation_by_meta
-from Source.Translations import language_vc
+from Source.Translations import language_vc, language_vs
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, GENERATED, COMPOUND_DATA_TYPE, COMPOUND_DATA, \
     DEFAULT_ANIMATION_FRAME_RATE
 from Source.Utility.popups import ErrorPopup, BasePopup, InfoPopup, WarningPopup
@@ -120,8 +120,8 @@ class UIBase:
     def create_version_file():
         game_version.load_version_file()
 
-    def dlc_selector(self, allow_compound: bool = False, parent=None) -> DLC | COMPOUND_DATA_TYPE | None:
-        all_dlcs = DLC.get_all_types()
+    def dlc_selector(self, game: Game, allow_compound: bool = False, parent=None) -> DLC | COMPOUND_DATA_TYPE | None:
+        all_dlcs = DLC.get_all_types_by_game(game)
         compound = repr(COMPOUND_DATA)
         if allow_compound:
             all_dlcs.append(compound)
@@ -138,7 +138,7 @@ class UIBase:
         folder = self.get_assets_dir(Game.VS).joinpath("Resources", "spritesheets")
 
         if not folder.exists():
-            self.show_warning("Warning", "Spritesheets folder does not found.")
+            self.show_warning("Warning", "Spritesheets folder for Vampire Survivors does not found.")
             return
 
         self.generate_by_meta_selector(folder, generate_function)
@@ -155,7 +155,7 @@ class UIBase:
             pass
 
         if not start_paths:
-            self.show_warning("Warning", "Assets folder not found.")
+            self.show_warning("Warning", f"Assets folder not found for\n{selected_game}.")
             return
 
         self.generate_by_meta_selector(start_path, generate_function)
@@ -215,8 +215,43 @@ class UIBase:
         except BasePopup as p:
             self.show_popup(p)
 
-    def get_languages_vs_all(self):
-        self._last_loaded_folder = language_vc.save_all_langs(self.progress_bar_set_percent)
+    ###
+
+    def get_data_vs_all(self):
+        self._last_loaded_folder = data_vs.dump_all_data(self.progress_bar_set_percent)
+        data_vs.make_meta_file_folder_structure()
+
+    def get_data_vs_merged(self):
+        self._last_loaded_folder = data_vs.dump_merged_data(self.progress_bar_set_percent)
+
+    def get_languages_vs_yaml(self):
+        self._last_loaded_folder = language_vs.dump_original_i2l(self.progress_bar_set_percent)
+
+    def get_languages_vs_json(self):
+        self._last_loaded_folder = language_vs.dump_json_i2l(self.progress_bar_set_percent)
+
+    def get_languages_vs_split(self):
+        available_split_types, lang_splits = language_vs.get_available_split_types()
+
+        selected_split_types = self.check_boxes(available_split_types, title="Select split types")
+
+        is_lang_select = any(select and lang for select, lang in zip(selected_split_types, lang_splits))
+
+        selected_langs = None
+        if is_lang_select:
+            available_langs = language_vs.get_available_lang_types()
+
+            selected_langs = self.check_boxes(available_langs,
+                                              label="Select languages to include in split files",
+                                              title="Select languages")
+            selected_langs = [available_langs[i] for i, is_selected in enumerate(selected_langs) if is_selected]
+
+        self._last_loaded_folder = language_vs.dump_split_i2l(selected_split_types, selected_langs,
+                                                              self.progress_bar_set_percent)
+
+        language_vs.make_meta_file_split_folder_structure()
+
+    ###
 
     def get_data_vc_all(self):
         dumpers = data_vc.get_available_dumpers()
@@ -228,3 +263,8 @@ class UIBase:
         self._last_loaded_folder = data_vc.dump_selected_data(selected, self.progress_bar_set_percent)
 
         data_vc.make_meta_file_folder_structure()
+
+    def get_languages_vc_all(self):
+        self._last_loaded_folder = language_vc.save_all_langs(self.progress_bar_set_percent)
+
+    ###

@@ -8,7 +8,7 @@ from PIL import ImageFont, ImageDraw
 from PIL.Image import Image, Resampling, open as image_open, new as image_new
 
 import Source.Images.transparent_save as tr_save
-from Source.Translations.language import LangType
+from Source.Translations.language_vs import LangType
 from Source.Utility.constants import DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, to_source_path
 from Source.Utility.image_functions import get_anim_sprites_ready, resize_list_images
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path

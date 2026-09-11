@@ -13,18 +13,18 @@ from tkinter.simpledialog import askinteger
 import PIL
 from PIL.Image import open as image_open
 
-import Source.Data.data as data_module
+import Source.Data.data_vs as data_module
 import Source.Data.game_version as game_version
 import Source.Images.transparent_save as tr_save
-import Source.Translations.language as lang_module
+import Source.Translations.language_vs as lang_module
 from Source.Config.config import CfgKey, DLC, Config, Game
 from Source.Data import data_vc
-from Source.Data.data import DataHandler
+from Source.Data.data_vs import DataHandler
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import image_gen, image_gen_vc
 from Source.Images.image_gen_vs import ImageGeneratorManager
 from Source.Translations import language_vc
-from Source.Translations.language import LangHandler, LangType
+from Source.Translations.language_vs import LangHandler, LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import I2_LANGUAGES, ROOT_FOLDER, IS_DEBUG, \
     DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, GENERATED, TILEMAPS, DATA_FOLDER, TRANSLATIONS_FOLDER, SPLIT, \
@@ -569,7 +569,7 @@ class UIOld(tk.Tk):
 
         if split_index == len(split_types) - 1:
             langs_list = LangHandler.get_lang_list()
-            cbs = CheckBoxes(LangHandler.get_lang_list(True), parent=self,
+            cbs = CheckBoxes(langs_list, parent=self,
                              label="Select languages to include in split files",
                              title="Select languages")
             cbs.wait_window()

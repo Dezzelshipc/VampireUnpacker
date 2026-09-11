@@ -5,10 +5,12 @@ from enum import Enum
 from pathlib import Path
 from typing import Any
 
-from Source.Config.config import DLC
-from Source.Utility.constants import DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, COMPOUND_DATA, COMPOUND_DATA_TYPE
-from Source.Data.meta_data import MetaDataHandler
+from Source.Config.config import DLC, Game
+from Source.Utility.constants import DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, COMPOUND_DATA, COMPOUND_DATA_TYPE, \
+    DATA_FOLDER, PROGRESS_BAR_FUNC_TYPE, PROGRESS_BAR_FUNC_DEFAULT, GENERATED
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.special_classes import Objectless
+from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc
 from Source.Utility.utility import to_pascalcase, clean_all_json, clean_commas_json
 
@@ -274,12 +276,72 @@ class DataHandler(Objectless):
         cls.load()
         return sum(len(dfs) for dfs in cls._loaded_data.values())
 
+def make_meta_file_folder_structure() -> Path:
+    save_path = to_current_game_path(DATA_FOLDER)
+    save_path.mkdir(parents=True, exist_ok=True)
+    save_path /= "Metadata.json"
+
+    folder_meta_data = {
+        dlc_type.value.full_name: [dlc.value for dlc in DataHandler.get_dict_by_dlc_type(dlc_type).keys()]
+        for dlc_type in DLC.get_all_types_by_game(Game.VS)
+    }
+    save_path.write_text(json.dumps(folder_meta_data, ensure_ascii=False, indent=2))
+
+    return save_path
+
+def dump_all_data(
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> Path:
+    assert MetaDataHandler.loaded_game == Game.VS, f"Loaded wrong metadata ({MetaDataHandler.loaded_game}). Need {Game.VC}"
+
+    _timeit = Timeit()
+
+    data_path = to_current_game_path(DATA_FOLDER)
+    total_amount = DataHandler.get_total_amount()
+    i = 0
+
+    dlc_types = DLC.get_all_types_by_game(Game.VS)
+    for dlc_type in dlc_types:
+        save_path = data_path / dlc_type.value.full_name
+        save_path.mkdir(parents=True, exist_ok=True)
+
+        data_files = DataHandler.get_dict_by_dlc_type(dlc_type)
+        for data_type, data_file in data_files.items():
+            with open((save_path / data_type.value).with_suffix(".json"), mode="w", encoding="UTF-8") as f:
+                f.write(data_file.raw_text_cleaned_commas())
+
+            func_progress_bar_set_percent(i := i + 1, total_amount, f"{dlc_type.value.full_name} - {data_type.value} {_timeit!r}")
+
+    return data_path
+
+def dump_merged_data(
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> Path:
+    assert MetaDataHandler.loaded_game == Game.VS, f"Loaded wrong metadata ({MetaDataHandler.loaded_game}). Need {Game.VC}"
+
+    _timeit = Timeit()
+
+    save_path = to_current_game_path(DATA_FOLDER) / GENERATED
+    save_path.mkdir(parents=True, exist_ok=True)
+
+    data_types = DataType.get_all_types()
+    total_amount = len(data_types)
+    i = 0
+
+    for data_type in data_types:
+        func_progress_bar_set_percent(i := i + 1, len(data_types), f"{data_type.value} {_timeit!r}")
+
+        data_file = DataHandler.get_data(COMPOUND_DATA, data_type)
+        with open((save_path / data_type.value).with_suffix(".json"), mode="w", encoding="UTF-8") as f:
+            f.write(data_file.raw_text())
+
+    return save_path
 
 if __name__ == "__main__":
     DataHandler.load()
 
 
-def get_all_fields(dlc_type: DLC | None, data_type: DataType):
+def __get_all_fields(dlc_type: DLC | None, data_type: DataType):
     data = DataHandler.get_data(dlc_type, data_type).data()
     entry = None
     for k, v in data.items():

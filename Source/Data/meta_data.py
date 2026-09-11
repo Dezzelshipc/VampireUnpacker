@@ -1,9 +1,9 @@
 import re
-from tkinter.messagebox import showerror
-from dataclasses import dataclass
 from collections.abc import Callable
+from enum import StrEnum
 from pathlib import Path
 from tkinter import Image
+from tkinter.messagebox import showerror
 
 from PIL.Image import Image, open as image_open
 
@@ -11,7 +11,7 @@ from Source.Config.config import DLC, Config, Game
 from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJECT, PREFAB_INSTANCE, AUDIO_CLIP, \
     MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL, ROOT_FOLDER, VERSION_DATA
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
-from Source.Utility.multirun import run_multiprocess_single, run_concurrent_sync
+from Source.Utility.multirun import run_multiprocess_single
 from Source.Utility.special_classes import Objectless, Emitter
 from Source.Utility.sprite_data import SpriteData, AnimationData, SKIP_ANIM_NAMES_LIST
 from Source.Utility.timer import Timeit
@@ -202,10 +202,12 @@ class MetaDataHandler(Emitter, Objectless):
     _assets_name_path: dict[str, Path] = {}
     _assets_guid_path: dict[str, Path] = {}
 
-    _on_loaded_game_callback: list[Callable[[Game], None]] = []
-
     loaded_game: Game = Game.NONE
     loaded_assets_meta: dict[str, MetaData] = {}
+
+    class Emit(StrEnum):
+        AFTER_LOAD = "after_load"
+        BEFORE_LOAD = "before_load"
 
     @classmethod
     def load(cls, game: Game):
@@ -213,11 +215,11 @@ class MetaDataHandler(Emitter, Objectless):
             if cls.loaded_game != Game.NONE:
                 cls.unload()
 
-            cls.emit("before_load", cls.loaded_game, game)
+            cls.emit(MetaDataHandler.Emit.BEFORE_LOAD, cls.loaded_game, game)
             cls.loaded_game = game
             cls._load_assets_meta_file_paths()
             cls._load_assets_meta_files_guids()
-            cls.emit("after_load", cls.loaded_game)
+            cls.emit(MetaDataHandler.Emit.AFTER_LOAD, cls.loaded_game)
 
     @classmethod
     def unload(cls):
@@ -227,7 +229,7 @@ class MetaDataHandler(Emitter, Objectless):
         cls.loaded_assets_meta.clear()
         print(f"MetaData unloaded [{cls.loaded_game.name if cls.loaded_game else ""}]")
         cls.loaded_game = Game.NONE
-        cls.emit("after_load", cls.loaded_game)
+        cls.emit(MetaDataHandler.Emit.AFTER_LOAD, cls.loaded_game)
 
     @classmethod
     def is_loaded(cls):

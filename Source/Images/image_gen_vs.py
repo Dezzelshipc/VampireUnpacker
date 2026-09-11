@@ -12,8 +12,8 @@ from PIL import ImageFont, ImageDraw
 from PIL.Image import Image, open as image_open, new as image_new
 
 from Source.Config.config import DLC
-from Source.Data.data import DataHandler, DataType, DataFile
-from Source.Translations.language import LangHandler, LangType
+from Source.Data.data_vs import DataHandler, DataType, DataFile
+from Source.Translations.language_vs import LangHandler, LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, COMPOUND_DATA_TYPE, GENERATED, \
     PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA, PROGRESS_BAR_FUNC_DEFAULT

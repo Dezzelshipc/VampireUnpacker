@@ -6,7 +6,7 @@ from typing import Iterable, Callable, Any
 import tkinter as tk
 from tkinter import simpledialog, messagebox, filedialog, ttk
 
-from Source.Config.config import Game, DLC, Config
+from Source.Config.config import Game, DLC, Config, CfgKey
 from Source.Data.meta_data import MetaDataHandler
 from Source.Data import data_vc
 from Source.Translations import language_vc
@@ -105,8 +105,8 @@ class UITkinter(tk.Tk, UIBase):
         _md_change_frame = ttk.Frame(_md_frame)
         _md_change_frame.grid(column=0, row=1)
 
-        MetaDataHandler.register("after_load", after_load)
-        MetaDataHandler.register("before_load",
+        MetaDataHandler.register(MetaDataHandler.Emit.AFTER_LOAD, after_load)
+        MetaDataHandler.register(MetaDataHandler.Emit.BEFORE_LOAD,
                                  lambda o, n: upd_md(f"Loading metadata for {n.get_default_dlc().value.full_name}..."))
 
         ttk.Button(
@@ -177,7 +177,7 @@ class UITkinter(tk.Tk, UIBase):
         ###
         self._main_frame.grid(column=0, row=6, pady=self._pady)
 
-        def set_main_frame(game: Game | None) -> None:
+        def set_main_frame(game: Game) -> None:
             match game:
                 case Game.VS:
                     self.set_vs_frame()
@@ -186,7 +186,7 @@ class UITkinter(tk.Tk, UIBase):
                 case _:
                     self.clear_main_frame()
 
-        MetaDataHandler.register("after_load", set_main_frame)
+        MetaDataHandler.register(MetaDataHandler.Emit.AFTER_LOAD, set_main_frame)
         ###
 
     def clear_main_frame(self):
@@ -203,6 +203,43 @@ class UITkinter(tk.Tk, UIBase):
             command=self.create_version_file,
         ).grid(column=0, row=0)
 
+
+        _data_frame = ttk.Frame(main_frame)
+        _data_frame.grid(column=0, row=1)
+
+        ttk.Button(
+            _data_frame,
+            text="Get data",
+            command=self.get_data_vs_all
+        ).grid(row=0, column=0)
+
+        ttk.Button(
+            _data_frame,
+            text="Get merged data",
+            command=self.get_data_vs_merged
+        ).grid(row=0, column=1)
+
+        _lang_frame = ttk.Frame(main_frame)
+        _lang_frame.grid(column=0, row=2)
+
+        ttk.Button(
+            _lang_frame,
+            text="Get language strings file yaml",
+            command=self.get_languages_vs_yaml
+        ).grid(row=0, column=0)
+
+        ttk.Button(
+            _lang_frame,
+            text="Get language strings file json",
+            command=self.get_languages_vs_json
+        ).grid(row=0, column=1)
+
+        ttk.Button(
+            _lang_frame,
+            text="Get split language strings files",
+            command=self.get_languages_vs_split
+        ).grid(row=0, column=2)
+
     def set_vc_frame(self):
         self.clear_main_frame()
         main_frame = self._main_frame
@@ -215,14 +252,14 @@ class UITkinter(tk.Tk, UIBase):
 
         ttk.Button(
             main_frame,
-            text="Get language strings",
-            command=self.get_languages_vs_all
+            text="Get data",
+            command=self.get_data_vc_all
         ).grid(column=0, row=1)
 
         ttk.Button(
             main_frame,
-            text="Get data",
-            command=self.get_data_vc_all
+            text="Get language strings",
+            command=self.get_languages_vc_all
         ).grid(column=0, row=2)
 
     @staticmethod

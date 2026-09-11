@@ -61,7 +61,7 @@ class COMPOUND_DATA(Objectless):
 
 COMPOUND_DATA_TYPE = type[COMPOUND_DATA]
 
-PROGRESS_BAR_FUNC_TYPE = Callable[[int | float, int | float], None]
+PROGRESS_BAR_FUNC_TYPE = Callable[[int | float, int | float], None] | Callable[[int | float, int | float, str], None]
 PROGRESS_BAR_FUNC_DEFAULT: Final[PROGRESS_BAR_FUNC_TYPE] = lambda c, t: None
 
 

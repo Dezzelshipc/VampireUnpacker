@@ -214,7 +214,7 @@ class Config(Objectless):
                     continue
                 data[CfgKey(key_m)] = val if CfgKey(key_m) in CfgKey.get_non_path_keys() else Path(val)
 
-            cls.__data.update(data)
+            cls._update_data(data)
 
     @classmethod
     def _update_data(cls, data: dict[CfgKey, Path | bool]):
@@ -229,9 +229,14 @@ class Config(Objectless):
         return cls.get_data().get(item)
 
     @classmethod
-    def assert_key(cls, item: CfgKey):
-        i = cls[item]
+    def assert_key(cls, key: CfgKey):
+        i = cls[key]
         assert i is not None and i != Path()
+
+    @classmethod
+    def has_valid(cls, key: CfgKey) -> bool:
+        i = cls[key]
+        return i and i != Path()
 
     @classmethod
     def get_multiprocessing(cls) -> bool:

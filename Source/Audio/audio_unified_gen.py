@@ -7,12 +7,12 @@ from typing import Literal, Any
 
 from pydub import AudioSegment
 
-import Source.Data.data as data_module
-import Source.Translations.language as lang_module
+import Source.Data.data_vs as data_module
+import Source.Translations.language_vs as lang_module
 from Source.Config.config import DLC, Config
-from Source.Data.data import DataType
+from Source.Data.data_vs import DataType
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
-from Source.Translations.language import LangType
+from Source.Translations.language_vs import LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import GENERATED, COMPOUND_DATA, AUDIO_FOLDER, COMPOUND_DATA_TYPE, PROGRESS_BAR_FUNC_TYPE, \
     PROGRESS_BAR_FUNC_DEFAULT
