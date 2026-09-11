@@ -11,7 +11,7 @@ from typing import Any, Callable
 from PIL import ImageFont, ImageDraw
 from PIL.Image import Image, open as image_open, new as image_new
 
-from Source.Config.config import DLCType
+from Source.Config.config import DLC
 from Source.Data.data import DataHandler, DataType, DataFile
 from Source.Translations.language import LangHandler, LangType
 from Source.Translations.language_utils import Lang
@@ -172,7 +172,7 @@ class ImageGeneratorManager:
         return set(filter(ImageGeneratorManager.get_gen, DataType.get_all_types()))
 
     @staticmethod
-    def gen_unified_images(dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def gen_unified_images(dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                            func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
                            parent=None) -> Path | None:
         gen_class: BaseImageGenerator.__class__ = ImageGeneratorManager.get_gen(data_type)
@@ -216,7 +216,7 @@ class BaseImageGenerator:
 
     default_frame_name = None
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         self.data_file: DataFile | None = DataHandler.get_data(dlc_type, data_type)
 
@@ -237,11 +237,11 @@ class BaseImageGenerator:
             self.get_unit(key_id, entry.copy()) for key_id, entry in self.data_file.data().items()
         ]
 
-    def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def main_generator(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
 
-        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / DLCType.string(dlc_type)
+        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / DLC.string(dlc_type)
         save_path.mkdir(parents=True, exist_ok=True)
 
         total_len = len(self.entries)
@@ -437,7 +437,7 @@ class ArcanaImageGenerator(BaseImageGenerator):
         textures_set.update({entry.get(self.key_secondary_texture_name) for entry in self.entries})
         return textures_set
 
-    def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def main_generator(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         save_path = super().main_generator(dlc_type, data_type)
         scale = self.requested_gens.get(GenType.IMAGE)
@@ -652,7 +652,7 @@ class CharacterImageGenerator(ListBaseImageGenerator):
 
     default_frame_name = "CharacterSelectFrame.png"
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         super().__init__(dlc_type, data_type, requested_gen_types)
 
@@ -761,7 +761,7 @@ class EnemyImageGenerator(ListBaseImageGenerator):
     key_frame_name = None
     key_entry_name = "bName"
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         super().__init__(dlc_type, data_type, requested_gen_types)
         raise NotImplementedError(f"{self.__class__.__name__} not implemented")
@@ -782,7 +782,7 @@ class StageImageGenerator(ListBaseImageGenerator):
     key_frame_name = None
     key_entry_name = "stageName"
 
-    def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def main_generator(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
         save_path = super().main_generator(dlc_type, data_type, func_progress_bar_set_percent)
@@ -846,7 +846,7 @@ class AdventureStageImageGenerator(StageImageGenerator):
     stage_set: DataFile = None
     stage_to_stage_set: dict[str, str] | None = None
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         self.stage_set: DataFile | None = DataHandler.get_data(dlc_type, DataType.ADVENTURE_STAGE_SET)
         self.stage_to_stage_set = {

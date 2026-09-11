@@ -1,12 +1,11 @@
 * [Vampire Survivors Files](https://github.com/Dezzelshipc/VampireSurvivorsFiles)
 * [Vampire Crawlers Files](https://github.com/Dezzelshipc/VampireCrawlersFiles)
 
-# Unpacker (v0.17.1) - Data manager and Image generator
+# Unpacker (v0.18.0a) - Data manager and Image generator
 
 Run [unpacker.py](unpacker.py) with [run.bat](run.bat). It can unpack images, get language strings and split them to
-different files and
-languages, unpack images based on data files and make them with unified names, making (almost correct) animations
-of characters and enemies.
+different files and languages, unpack images based on data files and make them with unified names, making (almost
+correct) animations of characters and enemies.
 
 ### Getting started
 
@@ -14,30 +13,31 @@ Use [Python 3.12](https://www.python.org/downloads/) with _**tkinter**_ and inst
 `pip install -r requirements.txt` (Can be done in global or venv. [run.bat](run.bat) has parameter of venv name when
 using in terminal. Default name ".venv". If venv not found it starts in global.)
 
-Enter paths to folders where ripped assets for respective DLCs will be located with _**Change config**_.
+Enter paths to folders for respective Games' _steam_ folder, ripped _assets_ folder (to be used by AssetRipper), and
+dumped _data_ folder (to be used by Unpacker) with _**Change config**_.
 
-* ! ***NOTE*** that ripping will **<u>REMOVE EVERYTHING</u>** in selected folders!
+* ! ***NOTE*** that ripping will **<u>REMOVE EVERYTHING</u>** in selected **<u>assets</u>** folders!
 
-Using [AssetRipper](https://github.com/AssetRipper/AssetRipper) (v1.3.8+)
+Using [AssetRipper](https://github.com/AssetRipper/AssetRipper) (v1.3.8+; latest tested: v2.0.0)
 
-* **<u>Automatically</u>** (Recommended) - Enter path to AssetRipper.exe and Steam folder for Vampire Survivors in
-  config. Press _**Magic button**_ and select DLCs to rip. Your previous settings for AssetRipper will be saved.
+* **<u>Automatically</u>** (Recommended) - Enter path to folder with AssetRipper.exe and Steam folder for Vampire
+  Survivors in config. Press _**Magic button**_ and select Games to rip. Your previous settings for AssetRipper will be
+  saved.
 
 
 * **Manually** - Export with **Export Unity Project** with settings:
 
     * Turn off "_Skip StreamingAssets Folder_",
     * "_Bundled Assets Export Mode_" set to _**Group By Asset Type**_,
-    * "_Script Content Level_" set to _**Level 2**_ (**Warning**: Levels 1,2 could crash ripper for some reason (in old
-      versions), but only from Level 1 you can rip I2Languages. If it crashes try level 0),
+    * "_Script Content Level_" set to _**Level 2**_,
     * "_Sprite Export Format_" set to _**Texture**_,
     * Tick "_Save Settings to Disk_" checkbox and click "Save" button to save settings.
-        * Main game and each DLC must be ripped separately (You have to own DLCs).
-          In `...\steamapps\common\Vampire Survivors` select `VampireSurvivors_Data` or numbered folders (DLCs) to open
-          in AssetRipper.
+    * Click "File" -> "Open Folder" and select steam folder with game to open in AssetRipper.
+    * After loading click "Export" -> "Export All Files", select folder for ripped assets, and click **Export Unity
+      Project**
 
-_**Enable multiprocessing**_ can increase speed in some cases in exchange for "heavily" loading CPU (and possibility of
-overflowing memory for very big files).
+_**Enable multiprocessing**_ in config can increase speed in some cases in exchange for "heavily" loading CPU (and
+possibility of overflowing memory for very big files).
 
 * Currently for: _Get stage tilemap_, _Get unified audio_, _Some necessary data processing
   (Parsing data, lang, metadata, etc.)_.

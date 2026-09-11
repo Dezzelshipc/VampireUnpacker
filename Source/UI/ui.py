@@ -2,7 +2,7 @@ from os import PathLike
 from pathlib import Path
 from typing import Iterable, Any
 
-from Source.Config.config import Config, DLCType, CfgKey, Game
+from Source.Config.config import Config, DLC, CfgKey, Game
 from Source.Data import game_version, data_vc
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import transparent_save
@@ -89,37 +89,39 @@ class UIBase:
             self.show_error("Error", "Not found path to AssetRipper")
             return
 
-        dlc_types_list = []
-        for d in DLCType.get_all_types():
-            if Config[d.value.config_key]:
-                dlc_types_list.append(d)
+        games_list = []
+        for g in Game.get_all_types():
+            if Config[g.value.steam_folder] != Path():
+                games_list.append(g)
 
-        data_from_popup = self.check_boxes(dlc_types_list, label="Select DLCs to rip", title="Select DLCs")
+        games_list.sort()
+
+        data_from_popup = self.check_boxes(games_list, label="Select DLCs to rip", title="Select DLCs")
         if not data_from_popup:
             return
 
-        dlc_types_set = {t for i, t in enumerate(dlc_types_list) if data_from_popup[i]}
-        if not dlc_types_set:
+        games_set = {t for i, t in enumerate(games_list) if data_from_popup[i]}
+        if not games_set:
             return
 
-        print(f"Started ripping files: {dlc_types_set}")
+        print(f"Started ripping files: {games_set}")
         from Source.Ripper.ripper import rip_files
-        rip_files(dlc_types_set, self.__class__)
+        rip_files(games_set, self.__class__)
 
         print("Finished ripping files")
         MetaDataHandler.unload()
 
     @staticmethod
-    def get_assets_dir(key: DLCType = DLCType.VS) -> Path:
-        path = Config.get_assets_dir(key)
+    def get_assets_dir(game: Game) -> Path:
+        path = Config.get_assets_dir(game)
         return path.exists() and path or Path()
 
     @staticmethod
     def create_version_file():
         game_version.load_version_file()
 
-    def dlc_selector(self, allow_compound: bool = False, parent=None) -> DLCType | COMPOUND_DATA_TYPE | None:
-        all_dlcs = DLCType.get_all_types()
+    def dlc_selector(self, allow_compound: bool = False, parent=None) -> DLC | COMPOUND_DATA_TYPE | None:
+        all_dlcs = DLC.get_all_types()
         compound = repr(COMPOUND_DATA)
         if allow_compound:
             all_dlcs.append(compound)
@@ -128,8 +130,12 @@ class UIBase:
 
         return COMPOUND_DATA if ret == compound else ret
 
+    def game_selector(self, parent=None) -> Game | None:
+        return self.buttons_box(sorted(Game.get_all_types()), "Select Game",
+                                "Select Game from which data file will be selected", parent)
+
     def unpack_by_meta_from_spritesheets(self, generate_function):
-        folder = self.get_assets_dir().joinpath("Resources", "spritesheets")
+        folder = self.get_assets_dir(Game.VS).joinpath("Resources", "spritesheets")
 
         if not folder.exists():
             self.show_warning("Warning", "Spritesheets folder does not found.")
@@ -138,11 +144,11 @@ class UIBase:
         self.generate_by_meta_selector(folder, generate_function)
 
     def unpack_by_meta(self, generate_function):
-        selected_dlc = self.dlc_selector()
-        if not selected_dlc:
+        selected_game = self.game_selector()
+        if not selected_game:
             return
 
-        _start_path = self.get_assets_dir(selected_dlc)
+        _start_path = self.get_assets_dir(selected_game)
         start_paths = [_start_path.joinpath("Texture2D"), _start_path]
 
         while (start_path := start_paths.pop(0)) and not start_path.exists():

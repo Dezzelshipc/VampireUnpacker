@@ -6,7 +6,7 @@ from typing import Iterable, Callable, Any
 import tkinter as tk
 from tkinter import simpledialog, messagebox, filedialog, ttk
 
-from Source.Config.config import Game, DLCType, Config
+from Source.Config.config import Game, DLC, Config
 from Source.Data.meta_data import MetaDataHandler
 from Source.Data import data_vc
 from Source.Translations import language_vc
@@ -88,9 +88,9 @@ class UITkinter(tk.Tk, UIBase):
             _metadata_label_string.set(text)
             _metadata_label.update()
 
-        def after_load(game: Game | None) -> None:
+        def after_load(game: Game) -> None:
             match game:
-                case None:
+                case Game.NONE:
                     metadata_string = f"Not loaded any metadata"
                 case Game.SPECIAL:
                     metadata_string = f"Loaded empty (special) metadata for generating images from meta"
@@ -100,7 +100,7 @@ class UITkinter(tk.Tk, UIBase):
             upd_md(metadata_string)
 
         self.__update_loaded_metadata = after_load
-        after_load(None)
+        after_load(Game.NONE)
 
         _md_change_frame = ttk.Frame(_md_frame)
         _md_change_frame.grid(column=0, row=1)

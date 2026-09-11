@@ -13,7 +13,7 @@ def write_in_file_end(save_path: Path, lines: list[str]):
         f.writelines(lines)
 
 
-def normalize_str(s) -> str:
+def normalize_str(s: Path | str) -> str:
     s = Path(str(s))
     name = s.name
     try:

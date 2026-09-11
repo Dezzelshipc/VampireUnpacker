@@ -84,17 +84,18 @@ class MetaDataGet(BaseMetaDataTest):
         self.assertEqual(set(data_dict.keys()), guids_set)
 
     def test_init_sprites_animations(self):
-        names_set = set(self.names_list)
-        data_set = MetaDataHandler.get_meta_by_name_set(names_set)
+        vals = dict(zip(map(normalize_str, self.names_list), zip([10] * len(self.names_list), [5] * (len(self.names_list) - 1) + [0])))
+        data_set = MetaDataHandler.get_meta_by_name_set(set(vals.keys()))
 
-        for data, sp_i, an_i in zip(data_set, [10] * 4, [5, 5, 5, 0]):
+        for data in data_set:
+            sp_i, an_i = vals[data.name]
             data.init_sprites()
             data.init_animations()
 
             self.assertGreaterEqual(sum(map(lambda x: x.sprite is not None, data.data_name.values())), sp_i,
-                                    f"Failed on {data.real_name}")
+                                    f"Failed sprites on {data.real_name}")
             self.assertGreaterEqual(sum(map(lambda x: x.animation is not None, data.data_name.values())), an_i,
-                                    f"Failed on {data.real_name}")
+                                    f"Failed animations on {data.real_name}")
 
 
 if __name__ == "__main__":

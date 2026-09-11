@@ -92,9 +92,9 @@ def unity_unravel_doc(unity_doc: UnityDoc, depth: int = 1, is_load_sprites: bool
 if __name__ == "__main__":
     from Source.Config.config import Game
 
-    MetaDataHandler.load(Game.VC)
+    MetaDataHandler.load(Game.VS)
 
-    db_name = "GemDatabase"
+    db_name = "DlcCatalog"
     print(db_name)
 
     path = MetaDataHandler.get_path_by_name_no_meta(db_name)

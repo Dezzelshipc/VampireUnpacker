@@ -5,7 +5,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Any
 
-from Source.Config.config import DLCType
+from Source.Config.config import DLC
 from Source.Utility.constants import DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, COMPOUND_DATA, COMPOUND_DATA_TYPE
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.special_classes import Objectless
@@ -96,7 +96,7 @@ class DataFile:
     guid: str
     __data_type: DataType | COMPOUND_DATA_TYPE
     __path: Path
-    __to_concat: dict[DLCType, "DataFile"] | None = None
+    __to_concat: dict[DLC, "DataFile"] | None = None
     __data: dict[str, Any] | None = None
     __raw_text: str | None = None
 
@@ -104,7 +104,7 @@ class DataFile:
         return f"<{self.__class__.__name__}: {self.__data_type}, {self.guid}>"
 
     def __init__(self, data_type: DataType | COMPOUND_DATA_TYPE, guid: str | None,
-                 data_to_concat: dict[DLCType, "DataFile"] = None):
+                 data_to_concat: dict[DLC, "DataFile"] = None):
         self.__data_type = data_type
         self.guid = guid
         self.__to_concat = data_to_concat
@@ -144,10 +144,10 @@ class DataFile:
         return self.__data_type
 
 
-def _concatenate(data_to_concat: dict[DLCType, DataFile]):
+def _concatenate(data_to_concat: dict[DLC, DataFile]):
     out_data = {}
     index_start = 0
-    for dlc_type in DLCType.get_all_types():
+    for dlc_type in DLC.get_all_types():
         index_cur = 0
 
         data_file = data_to_concat.get(dlc_type)
@@ -210,7 +210,7 @@ def _concatenate(data_to_concat: dict[DLCType, DataFile]):
 
 
 class DataHandler(Objectless):
-    _loaded_data: dict[DLCType, dict[DataType, DataFile]] = {}
+    _loaded_data: dict[DLC, dict[DataType, DataFile]] = {}
     _concat_data: dict[DataType, DataFile] = {}
 
     @classmethod
@@ -225,9 +225,9 @@ class DataHandler(Objectless):
 
         if vs_data:
             doc = UnityDoc.yaml_parse_file(vs_data[0][1].with_suffix(""))
-            loaded_data[DLCType.VS] = doc.entries[0].data['_Settings']
+            loaded_data[DLC.VS] = doc.entries[0].data['_Settings']
 
-        all_dlc_types = DLCType.get_all_types()
+        all_dlc_types = DLC.get_all_types()
         dlc_datas = MetaDataHandler.filter_paths(lambda name_path: BUNDLE_MANIFEST_DATA.lower() in name_path[0])
         for name, path in dlc_datas:
             for dlc_type in all_dlc_types:
@@ -252,13 +252,13 @@ class DataHandler(Objectless):
             cls._loaded_data[dlc_type] = current_dlc
 
         for data_type in DataType.get_all_types():
-            concat_data: dict[DLCType, DataFile] = {}
+            concat_data: dict[DLC, DataFile] = {}
             for dlc_type in all_dlc_types:
                 concat_data[dlc_type] = cls._loaded_data.get(dlc_type, {}).get(data_type)
             cls._concat_data[data_type] = DataFile(COMPOUND_DATA, None, concat_data)
 
     @classmethod
-    def get_dict_by_dlc_type(cls, dlc_type: DLCType | COMPOUND_DATA_TYPE) -> dict[DataType, DataFile]:
+    def get_dict_by_dlc_type(cls, dlc_type: DLC | COMPOUND_DATA_TYPE) -> dict[DataType, DataFile]:
         cls.load()
         if dlc_type == COMPOUND_DATA:
             return cls._concat_data
@@ -266,7 +266,7 @@ class DataHandler(Objectless):
             return cls._loaded_data.get(dlc_type)
 
     @classmethod
-    def get_data(cls, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType | None) -> DataFile:
+    def get_data(cls, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType | None) -> DataFile:
         return (cls.get_dict_by_dlc_type(dlc_type) or {}).get(data_type)
 
     @classmethod
@@ -279,7 +279,7 @@ if __name__ == "__main__":
     DataHandler.load()
 
 
-def get_all_fields(dlc_type: DLCType | None, data_type: DataType):
+def get_all_fields(dlc_type: DLC | None, data_type: DataType):
     data = DataHandler.get_data(dlc_type, data_type).data()
     entry = None
     for k, v in data.items():

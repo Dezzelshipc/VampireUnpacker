@@ -17,7 +17,7 @@ import Source.Data.data as data_module
 import Source.Data.game_version as game_version
 import Source.Images.transparent_save as tr_save
 import Source.Translations.language as lang_module
-from Source.Config.config import CfgKey, DLCType, Config, Game
+from Source.Config.config import CfgKey, DLC, Config, Game
 from Source.Data import data_vc
 from Source.Data.data import DataHandler
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
@@ -327,8 +327,8 @@ class UIOld(tk.Tk):
         # self.after(10, MetaDataHandler.load, Game.VS)
 
     @staticmethod
-    def get_assets_dir(key: DLCType = DLCType.VS) -> Path:
-        path = Config.get_assets_dir(key)
+    def get_assets_dir(game: Game) -> Path:
+        path = Config.get_assets_dir(game)
         return path.exists() and path or Path()
 
     @staticmethod
@@ -363,7 +363,7 @@ class UIOld(tk.Tk):
             os.startfile(self.last_loaded_folder)
 
     def unpack_by_meta_from_spritesheets(self, generate_function):
-        folder = self.get_assets_dir().joinpath("Resources", "spritesheets")
+        folder = self.get_assets_dir(Game.VS).joinpath("Resources", "spritesheets")
 
         if not folder.exists():
             showwarning("Warning", "Spritesheets folder does not found.")
@@ -372,11 +372,11 @@ class UIOld(tk.Tk):
         self.generate_by_meta_selector(folder, generate_function)
 
     def unpack_by_meta(self, generate_function):
-        selected_dlc = self.dlc_selector()
-        if not selected_dlc:
+        selected_game = self.game_selector()
+        if not selected_game:
             return
 
-        _start_path = self.get_assets_dir(selected_dlc)
+        _start_path = self.get_assets_dir(selected_game)
         start_paths = [_start_path.joinpath("Texture2D"), _start_path]
 
         while (start_path := start_paths.pop(0)) and not start_path.exists():
@@ -610,7 +610,7 @@ class UIOld(tk.Tk):
         print(f"Finished splitting I2Languages to separate categories. {_time!r}")
 
     def get_data(self):
-        if not self.get_assets_dir().exists():
+        if not self.get_assets_dir(Game.VS).exists():
             showwarning("Warning", "VS assets folder must be entered.")
             return
 
@@ -620,7 +620,7 @@ class UIOld(tk.Tk):
         total_amount = DataHandler.get_total_amount()
         i = 0
 
-        dlc_types = DLCType.get_all_types_by_game(Game.VS)
+        dlc_types = DLC.get_all_types_by_game(Game.VS)
         for dlc_type in dlc_types:
             save_path = to_current_game_path(DATA_FOLDER) / dlc_type.value.full_name
             save_path.mkdir(parents=True, exist_ok=True)
@@ -634,7 +634,7 @@ class UIOld(tk.Tk):
 
         folder_meta_data = {
             dlc_type.value.full_name: [dlc.value for dlc in DataHandler.get_dict_by_dlc_type(dlc_type).keys()]
-            for dlc_type in DLCType.get_all_types_by_game(Game.VS)
+            for dlc_type in DLC.get_all_types_by_game(Game.VS)
         }
         save_path = to_current_game_path(DATA_FOLDER) / "Metadata.json"
         save_path.write_text(json.dumps(folder_meta_data, ensure_ascii=False, indent=2))
@@ -700,7 +700,7 @@ class UIOld(tk.Tk):
 
             self.last_loaded_folder = Path(llf)
 
-        if "assets" not in self.get_assets_dir().stem.lower():
+        if "assets" not in self.get_assets_dir(Game.VS).stem.lower():
             showerror("Error", "Assets directory must be selected.")
             return
 
@@ -764,7 +764,7 @@ class UIOld(tk.Tk):
             return
 
         data_type = data_types[bb.return_data]
-        print(f"Started generating images for '{DLCType.string(selected_dlc)}' - '{data_type}'")
+        print(f"Started generating images for '{DLC.string(selected_dlc)}' - '{data_type}'")
 
         timeit = Timeit()
         self.last_loaded_folder = ImageGeneratorManager.gen_unified_images(selected_dlc, data_type,
@@ -772,8 +772,8 @@ class UIOld(tk.Tk):
         print(f"Finished generating unified images {timeit!r}")
 
     @staticmethod
-    def dlc_selector(allow_compound: bool = False, parent=None) -> DLCType | COMPOUND_DATA_TYPE | None:
-        all_dlcs = DLCType.get_all_types()
+    def dlc_selector(allow_compound: bool = False, parent=None) -> DLC | COMPOUND_DATA_TYPE | None:
+        all_dlcs = DLC.get_all_types()
         compound = COMPOUND_DATA.__repr__()
         if allow_compound:
             all_dlcs.append(compound)
@@ -788,7 +788,18 @@ class UIOld(tk.Tk):
         return COMPOUND_DATA if ret == compound else ret
 
     @staticmethod
-    def data_selector_data(dlc_type: DLCType | COMPOUND_DATA_TYPE,
+    def game_selector(parent=None) -> Game | None:
+        all_games = Game.get_all_types()
+
+        bb = ButtonsBox(all_games, "Select Game", "Select Game from which data file will be selected", parent)
+        bb.wait_window()
+
+        if bb.return_data is None:
+            return None
+        return all_games[bb.return_data]
+
+    @staticmethod
+    def data_selector_data(dlc_type: DLC | COMPOUND_DATA_TYPE,
                            parent=None) -> data_module.DataType | None:
         data_types = list(DataHandler.get_dict_by_dlc_type(dlc_type).keys())
 
@@ -802,7 +813,7 @@ class UIOld(tk.Tk):
 
     @staticmethod
     def data_selector(add_title="") -> Path | None:
-        path = Config[MetaDataHandler.loaded_game.get_data_folder_key()]
+        path = Config[MetaDataHandler.loaded_game.value.data_folder]
         if not path.exists():
             return None
 
@@ -822,8 +833,8 @@ class UIOld(tk.Tk):
         return Path(full_path)
 
     def tilemap_gen_handler(self):
-        selected_dlc = self.dlc_selector()
-        if not selected_dlc:
+        selected_game = self.game_selector()
+        if not selected_game:
             return
 
         is_found = False
@@ -831,7 +842,7 @@ class UIOld(tk.Tk):
 
         start_path = ROOT_FOLDER
         for folder in folders:
-            start_path = self.get_assets_dir(selected_dlc).joinpath(folder)
+            start_path = self.get_assets_dir(selected_game).joinpath(folder)
             if start_path.exists():
                 is_found = True
                 break
@@ -907,12 +918,14 @@ class UIOld(tk.Tk):
             showerror("Error", "Not found path to VS steam folder or AssetRipper")
             return
 
-        dlc_types_list = []
-        for d in DLCType.get_all_types():
-            if Config[d.value.config_key]:
-                dlc_types_list.append(d)
+        games_list = []
+        for g in Game.get_all_types():
+            if Config[g.value.steam_folder] != Path():
+                games_list.append(g)
 
-        cbs = CheckBoxes(dlc_types_list, parent=self, label="Select DLCs to rip",
+        games_list.sort()
+
+        cbs = CheckBoxes(games_list, parent=self, label="Select DLCs to rip",
                          title="Select DLCs")
         cbs.wait_window()
         data_from_popup = cbs.return_data
@@ -920,14 +933,14 @@ class UIOld(tk.Tk):
         if not data_from_popup:
             return
 
-        dlc_types_set = {t for i, t in enumerate(dlc_types_list) if data_from_popup[i]}
+        games_set = {t for i, t in enumerate(games_list) if data_from_popup[i]}
 
-        if not dlc_types_set:
+        if not games_set:
             return
 
-        print(f"Started ripping files: {dlc_types_set}")
+        print(f"Started ripping files: {games_set}")
         from Source.Ripper.ripper import rip_files
-        rip_files(dlc_types_set)
+        rip_files(games_set)
 
         print("Finished ripping files")
 

@@ -1,11 +1,11 @@
 import json
 import sys
 
-from Source.Config.config import PROJECT_SETTINGS, Game, DLCType, Config
+from Source.Config.config import PROJECT_SETTINGS, Game, DLC, Config
 from Source.Data.meta_data import MetaDataHandler
 from Source.Utility.constants import VERSION_DATA, VAMPIRE_SURVIVORS
 from Source.Utility.unity_parser import UnityDoc
-from Source.Utility.utility import get_parent_path_to, acf_to_json
+from Source.Utility.utility import get_parent_path_to, acf_to_json, to_pascalcase
 
 
 def get_game_bundle_version() -> str | None:
@@ -37,23 +37,17 @@ def get_game_build_version() -> tuple[str | None, str | None]:
     return data['_BuildId'], data['_BuildTime']
 
 
-def get_dlc_version() -> list[tuple[DLCType, str, str]]:
+def get_dlc_version() -> list[tuple[DLC, str, str]]:
     MetaDataHandler.assert_loaded_game()
 
     assets = []
     match MetaDataHandler.loaded_game:
         case Game.VS:
-            ## Refactor
             assets = [
-                (DLCType.MS, "Moonspell"),
-                (DLCType.BM, "Bloodmoon"),
-                (DLCType.FS, "Foscari"),
-                (DLCType.EM, "Chalcedony"),
-                (DLCType.OG, "FirstBlood"),
-                (DLCType.OC, "ThosePeople"),
-                (DLCType.ED, "Emeralds"),
-                (DLCType.AC, "Lemon"),
+                (dlc, to_pascalcase(dlc.value.code_name))
+                for dlc in DLC.get_all_types_by_game(Game.VS, is_game_sorting=True)[1:]
             ]
+            print(assets)
         case Game.VC:
             pass  ## Not implemented; not any DLC yet
 
@@ -77,16 +71,16 @@ def get_appmanifest() -> dict[str, str]:
 
     MetaDataHandler.assert_loaded_game()
 
-    game = MetaDataHandler.loaded_game
+    game: Game = MetaDataHandler.loaded_game
 
-    path = Config[game.get_main_folder_key()]
+    path = Config[game.value.steam_folder]
     path = get_parent_path_to(path, STEAMAPPS)
 
     if path is None or path.stem != STEAMAPPS:
         print(f"Not found steamapps path for {game}", file=sys.stderr)
         return {}
 
-    path /= f"appmanifest_{game.get_steam_appid()}.acf"
+    path /= f"appmanifest_{game.value.appid}.acf"
 
     with open(path) as f:
         text = acf_to_json(f.read())
@@ -98,7 +92,7 @@ def get_appmanifest() -> dict[str, str]:
 def load_version_file():
     MetaDataHandler.assert_loaded_game()
 
-    data_folder_key = MetaDataHandler.loaded_game.get_data_folder_key()
+    data_folder_key = MetaDataHandler.loaded_game.value.data_folder
     Config.assert_key(data_folder_key)
     data_folder = Config[data_folder_key]
 
