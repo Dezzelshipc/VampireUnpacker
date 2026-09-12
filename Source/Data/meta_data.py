@@ -263,19 +263,23 @@ class MetaDataHandler(Emitter, Objectless):
         ]
 
         match cls.loaded_game:
-            case Game.VS:
+            case Game.VC:
+                path_roots.extend([
+                    (MONO_BEHAVIOUR, ""),
+                    (MATERIAL, ""),
+                ])
+
+            case Game.NONE | Game.SPECIAL:
+                pass
+
+            case game:
                 path_roots.extend([
                     (MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS),
                     (MONO_BEHAVIOUR, BUNDLE_MANIFEST_DATA),
                     (MONO_BEHAVIOUR, VERSION_DATA),
                 ])
 
-                path_roots.extend([(MONO_BEHAVIOUR, to_pascalcase(dlc.value.code_name)) for dlc in DLC.get_all_types_by_game(Game.VS)])
-            case Game.VC:
-                path_roots.extend([
-                    (MONO_BEHAVIOUR, ""),
-                    (MATERIAL, ""),
-                ])
+                path_roots.extend([(MONO_BEHAVIOUR, to_pascalcase(dlc.value.code_name)) for dlc in DLC.get_all_types_by_game(game)])
 
         for root, file_name in path_roots:
             path = Config.get_assets_dir(cls.loaded_game) and Config.get_assets_dir(cls.loaded_game) / root

@@ -1,9 +1,11 @@
 import re
+from pathlib import Path
 from typing import Iterable
 
 from PIL import ImageOps
 from PIL.Image import Image, Resampling
 
+from Source.Utility.constants import PROGRESS_BAR_FUNC_TYPE, PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.sprite_data import SpriteData, SpriteRect, AnimationData
 
 
@@ -93,11 +95,22 @@ def get_anim_sprites_ready(anim: AnimationData) -> list[Image]:
     return get_adjusted_sprites_to_rect((img, rect) for img, rect, sprite_name in anim.get_sprites_iter())
 
 
-def apply_tint(image: Image, tint_color: tuple[int, int, int]) -> Image:
+def get_tint(tint_dec_int: int) -> tuple[int, int, int]:
+    return (
+        (tint_dec_int >> 16) & 0xff,
+        (tint_dec_int >> 8) & 0xff,
+        tint_dec_int & 0xff
+    )
+
+
+def apply_tint(image: Image, tint_color: tuple[int, int, int],
+               func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Image:
     img = image.copy().convert('RGBA')
     pixels = img.load()
 
     width, height = img.size
+
+    total_length = width * height
 
     for x in range(width):
         for y in range(height):
@@ -108,8 +121,22 @@ def apply_tint(image: Image, tint_color: tuple[int, int, int]) -> Image:
             b = int(b * tint_color[2] / 255)
 
             pixels[x, y] = (r, g, b, a)
+            func_progress_bar_set_percent(x * height + y, total_length, f"{x=}, {y=}")
 
     return img
+
+
+def create_tint_image(image_path: Path, save_folder: Path, tint_color: tuple[int, int, int],
+                      func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path:
+    import PIL.Image
+    PIL.Image.MAX_IMAGE_PIXELS = 2766929920
+    image = PIL.Image.open(image_path)
+
+    img = apply_tint(image, tint_color, func_progress_bar_set_percent)
+    img.save(save_folder / image_path.name)
+    img.rotate(180).save(save_folder / image_path.with_stem(image_path.stem + "_inv").name)
+
+    return save_folder
 
 
 def make_image_black(_image: Image, threshold: int = 10) -> Image:
@@ -120,8 +147,9 @@ def make_image_black(_image: Image, threshold: int = 10) -> Image:
             if pixdata[x, y][3] > threshold:
                 pixdata[x, y] = (0, 0, 0, 255)
             else:
-                pixdata[x, y] = (0,)*4
+                pixdata[x, y] = (0,) * 4
     return image
+
 
 if __name__ == "__main__":
     pass

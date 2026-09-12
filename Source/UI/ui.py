@@ -5,11 +5,12 @@ from typing import Iterable, Any
 from Source.Config.config import Config, DLC, CfgKey, Game
 from Source.Data import game_version, data_vc, data_vs
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
-from Source.Images import transparent_save
+from Source.Images import transparent_save, image_gen_vs
 from Source.Images.image_gen_general import generate_images_by_meta, generate_animation_by_meta
 from Source.Translations import language_vc, language_vs
+from Source.Utility import image_functions
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, GENERATED, COMPOUND_DATA_TYPE, COMPOUND_DATA, \
-    DEFAULT_ANIMATION_FRAME_RATE
+    DEFAULT_ANIMATION_FRAME_RATE, PREFAB_INSTANCE, GAME_OBJECT, ROOT_FOLDER, TILEMAPS
 from Source.Utility.popups import ErrorPopup, BasePopup, InfoPopup, WarningPopup
 
 
@@ -71,10 +72,12 @@ class UIBase:
     def progress_bar_set_sec(self, seconds: float, add_text: str = "") -> None:
         raise NotImplementedError()
 
-    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[bool]:
+    def check_boxes[T](self, list_to_boxes: list[T], title="", label: str | list[str] = "", width: int = 300) -> list[
+        bool]:
         raise NotImplementedError()
 
-    def buttons_box(self, list_to_texts, title="", label: str | list[str] = "", width: int = 300) -> Any:
+    def buttons_box[T](self, list_to_texts: list[T], title="", label: str | list[str] = "",
+                       width: int = 300) -> T | None:
         raise NotImplementedError()
 
     def open_last_loaded_folder(self) -> None:
@@ -84,6 +87,36 @@ class UIBase:
         raise NotImplementedError()
 
     ###
+    @staticmethod
+    def get_assets_dir(game: Game) -> Path:
+        path = Config.get_assets_dir(game)
+        return path.exists() and path or Path()
+
+    def dlc_selector(self, game: Game, allow_compound: bool = False) -> DLC | COMPOUND_DATA_TYPE | None:
+        all_dlcs = DLC.get_all_types_by_game(game, is_game_sorting=True)
+        if allow_compound:
+            all_dlcs.append(COMPOUND_DATA)
+
+        return self.buttons_box(all_dlcs, "Select DLC", "Select DLC from which data file will be selected")
+
+    def game_selector(self) -> Game | None:
+        return self.buttons_box(sorted(Game.get_all_types()), "Select Game",
+                                "Select Game from which data file will be selected")
+
+    def load_metadata(self):
+        selected_game = self.game_selector()
+        if not selected_game:
+            return
+
+        if Config.has_valid(selected_game.value.assets_folder):
+            MetaDataHandler.load(selected_game)
+        else:
+            _t = f"Not found path to assets folder for {selected_game}"
+            print(_t)
+            self.show_warning("Warning", _t)
+
+    ###
+
     def rip_data(self) -> None:
         if not Config[CfgKey.RIPPER]:
             self.show_error("Error", "Not found path to AssetRipper")
@@ -112,27 +145,8 @@ class UIBase:
         MetaDataHandler.unload()
 
     @staticmethod
-    def get_assets_dir(game: Game) -> Path:
-        path = Config.get_assets_dir(game)
-        return path.exists() and path or Path()
-
-    @staticmethod
     def create_version_file():
         game_version.load_version_file()
-
-    def dlc_selector(self, game: Game, allow_compound: bool = False, parent=None) -> DLC | COMPOUND_DATA_TYPE | None:
-        all_dlcs = DLC.get_all_types_by_game(game)
-        compound = repr(COMPOUND_DATA)
-        if allow_compound:
-            all_dlcs.append(compound)
-
-        ret = self.buttons_box(all_dlcs, "Select DLC", "Select DLC from which data file will be selected", parent)
-
-        return COMPOUND_DATA if ret == compound else ret
-
-    def game_selector(self, parent=None) -> Game | None:
-        return self.buttons_box(sorted(Game.get_all_types()), "Select Game",
-                                "Select Game from which data file will be selected", parent)
 
     def unpack_by_meta_from_spritesheets(self, generate_function):
         folder = self.get_assets_dir(Game.VS).joinpath("Resources", "spritesheets")
@@ -215,6 +229,69 @@ class UIBase:
         except BasePopup as p:
             self.show_popup(p)
 
+    def get_tilemap(self, selected_game: Game | None = None):
+        if selected_game is None or selected_game == Game.NONE:
+            return
+
+        is_found = False
+        folders = [GAME_OBJECT, PREFAB_INSTANCE]
+
+        start_path = None
+        for folder in folders:
+            start_path = self.get_assets_dir(selected_game).joinpath(folder)
+            if start_path.exists():
+                is_found = True
+                break
+
+        if not is_found:
+            self.show_warning("Error", "Folder with prefabs not found.")
+            start_path = Config[selected_game.value.assets_folder]
+
+        full_paths = self.ask_open_file_names(
+            title='Select prefab files of tilemap',
+            initialdir=start_path,
+            filetypes=[('Prefab', '*.prefab')]
+        )
+        if not full_paths:
+            return
+
+        print(f"Selected for generating tilemap: {full_paths!r}")
+
+        from Source.Images import tilemap_gen
+        save_folder = None
+        for full_path in full_paths:
+            save_folder = tilemap_gen.create_tilemap(full_path,
+                                                     func_progress_bar_set_percent=self.progress_bar_set_percent)
+        print(f"Finished generating all tilemaps: {[fp.name for fp in full_paths]}")
+        self._last_loaded_folder = save_folder
+
+    def create_inverse_tilemap(self):
+        selecting_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / TILEMAPS
+        while not selecting_path.exists():
+            selecting_path = selecting_path.parent
+
+        image_path = self.ask_open_file_name(
+            title='Open an image file of tilemap',
+            initialdir=selecting_path,
+            filetypes=[('Images', '*.png')]
+        )
+
+        if not image_path:
+            return
+
+        tint_dec_int = self.ask_integer("Enter tint", "Enter tint in form of integer base 10")
+        tint = image_functions.get_tint(tint_dec_int)
+
+        is_create = self.ask_yes_no("Create inverse?",
+                                    f"Create inverse with {tint=} [ {tint_dec_int} / {hex(tint_dec_int).upper()[2:]} ]")
+        if not is_create:
+            return
+
+        save_path = image_path.parent / "Inverse"
+        save_path.mkdir(exist_ok=True, parents=True)
+
+        self._last_loaded_folder = image_functions.create_tint_image(image_path, save_path, tint, self.progress_bar_set_percent)
+
     ###
 
     def get_data_vs_all(self):
@@ -250,6 +327,26 @@ class UIBase:
                                                               self.progress_bar_set_percent)
 
         language_vs.make_meta_file_split_folder_structure()
+
+    def get_unified_images_vs(self):
+        selected_dlc = self.dlc_selector(Game.VS, allow_compound=True)
+
+        if not selected_dlc:
+            return
+
+        data_dict = data_vs.get_available_data_by_dlc(selected_dlc)
+        data_types = list(sorted(image_gen_vs.get_supported_gen_types().intersection(data_dict.keys()),
+                                 key=lambda x: x.value))
+
+        selected_data = self.buttons_box(
+            data_types, title="Select data types",
+            label=["Select data type which will be used to generate images", f"({selected_dlc!s})"])
+
+        if not selected_data:
+            return
+
+        self._last_loaded_folder = image_gen_vs.gen_unified_images(selected_dlc, selected_data,
+                                                                   self.progress_bar_set_percent, parent=self)
 
     ###
 

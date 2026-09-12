@@ -13,7 +13,7 @@ from tkinter.simpledialog import askinteger
 import PIL
 from PIL.Image import open as image_open
 
-import Source.Data.data_vs as data_module
+import Source.Data.data_vs as data_vs
 import Source.Data.game_version as game_version
 import Source.Images.transparent_save as tr_save
 import Source.Translations.language_vs as lang_module
@@ -21,7 +21,7 @@ from Source.Config.config import CfgKey, DLC, Config, Game
 from Source.Data import data_vc
 from Source.Data.data_vs import DataHandler
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
-from Source.Images import image_gen, image_gen_vc
+from Source.Images import image_gen_vs_old, image_gen_vc, image_gen_vs
 from Source.Images.image_gen_vs import ImageGeneratorManager
 from Source.Translations import language_vc
 from Source.Translations.language_vs import LangHandler, LangType
@@ -59,14 +59,14 @@ class UIOld(tk.Tk):
             self.destroy()
 
     class GeneratorDialog(tk.Toplevel):
-        def __init__(self, parent, gen: image_gen.ImageGenerator):
+        def __init__(self, parent, gen: image_gen_vs_old.ImageGenerator):
             super().__init__(parent)
             self.parent = parent
             self.title("Select settings")
             ttk.Label(self, text="Select settings for exporting files").pack()
 
             self.settings = dict()
-            gt = image_gen.GenType
+            gt = image_gen_vs_old.GenType
 
             ttk.Label(self, text="Scale factor").pack()
             scale_input = ttk.Entry(self)
@@ -82,7 +82,7 @@ class UIOld(tk.Tk):
 
             if gt.FRAME in gen.available_gen:
                 text = "Also generate with frame variants"
-                if gen.assets_type in [image_gen.OldDataType.STAGE, image_gen.OldDataType.STAGE_SET]:
+                if gen.assets_type in [image_gen_vs_old.OldDataType.STAGE, image_gen_vs_old.OldDataType.STAGE_SET]:
                     text = "Also generate with name of stage"
 
                 frame_bool = tk.BooleanVar()
@@ -120,7 +120,7 @@ class UIOld(tk.Tk):
 
         def __close(self):
             def get(k, v):
-                return int(v.get()) if k == image_gen.GenType.SCALE else v.get()
+                return int(v.get()) if k == image_gen_vs_old.GenType.SCALE else v.get()
 
             self.parent.data_from_popup = {str(k): get(k, v) for k, v in self.settings.items()}
             self.parent.data_from_popup.update({"exit": self.exit})
@@ -644,7 +644,7 @@ class UIOld(tk.Tk):
     def data_concatenate(self):
         _time = Timeit()
         print(f"Concatenating data files.")
-        data_types = data_module.DataType.get_all_types()
+        data_types = data_vs.DataType.get_all_types()
         i = 0
 
         for data_type in data_types:
@@ -672,8 +672,8 @@ class UIOld(tk.Tk):
             lang = lang_module.LangHandler.get_lang_file(gen.langFileName).get_lang(Lang.EN) \
                 if gen.langFileName != LangType.NONE else None
 
-            if gen.assets_type == image_gen.OldDataType.CHARACTER:
-                w_data = DataHandler.get_data(COMPOUND_DATA, data_module.DataType.WEAPON).data()
+            if gen.assets_type == image_gen_vs_old.OldDataType.CHARACTER:
+                w_data = DataHandler.get_data(COMPOUND_DATA, data_vs.DataType.WEAPON).data()
                 lang_skins = lang_module.LangHandler.get_lang_file(LangType.SKIN).get_lang(Lang.EN)
                 lang_weapon = lang_module.LangHandler.get_lang_file(LangType.WEAPON).get_lang(Lang.EN)
                 add_data.update({
@@ -715,7 +715,7 @@ class UIOld(tk.Tk):
             "p_file": path_data.stem + "_" + path_data.parent.stem,
         }
 
-        gen = image_gen.IGFactory.get(p_file)
+        gen = image_gen_vs_old.IGFactory.get(p_file)
 
         if gen is None:
             showerror("Generator error", "Cannot get images from this file.\nGenerator does not exist.")
@@ -752,7 +752,7 @@ class UIOld(tk.Tk):
             return
 
         data_dict = DataHandler.get_dict_by_dlc_type(selected_dlc)
-        data_types = list(sorted(ImageGeneratorManager.get_supported_gen_types().intersection(data_dict.keys()),
+        data_types = list(sorted(image_gen_vs.get_supported_gen_types().intersection(data_dict.keys()),
                                  key=lambda x: x.value))
 
         show_text = selected_dlc.__repr__() if selected_dlc == COMPOUND_DATA else selected_dlc
@@ -764,28 +764,25 @@ class UIOld(tk.Tk):
             return
 
         data_type = data_types[bb.return_data]
-        print(f"Started generating images for '{DLC.string(selected_dlc)}' - '{data_type}'")
+        print(f"Started generating images for '{str(selected_dlc)}' - '{data_type}'")
 
         timeit = Timeit()
-        self.last_loaded_folder = ImageGeneratorManager.gen_unified_images(selected_dlc, data_type,
-                                                                           self.progress_bar_set_percent, parent=self)
+        self.last_loaded_folder = image_gen_vs.gen_unified_images(selected_dlc, data_type,
+                                                                  self.progress_bar_set_percent, parent=self)
         print(f"Finished generating unified images {timeit!r}")
 
     @staticmethod
     def dlc_selector(allow_compound: bool = False, parent=None) -> DLC | COMPOUND_DATA_TYPE | None:
         all_dlcs = DLC.get_all_types()
-        compound = COMPOUND_DATA.__repr__()
         if allow_compound:
-            all_dlcs.append(compound)
+            all_dlcs.append(COMPOUND_DATA)
 
         bb = ButtonsBox(all_dlcs, "Select DLC", "Select DLC from which data file will be selected", parent)
         bb.wait_window()
 
         if bb.return_data is None:
             return None
-        ret = all_dlcs[bb.return_data]
-
-        return COMPOUND_DATA if ret == compound else ret
+        return all_dlcs[bb.return_data]
 
     @staticmethod
     def game_selector(parent=None) -> Game | None:
@@ -800,7 +797,7 @@ class UIOld(tk.Tk):
 
     @staticmethod
     def data_selector_data(dlc_type: DLC | COMPOUND_DATA_TYPE,
-                           parent=None) -> data_module.DataType | None:
+                           parent=None) -> data_vs.DataType | None:
         data_types = list(DataHandler.get_dict_by_dlc_type(dlc_type).keys())
 
         bb = ButtonsBox(data_types, "Select Data Type", "Select data file", parent)
@@ -869,10 +866,10 @@ class UIOld(tk.Tk):
 
         print(f"Selected for generating tilemap: {full_paths!r}")
 
-        from Source.Images.tilemap_gen import gen_tilemap
+        from Source.Images.tilemap_gen import create_tilemap
         save_folder = None
         for full_path in full_paths:
-            save_folder = gen_tilemap(full_path, func_progress_bar_set_percent=self.progress_bar_set_percent)
+            save_folder = create_tilemap(full_path, func_progress_bar_set_percent=self.progress_bar_set_percent)
         print(f"Finished generating all tilemaps: {[fp.name for fp in full_paths]}")
         self.last_loaded_folder = save_folder
 

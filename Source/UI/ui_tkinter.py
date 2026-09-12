@@ -15,6 +15,16 @@ from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
 from Source.Utility.constants import IS_DEBUG
 from Source.Utility.logger import Logger
 
+_registered_layouts: dict[Game, Callable] = {}
+
+
+def register_game_layout(game: Game):
+    def decorator(func: Callable) -> Callable:
+        _registered_layouts[game] = func
+        return func
+
+    return decorator
+
 
 class UITkinter(tk.Tk, UIBase):
     def __init__(self, width=600, height=400):
@@ -102,24 +112,16 @@ class UITkinter(tk.Tk, UIBase):
         self.__update_loaded_metadata = after_load
         after_load(Game.NONE)
 
-        _md_change_frame = ttk.Frame(_md_frame)
-        _md_change_frame.grid(column=0, row=1)
-
         MetaDataHandler.register(MetaDataHandler.Emit.AFTER_LOAD, after_load)
         MetaDataHandler.register(MetaDataHandler.Emit.BEFORE_LOAD,
                                  lambda o, n: upd_md(f"Loading metadata for {n.get_default_dlc().value.full_name}..."))
 
         ttk.Button(
-            _md_change_frame,
-            text="Load VS Metadata",
-            command=lambda: MetaDataHandler.load(Game.VS),
-        ).grid(column=0, row=0)
+            _md_frame,
+            text="Load Game Metadata",
+            command=self.load_metadata,
+        ).grid(column=0, row=1)
 
-        ttk.Button(
-            _md_change_frame,
-            text="Load VC Metadata",
-            command=lambda: MetaDataHandler.load(Game.VC),
-        ).grid(column=1, row=0)
         ###
 
         ###
@@ -178,13 +180,8 @@ class UITkinter(tk.Tk, UIBase):
         self._main_frame.grid(column=0, row=6, pady=self._pady)
 
         def set_main_frame(game: Game) -> None:
-            match game:
-                case Game.VS:
-                    self.set_vs_frame()
-                case Game.VC:
-                    self.set_vc_frame()
-                case _:
-                    self.clear_main_frame()
+            f = _registered_layouts.get(game, UITkinter.clear_main_frame)
+            f(self)
 
         MetaDataHandler.register(MetaDataHandler.Emit.AFTER_LOAD, set_main_frame)
         ###
@@ -193,6 +190,7 @@ class UITkinter(tk.Tk, UIBase):
         for child in self._main_frame.winfo_children():
             child.destroy()
 
+    @register_game_layout(Game.VS)
     def set_vs_frame(self):
         self.clear_main_frame()
         main_frame = self._main_frame
@@ -201,8 +199,7 @@ class UITkinter(tk.Tk, UIBase):
             main_frame,
             text="Create Game Version file",
             command=self.create_version_file,
-        ).grid(column=0, row=0)
-
+        ).grid(row=0, column=0, pady=self._pady)
 
         _data_frame = ttk.Frame(main_frame)
         _data_frame.grid(column=0, row=1)
@@ -240,6 +237,28 @@ class UITkinter(tk.Tk, UIBase):
             command=self.get_languages_vs_split
         ).grid(row=0, column=2)
 
+        _image_frame = ttk.Frame(main_frame)
+        _image_frame.grid(column=0, row=3)
+
+        ttk.Button(
+            _image_frame,
+            text="Get unified images",
+            command=self.get_unified_images_vs
+        ).grid(row=0, column=0)
+
+        ttk.Button(
+            _image_frame,
+            text="Get stage tilemap",
+            command=lambda: self.get_tilemap(Game.VS)
+        ).grid(row=0, column=2)
+
+        ttk.Button(
+            _image_frame,
+            text="Create inverse tilemap",
+            command=self.create_inverse_tilemap
+        ).grid(row=0, column=3)
+
+    @register_game_layout(Game.VC)
     def set_vc_frame(self):
         self.clear_main_frame()
         main_frame = self._main_frame
@@ -261,6 +280,46 @@ class UITkinter(tk.Tk, UIBase):
             text="Get language strings",
             command=self.get_languages_vc_all
         ).grid(column=0, row=2)
+
+    @register_game_layout(Game.WS)
+    def set_ws_frame(self):
+        self.clear_main_frame()
+        main_frame = self._main_frame
+
+        _image_frame = ttk.Frame(main_frame)
+        _image_frame.grid(column=0, row=0)
+
+        ttk.Button(
+            _image_frame,
+            text="Get stage tilemap",
+            command=lambda: self.get_tilemap(Game.WS)
+        ).grid(row=0, column=0)
+
+        ttk.Button(
+            _image_frame,
+            text="Create inverse tilemap",
+            command=self.create_inverse_tilemap
+        ).grid(row=0, column=1)
+
+    @register_game_layout(Game.JJKRS)
+    def set_jjkrs_frame(self):
+        self.clear_main_frame()
+        main_frame = self._main_frame
+
+        _image_frame = ttk.Frame(main_frame)
+        _image_frame.grid(column=0, row=0)
+
+        ttk.Button(
+            _image_frame,
+            text="Get stage tilemap",
+            command=lambda: self.get_tilemap(Game.JJKRS)
+        ).grid(row=0, column=0)
+
+        ttk.Button(
+            _image_frame,
+            text="Create inverse tilemap",
+            command=self.create_inverse_tilemap
+        ).grid(row=0, column=1)
 
     @staticmethod
     def ask_open_file_name(title: str = "Select file", initialdir: set | os.PathLike[str] = None,
@@ -301,7 +360,6 @@ class UITkinter(tk.Tk, UIBase):
     def show_error(title: str = None, message: str = None, **options) -> None:
         tk.messagebox.showerror(title, message, **options)
 
-
     def progress_bar_set_percent(self, current: int | float, total: int | float, add_text: str = "") -> None:
         self.__update_progress_bar(current / total * 100 if total else 100, f"{current} / {total}", add_text)
 
@@ -315,12 +373,14 @@ class UITkinter(tk.Tk, UIBase):
     def change_config(self) -> None:
         Config.invoke_config_changer(self)
 
-    def check_boxes(self, list_to_boxes, title="", label: str | list[str] = "", width: int = 300) -> list[bool]:
+    def check_boxes[T](self, list_to_boxes: list[T], title="", label: str | list[str] = "", width: int = 300) -> list[
+        bool]:
         cbs = CheckBoxes(list_to_boxes, title=title, label=label, parent=self, width=width)
         cbs.wait_window()
         return cbs.return_data
 
-    def buttons_box(self, list_to_texts, title="", label: str | list[str] = "", width: int = 300) -> Any | None:
+    def buttons_box[T](self, list_to_texts: list[T], title="", label: str | list[str] = "",
+                       width: int = 300) -> T | None:
         bb = ButtonsBox(list_to_texts, title=title, label=label, parent=self, width=width)
         bb.wait_window()
         if bb.return_data is None:

@@ -1,18 +1,18 @@
 from __future__ import annotations
 
+import dataclasses
 import itertools
 import json
 import tkinter as tk
 from dataclasses import dataclass
-from enum import Enum
+from enum import Enum, StrEnum
 from pathlib import Path
 from tkinter import ttk
 from tkinter.filedialog import askdirectory
 from tkinter.messagebox import showerror, showinfo
 from typing import Final, Callable
 
-from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_TYPE, COMPOUND_DATA, STEAM_APPID_VS, \
-    STEAM_APPID_VC, STEAM_APPID_JJKR
+from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER
 from Source.Utility.special_classes import Objectless
 
 ASSETS = "Assets"
@@ -20,7 +20,7 @@ PROJECT_SETTINGS = "ProjectSettings"
 EXPORTED_PROJECT = "ExportedProject"
 
 
-class CfgKey(Enum):
+class CfgKey(StrEnum):
     MULTIPROCESSING = "MULTIPROCESSING"
     RIPPER = "AS_RIPPER"
 
@@ -31,6 +31,10 @@ class CfgKey(Enum):
     ASSETS_VC = "ASSETS_VC"
     STEAM_VC = "STEAM_VC"
     DATA_VC = "DATA_VC"
+
+    ASSETS_WS = "ASSETS_WRHS"
+    STEAM_WS = "STEAM_WRHS"
+    DATA_WS = "DATA_WRHS"
 
     ASSETS_JJKRS = "ASSETS_JJKRS"
     STEAM_JJKRS = "STEAM_JJKRS"
@@ -45,15 +49,15 @@ class CfgKey(Enum):
 
     @classmethod
     def get_assets_keys(cls) -> list[CfgKey]:
-        return [cls.ASSETS_VS, cls.ASSETS_VC, cls.ASSETS_JJKRS]
+        return [cls.ASSETS_VS, cls.ASSETS_VC, cls.ASSETS_WS, cls.ASSETS_JJKRS]
 
     @classmethod
     def get_steam_path_keys(cls) -> list[CfgKey]:
-        return [cls.STEAM_VS, cls.STEAM_VC, cls.STEAM_JJKRS]
+        return [cls.STEAM_VS, cls.STEAM_VC, cls.STEAM_WS, cls.STEAM_JJKRS]
 
     @classmethod
     def get_data_path_keys(cls) -> list[CfgKey]:
-        return [cls.DATA_VS, cls.DATA_VC, cls.DATA_JJKRS]
+        return [cls.DATA_VS, cls.DATA_VC, cls.DATA_WS, cls.DATA_JJKRS]
 
     @classmethod
     def get_path_keys(cls) -> set[CfgKey]:
@@ -69,9 +73,10 @@ class GameType:
 
 
 class Game(Enum):
-    VS = GameType(STEAM_APPID_VS, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
-    VC = GameType(STEAM_APPID_VC, CfgKey.STEAM_VC, CfgKey.ASSETS_VC, CfgKey.DATA_VC)
-    JJKRS = GameType(STEAM_APPID_JJKR, CfgKey.STEAM_JJKRS, CfgKey.ASSETS_JJKRS, CfgKey.DATA_JJKRS)
+    VS = GameType(1794680, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
+    VC = GameType(3265700, CfgKey.STEAM_VC, CfgKey.ASSETS_VC, CfgKey.DATA_VC)
+    WS = GameType(3669620, CfgKey.STEAM_WS, CfgKey.ASSETS_WS, CfgKey.DATA_WS)
+    JJKRS = GameType(4753290, CfgKey.STEAM_JJKRS, CfgKey.ASSETS_JJKRS, CfgKey.DATA_JJKRS)
 
     SPECIAL = GameType(-1, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
     NONE = None
@@ -86,10 +91,19 @@ class Game(Enum):
                 return DLC.VS
             case Game.VC:
                 return DLC.VC
+            case Game.WS:
+                return DLC.WS
             case Game.JJKRS:
                 return DLC.JJKRS
             case _:
                 assert False, "Game enum has no default dlc"
+
+    @classmethod
+    def get_game_by_cfgkey(cls, cfgkey: CfgKey) -> Game:
+        for game in cls.get_all_types():
+            if cfgkey in dataclasses.astuple(game.value):
+                return game
+        return Game.NONE
 
     def __str__(self):
         return self.get_default_dlc().value.full_name
@@ -108,7 +122,7 @@ class DLCType:
 
 
 class DLC(Enum):
-    VS = DLCType(0, 0, Game.VS, "BASE_GAME", "Vampire Survivors")
+    VS = DLCType(0, 0, Game.VS, "SURVIVORS", "Vampire Survivors")
     MS = DLCType(1, 1, Game.VS, "MOONSPELL", "Legacy of the Moonspell")
     FS = DLCType(2, 3, Game.VS, "FOSCARI", "Tides of the Foscari")
     EM = DLCType(3, 4, Game.VS, "CHALCEDONY", "Emergency Meeting")
@@ -121,11 +135,9 @@ class DLC(Enum):
 
     VC = DLCType(100, 0, Game.VC, "CRAWLERS", "Vampire Crawlers")
 
-    JJKRS = DLCType(200, 0, Game.JJKRS, "JJKRS", "JUJUTSU KAISEN RUMBLE: SURVIVATON")
+    WS = DLCType(200, 0, Game.WS, "WARHAMMER", "Warhammer Survivors")
 
-    @staticmethod
-    def string(dlc: DLC | COMPOUND_DATA_TYPE) -> str:
-        return str(dlc) if dlc != COMPOUND_DATA else dlc.value
+    JJKRS = DLCType(300, 0, Game.JJKRS, "JJKRS", "JUJUTSU KAISEN RUMBLE: SURVIVATON")
 
     def __str__(self):
         return self.value.full_name
@@ -190,11 +202,11 @@ class Config(Objectless):
     def migrate_config_key(cls, key: str) -> str:
         match key:
             case "STEAM_APP":
-                return CfgKey.STEAM_VS.value
+                return CfgKey.STEAM_VS
             case "VS_ASSETS":
-                return CfgKey.ASSETS_VS.value
+                return CfgKey.ASSETS_VS
             case "VC_ASSETS":
-                return CfgKey.ASSETS_VC.value
+                return CfgKey.ASSETS_VC
             case _:
                 return key
 
@@ -302,32 +314,19 @@ class Config(Objectless):
                     continue
 
                 info_text = ""
+                game = Game.get_game_by_cfgkey(key)
+                if "ASSETS_" in key:
+                    info_text = f"Folder with/for ripped data of {game.get_default_dlc().value.full_name}."
+                elif "STEAM_" in key:
+                    info_text = f"{game.get_default_dlc().value.code_name} steam folder. Folder must contain game executable."
+                elif "DATA_" in key:
+                        info_text = f"Folder for dumping {game.get_default_dlc().value.code_name} data"
+
                 match key:
                     case CfgKey.RIPPER:
                         info_text = f"Asset Ripper. Folder must contain 'AssetRipper[...].exe'"
                     case CfgKey.MULTIPROCESSING:
                         continue
-
-                    case CfgKey.ASSETS_VS:
-                        info_text = f"Folder with/for ripped data of {DLC.VS.value.full_name}."
-                    case CfgKey.ASSETS_VC:
-                        info_text = f"Folder with/for ripped data of {DLC.VC.value.full_name}."
-                    case CfgKey.ASSETS_JJKRS:
-                        info_text = f"Folder with/for ripped data of {DLC.JJKRS.value.full_name}."
-
-                    case CfgKey.STEAM_VS:
-                        info_text = f"VS steam folder. Folder must contain 'Vampire Survivors.exe'"
-                    case CfgKey.STEAM_VC:
-                        info_text = f"VC steam folder. Folder must contain 'Vampire Crawlers.exe'"
-                    case CfgKey.STEAM_JJKRS:
-                        info_text = f"JJKRS steam folder. Folder must contain '???.exe'"
-
-                    case CfgKey.DATA_VS:
-                        info_text = f"Folder for dumping Survivors data"
-                    case CfgKey.DATA_VC:
-                        info_text = f"Folder for dumping Crawlers data"
-                    case CfgKey.DATA_JJKRS:
-                        info_text = f"Folder for dumping JJKRS data"
 
                 tk.Label(self, text=info_text).pack()
 

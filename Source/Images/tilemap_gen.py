@@ -97,9 +97,9 @@ def __save_image(image: Image, path: Path) -> None:
     image.save(path)
 
 
-def gen_tilemap(path: Path, __is_full_auto=True,
-                func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
-                ui_class: UIBase.__class__ = UITkinter) -> Path | None:
+def create_tilemap(path: Path, __is_full_auto=True,
+                   func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
+                   ui_class: UIBase.__class__ = UITkinter) -> Path | None:
     p_file = path.name
     save_file = path.with_suffix("").name
     save_folder = Path(to_current_game_path(IMAGES_FOLDER), GENERATED, TILEMAPS, save_file)
@@ -282,7 +282,7 @@ if __name__ == "__main__":
         import cProfile
         print("Started")
         with cProfile.Profile() as pr:
-            gen_tilemap(full_path, False)
+            create_tilemap(full_path, False)
             # pr.print_stats('time')
             pr.dump_stats('./tilemap.prof')
 

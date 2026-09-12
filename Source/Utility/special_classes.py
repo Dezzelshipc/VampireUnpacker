@@ -13,7 +13,7 @@ class Singleton(type):
 
 class Objectless:
     def __new__(cls, *args, **kwargs):
-        raise RuntimeError('%s should not be instantiated' % cls)
+        raise RuntimeError(f'{cls} should not be instantiated')
 
 
 class Emitter[**P](Objectless):

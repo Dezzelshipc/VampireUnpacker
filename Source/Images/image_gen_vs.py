@@ -21,6 +21,7 @@ from Source.Utility.image_functions import make_image_black
 from Source.Utility.image_functions import resize_image, get_adjusted_sprites_to_rect, get_rects_by_sprite_list
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.sprite_data import SpriteData
+from Source.Utility.timer import Timeit
 from Source.Utility.utility import normalize_str
 
 PREFIX = "prefix"
@@ -167,33 +168,37 @@ class ImageGeneratorManager:
 
         return None
 
-    @staticmethod
-    def get_supported_gen_types() -> set[DataType]:
-        return set(filter(ImageGeneratorManager.get_gen, DataType.get_all_types()))
 
-    @staticmethod
-    def gen_unified_images(dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
-                           func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
-                           parent=None) -> Path | None:
-        gen_class: BaseImageGenerator.__class__ = ImageGeneratorManager.get_gen(data_type)
+def get_supported_gen_types() -> set[DataType]:
+    return set(filter(ImageGeneratorManager.get_gen, DataType.get_all_types()))
 
-        if not gen_class:
-            return None
 
-        dialog = GeneratorDialog(gen_class, parent=parent)
-        dialog.wait_window()
-        req_gens: dict[GenType, int | bool] | None = dialog.return_data
+def gen_unified_images(dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
+                       parent=None) -> Path | None:
+    gen_class: BaseImageGenerator.__class__ = ImageGeneratorManager.get_gen(data_type)
 
-        if not req_gens:
-            return None
+    if not gen_class:
+        return None
 
-        print(f"Selected settings for {gen_class.__name__}: {req_gens}")
+    dialog = GeneratorDialog(gen_class, parent=parent)
+    dialog.wait_window()
+    req_gens: dict[GenType, int | bool] | None = dialog.return_data
 
-        gen: BaseImageGenerator = gen_class(dlc_type, data_type, req_gens)
+    if not req_gens:
+        return None
 
-        save_path = gen.main_generator(dlc_type, data_type, func_progress_bar_set_percent)
+    gen: BaseImageGenerator = gen_class(dlc_type, data_type, req_gens)
 
-        return save_path
+    print(f"Selected settings for {gen_class.__name__}: {req_gens}")
+    print(f"Started generating images for '{str(dlc_type)}' - '{data_type}'")
+    _timeit = Timeit()
+
+    save_path = gen.main_generator(dlc_type, data_type, func_progress_bar_set_percent)
+
+    print(f"Finished generating unified images {_timeit!r}")
+
+    return save_path
 
 
 class BaseImageGenerator:
@@ -241,7 +246,7 @@ class BaseImageGenerator:
                        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
 
-        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / DLC.string(dlc_type)
+        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / str(dlc_type)
         save_path.mkdir(parents=True, exist_ok=True)
 
         total_len = len(self.entries)

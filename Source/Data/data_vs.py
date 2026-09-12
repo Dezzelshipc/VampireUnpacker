@@ -1,7 +1,7 @@
 import json
 import sys
 from dataclasses import dataclass
-from enum import Enum
+from enum import Enum, StrEnum
 from pathlib import Path
 from typing import Any
 
@@ -19,7 +19,7 @@ def open_f(path):
     return open(path, "r", errors='ignore', encoding="UTF-8-SIG")
 
 
-class DataType(Enum):
+class DataType(StrEnum):
     ACHIEVEMENT = "Achievement"
     ADVENTURE = "Adventure"
     ADVENTURE_MERCHANTS = "AdventureMerchants"
@@ -41,7 +41,7 @@ class DataType(Enum):
     STAGE = "Stage"
     WEAPON = "Weapon"
 
-    NONE = None
+    NONE = "__None"
 
     @classmethod
     def get_all_types(cls) -> set["DataType"]:
@@ -275,6 +275,9 @@ class DataHandler(Objectless):
     def get_total_amount(cls) -> int:
         cls.load()
         return sum(len(dfs) for dfs in cls._loaded_data.values())
+
+def get_available_data_by_dlc(dlc: DLC | COMPOUND_DATA_TYPE) -> dict[DataType, DataFile]:
+    return DataHandler.get_dict_by_dlc_type(dlc)
 
 def make_meta_file_folder_structure() -> Path:
     save_path = to_current_game_path(DATA_FOLDER)

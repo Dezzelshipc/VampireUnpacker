@@ -8,10 +8,6 @@ from Source.Utility.utility import _find_main_py_file
 IS_DEBUG: Final[bool] = (sys.monitoring.get_tool(sys.monitoring.DEBUGGER_ID)) is not None or (
         sys.gettrace() is not None)
 
-STEAM_APPID_VS = 1794680
-STEAM_APPID_VC = 3265700
-STEAM_APPID_JJKR = 4753290
-
 ROOT_FOLDER: Final[Path] = _find_main_py_file().parent.absolute()
 
 AUDIO_FOLDER: Final[Path] = ROOT_FOLDER / "Audio"
@@ -46,23 +42,22 @@ VERSION_DATA: Final[str] = "VersionData"
 I2_LANGUAGES: Final[str] = "I2Languages"
 
 
-class COMPOUND_DATA(Objectless):
+class _CompoundDataMeta(type(Objectless)):
+    value = "Compound Data"
+    def __str__(cls) -> str:  return f"{cls.value} (all DLC)"
+
+class COMPOUND_DATA(Objectless, metaclass=_CompoundDataMeta):
     """
     Special constant class for representing aggregated data from every DLC.
     Uses type 'COMPOUND_DATA_TYPE'.
     Cannot be instantiated directly. Should be used as 'COMPOUND_DATA'
     """
-    value = "Compound Data"
-
-    @classmethod
-    def __repr__(cls) -> str:
-        return f"{cls.value} (all DLC)"
 
 
 COMPOUND_DATA_TYPE = type[COMPOUND_DATA]
 
 PROGRESS_BAR_FUNC_TYPE = Callable[[int | float, int | float], None] | Callable[[int | float, int | float, str], None]
-PROGRESS_BAR_FUNC_DEFAULT: Final[PROGRESS_BAR_FUNC_TYPE] = lambda c, t: None
+PROGRESS_BAR_FUNC_DEFAULT: Final[PROGRESS_BAR_FUNC_TYPE] = lambda c, t, s: None
 
 
 def to_source_path(path: Path) -> Path:
