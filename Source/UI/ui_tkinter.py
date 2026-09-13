@@ -12,7 +12,7 @@ from Source.Data import data_vc
 from Source.Translations import language_vc
 from Source.UI.ui import UIBase
 from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
-from Source.Utility.constants import IS_DEBUG
+from Source.Utility.constants import IS_DEBUG, ROOT_FOLDER
 from Source.Utility.logger import Logger
 
 _registered_layouts: dict[Game, Callable] = {}
@@ -41,7 +41,7 @@ class UITkinter(tk.Tk, UIBase):
         self.minsize(width, height)
 
         self.title(self._title_text)
-        self.iconphoto(True, tk.PhotoImage(file=self._icon_path))
+        self.iconphoto(True, tk.PhotoImage(file=self._icon_path, master=self))
 
         self.__update_progress_bar: Callable[[int | float, str, str], None] = None
         self.__update_loaded_metadata: Callable[[Game.VS], None] = None
@@ -155,25 +155,37 @@ class UITkinter(tk.Tk, UIBase):
             _by_meta_frame,
             text="Select image atlas to unpack images",
             command=lambda: self.unpack_by_meta(self.generate_images_by_meta)
-        ).grid(column=0, row=0)
+        ).grid(row=0, column=0)
 
         ttk.Button(
             _by_meta_frame,
             text="... from spritesheets",
             command=lambda: self.unpack_by_meta_from_spritesheets(self.generate_images_by_meta)
-        ).grid(column=1, row=0)
+        ).grid(row=0, column=1)
+
+        ttk.Button(
+            _by_meta_frame,
+            text="... from any image",
+            command=lambda: self.generate_by_meta_selector(ROOT_FOLDER, self.generate_images_by_meta)
+        ).grid(row=0, column=2)
 
         ttk.Button(
             _by_meta_frame,
             text="Select image atlas to unpack animations",
             command=lambda: self.unpack_by_meta(self.generate_animation_by_meta)
-        ).grid(column=0, row=1)
+        ).grid(row=1, column=0)
 
         ttk.Button(
             _by_meta_frame,
             text="... from spritesheets",
             command=lambda: self.unpack_by_meta_from_spritesheets(self.generate_animation_by_meta)
-        ).grid(column=1, row=1)
+        ).grid(row=1, column=1)
+
+        ttk.Button(
+            _by_meta_frame,
+            text="... from any image",
+            command=lambda: self.generate_by_meta_selector(ROOT_FOLDER, self.generate_animation_by_meta)
+        ).grid(row=1, column=2)
         ###
 
         ###
@@ -258,6 +270,13 @@ class UITkinter(tk.Tk, UIBase):
             command=self.create_inverse_tilemap
         ).grid(row=0, column=3)
 
+        #
+        ttk.Button(
+            main_frame,
+            text="Get unified audio",
+            command=self.get_unified_audio_vs
+        ).grid(row=4, column=0)
+
     @register_game_layout(Game.VC)
     def set_vc_frame(self):
         self.clear_main_frame()
@@ -281,7 +300,7 @@ class UITkinter(tk.Tk, UIBase):
             command=self.get_languages_vc_all
         ).grid(column=0, row=2)
 
-    @register_game_layout(Game.WS)
+    @register_game_layout(Game.WRHS)
     def set_ws_frame(self):
         self.clear_main_frame()
         main_frame = self._main_frame
@@ -292,7 +311,7 @@ class UITkinter(tk.Tk, UIBase):
         ttk.Button(
             _image_frame,
             text="Get stage tilemap",
-            command=lambda: self.get_tilemap(Game.WS)
+            command=lambda: self.get_tilemap(Game.WRHS)
         ).grid(row=0, column=0)
 
         ttk.Button(
@@ -329,7 +348,7 @@ class UITkinter(tk.Tk, UIBase):
 
     @staticmethod
     def ask_open_file_names(title: str = "Select file", initialdir: set | os.PathLike[str] = None,
-                            filetypes: Iterable[tuple[str, str | list[str]]] = None) -> Iterable[Path] | None:
+                            filetypes: Iterable[tuple[str, str | list[str]]] = None) -> list[Path] | None:
         _paths = filedialog.askopenfilenames(initialdir=initialdir, title=title, filetypes=filetypes)
         return [Path(p) for p in _paths] if _paths else None
 
@@ -373,19 +392,13 @@ class UITkinter(tk.Tk, UIBase):
     def change_config(self) -> None:
         Config.invoke_config_changer(self)
 
-    def check_boxes[T](self, list_to_boxes: list[T], title="", label: str | list[str] = "", width: int = 300) -> list[
-        bool]:
-        cbs = CheckBoxes(list_to_boxes, title=title, label=label, parent=self, width=width)
-        cbs.wait_window()
-        return cbs.return_data
+    def check_boxes[T](self, list_to_boxes: list[T], title="", label: str | list[str] = "",
+                       width: int = 300) -> list[bool]:
+        return CheckBoxes.execute(list_to_boxes, title=title, label=label, parent=self, width=width)
 
     def buttons_box[T](self, list_to_texts: list[T], title="", label: str | list[str] = "",
                        width: int = 300) -> T | None:
-        bb = ButtonsBox(list_to_texts, title=title, label=label, parent=self, width=width)
-        bb.wait_window()
-        if bb.return_data is None:
-            return None
-        return list_to_texts[bb.return_data]
+        return ButtonsBox.execute(list_to_texts, title=title, label=label, parent=self, width=width)
 
 
 if __name__ == '__main__':

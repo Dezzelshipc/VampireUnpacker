@@ -22,10 +22,10 @@ from Source.Data import data_vc
 from Source.Data.data_vs import DataHandler
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Images import image_gen_vs_old, image_gen_vc, image_gen_vs
-from Source.Images.image_gen_vs import ImageGeneratorManager
 from Source.Translations import language_vc
-from Source.Translations.language_vs import LangHandler, LangType
 from Source.Translations.language_utils import Lang
+from Source.Translations.language_vs import LangHandler, LangType
+from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
 from Source.Utility.constants import I2_LANGUAGES, ROOT_FOLDER, IS_DEBUG, \
     DEFAULT_ANIMATION_FRAME_RATE, IMAGES_FOLDER, GENERATED, TILEMAPS, DATA_FOLDER, TRANSLATIONS_FOLDER, SPLIT, \
     COMPOUND_DATA, COMPOUND_DATA_TYPE, PREFAB_INSTANCE, GAME_OBJECT
@@ -34,7 +34,6 @@ from Source.Utility.image_functions import resize_image, get_anim_sprites_ready,
 from Source.Utility.logger import Logger
 from Source.Utility.timer import Timeit
 from Source.Utility.utility import clean_all_json
-from Source.UI.boxes_tkinter import CheckBoxes, ButtonsBox
 
 
 class UIOld(tk.Tk):
@@ -137,7 +136,7 @@ class UIOld(tk.Tk):
 
         self.title('Resource unpacker VS')
         icon_folder = to_source_path(IMAGES_FOLDER)
-        self.iconphoto(False, tk.PhotoImage(file=icon_folder / "Show/_Sprite-Atlas Gate.png"))
+        self.iconphoto(True, tk.PhotoImage(file=icon_folder / "Show/_Sprite-Atlas Gate.png", master=self))
 
         ico_image = tk.PhotoImage(file=icon_folder / "Show/_Sprite-Garlic.png")
         label_ico = ttk.Label(self, image=ico_image)
@@ -786,7 +785,7 @@ class UIOld(tk.Tk):
 
     @staticmethod
     def game_selector(parent=None) -> Game | None:
-        all_games = Game.get_all_types()
+        all_games = sorted(Game.get_all_types())
 
         bb = ButtonsBox(all_games, "Select Game", "Select Game from which data file will be selected", parent)
         bb.wait_window()
@@ -862,15 +861,40 @@ class UIOld(tk.Tk):
         if not full_paths_ask:
             return
 
-        full_paths = list(map(Path, full_paths_ask))
+        tilemap_paths = list(map(Path, full_paths_ask))
 
-        print(f"Selected for generating tilemap: {full_paths!r}")
+        print(f"Selected for generating tilemap: {tilemap_paths!r}")
 
-        from Source.Images.tilemap_gen import create_tilemap
+        from Source.Images import tilemap_gen
         save_folder = None
-        for full_path in full_paths:
-            save_folder = create_tilemap(full_path, func_progress_bar_set_percent=self.progress_bar_set_percent)
-        print(f"Finished generating all tilemaps: {[fp.name for fp in full_paths]}")
+
+        is_full_auto = False
+        if len(tilemap_paths) > 1:
+            is_full_auto = askyesno("Generation",
+                                    "Selected multiple tilemap prefabs.\nDo you want to automatically generate all tilemaps or manually handle every tilemap?")
+
+        for tilemap_path in tilemap_paths:
+            layers_count = tilemap_gen.get_tilemap_layers_count(tilemap_path)
+
+            if layers_count == 0:
+                showwarning("Warning", f"Not found any tilemap for {tilemap_path.name}.")
+                continue
+
+            if not is_full_auto:
+                if not askyesno("Generation",
+                                f"Found tilemap for {tilemap_path.name}.\nDo you want to generate it?"):
+                    continue
+
+            exclude_layers = set()
+            if not is_full_auto:
+                exclude_data = CheckBoxes.execute(range(layers_count), title="Layers to exclude",
+                                                  label="Select layers to exclude in generation", parent=self)
+                exclude_layers = set(itertools.compress(range(layers_count), exclude_data))
+
+            save_folder = tilemap_gen.create_tilemap(tilemap_path, exclude_layers,
+                                                     func_progress_bar_set_percent=self.progress_bar_set_percent)
+
+        print(f"Finished generating all tilemaps: {[fp.name for fp in tilemap_paths]}")
         self.last_loaded_folder = save_folder
 
     def audio_gen_handler(self):
@@ -880,7 +904,7 @@ class UIOld(tk.Tk):
             showerror("Error", "FFmpeg not found")
             return
 
-        import Source.Audio.audio_unified_gen as audio_gen
+        import Source.Audio.audio_gen_vs as audio_gen
 
         # dlc_type = self.dlc_selector(allow_compound=True, parent=self)
         # if not dlc_type:
@@ -889,8 +913,8 @@ class UIOld(tk.Tk):
 
         save_types_list = audio_gen.AudioSaveType.get()
 
-        cbs = CheckBoxes(save_types_list, parent=self, label="Select languages to include in split files",
-                         title="Select languages")
+        cbs = CheckBoxes(save_types_list, parent=self, label="Select save types",
+                         title="Select audio save types")
         cbs.wait_window()
         data_from_popup = cbs.return_data
 

@@ -32,9 +32,9 @@ class CfgKey(StrEnum):
     STEAM_VC = "STEAM_VC"
     DATA_VC = "DATA_VC"
 
-    ASSETS_WS = "ASSETS_WRHS"
-    STEAM_WS = "STEAM_WRHS"
-    DATA_WS = "DATA_WRHS"
+    ASSETS_WRHS = "ASSETS_WRHS"
+    STEAM_WRHS = "STEAM_WRHS"
+    DATA_WRHS = "DATA_WRHS"
 
     ASSETS_JJKRS = "ASSETS_JJKRS"
     STEAM_JJKRS = "STEAM_JJKRS"
@@ -49,15 +49,15 @@ class CfgKey(StrEnum):
 
     @classmethod
     def get_assets_keys(cls) -> list[CfgKey]:
-        return [cls.ASSETS_VS, cls.ASSETS_VC, cls.ASSETS_WS, cls.ASSETS_JJKRS]
+        return [cls.ASSETS_VS, cls.ASSETS_VC, cls.ASSETS_WRHS, cls.ASSETS_JJKRS]
 
     @classmethod
     def get_steam_path_keys(cls) -> list[CfgKey]:
-        return [cls.STEAM_VS, cls.STEAM_VC, cls.STEAM_WS, cls.STEAM_JJKRS]
+        return [cls.STEAM_VS, cls.STEAM_VC, cls.STEAM_WRHS, cls.STEAM_JJKRS]
 
     @classmethod
     def get_data_path_keys(cls) -> list[CfgKey]:
-        return [cls.DATA_VS, cls.DATA_VC, cls.DATA_WS, cls.DATA_JJKRS]
+        return [cls.DATA_VS, cls.DATA_VC, cls.DATA_WRHS, cls.DATA_JJKRS]
 
     @classmethod
     def get_path_keys(cls) -> set[CfgKey]:
@@ -75,7 +75,7 @@ class GameType:
 class Game(Enum):
     VS = GameType(1794680, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
     VC = GameType(3265700, CfgKey.STEAM_VC, CfgKey.ASSETS_VC, CfgKey.DATA_VC)
-    WS = GameType(3669620, CfgKey.STEAM_WS, CfgKey.ASSETS_WS, CfgKey.DATA_WS)
+    WRHS = GameType(3669620, CfgKey.STEAM_WRHS, CfgKey.ASSETS_WRHS, CfgKey.DATA_WRHS)
     JJKRS = GameType(4753290, CfgKey.STEAM_JJKRS, CfgKey.ASSETS_JJKRS, CfgKey.DATA_JJKRS)
 
     SPECIAL = GameType(-1, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
@@ -91,8 +91,8 @@ class Game(Enum):
                 return DLC.VS
             case Game.VC:
                 return DLC.VC
-            case Game.WS:
-                return DLC.WS
+            case Game.WRHS:
+                return DLC.WRHS
             case Game.JJKRS:
                 return DLC.JJKRS
             case _:
@@ -135,7 +135,7 @@ class DLC(Enum):
 
     VC = DLCType(100, 0, Game.VC, "CRAWLERS", "Vampire Crawlers")
 
-    WS = DLCType(200, 0, Game.WS, "WARHAMMER", "Warhammer Survivors")
+    WRHS = DLCType(200, 0, Game.WRHS, "WARHAMMER", "Warhammer Survivors")
 
     JJKRS = DLCType(300, 0, Game.JJKRS, "JJKRS", "JUJUTSU KAISEN RUMBLE: SURVIVATON")
 
@@ -190,9 +190,15 @@ class Config(Objectless):
     @staticmethod
     def _get_default_config():
         data: dict[CfgKey, Path | bool] = {}
-        data.update({cfg: Path() for cfg in CfgKey.get_steam_path_keys()})
-        data.update({cfg: Path() for cfg in CfgKey.get_assets_keys()})
-        data.update({cfg: Path() for cfg in CfgKey.get_data_path_keys()})
+        data = {
+            cfg: Path()
+            for game in sorted(Game.get_all_types())
+            for cfg in dataclasses.astuple(game.value)[1:]
+        }
+
+        # data.update({cfg: Path() for cfg in CfgKey.get_steam_path_keys()})
+        # data.update({cfg: Path() for cfg in CfgKey.get_assets_keys()})
+        # data.update({cfg: Path() for cfg in CfgKey.get_data_path_keys()})
 
         data[CfgKey.RIPPER] = Path()
         data[CfgKey.MULTIPROCESSING] = False
@@ -320,7 +326,7 @@ class Config(Objectless):
                 elif "STEAM_" in key:
                     info_text = f"{game.get_default_dlc().value.code_name} steam folder. Folder must contain game executable."
                 elif "DATA_" in key:
-                        info_text = f"Folder for dumping {game.get_default_dlc().value.code_name} data"
+                    info_text = f"Folder for dumping {game.get_default_dlc().value.code_name} data"
 
                 match key:
                     case CfgKey.RIPPER:
@@ -337,7 +343,7 @@ class Config(Objectless):
                 path = "" if path == Path() else str(path)
                 self.variables[key] = tk.StringVar(frame, path)
 
-                ttk.Label(frame, text=str(key)).pack(side=tk.LEFT)
+                ttk.Label(frame, text=str(key), anchor="center", width=14).pack(side=tk.LEFT)
                 ttk.Entry(frame, textvariable=self.variables[key], width=90).pack(side=tk.LEFT)
                 ttk.Button(frame, text="Select folder", command=select_folder(self.variables[key])).pack(side=tk.LEFT)
 

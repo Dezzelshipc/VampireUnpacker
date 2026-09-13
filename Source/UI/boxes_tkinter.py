@@ -3,7 +3,15 @@ from tkinter import ttk
 
 
 class CheckBoxes(tk.Toplevel):
-    def __init__(self, list_to_boxes, title="", label: str | list[str] = "", parent=None, width: int = 300):
+
+    @staticmethod
+    def execute[T](list_to_boxes: list[T], title="", label: str | list[str] = "", parent=None, width: int = 300) -> list[
+        bool]:
+        cbs = CheckBoxes(list_to_boxes, title=title, label=label, parent=parent, width=width)
+        cbs.wait_window()
+        return cbs.return_data
+
+    def __init__[T](self, list_to_boxes: list[T], title="", label: str | list[str] = "", parent=None, width: int = 300):
         super().__init__(parent)
         self.parent = parent
         self.title(title)
@@ -49,7 +57,17 @@ class CheckBoxes(tk.Toplevel):
 
 
 class ButtonsBox(tk.Toplevel):
-    def __init__(self, list_to_texts, title="", label: str | list[str] = "", parent=None, width: int = 300):
+
+    @staticmethod
+    def execute[T](list_to_texts: list[T], title="", label: str | list[str] = "", parent=None,
+                  width: int = 300) -> T | None:
+        bb = ButtonsBox(list_to_texts, title=title, label=label, parent=parent, width=width)
+        bb.wait_window()
+        if bb.return_data is None:
+            return None
+        return list_to_texts[bb.return_data]
+
+    def __init__[T](self, list_to_texts: list[T], title="", label: str | list[str] = "", parent=None, width: int = 300):
         super().__init__(parent)
         self.parent = parent
         self.minsize(width, 200)

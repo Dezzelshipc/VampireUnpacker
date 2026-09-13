@@ -500,7 +500,7 @@ def to_current_game_path(path: Path) -> Path:
     game_path = Config[MetaDataHandler.loaded_game.value.data_folder]
 
     if game_path is None or game_path == "" or game_path == Path():
-        err = f"Config does not contain path for dumping data [{MetaDataHandler.loaded_game}: {MetaDataHandler.loaded_game.value.data_folder}]"
+        err = f"Config does not contain path for dumping data [{MetaDataHandler.loaded_game} | {MetaDataHandler.loaded_game.value.data_folder}]"
         showerror("Dumping path error", err)
         assert False, err
 

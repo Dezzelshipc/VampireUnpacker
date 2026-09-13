@@ -1,6 +1,7 @@
+import itertools
 from os import PathLike
 from pathlib import Path
-from typing import Iterable, Any
+from typing import Iterable
 
 from Source.Config.config import Config, DLC, CfgKey, Game
 from Source.Data import game_version, data_vc, data_vs
@@ -10,7 +11,7 @@ from Source.Images.image_gen_general import generate_images_by_meta, generate_an
 from Source.Translations import language_vc, language_vs
 from Source.Utility import image_functions
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, GENERATED, COMPOUND_DATA_TYPE, COMPOUND_DATA, \
-    DEFAULT_ANIMATION_FRAME_RATE, PREFAB_INSTANCE, GAME_OBJECT, ROOT_FOLDER, TILEMAPS
+    DEFAULT_ANIMATION_FRAME_RATE, PREFAB_INSTANCE, GAME_OBJECT, TILEMAPS
 from Source.Utility.popups import ErrorPopup, BasePopup, InfoPopup, WarningPopup
 
 
@@ -28,7 +29,7 @@ class UIBase:
 
     @staticmethod
     def ask_open_file_names(title: str = "Select file", initialdir: set | PathLike[str] = None,
-                            filetypes: Iterable[tuple[str, str | list[str]]] = None) -> Iterable[Path] | None:
+                            filetypes: Iterable[tuple[str, str | list[str]]] = None) -> list[Path] | None:
         raise NotImplementedError()
 
     @staticmethod
@@ -72,11 +73,11 @@ class UIBase:
     def progress_bar_set_sec(self, seconds: float, add_text: str = "") -> None:
         raise NotImplementedError()
 
-    def check_boxes[T](self, list_to_boxes: list[T], title="", label: str | list[str] = "", width: int = 300) -> list[
-        bool]:
+    def check_boxes[T](self, list_to_boxes: Iterable[T], title="", label: str | list[str] = "", width: int = 300) -> \
+            list[bool]:
         raise NotImplementedError()
 
-    def buttons_box[T](self, list_to_texts: list[T], title="", label: str | list[str] = "",
+    def buttons_box[T](self, list_to_texts: Iterable[T], title="", label: str | list[str] = "",
                        width: int = 300) -> T | None:
         raise NotImplementedError()
 
@@ -129,7 +130,7 @@ class UIBase:
 
         games_list.sort()
 
-        data_from_popup = self.check_boxes(games_list, label="Select DLCs to rip", title="Select DLCs")
+        data_from_popup = self.check_boxes(games_list, label="Select Games to rip", title="Select Games")
         if not data_from_popup:
             return
 
@@ -148,15 +149,6 @@ class UIBase:
     def create_version_file():
         game_version.load_version_file()
 
-    def unpack_by_meta_from_spritesheets(self, generate_function):
-        folder = self.get_assets_dir(Game.VS).joinpath("Resources", "spritesheets")
-
-        if not folder.exists():
-            self.show_warning("Warning", "Spritesheets folder for Vampire Survivors does not found.")
-            return
-
-        self.generate_by_meta_selector(folder, generate_function)
-
     def unpack_by_meta(self, generate_function):
         selected_game = self.game_selector()
         if not selected_game:
@@ -174,15 +166,20 @@ class UIBase:
 
         self.generate_by_meta_selector(start_path, generate_function)
 
-    def generate_by_meta_selector(self, selecting_path: Path, generate_function):
-        filetypes = [
-            ('Images', '*.png')
-        ]
+    def unpack_by_meta_from_spritesheets(self, generate_function):
+        folder = self.get_assets_dir(Game.VS).joinpath("Resources", "spritesheets")
 
+        if not folder.exists():
+            self.show_warning("Warning", "Spritesheets folder for Vampire Survivors does not found.")
+            return
+
+        self.generate_by_meta_selector(folder, generate_function)
+
+    def generate_by_meta_selector(self, selecting_path: Path, generate_function):
         full_path = self.ask_open_file_name(
             title='Select a file',
             initialdir=selecting_path,
-            filetypes=filetypes
+            filetypes=[('Images', '*.png')]
         )
 
         if not full_path:
@@ -247,22 +244,47 @@ class UIBase:
             self.show_warning("Error", "Folder with prefabs not found.")
             start_path = Config[selected_game.value.assets_folder]
 
-        full_paths = self.ask_open_file_names(
+        tilemap_paths = self.ask_open_file_names(
             title='Select prefab files of tilemap',
             initialdir=start_path,
             filetypes=[('Prefab', '*.prefab')]
         )
-        if not full_paths:
+        if not tilemap_paths:
             return
 
-        print(f"Selected for generating tilemap: {full_paths!r}")
+        print(f"Selected for generating tilemap: {tilemap_paths!r}")
+        print(f"Multiprocessing: {Config.get_multiprocessing()}")
 
         from Source.Images import tilemap_gen
         save_folder = None
-        for full_path in full_paths:
-            save_folder = tilemap_gen.create_tilemap(full_path,
+
+        is_full_auto = False
+        if len(tilemap_paths) > 1:
+            is_full_auto = self.ask_yes_no("Generation",
+                                           "Selected multiple tilemap prefabs.\nDo you want to automatically generate all tilemaps or manually handle every tilemap?")
+
+        for tilemap_path in tilemap_paths:
+            layers_count = tilemap_gen.get_tilemap_layers_count(tilemap_path)
+
+            if layers_count == 0:
+                self.show_warning("Warning", f"Not found any tilemap for {tilemap_path.name}.")
+                continue
+
+            if not is_full_auto:
+                if not self.ask_yes_no("Generation",
+                                       f"Found tilemap for {tilemap_path.name}.\nDo you want to generate it?"):
+                    continue
+
+            exclude_layers = set()
+            if not is_full_auto:
+                exclude_data = self.check_boxes(range(layers_count), title="Layers to exclude",
+                                                label="Select layers to exclude in generation")
+                exclude_layers = set(itertools.compress(range(layers_count), exclude_data))
+
+            save_folder = tilemap_gen.create_tilemap(tilemap_path, exclude_layers,
                                                      func_progress_bar_set_percent=self.progress_bar_set_percent)
-        print(f"Finished generating all tilemaps: {[fp.name for fp in full_paths]}")
+
+        print(f"Finished generating all tilemaps: {[fp.name for fp in tilemap_paths]}")
         self._last_loaded_folder = save_folder
 
     def create_inverse_tilemap(self):
@@ -290,7 +312,8 @@ class UIBase:
         save_path = image_path.parent / "Inverse"
         save_path.mkdir(exist_ok=True, parents=True)
 
-        self._last_loaded_folder = image_functions.create_tint_image(image_path, save_path, tint, self.progress_bar_set_percent)
+        self._last_loaded_folder = image_functions.create_tint_image(image_path, save_path, tint,
+                                                                     self.progress_bar_set_percent)
 
     ###
 
@@ -310,7 +333,10 @@ class UIBase:
     def get_languages_vs_split(self):
         available_split_types, lang_splits = language_vs.get_available_split_types()
 
-        selected_split_types = self.check_boxes(available_split_types, title="Select split types")
+        selected_split_types = self.check_boxes(available_split_types, title="Select split types",
+                                                label="Select types for splitting langs")
+        if selected_split_types is None:
+            return
 
         is_lang_select = any(select and lang for select, lang in zip(selected_split_types, lang_splits))
 
@@ -347,6 +373,36 @@ class UIBase:
 
         self._last_loaded_folder = image_gen_vs.gen_unified_images(selected_dlc, selected_data,
                                                                    self.progress_bar_set_percent, parent=self)
+
+    def get_unified_audio_vs(self):
+        from req_test import check_pydub
+        if not check_pydub():
+            print("FFmpeg not found")
+            self.show_error("Error", "FFmpeg not found")
+            return
+
+        import Source.Audio.audio_gen_vs as audio_gen
+
+        save_types_list = audio_gen.AudioSaveType.get()
+        selected_save_type = self.check_boxes(save_types_list, title="Select save types",
+                                              label="Select audio save types")
+
+        if not selected_save_type:
+            return
+
+        save_types_set = {t for i, t in enumerate(save_types_list) if selected_save_type[i]}
+
+        if not save_types_set:
+            return
+
+        print(f"Started generating audio: {save_types_set}")
+
+        llf, error = audio_gen.gen_music_tracks(COMPOUND_DATA, save_types_set, self.progress_bar_set_percent)
+        if error:
+            print(error)
+            self.show_error("Error", error)
+        else:
+            self._last_loaded_folder = llf
 
     ###
 
