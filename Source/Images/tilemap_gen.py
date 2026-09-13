@@ -1,11 +1,13 @@
 import itertools
 from pathlib import Path
-from tkinter.messagebox import showerror, askyesno
 
 from PIL.Image import Image, new as image_new
 
 from Source.Config.config import Config
-from Source.Utility.constants import IMAGES_FOLDER, GENERATED, TILEMAPS, PROGRESS_BAR_FUNC_TYPE
+from Source.UI.ui import UIBase
+from Source.UI.ui_tkinter import UITkinter
+from Source.Utility.constants import IMAGES_FOLDER, GENERATED, TILEMAPS, PROGRESS_BAR_FUNC_TYPE, \
+    PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.image_functions import affine_transform, crop_image_rect_left_bot
 from Source.Data.meta_data import MetaData, MetaDataHandler, to_current_game_path
 from Source.Utility.multirun import run_multiprocess, run_concurrent_sync
@@ -13,7 +15,8 @@ from Source.Utility.special_classes import Objectless
 from Source.Utility.sprite_data import SpriteData, SpriteRect
 from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc, UnityEntry
-from Source.Utility.utility import CheckBoxes, write_in_file_end, clear_file
+from Source.Utility.utility import write_in_file_end, clear_file
+from Source.UI.boxes_tkinter import CheckBoxes
 
 
 class Tilemap:
@@ -32,7 +35,8 @@ class Tilemap:
 
 
 class TilemapDataHandler(Objectless):
-    loaded_prefabs: dict[Path, tuple[list[Tilemap | None], int]] = dict()
+    loaded_prefabs: dict[Path, list[Tilemap | None]] = dict()
+    layer_counts: dict[Path, int] = dict()
 
 
 def __resize_sprite_for_tile(image: Image, sprite_data: SpriteData, size_tile: tuple[int, int]) -> Image:
@@ -43,10 +47,10 @@ def __resize_sprite_for_tile(image: Image, sprite_data: SpriteData, size_tile: t
     return crop_image_rect_left_bot(image, rect)
 
 
-def __load_unity_document(path: Path) -> tuple[list[Tilemap | None], int]:
+def __load_unity_document(path: Path) -> list[Tilemap | None]:
     doc = UnityDoc.yaml_parse_file_smart(path, lambda x: "Tilemap:" in x)
     tilemaps = [Tilemap(tilemap) for tilemap in doc.entries]
-    return tilemaps, len(tilemaps)
+    return tilemaps
 
 
 def __create_tilemap_image(tilemap: Tilemap, new_image: Image, data_by_guid: dict[str: MetaData],
@@ -94,51 +98,39 @@ def __save_image(image: Image, path: Path) -> None:
     image.save(path)
 
 
-def gen_tilemap(path: Path, __is_full_auto=True,
-                func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
-    p_file = path.name
-    save_file = path.with_suffix("").name
-    save_folder = Path(to_current_game_path(IMAGES_FOLDER), GENERATED, TILEMAPS, save_file)
+def get_tilemap_layers_count(path: Path) -> int:
+    if path in TilemapDataHandler.layer_counts:
+        return TilemapDataHandler.layer_counts[path]
 
-    if path not in TilemapDataHandler.loaded_prefabs:
-        _text = path.read_text(encoding="UTF-8")
-        count_layers = _text.count("Tilemap:")
-        if not count_layers:
-            showerror("Error", f"Not found any tilemap for {p_file}.")
-            return None
-    else:
-        count_layers = TilemapDataHandler.loaded_prefabs[path][1]
+    _text = path.read_text(encoding="UTF-8")
+    count_layers = _text.count("Tilemap:")
 
-    is_proceed = askyesno("Generation",
-                          f"Found tilemap for {p_file}.\nDo you want to generate it?") if __is_full_auto else True
+    TilemapDataHandler.layer_counts[path] = count_layers
+    return count_layers
 
-    if not is_proceed:
-        return None
 
-    if __is_full_auto:
-        exclude_cbs = CheckBoxes(range(count_layers),
-                                 title="Layers to exclude",
-                                 label="Select layers to exclude in generation")
-        exclude_cbs.wait_window()
-        exclude_data = exclude_cbs.return_data
-        exclude_layers = set(itertools.compress(range(count_layers), exclude_data))
-    else:
-        exclude_layers = set()
+def create_tilemap(
+        path: Path,
+        exclude_layers: set[int],
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> Path | None:
+    tilemap_name = path.name
+    save_file = path.stem
+    save_folder = to_current_game_path(IMAGES_FOLDER) / GENERATED / TILEMAPS / save_file
 
-    print(f"Multiprocessing: {Config.get_multiprocessing()}")
+    count_layers = get_tilemap_layers_count(path)
+
     print(f"Excluded layers: {exclude_layers}")
 
     if path not in TilemapDataHandler.loaded_prefabs:
-        print(f"Started {p_file} parsing")
+        print(f"Started {tilemap_name} parsing")
         timeit = Timeit()
-        TilemapDataHandler.loaded_prefabs.update({
-            path: __load_unity_document(path)
-        })
-        print(f"Finished {p_file} parsing ({timeit:.2f} sec)")
+        TilemapDataHandler.loaded_prefabs[path] = __load_unity_document(path)
+        print(f"Finished {tilemap_name} parsing ({timeit:.2f} sec)")
     else:
-        print(f"Already parsed {p_file}")
+        print(f"Already parsed {tilemap_name}")
 
-    tilemaps, _ = TilemapDataHandler.loaded_prefabs[path]
+    tilemaps = TilemapDataHandler.loaded_prefabs[path]
 
     guid_set = {sprite["m_Data"]["guid"] for tilemap in tilemaps for sprite in tilemap.m_TileSpriteArray}
 
@@ -151,7 +143,7 @@ def gen_tilemap(path: Path, __is_full_auto=True,
 
     save_folder.mkdir(parents=True, exist_ok=True)
 
-    print(f"Started generating tilemap layers for {p_file}")
+    print(f"Started generating tilemap layers for {tilemap_name}")
     clear_file(save_folder / "errors.log")
     timeit = Timeit()
 
@@ -185,9 +177,9 @@ def gen_tilemap(path: Path, __is_full_auto=True,
         )
         run_concurrent_sync(__save_image, args_save_tilemap_layers)
 
-    print(f"Finished generation for tilemap layers {p_file} ({timeit:.2f} sec)")
+    print(f"Finished generation for tilemap layers {tilemap_name} ({timeit:.2f} sec)")
 
-    print(f"Started composing layers for {p_file}")
+    print(f"Started composing layers for {tilemap_name}")
     timeit = Timeit()
 
     im_map = get_transparent_image()
@@ -213,7 +205,7 @@ def gen_tilemap(path: Path, __is_full_auto=True,
             im_map.alpha_composite(layer)
             __save_image(im_map.copy(), save_folder / f"{save_file}-{i}.png")
 
-    print(f"Finished generation for tilemap {p_file} ({timeit:.2f} sec)")
+    print(f"Finished generation for tilemap {tilemap_name} ({timeit:.2f} sec)")
 
     return save_folder
 
@@ -262,13 +254,13 @@ if __name__ == "__main__":
 
     def __profile():
         from tkinter import filedialog as fd
-        from Source.Config.config import DLCType, Game
+        from Source.Config.config import DLC, Game
         from Source.Utility.constants import GAME_OBJECT
         MetaDataHandler.load(Game.VS)
 
         full_path = fd.askopenfilename(
             title='Select prefab file of tilemap',
-            initialdir=Config.get_assets_dir(DLCType.VS) / GAME_OBJECT,
+            initialdir=Config.get_assets_dir(Game.VS) / GAME_OBJECT,
             filetypes=[('Prefab', '*.prefab')]
         )
         if not full_path:
@@ -278,7 +270,7 @@ if __name__ == "__main__":
         import cProfile
         print("Started")
         with cProfile.Profile() as pr:
-            gen_tilemap(full_path, False)
+            create_tilemap(full_path, set())
             # pr.print_stats('time')
             pr.dump_stats('./tilemap.prof')
 

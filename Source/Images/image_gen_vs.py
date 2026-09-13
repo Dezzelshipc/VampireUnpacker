@@ -11,16 +11,17 @@ from typing import Any, Callable
 from PIL import ImageFont, ImageDraw
 from PIL.Image import Image, open as image_open, new as image_new
 
-from Source.Config.config import DLCType
-from Source.Data.data import DataHandler, DataType, DataFile
-from Source.Translations.language import LangHandler, LangType
+from Source.Config.config import DLC
+from Source.Data.data_vs import DataHandler, DataType, DataFile
+from Source.Translations.language_vs import LangHandler, LangType
 from Source.Translations.language_utils import Lang
 from Source.Utility.constants import to_source_path, IMAGES_FOLDER, COMPOUND_DATA_TYPE, GENERATED, \
-    PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA
+    PROGRESS_BAR_FUNC_TYPE, COMPOUND_DATA, PROGRESS_BAR_FUNC_DEFAULT
 from Source.Utility.image_functions import make_image_black
 from Source.Utility.image_functions import resize_image, get_adjusted_sprites_to_rect, get_rects_by_sprite_list
 from Source.Data.meta_data import MetaDataHandler, to_current_game_path
 from Source.Utility.sprite_data import SpriteData
+from Source.Utility.timer import Timeit
 from Source.Utility.utility import normalize_str
 
 PREFIX = "prefix"
@@ -167,33 +168,37 @@ class ImageGeneratorManager:
 
         return None
 
-    @staticmethod
-    def get_supported_gen_types() -> set[DataType]:
-        return set(filter(ImageGeneratorManager.get_gen, DataType.get_all_types()))
 
-    @staticmethod
-    def gen_unified_images(dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                           func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0,
-                           parent=None) -> Path | None:
-        gen_class: BaseImageGenerator.__class__ = ImageGeneratorManager.get_gen(data_type)
+def get_supported_gen_types() -> set[DataType]:
+    return set(filter(ImageGeneratorManager.get_gen, DataType.get_all_types()))
 
-        if not gen_class:
-            return None
 
-        dialog = GeneratorDialog(gen_class, parent=parent)
-        dialog.wait_window()
-        req_gens: dict[GenType, int | bool] | None = dialog.return_data
+def gen_unified_images(dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT,
+                       parent=None) -> Path | None:
+    gen_class: BaseImageGenerator.__class__ = ImageGeneratorManager.get_gen(data_type)
 
-        if not req_gens:
-            return None
+    if not gen_class:
+        return None
 
-        print(f"Selected settings for {gen_class.__name__}: {req_gens}")
+    dialog = GeneratorDialog(gen_class, parent=parent)
+    dialog.wait_window()
+    req_gens: dict[GenType, int | bool] | None = dialog.return_data
 
-        gen: BaseImageGenerator = gen_class(dlc_type, data_type, req_gens)
+    if not req_gens:
+        return None
 
-        save_path = gen.main_generator(dlc_type, data_type, func_progress_bar_set_percent)
+    gen: BaseImageGenerator = gen_class(dlc_type, data_type, req_gens)
 
-        return save_path
+    print(f"Selected settings for {gen_class.__name__}: {req_gens}")
+    print(f"Started generating images for '{str(dlc_type)}' - '{data_type}'")
+    _timeit = Timeit()
+
+    save_path = gen.main_generator(dlc_type, data_type, func_progress_bar_set_percent)
+
+    print(f"Finished generating unified images {_timeit!r}")
+
+    return save_path
 
 
 class BaseImageGenerator:
@@ -216,7 +221,7 @@ class BaseImageGenerator:
 
     default_frame_name = None
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         self.data_file: DataFile | None = DataHandler.get_data(dlc_type, data_type)
 
@@ -237,11 +242,11 @@ class BaseImageGenerator:
             self.get_unit(key_id, entry.copy()) for key_id, entry in self.data_file.data().items()
         ]
 
-    def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
+    def main_generator(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
 
-        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / DLCType.string(dlc_type)
+        save_path = to_current_game_path(IMAGES_FOLDER) / GENERATED / data_type.value / str(dlc_type)
         save_path.mkdir(parents=True, exist_ok=True)
 
         total_len = len(self.entries)
@@ -252,7 +257,7 @@ class BaseImageGenerator:
                 if out_entry:
                     out_entry.save_entry(save_path, entry, scale)
 
-                func_progress_bar_set_percent(i + 1, total_len)
+                func_progress_bar_set_percent(i + 1, total_len, out_entry.name if out_entry else "")
 
         if self.requested_gens.get(GenType.IMAGE_FRAME):
             for i, entry in enumerate(self.entries):
@@ -260,7 +265,7 @@ class BaseImageGenerator:
                 if out_entry:
                     out_entry.save_entry(save_path, entry, scale, add_to_path="Icon")
 
-                func_progress_bar_set_percent(i + 1, total_len)
+                func_progress_bar_set_percent(i + 1, total_len, "Icon:" + out_entry.name if out_entry else "")
 
         return save_path
 
@@ -310,7 +315,7 @@ class BaseImageGenerator:
             print(f"!!! Image skipped '{sprite_texture}': texture '{main_texture}' not found", file=sys.stderr)
             return None
 
-        sprite_data = texture_meta_data.data_name.get(sprite_texture)
+        sprite_data = texture_meta_data.data_name.get(sprite_texture) or texture_meta_data.data_id.get(0)
         if not sprite_data:
             print(f"!!! Image skipped '{sprite_texture}': not found for texture '{main_texture}'", file=sys.stderr)
             return None
@@ -437,8 +442,8 @@ class ArcanaImageGenerator(BaseImageGenerator):
         textures_set.update({entry.get(self.key_secondary_texture_name) for entry in self.entries})
         return textures_set
 
-    def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
+    def main_generator(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         save_path = super().main_generator(dlc_type, data_type)
         scale = self.requested_gens.get(GenType.IMAGE)
 
@@ -652,7 +657,7 @@ class CharacterImageGenerator(ListBaseImageGenerator):
 
     default_frame_name = "CharacterSelectFrame.png"
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         super().__init__(dlc_type, data_type, requested_gen_types)
 
@@ -694,6 +699,10 @@ class CharacterImageGenerator(ListBaseImageGenerator):
 
         if (weapon_id := entry.get("startingWeapon")) and weapon_id not in ["VOID", "0", 0, None]:
             weapon_data = self.weapon_image_gen.data_file.data().get(weapon_id)
+            if weapon_data is None:
+                print(f"Not found weapon [ID={weapon_id}] for character {eng_name}")
+                return None
+
             weapon_entry = self.weapon_image_gen.gen_image(self.weapon_image_gen.get_unit(weapon_id, weapon_data))
 
             if weapon_entry is None:
@@ -712,17 +721,23 @@ class CharacterImageGenerator(ListBaseImageGenerator):
         frame_image.alpha_composite(char_sprite, (12, frame_image.height - char_sprite.height - 11))
 
         text = entry.get(CHAR_NAME)
-        font = ImageFont.truetype(FONT_FILE_PATH, 30)
+        font_size = 30
+        font = ImageFont.truetype(FONT_FILE_PATH, font_size)
 
-        if font.getbbox(text)[2] > frame_image.size[0] - 8:
-            small_size = 28
+        if font.getbbox(text)[2] > frame_image.size[0] - 30:
+            font_size = 28
             if "lolo,".lower() in text.lower():
-                small_size = 24
+                font_size = 24
                 text = text.replace(", ", ",\n", 2).replace(",\n", ", ", 1)
             elif " " in text:
                 text = text[::-1].replace(" ", "\n", 1)[::-1]
 
-            font = ImageFont.truetype(FONT_FILE_PATH, small_size)
+            font = font.font_variant(size=font_size)
+            while font_size >= 20:
+                if font.getbbox(text)[2] <= frame_image.size[0] - 30:
+                    break
+                font_size -= 0.2
+                font = font.font_variant(size=font_size)
 
         canvas = image_new('RGBA', frame_image.size)
 
@@ -751,7 +766,7 @@ class EnemyImageGenerator(ListBaseImageGenerator):
     key_frame_name = None
     key_entry_name = "bName"
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         super().__init__(dlc_type, data_type, requested_gen_types)
         raise NotImplementedError(f"{self.__class__.__name__} not implemented")
@@ -772,8 +787,8 @@ class StageImageGenerator(ListBaseImageGenerator):
     key_frame_name = None
     key_entry_name = "stageName"
 
-    def main_generator(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
-                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = lambda c, t: 0) -> Path | None:
+    def main_generator(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
+                       func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT) -> Path | None:
         scale = self.requested_gens[GenType.IMAGE]
         save_path = super().main_generator(dlc_type, data_type, func_progress_bar_set_percent)
 
@@ -836,7 +851,7 @@ class AdventureStageImageGenerator(StageImageGenerator):
     stage_set: DataFile = None
     stage_to_stage_set: dict[str, str] | None = None
 
-    def __init__(self, dlc_type: DLCType | COMPOUND_DATA_TYPE, data_type: DataType,
+    def __init__(self, dlc_type: DLC | COMPOUND_DATA_TYPE, data_type: DataType,
                  requested_gen_types: dict[GenType, int | bool]):
         self.stage_set: DataFile | None = DataHandler.get_data(dlc_type, DataType.ADVENTURE_STAGE_SET)
         self.stage_to_stage_set = {

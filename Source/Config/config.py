@@ -1,16 +1,18 @@
+from __future__ import annotations
+
+import dataclasses
 import itertools
 import json
 import tkinter as tk
 from dataclasses import dataclass
-from enum import Enum
+from enum import Enum, StrEnum
 from pathlib import Path
 from tkinter import ttk
 from tkinter.filedialog import askdirectory
 from tkinter.messagebox import showerror, showinfo
-from typing import Self, Final, Callable
+from typing import Final, Callable
 
-from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER, COMPOUND_DATA_TYPE, COMPOUND_DATA, STEAM_APPID_VS, \
-    STEAM_APPID_VC
+from Source.Utility.constants import CONFIG_FOLDER, ROOT_FOLDER
 from Source.Utility.special_classes import Objectless
 
 ASSETS = "Assets"
@@ -18,154 +20,145 @@ PROJECT_SETTINGS = "ProjectSettings"
 EXPORTED_PROJECT = "ExportedProject"
 
 
-class CfgKey(Enum):
+class CfgKey(StrEnum):
     MULTIPROCESSING = "MULTIPROCESSING"
     RIPPER = "AS_RIPPER"
 
-    STEAM_VS = "STEAM_APP"
-    VS = "VS_ASSETS"
-    MS = "MS_ASSETS"
-    FS = "FS_ASSETS"
-    EM = "EM_ASSETS"
-    OG = "OG_ASSETS"
-    OC = "OC_ASSETS"
-    ED = "ED_ASSETS"
-    AC = "AC_ASSETS"
-    # BM = "BM_ASSETS"
-    # IS = "IS_ASSETS"
+    ASSETS_VS = "ASSETS_VS"
+    STEAM_VS = "STEAM_VS"
     DATA_VS = "DATA_VS"
 
+    ASSETS_VC = "ASSETS_VC"
     STEAM_VC = "STEAM_VC"
-    VC = "VC_ASSETS"
     DATA_VC = "DATA_VC"
+
+    ASSETS_WRHS = "ASSETS_WRHS"
+    STEAM_WRHS = "STEAM_WRHS"
+    DATA_WRHS = "DATA_WRHS"
+
+    ASSETS_JJKRS = "ASSETS_JJKRS"
+    STEAM_JJKRS = "STEAM_JJKRS"
+    DATA_JJKRS = "DATA_JJKRS"
 
     def __str__(self):
         return self.value
 
     @classmethod
-    def get_non_path_keys(cls) -> set[Self]:
+    def get_non_path_keys(cls) -> set[CfgKey]:
         return {cls.MULTIPROCESSING}
 
     @classmethod
-    def get_path_keys(cls) -> set[Self]:
+    def get_assets_keys(cls) -> list[CfgKey]:
+        return [cls.ASSETS_VS, cls.ASSETS_VC, cls.ASSETS_WRHS, cls.ASSETS_JJKRS]
+
+    @classmethod
+    def get_steam_path_keys(cls) -> list[CfgKey]:
+        return [cls.STEAM_VS, cls.STEAM_VC, cls.STEAM_WRHS, cls.STEAM_JJKRS]
+
+    @classmethod
+    def get_data_path_keys(cls) -> list[CfgKey]:
+        return [cls.DATA_VS, cls.DATA_VC, cls.DATA_WRHS, cls.DATA_JJKRS]
+
+    @classmethod
+    def get_path_keys(cls) -> set[CfgKey]:
         return {*cls}.difference(cls.get_non_path_keys())
-
-    @classmethod
-    def get_assets_keys(cls) -> set[Self]:
-        return {*cls}.difference({CfgKey.MULTIPROCESSING, CfgKey.RIPPER, CfgKey.STEAM_VS, CfgKey.STEAM_VC})
-
-
-class Game(Enum):
-    VS = 0
-    VC = 100
-
-    SPECIAL = -1
-
-    @classmethod
-    def get_all_types(cls) -> set[Self]:
-        return {*cls}.difference({cls.SPECIAL})
-
-    def get_default_dlc(self) -> "DLCType":
-        match self:
-            case Game.VS:
-                return DLCType.VS
-            case Game.VC:
-                return DLCType.VC
-            case _:
-                assert False, "Game enum has no default dlc"
-
-    def get_main_folder_key(self) -> "CfgKey":
-        match self:
-            case Game.VS:
-                return CfgKey.STEAM_VS
-            case Game.VC:
-                return CfgKey.STEAM_VC
-            case _:
-                assert False, "Game enum has no default folder"
-
-    def get_data_folder_key(self) -> "CfgKey":
-        match self:
-            case Game.VS | Game.SPECIAL:
-                return CfgKey.DATA_VS
-            case Game.VC:
-                return CfgKey.DATA_VC
-            case _:
-                assert False, "Game enum has no data folder"
-
-    def get_steam_appid(self) -> int:
-        match self:
-            case Game.VS:
-                return STEAM_APPID_VS
-            case Game.VC:
-                return STEAM_APPID_VC
-            case _:
-                assert False, "Game enum has no data folder"
 
 
 @dataclass(order=True, unsafe_hash=True)
-class DLC:
+class GameType:
+    appid: int
+    steam_folder: CfgKey
+    assets_folder: CfgKey
+    data_folder: CfgKey
+
+
+class Game(Enum):
+    VS = GameType(1794680, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
+    VC = GameType(3265700, CfgKey.STEAM_VC, CfgKey.ASSETS_VC, CfgKey.DATA_VC)
+    WRHS = GameType(3669620, CfgKey.STEAM_WRHS, CfgKey.ASSETS_WRHS, CfgKey.DATA_WRHS)
+    JJKRS = GameType(4753290, CfgKey.STEAM_JJKRS, CfgKey.ASSETS_JJKRS, CfgKey.DATA_JJKRS)
+
+    SPECIAL = GameType(-1, CfgKey.STEAM_VS, CfgKey.ASSETS_VS, CfgKey.DATA_VS)
+    NONE = None
+
+    @classmethod
+    def get_all_types(cls) -> set[Game]:
+        return {*cls}.difference({cls.SPECIAL, cls.NONE})
+
+    def get_default_dlc(self) -> DLC:
+        match self:
+            case Game.VS | Game.SPECIAL:
+                return DLC.VS
+            case Game.VC:
+                return DLC.VC
+            case Game.WRHS:
+                return DLC.WRHS
+            case Game.JJKRS:
+                return DLC.JJKRS
+            case _:
+                assert False, "Game enum has no default dlc"
+
+    @classmethod
+    def get_game_by_cfgkey(cls, cfgkey: CfgKey) -> Game:
+        for game in cls.get_all_types():
+            if cfgkey in dataclasses.astuple(game.value):
+                return game
+        return Game.NONE
+
+    def __str__(self):
+        return self.get_default_dlc().value.full_name
+
+    def __lt__(self, other: Game) -> bool:
+        return self.value < other.value
+
+
+@dataclass(order=True, unsafe_hash=True)
+class DLCType:
     index: int
-    config_key: CfgKey
+    sorting_index: int
     game: Game
     code_name: str
-    steam_index: str
     full_name: str
 
 
-class DLCType(Enum):
-    VS = DLC(0, CfgKey.VS, Game.VS, "BASE_GAME", "VampireSurvivors_Data", "Vampire Survivors")
-    MS = DLC(1, CfgKey.MS, Game.VS, "MOONSPELL", "2230760", "Legacy of the Moonspell")
-    FS = DLC(2, CfgKey.FS, Game.VS, "FOSCARI", "2313550", "Tides of the Foscari")
-    EM = DLC(3, CfgKey.EM, Game.VS, "CHALCEDONY", "2690330", "Emergency Meeting")
-    OG = DLC(4, CfgKey.OG, Game.VS, "FIRST_BLOOD", "2887680", "Operation Guns")
-    OC = DLC(5, CfgKey.OC, Game.VS, "THOSE_PEOPLE", "3210350", "Ode to Castlevania")
-    ED = DLC(6, CfgKey.ED, Game.VS, "EMERALDS", "3451100", "Emerald Diorama")
-    AC = DLC(7, CfgKey.AC, Game.VS, "LEMON", "3929770", "Ante Chamber")
-    # BM = DLC(8, CfgKey.BM, Game.VS, "BLOODMOON(?)", "4781330", "Legacy of the Bloodmoon")
-    # IS = DLC(-1, CfgKey.IS, Game.VS, "-", "-", "IS")
+class DLC(Enum):
+    VS = DLCType(0, 0, Game.VS, "SURVIVORS", "Vampire Survivors")
+    MS = DLCType(1, 1, Game.VS, "MOONSPELL", "Legacy of the Moonspell")
+    FS = DLCType(2, 3, Game.VS, "FOSCARI", "Tides of the Foscari")
+    EM = DLCType(3, 4, Game.VS, "CHALCEDONY", "Emergency Meeting")
+    OG = DLCType(4, 5, Game.VS, "FIRST_BLOOD", "Operation Guns")
+    OC = DLCType(5, 6, Game.VS, "THOSE_PEOPLE", "Ode to Castlevania")
+    ED = DLCType(6, 7, Game.VS, "EMERALDS", "Emerald Diorama")
+    AC = DLCType(7, 8, Game.VS, "LEMON", "Ante Chamber")
+    BM = DLCType(8, 2, Game.VS, "BLOODMOON", "Legacy of the Bloodmoon")
+    # IS = DLCType(99, 99, Game.VS, "-", "-")
 
-    VC = DLC(100, CfgKey.VC, Game.VC, "CRAWLERS", "Vampire Crawlers_Data", "Vampire Crawlers")
+    VC = DLCType(100, 0, Game.VC, "CRAWLERS", "Vampire Crawlers")
 
-    @staticmethod
-    def string(dlc: Self | COMPOUND_DATA_TYPE) -> str:
-        return str(dlc) if dlc != COMPOUND_DATA else dlc.value
+    WRHS = DLCType(200, 0, Game.WRHS, "WARHAMMER", "Warhammer Survivors")
+
+    JJKRS = DLCType(300, 0, Game.JJKRS, "JJKRS", "JUJUTSU KAISEN RUMBLE: SURVIVATON")
 
     def __str__(self):
         return self.value.full_name
 
     def __repr__(self):
         val = self.value
-        return f"<{DLCType.__name__}.{self.name} - {val.code_name} - {val.full_name}>"
+        return f"<{DLC.__name__}.{self.name} - {val.code_name} - {val.full_name}>"
 
     @classmethod
-    def get_all_types(cls) -> list[Self]:
+    def get_all_types(cls) -> list[DLC]:
         dlcs = [*cls]
         return list(sorted(dlcs, key=lambda x: x.value))
 
     @classmethod
-    def get_all_types_by_game(cls, game: Game) -> list[Self]:
+    def get_all_types_by_game(cls, game: Game, is_game_sorting: bool = False) -> list[DLC]:
         dlcs = [c for c in cls if c.value.game == game]
-        return list(sorted(dlcs, key=lambda x: x.value))
+        sorting_f = (lambda x: x.value.sorting_index) if is_game_sorting else (lambda x: x.value.index)
+        return list(sorted(dlcs, key=sorting_f))
 
     @classmethod
-    def get_by_cfgkey(cls, config_key: CfgKey) -> DLC | None:
-        for dlc in [*cls]:
-            if dlc.value.config_key == config_key:
-                return dlc.value
-        return None
-
-    @staticmethod
-    def get_dlc_name(config_key: CfgKey) -> str | None:
-        dlc = DLCType.get_by_cfgkey(config_key)
-        return dlc.full_name if dlc else None
-
-    @staticmethod
-    def get_code_name(config_key: CfgKey) -> str | None:
-        dlc = DLCType.get_by_cfgkey(config_key)
-        return dlc.code_name if dlc else None
-
-    @classmethod
-    def get(cls, index: int) -> Self | None:
+    def get(cls, index: int) -> DLC | None:
         _all = cls.get_all_types()
         return _all[index] if index < len(_all) else None
 
@@ -189,20 +182,39 @@ class Config(Objectless):
     def _save_config_file(cls):
         with open(cls._CONFIG_FILE, "w", encoding="utf-8") as f:
             f.write(json.dumps({
-                key.value: ("" if val == Path() else str(val)) if isinstance(val, Path) else val
+                key.value: str(val) if isinstance(val, Path) else val
                 for key, val in cls.__data.items()
+                if val != Path()
             }, ensure_ascii=False, indent=2))
 
     @staticmethod
     def _get_default_config():
-        data: dict[CfgKey, Path | bool] = {dlc.value.config_key: Path() for dlc in DLCType.get_all_types()}
-        data[CfgKey.STEAM_VS] = Path()
-        data[CfgKey.STEAM_VC] = Path()
-        data[CfgKey.DATA_VS] = Path()
-        data[CfgKey.DATA_VC] = Path()
+        data: dict[CfgKey, Path | bool] = {}
+        data = {
+            cfg: Path()
+            for game in sorted(Game.get_all_types())
+            for cfg in dataclasses.astuple(game.value)[1:]
+        }
+
+        # data.update({cfg: Path() for cfg in CfgKey.get_steam_path_keys()})
+        # data.update({cfg: Path() for cfg in CfgKey.get_assets_keys()})
+        # data.update({cfg: Path() for cfg in CfgKey.get_data_path_keys()})
+
         data[CfgKey.RIPPER] = Path()
         data[CfgKey.MULTIPROCESSING] = False
         return data
+
+    @classmethod
+    def migrate_config_key(cls, key: str) -> str:
+        match key:
+            case "STEAM_APP":
+                return CfgKey.STEAM_VS
+            case "VS_ASSETS":
+                return CfgKey.ASSETS_VS
+            case "VC_ASSETS":
+                return CfgKey.ASSETS_VC
+            case _:
+                return key
 
     @classmethod
     def _load_config(cls):
@@ -213,11 +225,14 @@ class Config(Objectless):
                 print(e)
                 json_file = dict()
 
-            cls.__data.update({
-                CfgKey(key): (val if CfgKey(key) in CfgKey.get_non_path_keys() else Path(val))
-                for key, val in json_file.items()
-                if key in CfgKey
-            })
+            data = dict()
+            for key, val in json_file.items():
+                key_m = cls.migrate_config_key(key)
+                if key_m not in CfgKey:
+                    continue
+                data[CfgKey(key_m)] = val if CfgKey(key_m) in CfgKey.get_non_path_keys() else Path(val)
+
+            cls._update_data(data)
 
     @classmethod
     def _update_data(cls, data: dict[CfgKey, Path | bool]):
@@ -232,21 +247,26 @@ class Config(Objectless):
         return cls.get_data().get(item)
 
     @classmethod
-    def assert_key(cls, item: CfgKey):
-        i = cls[item]
+    def assert_key(cls, key: CfgKey):
+        i = cls[key]
         assert i is not None and i != Path()
+
+    @classmethod
+    def has_valid(cls, key: CfgKey) -> bool:
+        i = cls[key]
+        return i and i != Path()
 
     @classmethod
     def get_multiprocessing(cls) -> bool:
         return cls[CfgKey.MULTIPROCESSING]
 
     @classmethod
-    def get_assets_dir(cls, dlc: DLCType = DLCType.VS) -> Path:
-        return cls[dlc.value.config_key] / EXPORTED_PROJECT / ASSETS
+    def get_assets_dir(cls, game: Game) -> Path:
+        return cls[game.value.assets_folder] / EXPORTED_PROJECT / ASSETS
 
     @classmethod
-    def get_project_settings_dir(cls, dlc: DLCType = DLCType.VS) -> Path:
-        return cls[dlc.value.config_key] / EXPORTED_PROJECT / PROJECT_SETTINGS
+    def get_project_settings_dir(cls, game: Game) -> Path:
+        return cls[game.value.assets_folder] / EXPORTED_PROJECT / PROJECT_SETTINGS
 
     @staticmethod
     def _fix_assets_path(data: dict[CfgKey, Path | bool]) -> tuple[dict[CfgKey, Path | bool], bool]:
@@ -300,22 +320,19 @@ class Config(Objectless):
                     continue
 
                 info_text = ""
-                if dlc := DLCType.get_by_cfgkey(key):
-                    info_text = f"{dlc.full_name}. {dlc.code_name}"
-                else:
-                    match key:
-                        case CfgKey.RIPPER:
-                            info_text = f"Asset Ripper. Folder must contain 'AssetRipper[...].exe'"
-                        case CfgKey.STEAM_VS:
-                            info_text = f"VS steam folder. Folder must contain 'Vampire Survivors.exe'"
-                        case CfgKey.STEAM_VC:
-                            info_text = f"VC steam folder. Folder must contain 'Vampire Crawlers.exe'"
-                        case CfgKey.MULTIPROCESSING:
-                            continue
-                        case CfgKey.DATA_VS:
-                            info_text = f"Folder for dumping Survivors data"
-                        case CfgKey.DATA_VC:
-                            info_text = f"Folder for dumping Crawlers data"
+                game = Game.get_game_by_cfgkey(key)
+                if "ASSETS_" in key:
+                    info_text = f"Folder with/for ripped data of {game.get_default_dlc().value.full_name}."
+                elif "STEAM_" in key:
+                    info_text = f"{game.get_default_dlc().value.code_name} steam folder. Folder must contain game executable."
+                elif "DATA_" in key:
+                    info_text = f"Folder for dumping {game.get_default_dlc().value.code_name} data"
+
+                match key:
+                    case CfgKey.RIPPER:
+                        info_text = f"Asset Ripper. Folder must contain 'AssetRipper[...].exe'"
+                    case CfgKey.MULTIPROCESSING:
+                        continue
 
                 tk.Label(self, text=info_text).pack()
 
@@ -326,7 +343,7 @@ class Config(Objectless):
                 path = "" if path == Path() else str(path)
                 self.variables[key] = tk.StringVar(frame, path)
 
-                ttk.Label(frame, text=str(key)).pack(side=tk.LEFT)
+                ttk.Label(frame, text=str(key), anchor="center", width=14).pack(side=tk.LEFT)
                 ttk.Entry(frame, textvariable=self.variables[key], width=90).pack(side=tk.LEFT)
                 ttk.Button(frame, text="Select folder", command=select_folder(self.variables[key])).pack(side=tk.LEFT)
 

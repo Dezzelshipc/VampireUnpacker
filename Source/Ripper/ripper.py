@@ -3,11 +3,12 @@ import shutil
 import sys
 import time
 from pathlib import Path
-from tkinter.messagebox import showerror
 
 import requests
 
-from Source.Config.config import DLCType, CfgKey, Config, Game
+from Source.Config.config import DLC, CfgKey, Config, Game
+from Source.UI.ui import UIBase
+from Source.UI.ui_tkinter import UITkinter
 from Source.Utility.constants import RIPPER_FOLDER, to_source_path
 from Source.Utility.timer import Timeit
 
@@ -15,7 +16,7 @@ ripper_port = 56636
 ripper_url = f"http://127.0.0.1:{ripper_port}/"
 
 
-def rip_files(dlc_list: set[DLCType]):
+def rip_files(games_to_rip: set[Game], ui_class: UIBase.__class__ = UITkinter):
     ripper_path = Config[CfgKey.RIPPER]
     settings_name = "AssetRipper.Settings.json"
 
@@ -36,18 +37,18 @@ def rip_files(dlc_list: set[DLCType]):
     if not ripper:
         _s = "AssetRipper not found"
         print(_s, file=sys.stderr)
-        showerror("Ripper Error", _s)
+        ui_class.show_error("Ripper Error", _s)
         return
 
-    if Config[CfgKey.STEAM_VS] == Path():
-        _s = f"Steam config path is empty"
-        showerror("Ripper Error", _s)
+    if empty_game_paths := [game for game in games_to_rip if Config[game.value.steam_folder] == Path()]:
+        _s = f"Some config paths to steam folders are empty:\n{'\n'.join(map(str, empty_game_paths))}"
+        ui_class.show_error("Ripper Error", _s)
         print(_s, file=sys.stderr)
         return
 
-    if empty_paths := [dlc.value.full_name for dlc in dlc_list if Config[dlc.value.config_key] == Path()]:
-        _s = f"Some config paths are empty:\n{'\n'.join(empty_paths)}"
-        showerror("Ripper Error", _s)
+    if empty_asset_paths := [game for game in games_to_rip if Config[game.value.assets_folder] == Path()]:
+        _s = f"Some config paths to asset folders are empty:\n{'\n'.join(map(str, empty_asset_paths))}"
+        ui_class.show_error("Ripper Error", _s)
         print(_s, file=sys.stderr)
         return
 
@@ -84,24 +85,14 @@ def rip_files(dlc_list: set[DLCType]):
                 wait_time *= 2
                 print(f"Ripper is not loaded. Trying reconnect in {wait_time} sec.")
 
-    steam_folder = {
-        p.name: p
-        for game_dlc in Game.get_all_types()
-        for p in Config[game_dlc.get_main_folder_key()].iterdir()
-    }
+    for game in sorted(games_to_rip):
+        assets_path = Config[game.value.assets_folder]
 
-    for dlc in sorted(map(lambda x: x.value, dlc_list)):
-        assets_path = Config[dlc.config_key]
-
-        if dlc.steam_index not in steam_folder:
-            print(f"Skipping {dlc.code_name} - Steam folder {dlc.steam_index} not found")
-            continue
-
-        print(dlc.code_name, "Loading to", assets_path, end="... ", flush=True)
+        print(game.get_default_dlc().value.full_name, "Loading to", assets_path, end="... ", flush=True)
 
         timeit = Timeit()
 
-        requests.post(ripper_url + "LoadFolder", data={"Path": steam_folder[dlc.steam_index]})
+        requests.post(ripper_url + "LoadFolder", data={"Path": Config[game.value.steam_folder]})
 
         assets_path.mkdir(parents=True, exist_ok=True)
         print("Exporting UnityProject", end="... ")

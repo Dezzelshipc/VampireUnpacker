@@ -1,22 +1,22 @@
 import re
-from tkinter.messagebox import showerror
-from dataclasses import dataclass
 from collections.abc import Callable
+from enum import StrEnum
 from pathlib import Path
 from tkinter import Image
+from tkinter.messagebox import showerror
 
 from PIL.Image import Image, open as image_open
 
-from Source.Config.config import DLCType, Config, Game
+from Source.Config.config import DLC, Config, Game
 from Source.Utility.constants import RESOURCES, TEXTURE_2D, TEXT_ASSET, GAME_OBJECT, PREFAB_INSTANCE, AUDIO_CLIP, \
     MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS, BUNDLE_MANIFEST_DATA, MATERIAL, ROOT_FOLDER, VERSION_DATA
 from Source.Utility.image_functions import crop_image_rect_left_bot, split_name_count, get_rects_by_sprite_list
-from Source.Utility.multirun import run_multiprocess_single, run_concurrent_sync
-from Source.Utility.special_classes import Objectless
+from Source.Utility.multirun import run_multiprocess_single
+from Source.Utility.special_classes import Objectless, Emitter
 from Source.Utility.sprite_data import SpriteData, AnimationData, SKIP_ANIM_NAMES_LIST
 from Source.Utility.timer import Timeit
 from Source.Utility.unity_parser import UnityDoc
-from Source.Utility.utility import normalize_str
+from Source.Utility.utility import normalize_str, to_pascalcase
 
 
 def _get_meta_guid(path: Path) -> tuple[str | None, Path]:
@@ -196,24 +196,30 @@ def _get_meta(meta_path: Path) -> MetaData:
     return MetaData(name, meta_path_name, guid, image, prepared_data_name, prepared_data_id)
 
 
-class MetaDataHandler(Objectless):
+class MetaDataHandler(Emitter, Objectless):
     _found_files: list[Path] = []
 
     _assets_name_path: dict[str, Path] = {}
     _assets_guid_path: dict[str, Path] = {}
 
-    loaded_game: Game = None
+    loaded_game: Game = Game.NONE
     loaded_assets_meta: dict[str, MetaData] = {}
+
+    class Emit(StrEnum):
+        AFTER_LOAD = "after_load"
+        BEFORE_LOAD = "before_load"
 
     @classmethod
     def load(cls, game: Game):
         if game != cls.loaded_game:
-            if cls.loaded_game is not None:
+            if cls.loaded_game != Game.NONE:
                 cls.unload()
-            cls.loaded_game = game
 
-        cls._load_assets_meta_file_paths()
-        cls._load_assets_meta_files_guids()
+            cls.emit(MetaDataHandler.Emit.BEFORE_LOAD, cls.loaded_game, game)
+            cls.loaded_game = game
+            cls._load_assets_meta_file_paths()
+            cls._load_assets_meta_files_guids()
+            cls.emit(MetaDataHandler.Emit.AFTER_LOAD, cls.loaded_game)
 
     @classmethod
     def unload(cls):
@@ -222,6 +228,12 @@ class MetaDataHandler(Objectless):
         cls._assets_guid_path.clear()
         cls.loaded_assets_meta.clear()
         print(f"MetaData unloaded [{cls.loaded_game.name if cls.loaded_game else ""}]")
+        cls.loaded_game = Game.NONE
+        cls.emit(MetaDataHandler.Emit.AFTER_LOAD, cls.loaded_game)
+
+    @classmethod
+    def is_loaded(cls):
+        return cls.loaded_game != Game.NONE
 
     @classmethod
     def assert_game(cls, game: Game):
@@ -229,12 +241,14 @@ class MetaDataHandler(Objectless):
 
     @classmethod
     def assert_loaded_game(cls):
-        assert cls.loaded_game is not None, f"Game assets not loaded! [{cls.loaded_game}]"
+        assert cls.loaded_game != Game.NONE, f"Game assets not loaded! [{cls.loaded_game}]"
 
     @classmethod
     def _load_assets_meta_file_paths(cls) -> None:
         if cls._assets_name_path:
             return
+
+        cls.assert_loaded_game()
 
         timeit = Timeit()
 
@@ -249,34 +263,31 @@ class MetaDataHandler(Objectless):
         ]
 
         match cls.loaded_game:
-            case Game.VS:
-                path_roots.extend([
-                    (MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS),
-                    (MONO_BEHAVIOUR, BUNDLE_MANIFEST_DATA),
-                    (MONO_BEHAVIOUR, VERSION_DATA),
-
-                    (MONO_BEHAVIOUR, "Moonspell"),
-                    (MONO_BEHAVIOUR, "Foscari"),
-                    (MONO_BEHAVIOUR, "Chalcedony"),
-                    (MONO_BEHAVIOUR, "FirstBlood"),
-                    (MONO_BEHAVIOUR, "ThosePeople"),
-                    (MONO_BEHAVIOUR, "Emeralds"),
-                    (MONO_BEHAVIOUR, "Lemon"),
-                ])
             case Game.VC:
                 path_roots.extend([
                     (MONO_BEHAVIOUR, ""),
                     (MATERIAL, ""),
                 ])
 
-        for dlc in DLCType.get_all_types_by_game(cls.loaded_game):
-            for root, file_name in path_roots:
-                path = Config.get_assets_dir(dlc) and Config.get_assets_dir(dlc).joinpath(root)
-                if path and path.exists():
-                    cls._found_files.extend(path.rglob(f"{file_name}*.meta"))
+            case Game.NONE | Game.SPECIAL:
+                pass
+
+            case game:
+                path_roots.extend([
+                    (MONO_BEHAVIOUR, DATA_MANAGER_SETTINGS),
+                    (MONO_BEHAVIOUR, BUNDLE_MANIFEST_DATA),
+                    (MONO_BEHAVIOUR, VERSION_DATA),
+                ])
+
+                path_roots.extend([(MONO_BEHAVIOUR, to_pascalcase(dlc.value.code_name)) for dlc in DLC.get_all_types_by_game(game)])
+
+        for root, file_name in path_roots:
+            path = Config.get_assets_dir(cls.loaded_game) and Config.get_assets_dir(cls.loaded_game) / root
+            if path and path.exists():
+                cls._found_files.extend(path.rglob(f"{file_name}*.meta", case_sensitive=False))
 
         ### load additional paths
-        path = Config.get_project_settings_dir(cls.loaded_game.get_default_dlc())
+        path = Config.get_project_settings_dir(cls.loaded_game)
         if path and path.exists():
             cls._found_files.extend(path.rglob("*"))
 
@@ -486,10 +497,10 @@ class MetaDataHandler(Objectless):
 
 
 def to_current_game_path(path: Path) -> Path:
-    game_path = Config[MetaDataHandler.loaded_game.get_data_folder_key()]
+    game_path = Config[MetaDataHandler.loaded_game.value.data_folder]
 
     if game_path is None or game_path == "" or game_path == Path():
-        err = f"Config does not contain path for dumping data [{MetaDataHandler.loaded_game}: {MetaDataHandler.loaded_game.get_data_folder_key()}]"
+        err = f"Config does not contain path for dumping data [{MetaDataHandler.loaded_game} | {MetaDataHandler.loaded_game.value.data_folder}]"
         showerror("Dumping path error", err)
         assert False, err
 

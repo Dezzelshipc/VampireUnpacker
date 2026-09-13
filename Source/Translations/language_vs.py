@@ -1,10 +1,12 @@
 import json
 import sys
 from enum import Enum
+from pathlib import Path
 from typing import Any
 
-from Source.Data.meta_data import MetaDataHandler
-from Source.Utility.constants import I2_LANGUAGES, COMPOUND_DATA_TYPE, COMPOUND_DATA
+from Source.Data.meta_data import MetaDataHandler, to_current_game_path
+from Source.Utility.constants import I2_LANGUAGES, COMPOUND_DATA_TYPE, COMPOUND_DATA, PROGRESS_BAR_FUNC_TYPE, \
+    PROGRESS_BAR_FUNC_DEFAULT, TRANSLATIONS_FOLDER, GENERATED, SPLIT
 from Source.Utility.special_classes import Objectless
 from Source.Utility.timer import Timeit
 from Source.Translations.language_utils import Lang
@@ -151,11 +153,9 @@ class LangHandler(Objectless):
         return cls._full_file
 
     @classmethod
-    def get_lang_list(cls, is_str: bool = False) -> list[Lang]:
+    def get_lang_list(cls) -> list[Lang]:
         i2l = cls.get_i2language().data()
         langs = [Lang(e['Code']) for e in i2l["mSource"]["mLanguages"]]
-        if is_str:
-            langs = list(map(lambda lang: lang.value, langs))
         return langs
 
     @classmethod
@@ -165,7 +165,7 @@ class LangHandler(Objectless):
 
 
 def gen_changed_list_to_dict(lang_type: LangType) -> dict[str, Any]:
-    lang_list = LangHandler.get_lang_list(True)
+    lang_list = LangHandler.get_lang_list()
 
     out_data = dict()
 
@@ -206,6 +206,105 @@ def gen_inverse_dict(lang_type: LangType, selected_langs: set[int] = None) -> di
 
     return out_data
 
+
+def dump_original_i2l(
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> Path:
+    func_progress_bar_set_percent(0, 1, "Copying I2Languages.assets")
+    print("Copying I2Languages.assets")
+
+    _timeit = Timeit()
+
+    save_folder = to_current_game_path(TRANSLATIONS_FOLDER)
+    save_folder.mkdir(exist_ok=True, parents=True)
+
+    i2l = LangHandler.get_i2language().raw_text()
+    with open((save_folder / I2_LANGUAGES).with_suffix(".yaml"), "w", encoding="utf-8") as f:
+        f.write(i2l)
+
+    func_progress_bar_set_percent(1, 1, f"Finished copying I2Languages.assets {_timeit!r}")
+    print(f"Finished copying I2Languages.assets {_timeit!r}")
+    return save_folder
+
+def dump_json_i2l(
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> Path:
+
+    func_progress_bar_set_percent(0, 1, "Converting I2Languages to json")
+    print("Converting I2Languages to json")
+
+    _timeit = Timeit()
+
+    save_folder = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED
+    save_folder.mkdir(exist_ok=True, parents=True)
+
+    i2l = LangHandler.get_i2language().json_text()
+    with open((save_folder / I2_LANGUAGES).with_suffix(".json"), "w", encoding="utf-8") as f:
+        f.write(i2l)
+
+    func_progress_bar_set_percent(1, 1, f"Converting I2Languages to json finished {_timeit!r}")
+    print(f"Converting I2Languages to json finished {_timeit!r}")
+    return save_folder
+
+
+def get_available_split_types() -> tuple[ list[str], list[bool] ]:
+    """
+        Returns:
+            Tuple of lists: Names of splits, Bools where language selection available for split.
+    """
+    return ["Split as is", "Change lang list to dict", "Inverse hierarchy so lang is top key"], [False, False, True]
+
+def get_available_lang_types() -> list[Lang]:
+    return LangHandler.get_lang_list()
+
+def dump_split_i2l(
+        selected_split_types: list[bool],
+        selected_langs: list[str] | None = None,
+        func_progress_bar_set_percent: PROGRESS_BAR_FUNC_TYPE = PROGRESS_BAR_FUNC_DEFAULT
+) -> Path:
+    split_funcs = [
+        lambda l_t: LangHandler.get_lang_file(l_t).json_text(),
+        lambda l_t: json.dumps(gen_changed_list_to_dict(l_t), ensure_ascii=False, indent=2),
+        lambda l_t: json.dumps(
+            {lang.value: LangHandler.get_lang_file(l_t).get_lang(lang) for lang in selected_langs},
+            ensure_ascii=False, indent=2),
+    ]
+    split_folder_names = ["LangList", "LangDictionary", "InverseLangDictionary"]
+
+    _timeit = Timeit()
+    lang_types = LangType.get_all_types()
+    total_length = len(lang_types) * sum(selected_split_types)
+    i = 0
+
+    split_path = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED / SPLIT
+
+
+    for split_index, is_selected in enumerate(selected_split_types):
+        if not is_selected:
+            continue
+
+        print(f"Splitting I2Languages to separate categories. ({split_folder_names[split_index]})")
+
+        save_path = split_path / split_folder_names[split_index]
+        save_path.mkdir(parents=True, exist_ok=True)
+        for lang_type in lang_types:
+            lang_file = split_funcs[split_index](lang_type)
+            if lang_file:
+                with open((save_path / lang_type.value).with_suffix(".json"), mode="w", encoding="UTF-8") as f:
+                    f.write(lang_file)
+
+            func_progress_bar_set_percent(i := i + 1, total_length, f"{split_folder_names[split_index]} {_timeit!r}")
+
+    _t = f"Finished splitting I2Languages to separate categories. {_timeit!r}"
+    func_progress_bar_set_percent(i, total_length, _t)
+    print(_t)
+    return split_path
+
+def make_meta_file_split_folder_structure() -> Path:
+    save_path = to_current_game_path(TRANSLATIONS_FOLDER) / GENERATED / "Metadata.json"
+    folder_metadata = [lang_type.value for lang_type in LangType.get_all_types()]
+    save_path.write_text(json.dumps(sorted(folder_metadata), ensure_ascii=False, indent=2))
+    return save_path
 
 if __name__ == "__main__":
     # LangHandler.get_i2language().data()
